@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>意大利双城漫游攻略 - 2026年3月 罗马 & 佛罗伦萨</title>
+    <style>
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{font-family:"PingFang SC","Microsoft YaHei","Georgia",serif;line-height:1.6;color:#3a2e2e;background:#fbf8f1;font-size:14px;-webkit-text-size-adjust:100%}
+        /* 导航栏 */
+        header{position:fixed;top:0;width:100%;background:linear-gradient(135deg,#722f37,#8b4049,#a05a5a);z-index:1000;box-shadow:0 2px 10px rgba(114,47,55,.4)}
+        nav{display:flex;justify-content:center;padding:8px 4px;flex-wrap:wrap;gap:4px}
+        nav a{color:#fff;text-decoration:none;font-weight:bold;font-size:12px;padding:5px 10px;white-space:nowrap;border-radius:16px;background:rgba(255,255,255,.15);transition:background .2s}
+        nav a:hover,nav a:active{background:rgba(255,255,255,.3)}
+        /* 容器 */
+        .container{max-width:800px;margin:56px auto 20px;padding:0 12px 12px}
+        /* 标题 */
+        h1{font-size:22px;text-align:center;border-bottom:3px solid #8b6914;padding-bottom:10px;margin-bottom:8px;color:#3a2e2e}
+        .subtitle{text-align:center;color:#777;margin-bottom:20px;font-size:15px;font-style:italic}
+        h2{font-size:19px;margin:0 0 12px;color:#3a2e2e;border-left:4px solid #8b6914;padding-left:10px}
+        h3{font-size:14px;margin:10px 0 6px;color:#4a3636;background:linear-gradient(135deg,#f5f0e6,#efe8d8);padding:8px 10px;border-radius:5px;line-height:1.4}
+        /* 首页概览卡片 */
+        .overview{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin:16px 0}
+        .day-link{background:linear-gradient(135deg,#fff,#f9f4ea);padding:14px 10px;text-align:center;border-radius:8px;cursor:pointer;text-decoration:none;color:inherit;display:block;border:2px solid #e8dcc8;box-shadow:0 1px 4px rgba(139,105,20,.1);transition:transform .2s,box-shadow .2s,border-color .2s}
+        .day-link:active{transform:scale(.97)}
+        .day-link:hover{border-color:#8b6914;box-shadow:0 3px 8px rgba(139,105,20,.2)}
+        .day-link .date{font-size:16px;font-weight:bold;color:#8b6914;margin-bottom:4px}
+        .day-link .theme{font-size:12px;color:#666}
+        /* 每日区块 */
+        .day-section{margin-bottom:24px;padding:14px;background:#fff;border-radius:8px;box-shadow:0 1px 5px rgba(139,105,20,.08)}
+        /* 时间段 */
+        .time-block{margin:8px 0;padding:10px;background:#fdfbf6;border-radius:6px;border-left:3px solid #8b6914}
+        .time{font-weight:bold;color:#8b6914;font-size:14px;margin-bottom:4px}
+        .core-action{margin:4px 0 6px;font-size:13px;color:#555}
+        /* 最优项 & 备选 */
+        .best{margin:6px 0;padding:8px 10px;background:linear-gradient(135deg,#fef9ee,#fdf5e6);border-radius:5px;font-size:13px;line-height:1.7;border:1px solid #f0e4c8}
+        .best-title{font-weight:bold;color:#3a2e2e;margin-bottom:2px}
+        .alt-title{font-weight:bold;color:#6a5a4a;font-size:13px;margin:8px 0 4px}
+        .alt-list{margin:0;padding-left:18px;font-size:13px;line-height:1.7;color:#555}
+        .alt-list li{margin-bottom:4px}
+        /* 提示框 */
+        .tips{background:linear-gradient(135deg,#f5f0e6,#efe8d8);border-left:4px solid #722f37;padding:10px 12px;margin:10px 0;border-radius:5px;font-size:13px;line-height:1.7}
+        .tips-title{font-weight:bold;color:#722f37;margin-bottom:4px}
+        .tips ul{margin:0;padding-left:18px}
+        .tips li{margin-bottom:2px}
+        /* 表格 */
+        .info-table{width:100%;border-collapse:collapse;margin:8px 0;font-size:12px}
+        .info-table th{background:#722f37;color:#fff;padding:6px 8px;text-align:left;font-size:12px}
+        .info-table td{padding:6px 8px;border-bottom:1px solid #e8dcc8;font-size:12px}
+        .info-table tr:nth-child(even){background:#fdfbf6}
+        /* 地点链接 */
+        .loc{color:#8b6914;text-decoration:underline;cursor:pointer}
+        .loc:active{color:#6a5010}
+        /* 返回顶部 */
+        .back-to-top{position:fixed;bottom:20px;right:16px;width:40px;height:40px;background:linear-gradient(135deg,#722f37,#8b4049);color:#fff;border:none;border-radius:50%;cursor:pointer;font-size:18px;box-shadow:0 2px 8px rgba(114,47,55,.4);opacity:0;visibility:hidden;transition:opacity .3s;z-index:999;display:flex;align-items:center;justify-content:center}
+        .back-to-top.show{opacity:1;visibility:visible}
+        /* 警告框 */
+        .warning{background:#fff5f5;border-left:4px solid #c0392b;padding:8px 10px;margin:6px 0;border-radius:4px;font-size:12px;line-height:1.6;color:#722f37}
+        /* 购物清单 */
+        .shop-item{background:#fdfbf6;padding:6px 10px;margin:3px 0;border-radius:4px;font-size:12px;line-height:1.6;border-left:3px solid #8b6914}
+        /* 配图 */
+        .spot-img{float:right;width:100px;height:68px;object-fit:cover;border-radius:6px;margin:0 0 6px 10px;box-shadow:0 1px 4px rgba(0,0,0,.12)}
+        .best::after{content:'';display:block;clear:both}
+        /* 响应式 */
+        @media(max-width:480px){
+            nav a{font-size:11px;padding:4px 7px}
+            .container{margin-top:52px;padding:0 8px 8px}
+            h1{font-size:20px}
+            h2{font-size:17px}
+            .overview{grid-template-columns:1fr 1fr}
+            .info-table{font-size:11px}
+            .info-table th,.info-table td{padding:4px 6px}
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#home">首页</a>
+            <a href="#day1">3/13</a>
+            <a href="#day2">3/14</a>
+            <a href="#day3">3/15</a>
+            <a href="#day4">3/16</a>
+            <a href="#day5">3/17</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- 首页概览 -->
+        <section id="home" class="day-section">
+            <h1>🏛️ 意大利双城漫游攻略</h1>
+            <p class="subtitle">3月13日 - 3月17日 | 罗马 &amp; 佛罗伦萨 · 探索巴洛克浪漫与文艺复兴的完美融合</p>
+
+            <div class="overview">
+                <a href="#day1" class="day-link"><div class="date">3月13日</div><div class="theme">罗马·巴洛克浪漫的开幕</div></a>
+                <a href="#day2" class="day-link"><div class="date">3月14日</div><div class="theme">罗马·千年遗迹与艺术洗礼</div></a>
+                <a href="#day3" class="day-link"><div class="date">3月15日</div><div class="theme">罗马 → 佛罗伦萨·文艺复兴启幕</div></a>
+                <a href="#day4" class="day-link"><div class="date">3月16日</div><div class="theme">佛罗伦萨·匠心艺术与奢华扫货</div></a>
+                <a href="#day5" class="day-link"><div class="date">3月17日</div><div class="theme">归程·机场免税最后一搏</div></a>
+            </div>
+
+            <div class="tips">
+                <div class="tips-title">💡 重要提示</div>
+                <ul>
+                    <li><strong>防盗核心策略：</strong>罗马扒手以特莱维喷泉、Termini车站、40/64路公交车为重灾区。请使用防割斜挎包，护照和大额现金锁在酒店保险箱，随身仅携带当日所需小额现金（€5-10面额）和一张信用卡。</li>
+                    <li><strong>奢侈品购买策略：</strong>为防止旅途中被盗，建议将奢侈品集中在3月16日下午（归程前一天）于佛罗伦萨Via de' Tornabuoni一条街高效扫货，买完直接回酒店锁好，第二天直奔机场。</li>
+                    <li><strong>退税须知：</strong>2025年起意大利退税门槛已降至每张发票€70.01。增值税22%，实际退税约12-14%。购物时主动索要 Tax Free Form，检查护照号和国码是否正确。离境时需在机场完成 OTELLO 电子验证或海关盖章。</li>
+                    <li><strong>餐厅文化：</strong>意大利午餐12:30-14:30、晚餐19:30-22:00。Coperto（座位费）€1-3/人属正常收费，不是宰客。</li>
+                    <li><strong>预约提醒：</strong>梵蒂冈博物馆、斗兽场、乌菲兹美术馆务必提前2-4周在官网预约！热门餐厅建议提前1周预订。</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 3月13日 -->
+        <section id="day1" class="day-section">
+            <h2>🗓️ 3月13日：罗马·巴洛克浪漫的开幕</h2>
+
+            <div class="time-block">
+                <div class="time">15:00 - 17:30 落地罗马：漫步"三叉戟"区与西班牙阶梯</div>
+                <div class="core-action">核心行动：从酒店出发，初识罗马。沿"三叉戟"（Via del Corso、Via di Ripetta、Via del Babuino）三条名街汇聚的人民广场开始漫步，一路南下至西班牙阶梯。</div>
+                <div class="best">
+                    <div class="best-title">最优项：<span class="loc" onclick="gm('Spanish Steps Rome')">西班牙大阶梯 (Spanish Steps)</span> &amp; <span class="loc" onclick="gm('Piazza del Popolo Rome')">人民广场 (Piazza del Popolo)</span> ⭐⭐⭐⭐⭐</div>
+                    <img class="spot-img" src="img/spanish-steps.jpg" alt="西班牙大阶梯" loading="lazy">
+                    <div>理由：人民广场的双子教堂是对称美学的极致，从这里沿 Via del Babuino 步行15分钟即可抵达西班牙阶梯——罗马最经典的地标。阶梯顶部的圣三一教堂可俯瞰整条奢华的 Via dei Condotti 街。</div>
+                    <div>📸 拍摄点：站在阶梯中段，斜向上仰拍圣三一教堂；或在阶梯顶部俯拍破船喷泉与名店街延伸线，黄金时段光线最佳。</div>
+                    <div>📍 路线：<span class="loc" onclick="gm('Piazza del Popolo Rome')">人民广场</span> → Via del Babuino → <span class="loc" onclick="gm('Spanish Steps Rome')">西班牙阶梯</span></div>
+                </div>
+                <div class="alt-title">备选行动项（根据体力和兴趣选择）：</div>
+                <ul class="alt-list">
+                    <li><strong><span class="loc" onclick="gm('Fontana della Barcaccia Rome')">破船喷泉 (Barcaccia)</span></strong> ⭐⭐⭐⭐：📍 阶梯脚下。贝尼尼父子名作，水流从"沉船"中涌出的设计极具巧思，是阶梯前最佳前景拍摄道具。</li>
+                    <li><strong><span class="loc" onclick="gm('Via Margutta Rome')">Via Margutta</span></strong> ⭐⭐⭐⭐：📍 Via del Babuino 旁的小巷。《罗马假日》取景地，布满藤蔓和画廊，非常安静，适合文艺青年驻足。</li>
+                    <li><strong><span class="loc" onclick="gm('Antico Caffè Greco Via dei Condotti Rome')">Caffè Greco</span></strong> ⭐⭐⭐⭐：📍 Via dei Condotti 86。意大利最古老的咖啡馆（1760年），歌德、狄更斯、拜伦曾是座上客，站着喝一杯 Espresso 仅€1.5。</li>
+                    <li><strong><span class="loc" onclick="gm('Babingtons Tea Room Rome')">Babington's Tea Room</span></strong> ⭐⭐⭐：📍 西班牙阶梯脚下。1893年至今的英式茶室，提供全套英式下午茶，适合坐下来歇脚（人均€25-35）。</li>
+                </ul>
+            </div>
+
+            <div class="time-block">
+                <div class="time">17:30 - 18:00 下午茶/甜品：第一口 Gelato</div>
+                <div class="core-action">核心行动：在前往许愿池的路上，犒劳自己一份地道罗马 Gelato。</div>
+                <div class="best">
+                    <div class="best-title">最优项：<span class="loc" onclick="gm('Ciampini Piazza San Lorenzo in Lucina Rome')">Ciampini (1943)</span> ⭐⭐⭐⭐⭐</div>
+                    <img class="spot-img" src="img/gelato-1.jpg" alt="Gelato 冰淇淋" loading="lazy">
+                    <div>理由：📍 Piazza San Lorenzo in Lucina。创立于1943年的老字号，就在西班牙阶梯和许愿池之间的路上，开心果和榛子口味浓郁正宗。判断好 Gelato 的标准：颜色自然不鲜艳、盛放在金属盖盒中而非堆成小山。</div>
+                    <div>📍 位置：从西班牙阶梯步行约8分钟</div>
+                </div>
+                <div class="alt-title">备选行动项：</div>
+                <ul class="alt-list">
+                    <li><strong><span class="loc" onclick="gm('Venchi Via della Croce Rome')">Venchi Cioccolato</span></strong> ⭐⭐⭐⭐：📍 Via della Croce 25。拥有一整面巧克力瀑布墙，适合打卡拍照，黑巧克力 Gelato 浓郁丝滑。</li>
+                    <li><strong><span class="loc" onclick="gm('Gelateria Valentino Rome')">Gelateria Valentino</span></strong> ⭐⭐⭐⭐⭐：📍 Via del Moro。TripAdvisor罗马排名第一的冰淇淋店（4.7分/6260条评价），若时间允许值得绕路。</li>
+                    <li><strong><span class="loc" onclick="gm('Giolitti gelato Rome')">Giolitti (1900)</span></strong> ⭐⭐⭐⭐：📍 Via degli Uffici del Vicario 40（万神殿旁）。百年老店，40多种口味，1940年代原始装潢，奥黛丽·赫本同款。</li>
+                </ul>
+            </div>
+
+            <div class="time-block">
+                <div class="time">18:00 - 19:30 许愿池与罗马之夜</div>
+                <div class="core-action">核心行动：投币许愿并捕捉华灯初上的城市感。传说背对喷泉用右手从左肩投一枚硬币，就能重返罗马。</div>
+                <div class="best">
+                    <div class="best-title">最优项：<span class="loc" onclick="gm('Trevi Fountain Rome')">特莱维喷泉 (Trevi Fountain)</span> ⭐⭐⭐⭐⭐</div>
+                    <img class="spot-img" src="img/trevi-fountain.jpg" alt="特莱维喷泉" loading="lazy">
+                    <div>理由：全球最美的巴洛克喷泉，黄昏时分的灯光让白色大理石极具质感。黄昏18:00后人群开始减少，灯光亮起时是最佳拍摄时机。</div>
+                    <div>📸 拍摄点：右侧石阶上方平台，利用人群做虚化前景，对焦在海神尼普顿主体雕像上。</div>
+                </div>
+                <div class="warning">⚠️ <strong>防盗警告：</strong>许愿池是罗马扒手第一重灾区！拍照时务必将包挎在身前，手机拍完立即收好，不要在人群中停留过久。</div>
+                <div class="alt-title">备选行动项（许愿池周边步行可达）：</div>
+                <ul class="alt-list">
+                    <li><strong><span class="loc" onclick="gm('Galleria Sciarra Rome')">Galleria Sciarra</span></strong> ⭐⭐⭐⭐：📍 Via Marco Minghetti 10。隐藏在巷子里的新艺术风格中庭，天花板壁画描绘了各种女性美德，游客极少，免费进入。</li>
+                    <li><strong><span class="loc" onclick="gm('Chiesa di Sant Ignazio di Loyola Rome')">圣依纳爵堂 (Chiesa di Sant'Ignazio)</span></strong> ⭐⭐⭐⭐：📍 步行5分钟。拥有令人叹为观止的"假穹顶"透视壁画——站在教堂中央铜钉标记处仰望，平面天花板呈现完美的3D穹顶效果。</li>
+                    <li><strong><span class="loc" onclick="gm('Galleria Alberto Sordi Rome')">Galleria Alberto Sordi</span></strong> ⭐⭐⭐：📍 Piazza Colonna。复古玻璃顶购物廊，适合街拍，内有快闪书店和设计品牌。</li>
+                </ul>
+            </div>
+
+            <div class="time-block">
+                <div class="time">20:00 - 22:00 欢迎晚餐：罗马经典四大面</div>
+                <div class="core-action">核心行动：用一顿正宗罗马晚餐开启旅程。罗马四大经典意面必须认识：Carbonara（培根蛋酱面）、Cacio e Pepe（胡椒乳酪面）、Amatriciana（培根番茄面）、Gricia（白酱培根面）。</div>
+                <div class="best">
+                    <div class="best-title">最优项：<span class="loc" onclick="gm('Hostaria Romana Via del Boccaccio Rome')">Hostaria Romana</span> ⭐⭐⭐⭐⭐</div>
+                    <img class="spot-img" src="img/carbonara.jpg" alt="罗马经典意面" loading="lazy">
+                    <div>理由：📍 Via del Boccaccio 1（西班牙阶梯附近步行5分钟）。1961年开业的老店，同时精通罗马四大面，其 Saltimbocca（嫩小牛肉配帕尔马火腿和鼠尾草）是传统罗马二道菜的天花板。离第一天的活动区域最近，省去长途跋涉。</div>
+                    <div>🍝 必点：Cacio e Pepe + Saltimbocca + 一杯 Frascati 白葡萄酒</div>
+                </div>
+                <div class="alt-title">备选行动项（不同风格选）：</div>
+                <ul class="alt-list">
+                    <li><strong><span class="loc" onclick="gm('Piccolo Buco Via del Lavatore Rome')">Piccolo Buco</span></strong> ⭐⭐⭐⭐：📍 许愿池旁 Via del Lavatore 91。许愿池周边唯一不踩雷的清流，厚边拿坡里披萨在当地极受追捧，适合想吃轻松一点的第一晚。</li>
+                    <li><strong><span class="loc" onclick="gm('Colline Emiliane Rome')">Colline Emiliane</span></strong> ⭐⭐⭐⭐⭐：📍 Via degli Avignonesi 22。专注北意手工意面，蛋黄酱宽面 (Fettuccine al Ragù) 是一绝，1931年至今的家族老店。</li>
+                    <li><strong><span class="loc" onclick="gm('Baccano Via delle Muratte Rome')">Baccano</span></strong> ⭐⭐⭐⭐：📍 Via delle Muratte 23。工业复古风格的全日餐厅，生蚝拼盘和牛排非常优秀，适合想吃西式的晚上。</li>
+                    <li><strong><span class="loc" onclick="gm('Il Chianti Vineria Rome')">Il Chianti Vineria</span></strong> ⭐⭐⭐：📍 Via del Lavatore 81。意式庭院风，酒单极丰富，托斯卡纳风味菜品不错，但更偏旅游区风格。</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 3月14日 -->
+        <section id="day2" class="day-section">
+            <h2>🗓️ 3月14日：罗马·千年遗迹与艺术洗礼</h2>
+
+            <div class="time-block">
+                <div class="time">07:30 - 08:30 早餐：罗马式的清晨仪式</div>
+                <div class="core-action">核心行动：像罗马人一样，站在吧台前花€2吃一个 Cornetto（意式牛角包）+ 一杯 Cappuccino，迅速充能后出发。注意：意大利人只在上午11点前喝 Cappuccino！</div>
+                <div class="best">
+                    <div class="best-title">最优项：<span class="loc" onclick="gm('Pasticceria Regoli Via dello Statuto Rome')">Pasticceria Regoli</span> ⭐⭐⭐⭐⭐</div>
+                    <img class="spot-img" src="img/maritozzo.jpg" alt="Maritozzo 奶油面包" loading="lazy">
+                    <div>理由：📍 Via dello Statuto 60（Esquilino区）。1916年至今的老字号，其 Maritozzo（奶油大面包）是罗马早餐的灵魂甜品——松软面包中间塞满山丘般的鲜奶油，入口即化。在前往斗兽场的路上顺道打卡。</div>
+                    <div>🥐 必点：Maritozzo con la Panna + Cappuccino（总计约€5）</div>
+                </div>
+                <div class="alt-title">备选行动项：</div>
+                <ul class="alt-list">
+                    <li><strong><span class="loc" onclick="gm('Sant Eustachio Il Caffè Rome')">Sant' Eustachio Il Caffè</span></strong> ⭐⭐⭐⭐⭐：📍 Piazza di Sant'Eustachio 82（万神殿旁）。以秘密烘焙技术著称，其 Gran Caffè 咖啡泡沫口感绵密，是罗马最传奇的咖啡。但离斗兽场较远，适合住在中心区的旅客。</li>
+                    <li><strong><span class="loc" onclick="gm('Antico Forno Roscioli Via dei Chiavari Rome')">Antico Forno Roscioli</span></strong> ⭐⭐⭐⭐：📍 Via dei Chiavari 34。刚出炉的罗马方块披萨 (Pizza al Taglio)，外酥内软，配一杯咖啡就是完美的罗马站立式早餐。</li>
+                    <li><strong><span class="loc" onclick="gm('La Casa del Caffè Tazza d Oro Rome')">La Casa del Caffè Tazza d'Oro</span></strong> ⭐⭐⭐⭐：📍 Via degli Orfani 84（万神殿旁）。咖啡冰沙 (Granita di Caffè) 罗马第一，3月虽然偏凉但依然值得一试。</li>
+                    <li><strong><span class="loc" onclick="gm('Casa Manfredi Viale Aventino Rome')">Casa Manfredi</span></strong> ⭐⭐⭐⭐：📍 Viale Aventino 91。品质极高的意法混合糕点，有露天座位，吧台€3-5即可吃好。</li>
+                </ul>
+            </div>
+
+            <div class="time-block">
+                <div class="time">09:00 - 13:00 千年遗迹：斗兽场·古罗马广场·帕拉蒂尼山</div>
+                <div class="core-action">核心行动：这是本次旅程的重头戏。一张联票包含斗兽场 + 古罗马广场 + 帕拉蒂尼山，有效期24小时。务必提前在官网预约指定时段（建议选9:00最早档）。3月非旺季，但早到仍可避开旅行团。</div>
+                <div class="best">
+                    <div class="best-title">最优项：<span class="loc" onclick="gm('Colosseum Rome')">斗兽场 (Colosseum)</span> → <span class="loc" onclick="gm('Roman Forum Rome')">古罗马广场 (Roman Forum)</span> → <span class="loc" onclick="gm('Palatine Hill Rome')">帕拉蒂尼山 (Palatine Hill)</span> ⭐⭐⭐⭐⭐</div>
+                    <img class="spot-img" src="img/colosseum.jpg" alt="罗马斗兽场" loading="lazy">
+                    <div>理由：两千年前可容纳5万人的巨型竞技场，走进其中会被那种沧桑的规模感震撼到说不出话。古罗马广场是罗马帝国的政治心脏，残留的元老院、凯旋门、神庙遗址让人穿越两千年。帕拉蒂尼山是皇帝寝宫所在，可俯瞰广场全景。</div>
+                    <div>📸 拍摄点：斗兽场二层看台用广角拍内部全景；古罗马广场 Via Sacra 上以提图斯凯旋门为前景拍斗兽场；帕拉蒂尼山顶俯拍广场遗址全景。</div>
+                    <div>⏱️ 时间分配：斗兽场 2小时 → 古罗马广场 1.5小时 → 帕拉蒂尼山 0.5小时</div>
+                </div>
+                <div class="warning">⚠️ <strong>实用提示：</strong>穿舒适运动鞋（古罗马广场地面全是碎石），带水和防晒。安检排队约15-30分钟，建议比预约时间提前20分钟到。</div>
+                <div class="alt-title">备选行动项（若斗兽场票已售罄或想调换）：</div>
+                <ul class="alt-list">
+                    <li><strong>帕拉蒂尼山优先</strong> ⭐⭐⭐⭐：若预约到下午的斗兽场场次，可上午先走帕拉蒂尼山+广场，下午再进斗兽场，光线更好且游客更少。</li>
+                    <li><strong>斗兽场地下层+竞技场层 (Underground Tour)</strong> ⭐⭐⭐⭐⭐：额外€16，可进入角斗士候场的地下通道和中央竞技场木地板，极具震撼力（需单独预约，建议提前1个月）。</li>
+                    <li><strong><span class="loc" onclick="gm('Arch of Constantine Rome')">君士坦丁凯旋门</span></strong> ⭐⭐⭐⭐：📍 斗兽场旁。315年建造的三拱凯旋门，浮雕精美，与斗兽场同框是经典构图。</li>
+                </ul>
+            </div>
+
+            <div class="time-block">
+                <div class="time">13:00 - 14:30 午餐：古罗马风味</div>
+                <div class="core-action">核心行动：从斗兽场区域步行10分钟至 Monti（蒙蒂区），这是罗马最有烟火气的街区，藏着大量本地人才知道的小馆子。</div>
+                <div class="best">
+                    <div class="best-title">最优项：<span class="loc" onclick="gm('La Nuova Piazzetta Via del Boschetto Rome')">La Nuova Piazzetta</span> ⭐⭐⭐⭐⭐</div>
+                    <img class="spot-img" src="img/carbonara-2.jpg" alt="正宗罗马 Carbonara" loading="lazy">
+                    <div>理由：📍 Via del Boschetto 22（蒙蒂区）。2025年入选携程全球100当地风味餐厅，人均仅€25。老板会热情推荐当日特色菜，Carbonara 是用鲜蛋黄现拌的传统做法，没有一滴奶油。</div>
+                    <div>🍝 必点：Carbonara（正宗罗马做法）+ Supplì（油炸饭团，内馅拉丝马苏里拉）</div>
+                </div>
+                <div class="alt-title">备选行动项：</div>
+                <ul class="alt-list">
+                    <li><strong><span class="loc" onclick="gm('Osteria da Fortunata Via del Pellegrino Rome')">Osteria da Fortunata</span></strong> ⭐⭐⭐⭐：📍 Via del Pellegrino 11。橱窗里有老奶奶现场手搓 Fettuccine 意面，视觉和味觉双重享受。</li>
+                    <li><strong><span class="loc" onclick="gm('Ai Tre Scalini Via Panisperna Rome')">Ai Tre Scalini</span></strong> ⭐⭐⭐⭐：📍 Via Panisperna 251（蒙蒂区）。当地人下班后最爱的小酒馆，Polpette（肉丸）配上一杯红酒是经典组合。</li>
+                    <li><strong><span class="loc" onclick="gm('Pizzeria da Baffetto Via del Governo Vecchio Rome')">Pizzeria da Baffetto</span></strong> ⭐⭐⭐⭐：📍 Via del Governo Vecchio 114。罗马最传奇的披萨店之一，薄脆到极致的罗马式披萨，人均仅€10-15，但要做好排队准备。</li>
+                    <li><strong><span class="loc" onclick="gm('Bonci Pizzarium Via della Meloria Rome')">Bonci Pizzarium</span></strong> ⭐⭐⭐⭐⭐：📍 Via della Meloria 43。罗马"披萨之神" Gabriele Bonci 的方块披萨店，季节性食材搭配惊艳，被认为是全罗马最好的 Pizza al Taglio。</li>
+                </ul>
+            </div>
+
+            <div class="time-block">
+                <div class="time">15:00 - 17:30 贵族私藏美术馆 &amp; 万神殿</div>
+                <div class="core-action">核心行动：午后避开烈日，转入室内艺术殿堂。先看一座小众美术馆，再顺路打卡万神殿。</div>
+                <div class="best">
+                    <div class="best-title">最优项：<span class="loc" onclick="gm('Doria Pamphilj Gallery Rome')">多利亚·潘菲利美术馆 (Doria Pamphilj Gallery)</span> + <span class="loc" onclick="gm('Pantheon Rome')">万神殿 (Pantheon)</span> ⭐⭐⭐⭐⭐</div>
+                    <img class="spot-img" src="img/pantheon.jpg" alt="万神殿" loading="lazy">
+                    <div>理由：多利亚·潘菲利是一座真正的贵族宫殿，至今仍属私人家族所有。镜廊复刻了凡尔赛宫的华丽，但游客数量仅为乌菲兹的1/20。之后步行5分钟即到万神殿——两千年前的混凝土穹顶至今完好，穹顶中央的圆洞 (Oculus) 透下的光柱是建筑史上最伟大的奇迹之一。</div>
+                    <div>📸 拍摄点：多利亚·潘菲利的镜廊 (Mirror Gallery)；万神殿内部正中央仰拍穹顶光柱。</div>
+                    <div>⏱️ 时间分配：美术馆 1.5小时 → 万神殿 0.5小时</div>
+                </div>
+                <div class="warning">⚠️ 万神殿需官网免费预约（museipantheon.cultura.gov.it），否则无法进入。</div>
+                <div class="alt-title">备选行动项（替换美术馆部分）：</div>
+                <ul class="alt-list">
+                    <li><strong><span class="loc" onclick="gm('Galleria Borghese Rome')">博尔盖塞美术馆 (Galleria Borghese)</span></strong> ⭐⭐⭐⭐⭐：📍 Villa Borghese 公园内。贝尼尼雕塑的巅峰之作《阿波罗与达芙妮》和《普鲁托掳走珀尔塞福涅》都在这里，雕塑的肌肉线条和手指按压皮肤的细节令人窒息。<strong>必须提前数周预约</strong>，每次限2小时。</li>
+                    <li><strong><span class="loc" onclick="gm('San Luigi dei Francesi Rome')">圣王路易堂 (San Luigi dei Francesi)</span></strong> ⭐⭐⭐⭐：📍 万神殿旁。免费观赏三幅卡拉瓦乔巅峰巨作，投€1点亮灯光即可近距离欣赏明暗对比法的极致。</li>
+                    <li><strong><span class="loc" onclick="gm('Palazzo Barberini Rome')">巴贝里尼宫 (Palazzo Barberini)</span></strong> ⭐⭐⭐⭐：📍 Via delle Quattro Fontane 13。拥有拉斐尔的《面包师之女》和卡拉瓦乔的《朱蒂斯砍下霍洛芬斯头颅》，天花板壁画气势恢宏。</li>
+                </ul>
+            </div>
+
+            <div class="time-block">
+                <div class="time">17:30 - 18:00 下午茶甜品：万神殿旁的百年冰淇淋</div>
+                <div class="core-action">核心行动：在从万神殿前往纳沃纳广场的路上，用一份百年 Gelato 补充能量。</div>
+                <div class="best">
+                    <div class="best-title">最优项：<span class="loc" onclick="gm('Giolitti gelato Rome')">Giolitti (1900)</span> ⭐⭐⭐⭐⭐</div>
+                    <img class="spot-img" src="img/gelato-2.jpg" alt="罗马冰淇淋店" loading="lazy">
+                    <div>理由：📍 Via degli Uffici del Vicario 40（万神殿步行2分钟）。罗马最古老的冰淇淋店之一，1900年至今，40多种口味，保留了1940年代的装潢。冬天还有招牌热巧克力配鲜奶油。奥黛丽·赫本在《罗马假日》中吃冰淇淋的经典画面就取材自此。</div>
+                    <div>🍦 必点：Pistachio（开心果）+ Crema Giolitti（招牌奶油味）</div>
+                </div>
+                <div class="alt-title">备选行动项：</div>
+                <ul class="alt-list">
+                    <li><strong><span class="loc" onclick="gm('La Casa del Caffè Tazza d Oro Rome')">La Casa del Caffè Tazza d'Oro 咖啡冰沙</span></strong> ⭐⭐⭐⭐：📍 万神殿旁。如果不想吃 Gelato，来一杯 Granita di Caffè con Panna（咖啡冰沙配鲜奶油），提神醒脑。</li>
+                    <li><strong><span class="loc" onclick="gm('Gelateria dei Gracchi Rome')">Gelateria dei Gracchi</span></strong> ⭐⭐⭐⭐⭐：📍 Via della Tribuna di Campitelli 5。用西西里 Bronte 产区的顶级开心果制作，被评为罗马最佳开心果 Gelato。</li>
+                </ul>
+            </div>
+
+            <div class="time-block">
+                <div class="time">18:00 - 19:00 广场漫步：纳沃纳广场与周边</div>
+                <div class="core-action">核心行动：在罗马最美的椭圆形广场享受黄金时刻的光影。</div>
+                <div class="best">
+                    <div class="best-title">最优项：<span class="loc" onclick="gm('Piazza Navona Rome')">纳沃纳广场 (Piazza Navona)</span> ⭐⭐⭐⭐⭐</div>
+                    <img class="spot-img" src="img/navona.jpg" alt="纳沃纳广场四河喷泉" loading="lazy">
+                    <div>理由：三座喷泉错落有致，中央的四河喷泉是贝尼尼的杰作——代表尼罗河、恒河、多瑙河、拉普拉塔河的四尊巨型雕像围绕方尖碑。广场上街头画家和音乐人营造出浓厚的艺术氛围。</div>
+                    <div>📸 拍摄点：广场南端长椅处，利用喷泉水面反射拍摄圣阿格尼斯教堂。</div>
+                </div>
+                <div class="alt-title">备选行动项（广场周边步行可达）：</div>
+                <ul class="alt-list">
+                    <li><strong><span class="loc" onclick="gm('Campo de Fiori Rome')">Campo de' Fiori（鲜花广场）</span></strong> ⭐⭐⭐：📍 步行5分钟。白天是鲜花与食材集市，傍晚变身为年轻人聚集的酒吧街，感受罗马最地道的烟火气。</li>
+                    <li><strong><span class="loc" onclick="gm('Castroni Roma')">Castroni</span></strong> ⭐⭐⭐⭐：📍 Via Ottaviano 55 或 Via dei Giubbonari。意大利高端食品超市，松露酱（€8-15）、意利咖啡豆（€6-10）、手工意面（€3-5）是性价比极高的手信。</li>
+                    <li><strong><span class="loc" onclick="gm('Castel Sant Angelo Rome')">Castel Sant'Angelo（圣天使堡）</span></strong> ⭐⭐⭐⭐：📍 步行10分钟。不必进去，在圣天使桥上拍摄十座天使雕像与圣天使堡的组合，黄昏光线下极美。</li>
+                </ul>
+            </div>
+
+            <div class="time-block">
+                <div class="time">19:30 - 21:30 晚餐：越台伯河区的灵魂深处</div>
+                <div class="core-action">核心行动：渡过台伯河，进入罗马最有灵魂的美食街区——Trastevere（越台伯河区）。这里是罗马人的"自家厨房"，鹅卵石巷弄中满是藤蔓缠绕的百年小馆。</div>
+                <div class="best">
+                    <div class="best-title">最优项：<span class="loc" onclick="gm('Trattoria Da Enzo al 29 Rome')">Trattoria Da Enzo al 29</span> ⭐⭐⭐⭐⭐</div>
+                    <img class="spot-img" src="img/trastevere.jpg" alt="Trastevere 越台伯河区" loading="lazy">
+                    <div>理由：📍 Via dei Vascellari 29。2025年入选携程全球100当地风味餐厅，全罗马最难排队的餐馆之一。食材全部天然有机，Burrata 芝士入口即化，Carciofi alla Giudia（犹太式炸朝鲜蓟）酥脆到极致——这道菜是罗马犹太社区独创的经典。</div>
+                    <div>🍽️ 必点：Carciofi alla Giudia + Tonnarelli Cacio e Pepe + Tiramisù</div>
+                    <div>⚠️ 不接受预订，17:30前去排队可以在19:00第一轮坐下。</div>
+                </div>
+                <div class="alt-title">备选行动项：</div>
+                <ul class="alt-list">
+                    <li><strong><span class="loc" onclick="gm('Tonnarello Via della Paglia Rome')">Tonnarello</span></strong> ⭐⭐⭐⭐⭐：📍 Via della Paglia 77。传统罗马四大面全部精通，户外鹅卵石广场的座位在春夜极其浪漫，分量巨大。</li>
+                    <li><strong><span class="loc" onclick="gm('Nannarella Rome Trastevere')">Nannarella</span></strong> ⭐⭐⭐⭐：📍 Piazza di Sant'Egidio 6/7。氛围感十足的小馆，分量极大的 Amatriciana 面是招牌。</li>
+                    <li><strong><span class="loc" onclick="gm('Dar Poeta Vicolo del Bologna Rome')">Dar Poeta</span></strong> ⭐⭐⭐⭐：📍 Vicolo del Bologna 45。隐藏在巷子里的神级披萨店，饼底蓬松有嚼劲，甜品 Calzone（Nutella+乳清芝士馅）是大杀器。</li>
+                    <li><strong><span class="loc" onclick="gm('Freni e Frizioni Rome Trastevere')">Freni e Frizioni</span></strong> ⭐⭐⭐⭐：📍 Via del Politeama 4。著名的 Aperitivo（餐前酒）酒吧，€10-12一杯鸡尾酒附赠丰盛自助小食，是体验罗马夜生活的最佳方式。饭前来一杯 Spritz 开胃。</li>
+                </ul>
+            </div>
+
+            <div class="time-block">
+                <div class="time">21:30 - 22:00 Gelato 夜宵：完美收官</div>
+                <div class="best">
+                    <div class="best-title">最优项：<span class="loc" onclick="gm('Otaleg Via di San Cosimato Rome')">Otaleg</span> ⭐⭐⭐⭐⭐</div>
+                    <img class="spot-img" src="img/gelato-3.jpg" alt="创意 Gelato" loading="lazy">
+                    <div>理由：📍 Via di San Cosimato 14（Trastevere 区内）。Gambero Rosso 美食指南推荐，以大胆的创意口味闻名——白巧克力芥末、季节性无花果、松露蜂蜜。从 Da Enzo 步行仅3分钟。</div>
+                </div>
+                <div class="alt-title">备选：</div>
+                <ul class="alt-list">
+                    <li><strong><span class="loc" onclick="gm('La Gelateria Frigidarium Rome')">La Gelateria Frigidarium</span></strong> ⭐⭐⭐⭐：📍 Via del Governo Vecchio 112（纳沃纳广场方向）。TripAdvisor 4.7分，开心果和黑巧克力口味极佳。</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 3月15日 -->
+        <section id="day3" class="day-section">
+            <h2>🗓️ 3月15日：罗马 → 佛罗伦萨·文艺复兴启幕</h2>
+
+            <div class="time-block">
+                <div class="time">07:00 - 08:00 早餐：出发前的能量储备</div>
+                <div class="core-action">核心行动：在前往火车站的路上快速解决早餐，节省时间。</div>
+                <div class="best">
+                    <div class="best-title">最优项：<span class="loc" onclick="gm('Antico Forno Roscioli Via dei Chiavari Rome')">Antico Forno Roscioli</span> ⭐⭐⭐⭐⭐</div>
+                    <img class="spot-img" src="img/pizza.jpg" alt="意式 Pizza" loading="lazy">
+                    <div>理由：📍 Via dei Chiavari 34。罗马最好的烘焙坊，清晨6:00就开门。现烤的 Pizza Bianca（白披萨，只有橄榄油和海盐）外酥内软，搭配一杯浓缩咖啡就是最完美的罗马式告别早餐。</div>
+                    <div>🥐 必点：Pizza Bianca + Cornetto Integrale（全麦牛角包）+ Espresso</div>
+                </div>
+                <div class="alt-title">备选行动项：</div>
+                <ul class="alt-list">
+                    <li><strong><span class="loc" onclick="gm('Roscioli Caffè Piazza Benedetto Cairoli Rome')">Roscioli Caffè</span></strong> ⭐⭐⭐⭐：📍 Piazza Benedetto Cairoli 16。同一家族的咖啡分支，精品意式早餐更加丰盛，开心果酥皮卷必点，但需要多坐15分钟。</li>
+                    <li><strong>Termini 车站内 Chef Express</strong> ⭐⭐⭐：📍 站内。如果时间紧迫，车站内的连锁咖啡也能提供标准的 Cornetto + Cappuccino，味道不差。</li>
+                </ul>
+            </div>
+
+            <div class="time-block">
+                <div class="time">08:30 - 10:00 高铁转移：罗马 → 佛罗伦萨</div>
+                <div class="core-action">核心行动：从 <span class="loc" onclick="gm('Roma Termini Station')">Roma Termini</span> 乘 Italo 或 Trenitalia 高铁前往 <span class="loc" onclick="gm('Firenze Santa Maria Novella Station')">Firenze Santa Maria Novella (SMN)</span>。车程约1.5小时。</div>
+                <div class="best">
+                    <div class="best-title">最优项：Italo 高铁 Prima 舱（商务舱）</div>
+                    <img class="spot-img" src="img/italo-train.jpg" alt="Italo 意大利高铁" loading="lazy">
+                    <div>理由：提前预订可享受早鸟价€29-45（经济舱最低€19），Prima 舱提供免费WiFi、饮品和更宽敞的座位。Italo 的红色车身非常醒目，列车新且干净。</div>
+                    <div>⚠️ 购票建议：在 italotreno.it 或 trenitalia.com 提前2-4周购买，价格可能仅为现场购票的1/3。</div>
+                </div>
+                <div class="alt-title">备选行动项：</div>
+                <ul class="alt-list">
+                    <li><strong>Trenitalia Frecciarossa</strong> ⭐⭐⭐⭐：意大利国铁的高速列车，班次更密集，每20-30分钟一班，灵活度高。</li>
+                    <li><strong>车上早餐升级</strong>：在 Termini 车站的 Eataly Roma 买一份 Focaccia 三明治带上车，享受移动中的意式早午餐。</li>
+                </ul>
+            </div>
+
+            <div class="time-block">
+                <div class="time">10:30 - 11:30 酒店 Check-in &amp; 放行李</div>
+                <div class="core-action">核心行动：抵达佛罗伦萨 SMN 车站后，先去酒店放下行李（大部分酒店10:30后可寄存），轻装出发。</div>
+            </div>
+
+            <div class="time-block">
+                <div class="time">11:30 - 13:00 圣母百花大教堂：文艺复兴的第一眼震撼</div>
+                <div class="core-action">核心行动：从酒店步行前往佛罗伦萨的心脏地带——大教堂广场。这是全城最不可能错过的地标。</div>
+                <div class="best">
+                    <div class="best-title">最优项：<span class="loc" onclick="gm('Cattedrale di Santa Maria del Fiore Florence')">圣母百花大教堂广场 (Piazza del Duomo)</span> ⭐⭐⭐⭐⭐</div>
+                    <img class="spot-img" src="img/duomo-florence.jpg" alt="佛罗伦萨圣母百花大教堂" loading="lazy">
+                    <div>理由：世界上最精美的大理石立面，粉白绿三色的几何图案在阳光下像一幅巨型珠宝画。布鲁内莱斯基设计的穹顶直径45米，至今仍是世界上最大的砖造穹顶，没有使用任何脚手架！</div>
+                    <div>📸 拍摄点：侧面小巷 Via dei Servi 尽头回望，可以拍到巨型穹顶压在巷子顶端的震撼透视感；洗礼堂正门前，拍摄吉贝尔蒂的"天堂之门"青铜浮雕。</div>
+                    <div>⚠️ 登穹顶需提前预约（€30），463级台阶无电梯，恐高者慎入。教堂内部免费但需排队。</div>
+                </div>
+                <div class="alt-title">备选行动项：</div>
+                <ul class="alt-list">
+                    <li><strong><span class="loc" onclick="gm('Giotto Campanile Florence')">乔托钟楼 (Giotto's Campanile)</span></strong> ⭐⭐⭐⭐：📍 大教堂旁。414级台阶登顶，可以近距离平视穹顶的红瓦表面，俯瞰全城红色屋顶。比登穹顶排队短很多。</li>
+                    <li><strong><span class="loc" onclick="gm('Battistero di San Giovanni Florence')">圣若望洗礼堂 (Baptistery of St. John)</span></strong> ⭐⭐⭐⭐：📍 大教堂正前方。吉贝尔蒂花了27年打造的青铜东门被米开朗基罗赞誉为"天堂之门"，内部金色马赛克穹顶也极其震撼。</li>
+                </ul>
+            </div>
+
+            <div class="time-block">
+                <div class="time">13:00 - 14:30 午餐：佛罗伦萨灵魂美食</div>
+                <div class="core-action">核心行动：在中央市场一带品尝佛罗伦萨最地道的街头美食。</div>
+                <div class="best">
+                    <div class="best-title">最优项：<span class="loc" onclick="gm('Da Nerbone Mercato Centrale Florence')">Da Nerbone</span> ⭐⭐⭐⭐⭐</div>
+                    <img class="spot-img" src="img/lampredotto.jpg" alt="佛罗伦萨牛肚包 Lampredotto" loading="lazy">
+                    <div>理由：📍 Mercato Centrale（中央市场）一楼内部。始于1872年，牛肚包 (Lampredotto) 的天花板——将慢炖的牛肚切碎，塞进脆皮面包里，再淋上绿酱 (Salsa Verde) 和辣酱。这是佛罗伦萨蓝领阶层的灵魂食物，€5一个就能吃饱。</div>
+                    <div>🥩 必点：Lampredotto 牛肚包 + Bollito 牛肉包 + 一杯红酒</div>
+                </div>
+                <div class="alt-title">备选行动项：</div>
+                <ul class="alt-list">
+                    <li><strong><span class="loc" onclick="gm('All Antico Vinaio Via dei Neri Florence')">All'Antico Vinaio</span></strong> ⭐⭐⭐⭐：📍 Via dei Neri 65。被国外杂志评为"世界最好吃的三明治"之一，排队极长但移动快。Schiacciata 夹各种冷切肉和芝士，€5-8一个，分量巨大。</li>
+                    <li><strong><span class="loc" onclick="gm('Trattoria Mario Via Rosina Florence')">Trattoria Mario</span></strong> ⭐⭐⭐⭐：📍 Via Rosina 2。只做午餐的硬核老店（1953年至今），需要拼桌，Ribollita（托斯卡纳面包浓汤）是冬季/初春必吃。</li>
+                    <li><strong><span class="loc" onclick="gm('I Girone De Ghiotti Via dei Neri Florence')">I' Girone De' Ghiotti</span></strong> ⭐⭐⭐⭐：📍 Via dei Neri（Vinaio 隔壁）。本地人更爱的冷切肉板和三明治，排队比 Vinaio 短很多，品质同样出色。</li>
+                    <li><strong><span class="loc" onclick="gm('Mercato Centrale Florence')">Mercato Centrale 二楼</span></strong> ⭐⭐⭐：现代美食广场，从寿司到牛排到 Gelato 一应俱全，选择困难症的救星。</li>
+                </ul>
+            </div>
+
+            <div class="time-block">
+                <div class="time">14:30 - 17:00 皮革巡礼与老城漫步</div>
+                <div class="core-action">核心行动：佛罗伦萨是意大利皮革工艺的故乡，下午深入老城寻找真正的匠人手作皮具，同时打卡领主广场。</div>
+                <div class="best">
+                    <div class="best-title">最优项：<span class="loc" onclick="gm('Scuola del Cuoio Florence')">Scuola del Cuoio（皮革学校）</span> + <span class="loc" onclick="gm('Piazza della Signoria Florence')">Piazza della Signoria（领主广场）</span> ⭐⭐⭐⭐⭐</div>
+                    <img class="spot-img" src="img/piazza-signoria.jpg" alt="佛罗伦萨领主广场" loading="lazy">
+                    <div>理由：Scuola del Cuoio 位于圣十字教堂的修道院侧翼，二战后由修道士和皮匠家族联合创办，至今仍是活跃的手工皮革工坊。你可以现场观看匠人烫金压花、缝合皮带的全过程，再购买一件真正的佛罗伦萨手工皮具（钱包€40-80、皮带€30-60、皮包€150-400）。之后步行10分钟到领主广场，这里是露天雕塑博物馆——大卫像复制品、珀尔修斯青铜像、海神喷泉一字排开。</div>
+                    <div>📍 路线：圣十字教堂/皮革学校 → Via dei Neri → Piazza della Signoria</div>
+                    <div>🛍️ 购物贴士：辨别真皮看三点——闻（有浓郁天然皮革香）、摸（纹理自然不均匀）、看标签（"Vera Pelle" = 真皮，"Cuoio" = 皮革）。</div>
+                </div>
+                <div class="alt-title">备选行动项：</div>
+                <ul class="alt-list">
+                    <li><strong><span class="loc" onclick="gm('Bottega Fiorentina Borgo dei Greci Florence')">Bottega Fiorentina</span></strong> ⭐⭐⭐⭐：📍 Borgo dei Greci 5。家族作坊，提供手工手套、钱包和定制皮衣，服务亲切，可以刻字。</li>
+                    <li><strong><span class="loc" onclick="gm('San Lorenzo Leather Market Florence')">San Lorenzo 皮革市场</span></strong> ⭐⭐⭐：📍 Via dell'Ariento（中央市场旁）。露天摊位众多，价格可砍，但品质参差。建议上午去（人少好砍价），认准"100% Vera Pelle"标签。</li>
+                    <li><strong><span class="loc" onclick="gm('Gucci Garden Piazza della Signoria Florence')">Gucci Garden</span></strong> ⭐⭐⭐⭐：📍 Piazza della Signoria 10。全球唯一的古驰博物馆（€10门票）+ 精品店 + Gucci Osteria 餐厅。博物馆内展示品牌百年历史，精品店有佛罗伦萨独家限量款。</li>
+                </ul>
+            </div>
+
+            <div class="time-block">
+                <div class="time">17:00 - 18:30 绝美日落：米开朗基罗广场</div>
+                <div class="core-action">核心行动：赶在日落前登上阿诺河南岸的山丘，在全佛罗伦萨最经典的观景点等待金色的黄昏。</div>
+                <div class="best">
+                    <div class="best-title">最优项：<span class="loc" onclick="gm('Piazzale Michelangelo Florence')">米开朗基罗广场 (Piazzale Michelangelo)</span> ⭐⭐⭐⭐⭐</div>
+                    <img class="spot-img" src="img/piazzale-michelangelo.jpg" alt="米开朗基罗广场俯瞰佛罗伦萨" loading="lazy">
+                    <div>理由：从市中心步行约25分钟（上坡），或乘12/13路公交到达。这里可以俯瞰佛罗伦萨全景——阿诺河如丝带般蜿蜒穿城，老桥、大教堂穹顶、乔托钟楼、圣十字教堂尽收眼底。日落时分红色屋顶被染成金色，是"人生照片"级别的壮观。</div>
+                    <div>📸 拍摄点：广场栏杆正中位置，将大卫像铜像复制品作为前景框住穹顶。日落时间3月中旬约18:15-18:30。</div>
+                </div>
+                <div class="alt-title">备选行动项：</div>
+                <ul class="alt-list">
+                    <li><strong><span class="loc" onclick="gm('San Miniato al Monte Florence')">圣米尼亚托大殿 (San Miniato al Monte)</span></strong> ⭐⭐⭐⭐：📍 广场再往上5分钟。比广场更高更安静，教堂本身也是罗马式建筑的杰作（11世纪），僧侣们每天17:00唱诵格列高利圣咏。</li>
+                    <li><strong><span class="loc" onclick="gm('Ponte Santa Trinita Florence')">Ponte Santa Trinita</span></strong> ⭐⭐⭐⭐：📍 市中心河边。拍摄老桥 (Ponte Vecchio) 的最佳侧面角度，黄昏时桥体和水面的金色反射极美。</li>
+                    <li><strong><span class="loc" onclick="gm('Giardino delle Rose Florence')">玫瑰园 (Giardino delle Rose)</span></strong> ⭐⭐⭐：📍 上山路上。3月初春玫瑰可能尚未盛开，但园内的日本艺术家设计的铜雕非常有趣，且免费进入。</li>
+                </ul>
+            </div>
+
+            <div class="time-block">
+                <div class="time">19:00 - 21:00 晚餐：T骨牛排的暴击</div>
+                <div class="core-action">核心行动：佛罗伦萨 T 骨牛排 (Bistecca alla Fiorentina) 是来此必吃的重头戏。正宗做法要求使用 Chianina 品种牛的腰部肉，厚度至少4-5指，明火高温烤制，中间只能是三分熟的血红色。按公斤计价（€45-60/kg），两人合点一块1kg的即可。</div>
+                <div class="best">
+                    <div class="best-title">最优项：<span class="loc" onclick="gm('Buca Lapi Via del Trebbio Florence')">Buca Lapi</span> ⭐⭐⭐⭐⭐</div>
+                    <img class="spot-img" src="img/bistecca.jpg" alt="佛罗伦萨 T 骨牛排" loading="lazy">
+                    <div>理由：📍 Via del Trebbio 1。佛罗伦萨最古老、评价最高的牛排馆（1880年至今），位于古老的酒窖地下室内，拱形天花板上贴满了来自世界各地的旅行海报。牛排外焦里嫩，配上一瓶 Brunello di Montalcino 红酒，是此行最奢侈的味觉享受。</div>
+                    <div>🥩 必点：Bistecca alla Fiorentina (1kg, 2人分享) + Fagioli all'Olio（托斯卡纳白豆配橄榄油）+ Cantucci con Vin Santo（杏仁脆饼蘸甜酒，甜品）</div>
+                    <div>⚠️ 强烈建议提前1周预约，电话 +39 055 213768</div>
+                </div>
+                <div class="alt-title">备选行动项：</div>
+                <ul class="alt-list">
+                    <li><strong><span class="loc" onclick="gm('Trattoria dall Oste Florence')">Trattoria dall'Oste</span></strong> ⭐⭐⭐⭐：📍 Via Luigi Alamanni 3r（SMN车站旁）。专做各品种干式熟成牛排，可以选择不同天数的熟成和不同部位，肉食爱好者的天堂。</li>
+                    <li><strong><span class="loc" onclick="gm('I Brindellone Piazza Piattellina Florence')">I'Brindellone</span></strong> ⭐⭐⭐⭐：📍 Piazza Piattellina 10r（Oltrarno区）。极高性价比的本地人最爱，牛排品质不输名店但价格低30%。</li>
+                    <li><strong><span class="loc" onclick="gm('La Giostra Borgo Pinti Florence')">La Giostra</span></strong> ⭐⭐⭐⭐：📍 Borgo Pinti 12r。环境极其浪漫（烛光酒窖），不止牛排，松露意面也是招牌，适合想要特别氛围的晚上。</li>
+                    <li><strong><span class="loc" onclick="gm('Perseus Viale Don Minzoni Florence')">Perseus</span></strong> ⭐⭐⭐⭐：📍 Viale Don Minzoni 10。本地人口碑极佳的牛排馆，远离旅游区，性价比高。</li>
+                </ul>
+            </div>
+
+            <div class="time-block">
+                <div class="time">21:00 - 21:30 Gelato 夜宵：佛罗伦萨的甜蜜句号</div>
+                <div class="best">
+                    <div class="best-title">最优项：<span class="loc" onclick="gm('Vivoli Gelateria Florence')">Vivoli Gelateria (1929)</span> ⭐⭐⭐⭐⭐</div>
+                    <img class="spot-img" src="img/gelato-florence.jpg" alt="佛罗伦萨 Gelato" loading="lazy">
+                    <div>理由：📍 Via dell'Isola delle Stinche 7r（圣十字教堂旁）。佛罗伦萨最古老的冰淇淋店，好莱坞明星 Stanley Tucci 力荐的私藏店。只用杯不用蛋筒、不加人工色素——如果 Gelato 颜色太鲜艳那一定是"假货"。开心果色应是暗淡的灰绿色才是真品。</div>
+                </div>
+                <div class="alt-title">备选：</div>
+                <ul class="alt-list">
+                    <li><strong><span class="loc" onclick="gm('Gelateria La Carraia Florence')">Gelateria La Carraia</span></strong> ⭐⭐⭐⭐：📍 Piazza Nazario Sauro 25r（老桥旁）。价格极便宜（€1.5起），品质却出奇地好，Crema 和 Nocciola（榛子）口味绝佳。</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 3月16日 -->
+        <section id="day4" class="day-section">
+            <h2>🗓️ 3月16日：佛罗伦萨·匠心艺术与奢华扫货</h2>
+
+            <div class="time-block">
+                <div class="time">07:30 - 08:30 早餐：市场里的佛罗伦萨清晨</div>
+                <div class="core-action">核心行动：在中央市场一带享用一份丰盛的托斯卡纳式早餐。</div>
+                <div class="best">
+                    <div class="best-title">最优项：<span class="loc" onclick="gm('Mercato Centrale Florence')">Mercato Centrale 二楼 - 早餐区</span> ⭐⭐⭐⭐</div>
+                    <img class="spot-img" src="img/espresso.jpg" alt="意式 Espresso 咖啡" loading="lazy">
+                    <div>理由：📍 Via dell'Ariento 10-14（二楼）。二楼的现代美食广场从早上开始营业，有专门的 Cornetto 和咖啡摊位，也可以选择新鲜烤 Focaccia 配火腿和乳酪，坐在明亮的钢铁玻璃建筑下吃早餐非常舒服。</div>
+                </div>
+                <div class="alt-title">备选行动项：</div>
+                <ul class="alt-list">
+                    <li><strong><span class="loc" onclick="gm('Caffè Gilli Piazza della Repubblica Florence')">Caffè Gilli (1733)</span></strong> ⭐⭐⭐⭐⭐：📍 Piazza della Repubblica 39r。佛罗伦萨最古老的咖啡馆，金碧辉煌的装饰堪比宫殿，一杯站立式 Espresso 仅€1.5，坐下来加收座位费但享受完全不同。</li>
+                    <li><strong><span class="loc" onclick="gm('S.Forno Via Santa Monaca Florence')">S.Forno</span></strong> ⭐⭐⭐⭐：📍 Via Santa Monaca 3r（Oltrarno区）。本地人最爱的面包坊，Schiacciata all'Olio（佛罗伦萨橄榄油扁面包）外酥内糯。</li>
+                </ul>
+            </div>
+
+            <div class="time-block">
+                <div class="time">09:00 - 12:00 艺术殿堂：乌菲兹美术馆</div>
+                <div class="core-action">核心行动：这是全球文艺复兴艺术品最密集的博物馆，没有之一。务必提前在 uffizi.it 预约9:00最早场次（€25含预约费），避免排队2-3小时。</div>
+                <div class="best">
+                    <div class="best-title">最优项：<span class="loc" onclick="gm('Uffizi Gallery Florence')">乌菲兹美术馆 (Galleria degli Uffizi)</span> ⭐⭐⭐⭐⭐</div>
+                    <img class="spot-img" src="img/uffizi.jpg" alt="乌菲兹美术馆" loading="lazy">
+                    <div>理由：波提切利的《维纳斯的诞生》《春》、达芬奇的《天使报喜》、拉斐尔的《金翅雀圣母》、卡拉瓦乔的《美杜莎》——这些曾经只在教科书上看过的名画，真迹就在你面前。</div>
+                    <div>📸 拍摄点：乌菲兹长廊的窗户可以拍到老桥的经典角度。</div>
+                    <div>⏱️ 建议参观时间：2.5-3小时。必看房间：波提切利厅（10-14号）、达芬奇厅（15号）、拉斐尔厅（66号）、卡拉瓦乔厅（90号）。</div>
+                </div>
+                <div class="alt-title">备选行动项（若乌菲兹票已售罄）：</div>
+                <ul class="alt-list">
+                    <li><strong><span class="loc" onclick="gm('Galleria dell Accademia Florence')">学院美术馆 (Galleria dell'Accademia)</span></strong> ⭐⭐⭐⭐⭐：📍 Via Ricasoli 58-60。只为看一眼米开朗基罗的《大卫》真迹——5.17米高的大理石巨人，肌肉纹理和手部血管的雕刻细节令人窒息。参观1-1.5小时即可。</li>
+                    <li><strong><span class="loc" onclick="gm('Palazzo Pitti Florence')">皮蒂宫 (Palazzo Pitti)</span></strong> ⭐⭐⭐⭐：📍 Piazza de' Pitti。美第奇家族的居所，满墙的拉斐尔和提香，后面连接波波里花园。</li>
+                    <li><strong><span class="loc" onclick="gm('Medici Chapels Florence')">美第奇礼拜堂 (Medici Chapels)</span></strong> ⭐⭐⭐⭐：📍 Piazza di Madonna degli Aldobrandini 6。米开朗基罗设计的"新圣器室"，《昼》《夜》《晨》《暮》四座雕像是其晚年的沉思之作。</li>
+                </ul>
+            </div>
+
+            <div class="time-block">
+                <div class="time">12:00 - 13:30 午餐：托斯卡纳的味觉记忆</div>
+                <div class="core-action">核心行动：从乌菲兹出来后，步行至阿诺河南岸的 Oltrarno 区——这是佛罗伦萨最有"本地感"的街区。</div>
+                <div class="best">
+                    <div class="best-title">最优项：<span class="loc" onclick="gm('Trattoria Sostanza Via del Porcellana Florence')">Trattoria Sostanza (il Troia)</span> ⭐⭐⭐⭐⭐</div>
+                    <img class="spot-img" src="img/trattoria.jpg" alt="托斯卡纳料理" loading="lazy">
+                    <div>理由：📍 Via del Porcellana 25r。1869年至今的传奇小馆，座位不到30个，只有两道菜是必点的：Burro Chicken（黄油鸡胸肉——用整块黄油煎到表面金黄，切开后汁水横流）和 Artichoke Omelette（朝鲜蓟煎蛋饼）。这里没有菜单，服务员直接口述当日菜品。</div>
+                    <div>🍽️ 必点：Burro Chicken + Artichoke Omelette + Cantucci con Vin Santo</div>
+                    <div>⚠️ 只接受电话预约，+39 055 212691，且只收现金！</div>
+                </div>
+                <div class="alt-title">备选行动项：</div>
+                <ul class="alt-list">
+                    <li><strong><span class="loc" onclick="gm('Osteria Pastella Via degli Alfani Florence')">Osteria Pastella</span></strong> ⭐⭐⭐⭐：📍 Via degli Alfani 74r。现场在巨型帕玛森奶酪轮里拌面的表演极具仪式感——服务员将热意面直接倒入掏空的奶酪轮中翻拌，奶酪融化包裹每一根面条。</li>
+                    <li><strong><span class="loc" onclick="gm('Buca Mario Piazza degli Ottaviani Florence')">Buca Mario</span></strong> ⭐⭐⭐⭐：📍 Piazza degli Ottaviani 16r。地窖式传统氛围，从2007年至今年年获选米其林餐盘推荐，牛排和野猪肉酱面都是经典。</li>
+                    <li><strong><span class="loc" onclick="gm('Fishing Lab Alle Murate Florence')">Fishing Lab Alle Murate</span></strong> ⭐⭐⭐⭐：📍 Via del Proconsolo 16r。米其林推荐的海鲜餐厅，位于14世纪壁画遗址内用餐，环境极为独特。</li>
+                </ul>
+            </div>
+
+            <div class="time-block">
+                <div class="time">13:30 - 14:30 百年药妆店：全世界最古老的药房</div>
+                <div class="core-action">核心行动：午餐后步行前往一处"像宫殿一样的购物空间"——这可能是你此行最惊艳的非典型打卡点。</div>
+                <div class="best">
+                    <div class="best-title">最优项：<span class="loc" onclick="gm('Officina Profumo Farmaceutica di Santa Maria Novella Florence')">Santa Maria Novella 药妆店</span> ⭐⭐⭐⭐⭐</div>
+                    <img class="spot-img" src="img/smn-pharmacy.png" alt="Santa Maria Novella 药妆店" loading="lazy">
+                    <div>理由：📍 Via della Scala 16。创立于1221年的修道院药房，是世界上最古老的药妆店，至今仍在佛罗伦萨工厂手工制作所有产品。走进去的那一刻——壁画穹顶、彩色玻璃窗、大理石柜台——你会以为自己走进了一座教堂。</div>
+                </div>
+                <div class="shop-item"><strong>Acqua di Rose（玫瑰花水）</strong> €20-25：用途 > "百搭保湿水"，800年配方，用作化妆水或喷雾，气味清新不刺鼻。</div>
+                <div class="shop-item"><strong>Pot-Pourri 陶罐香囊</strong> €35-50：用途 > "高级伴手礼"，手绘陶罐装的天然花瓣香囊，打开盖子满室芬芳，送人极有面子。</div>
+                <div class="shop-item"><strong>Tabacco Toscano 古龙水</strong> €125：用途 > "男士签名香"，烟草和木质调的温暖气息，非常有辨识度。</div>
+                <div class="shop-item"><strong>Cinquanta 古龙水</strong> €150：用途 > "男女通用香"，2015年为纪念佛罗伦萨与京都结为友好城市而创，融合地中海佛手柑和东方绿茶。</div>
+            </div>
+
+            <div class="time-block">
+                <div class="time">14:30 - 18:00 奢华扫货：Via de' Tornabuoni 一条街搞定</div>
+                <div class="core-action">核心行动：这是本次旅行的<strong>奢侈品集中扫货时段</strong>！佛罗伦萨的 <span class="loc" onclick="gm('Via de Tornabuoni Florence')">Via de' Tornabuoni</span> 是意大利最奢华的购物街之一，从 Piazza Antinori 一直延伸到 Ponte Santa Trinita，短短500米集中了所有顶级品牌。选择在归程前一天下午购买，买完直接回酒店锁进保险箱，最大程度降低被盗风险。</div>
+                <div class="best">
+                    <div class="best-title">最优项：Via de' Tornabuoni 品牌地图 ⭐⭐⭐⭐⭐</div>
+                    <img class="spot-img" src="img/tornabuoni.jpg" alt="Via de' Tornabuoni 购物街" loading="lazy">
+                    <div>🛍️ 扫货路线（从北到南，步行10分钟走完全程）：</div>
+                </div>
+                <table class="info-table">
+                    <tr><th>品牌</th><th>地址</th><th>特色</th></tr>
+                    <tr><td><strong><span class="loc" onclick="gm('Gucci Via de Tornabuoni Florence')">Gucci</span></strong></td><td>Via de' Tornabuoni 73-81r</td><td>佛罗伦萨是 Gucci 发源地，部分款式为当地独家</td></tr>
+                    <tr><td><strong><span class="loc" onclick="gm('Salvatore Ferragamo Piazza Santa Trinita Florence')">Ferragamo</span></strong></td><td>Piazza Santa Trinita 5</td><td>总部旗舰店+鞋博物馆，顶层可俯瞰阿诺河</td></tr>
+                    <tr><td><strong><span class="loc" onclick="gm('Prada Via de Tornabuoni Florence')">Prada</span></strong></td><td>Via de' Tornabuoni 67r</td><td>经典款皮具比国内便宜20-35%</td></tr>
+                    <tr><td><strong><span class="loc" onclick="gm('Fendi Via de Tornabuoni Florence')">Fendi</span></strong></td><td>Via de' Tornabuoni 40r</td><td>意大利本土品牌，皮草和包包系列齐全</td></tr>
+                    <tr><td><strong><span class="loc" onclick="gm('Valentino Via de Tornabuoni Florence')">Valentino</span></strong></td><td>Via de' Tornabuoni 52r</td><td>Rockstuds 铆钉鞋/包系列是爆款</td></tr>
+                    <tr><td><strong><span class="loc" onclick="gm('Cartier Via de Tornabuoni Florence')">Cartier</span></strong></td><td>Via de' Tornabuoni 40r</td><td>珠宝和腕表</td></tr>
+                    <tr><td><strong><span class="loc" onclick="gm('Hermès Piazza Antinori Florence')">Hermès</span></strong></td><td>Piazza Antinori 6r</td><td>佛罗伦萨旗舰店</td></tr>
+                    <tr><td><strong><span class="loc" onclick="gm('Emilio Pucci Via de Tornabuoni Florence')">Emilio Pucci</span></strong></td><td>Via de' Tornabuoni 20-22r</td><td>佛罗伦萨本土品牌，招牌几何印花丝巾</td></tr>
+                    <tr><td><strong><span class="loc" onclick="gm('Roberto Cavalli Via de Tornabuoni Florence')">Roberto Cavalli</span></strong></td><td>Via de' Tornabuoni 83r</td><td>总部旗舰店</td></tr>
+                </table>
+                <div class="tips" style="margin-top:8px">
+                    <div class="tips-title">💰 退税操作流程：</div>
+                    <ul>
+                        <li>购物时出示护照，要求开具 Tax Free Form（Global Blue 或 Planet）</li>
+                        <li>仔细核对表单上的护照号码、姓名拼写、国码</li>
+                        <li>保留所有收据原件（拍照备份）</li>
+                        <li>离境时在机场完成 OTELLO 电子验证或海关盖章</li>
+                        <li>投入退税公司专用邮箱或交给人工柜台</li>
+                    </ul>
+                </div>
+                <div class="warning">⚠️ <strong>防盗策略：</strong>购物后立即回酒店，将所有购物袋锁入保险箱。不要提着品牌购物袋在街上逛！如需继续外出，换上普通帆布袋装好。</div>
+                <div class="alt-title">备选行动项（补充购物选择）：</div>
+                <ul class="alt-list">
+                    <li><strong><span class="loc" onclick="gm('Luisa Via Roma Florence')">Luisa Via Roma</span></strong> ⭐⭐⭐⭐⭐：📍 Via Roma 19-21r。全球顶级买手店，集合了 Balenciaga、Bottega Veneta、Loewe 等数百个品牌，如果不想一家家逛，这里一站搞定。</li>
+                    <li><strong><span class="loc" onclick="gm('Richard Ginori Via dei Rondinelli Florence')">Richard Ginori</span></strong> ⭐⭐⭐⭐：📍 Via dei Rondinelli 17r。意大利国宝级瓷器品牌（1735年），手绘餐具精美绝伦，一套咖啡杯€60-120，送人极其体面。</li>
+                    <li><strong><span class="loc" onclick="gm('Rinascente Piazza della Repubblica Florence')">Rinascente 百货</span></strong> ⭐⭐⭐⭐：📍 Piazza della Repubblica 1。意大利高端百货，顶楼露台餐厅正对大教堂穹顶，一站式购买各品牌且可统一办理退税。</li>
+                    <li><strong><span class="loc" onclick="gm('Loretta Caponi Piazza Antinori Florence')">Loretta Caponi</span></strong> ⭐⭐⭐：📍 Piazza Antinori 4r。佛罗伦萨顶级手工刺绣品牌，真丝睡衣和桌布是富裕阶层的心头好（一件睡衣€300-800）。</li>
+                </ul>
+            </div>
+
+            <div class="time-block">
+                <div class="time">18:00 - 19:00 回酒店放好战利品</div>
+                <div class="core-action">核心行动：将所有奢侈品购物袋送回酒店，锁入保险箱。换上舒适衣服，轻装出发享受最后一晚的佛罗伦萨。</div>
+            </div>
+
+            <div class="time-block">
+                <div class="time">19:30 - 21:30 最后的晚餐：完美谢幕</div>
+                <div class="core-action">核心行动：用一顿充满仪式感的晚餐为意大利之旅画上句号。</div>
+                <div class="best">
+                    <div class="best-title">最优项：<span class="loc" onclick="gm('La Giostra Borgo Pinti Florence')">La Giostra</span> ⭐⭐⭐⭐⭐</div>
+                    <img class="spot-img" src="img/truffle-pasta.jpg" alt="松露意面" loading="lazy">
+                    <div>理由：📍 Borgo Pinti 12r。由哈布斯堡王朝后裔开设的浪漫酒窖餐厅，烛光摇曳的拱形砖墙下，松露意面香气扑鼻。老板会亲自到每桌问候，送上自酿的 Vin Santo 甜酒。这是那种"你会在多年后仍然想起"的餐厅。</div>
+                    <div>🍽️ 必点：Tartufo Pasta（松露意面）+ Tagliata di Manzo（切片牛排）+ Tiramisù + Vin Santo</div>
+                    <div>⚠️ 提前预约：+39 055 241341</div>
+                </div>
+                <div class="alt-title">备选行动项：</div>
+                <ul class="alt-list">
+                    <li><strong><span class="loc" onclick="gm('Buca Lapi Via del Trebbio Florence')">Buca Lapi</span></strong> ⭐⭐⭐⭐⭐：如果昨晚没去成，今晚是最后机会吃佛罗伦萨最好的 T 骨牛排。</li>
+                    <li><strong><span class="loc" onclick="gm('Ristorante Santa Elisabetta Hotel Brunelleschi Florence')">Ristorante Santa Elisabetta</span></strong> ⭐⭐⭐⭐⭐：📍 Hotel Brunelleschi 内。佛罗伦萨高端餐厅排名第一（4.8分），位于中世纪拜占庭塔楼内部用餐，菜品精致如艺术品（人均€80-120）。</li>
+                    <li><strong><span class="loc" onclick="gm('I Brindellone Piazza Piattellina Florence')">I'Brindellone</span></strong> ⭐⭐⭐⭐：📍 Piazza Piattellina 10r。如果想要一个轻松的当地人氛围，这里的牛排性价比极高，户外广场座位在春夜微风中非常惬意。</li>
+                </ul>
+            </div>
+
+            <div class="time-block">
+                <div class="time">21:30 - 22:00 告别甜品：最后一口 Gelato</div>
+                <div class="best">
+                    <div class="best-title">最优项：<span class="loc" onclick="gm('Perché no gelato Via dei Tavolini Florence')">Perché no!... (1939)</span> ⭐⭐⭐⭐⭐</div>
+                    <img class="spot-img" src="img/gelato-1.jpg" alt="Gelato 冰淇淋" loading="lazy">
+                    <div>理由：📍 Via dei Tavolini 19r（领主广场旁）。1939年至今的老字号，生姜口味极为特别——微辣的姜味在奶油的甜香中绽放，是佛罗伦萨最有创意的 Gelato 之一。</div>
+                </div>
+                <div class="alt-title">备选：</div>
+                <ul class="alt-list">
+                    <li><strong><span class="loc" onclick="gm('Vivoli Gelateria Florence')">Vivoli</span></strong> ⭐⭐⭐⭐⭐：如果昨晚没去，最后一晚补上。</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 3月17日 -->
+        <section id="day5" class="day-section">
+            <h2>🗓️ 3月17日：归程·机场免税最后一搏</h2>
+
+            <div class="time-block">
+                <div class="time">04:30 起床 &amp; 整理行李</div>
+                <div class="core-action">核心行动：检查所有退税单据是否齐全（购物小票+Tax Free Form），将需要退税的商品放在随身可取的位置（海关可能要求查验）。</div>
+                <div class="tips">
+                    <div class="tips-title">⚠️ 退税检查清单：</div>
+                    <ul>
+                        <li>所有 Tax Free Form 已填写完整</li>
+                        <li>护照号码和姓名与表单一致</li>
+                        <li>购物小票原件与表单对应</li>
+                        <li>商品保持全新（有包装盒的保留完整）</li>
+                        <li>拍照备份所有单据</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="time-block">
+                <div class="time">05:00 退房出发</div>
+                <div class="core-action">核心行动：请前台代订出租车（佛罗伦萨市区到 FLR 机场固定费率约€25-30，车程20-25分钟）。小费不是强制的，但给€2-3零钱是礼貌。</div>
+            </div>
+
+            <div class="time-block">
+                <div class="time">05:30 - 06:30 FLR 机场：退税 &amp; 免税店扫货</div>
+                <div class="core-action">核心行动：抵达 <span class="loc" onclick="gm('Florence Airport Amerigo Vespucci')">Amerigo Vespucci 机场 (FLR)</span> 后，依次完成退税和免税购物。FLR 是小型机场，流程相对快速。</div>
+                <div class="tips">
+                    <div class="tips-title">退税流程：</div>
+                    <ul>
+                        <li>先到海关柜台（Check-in 区域旁）办理 OTELLO 电子验证或人工盖章</li>
+                        <li>如选择信用卡退税（手续费低），将盖章后的表单投入 Global Blue / Planet 专用邮箱</li>
+                        <li>如选择现金退税，到退税公司柜台排队领取（手续费较高但即时到账）</li>
+                    </ul>
+                </div>
+                <div class="best">
+                    <div class="best-title">最优项：Firenze Duty Free 免税店 ⭐⭐⭐⭐</div>
+                    <img class="spot-img" src="img/duty-free.jpg" alt="机场免税店" loading="lazy">
+                    <div>理由：📍 安检后出发区域。营业时间06:00-20:30。虽然 FLR 免税区比罗马 FCO 小得多，但仍有值得抓紧最后机会购买的好物。</div>
+                </div>
+                <div class="shop-item"><strong>Versace 香水系列</strong> €40-80：用途 > "免税价比市区便宜10-15%"，Crystal Noir 和 Bright Crystal 是经典款。</div>
+                <div class="shop-item"><strong>意大利本土巧克力（Venchi / Perugina Baci）</strong> €10-20：用途 > "办公室伴手礼"，Baci 榛子巧克力包装精美，每颗内附一张爱情箴言。</div>
+                <div class="shop-item"><strong>Limoncello（柠檬利口酒）</strong> €12-18：用途 > "餐后消化酒"，冷冻后小口啜饮，柠檬香气极为清新。</div>
+                <div class="shop-item"><strong>意大利特级初榨橄榄油 (Extra Virgin)</strong> €8-15：用途 > "厨房必备"，托斯卡纳产区的橄榄油口感果香浓郁，比国内品质高数倍。</div>
+                <div class="shop-item"><strong>Grappa（渣酿白兰地）</strong> €15-30：用途 > "收藏级烈酒"，用葡萄皮渣蒸馏而成的意大利国酒，口感浓烈辛辣。</div>
+                <div class="alt-title">备选行动项：</div>
+                <ul class="alt-list">
+                    <li><strong>最后一杯意式咖啡</strong>：在机场候机区的咖啡吧站着喝最后一杯 Espresso（约€1.5），为这趟旅程画上最具仪式感的句号。</li>
+                    <li><strong>机场书店纪念品</strong>：意大利制造的皮质笔记本、手绘明信片和艺术画册是轻便又有质感的伴手礼。</li>
+                </ul>
+            </div>
+
+            <div class="time-block">
+                <div class="time">07:00 登机</div>
+                <div class="core-action">带着满满的回忆、行李箱里的手工皮具、退税单据和最后一丝 Gelato 的甜蜜余韵，飞回深圳。✈️<br><br>Buon viaggio! 祝旅途愉快！</div>
+            </div>
+        </section>
+
+        <!-- 附录 -->
+        <section class="day-section">
+            <h2>📋 附录：防盗装备与实用信息速查</h2>
+
+            <h3>防盗必备装备</h3>
+            <table class="info-table">
+                <tr><th>装备</th><th>说明</th></tr>
+                <tr><td>防割斜挎包</td><td>钢丝内衬防割、隐藏拉链、RFID屏蔽（推荐 Pacsafe/Travelon）</td></tr>
+                <tr><td>隐形腰包</td><td>贴身藏在衣服内，存放护照和大额现金</td></tr>
+                <tr><td>小额零钱包</td><td>外口袋放€5-10小额纸币，付卫生间和小费用</td></tr>
+                <tr><td>手机链/防丢绳</td><td>拍照时手机不离手</td></tr>
+            </table>
+
+            <h3>高风险区域警示</h3>
+            <table class="info-table">
+                <tr><th>地点</th><th>风险等级</th><th>注意事项</th></tr>
+                <tr><td>特莱维喷泉</td><td>⚠️⚠️⚠️</td><td>拍照时包挎身前，手机拍完即收</td></tr>
+                <tr><td>Termini 火车站</td><td>⚠️⚠️⚠️</td><td>买票时注意周围，不要在站内数钱</td></tr>
+                <tr><td>40/64路公交车</td><td>⚠️⚠️</td><td>这两条线路经过梵蒂冈，扒手密集</td></tr>
+                <tr><td>地铁A/B线</td><td>⚠️⚠️</td><td>高峰期车厢拥挤时特别注意</td></tr>
+                <tr><td>佛罗伦萨老桥</td><td>⚠️</td><td>人多拥挤时注意随身物品</td></tr>
+            </table>
+
+            <h3>紧急联系方式</h3>
+            <div class="tips">
+                <ul>
+                    <li><strong>意大利报警电话：</strong>112（通用紧急号码）</li>
+                    <li><strong>中国驻罗马大使馆：</strong>+39 06 96524200</li>
+                    <li><strong>中国驻佛罗伦萨总领馆：</strong>+39 055 5520735</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
+
+    <script>
+        // 返回顶部
+        window.addEventListener('scroll',function(){
+            document.getElementById('backToTop').classList.toggle('show',window.pageYOffset>300);
+        });
+        function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'})}
+        // 锚点平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(function(a){
+            a.addEventListener('click',function(e){
+                e.preventDefault();
+                var t=document.querySelector(this.getAttribute('href'));
+                if(t)t.scrollIntoView({behavior:'smooth',block:'start'});
+            });
+        });
+        // Google Maps
+        function gm(loc){window.open('https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(loc),'_blank')}
+    </script>
+</body>
+</html>
+.open('https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(loc),'_blank')}
+    </script>
+</body>
+</html>
