@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>漳州·东山岛 清明旅游攻略（方案B：住云霄深度游东山岛）</title>
+<style>
+:root{
+  --primary:#b4532c;
+  --primary-dark:#8b3a1a;
+  --accent:#6b4423;
+  --bg:#faf6f1;
+  --card:#f5efe8;
+  --time-bg:#f0e6dc;
+  --border:#e0d3c4;
+  --text:#2d2015;
+  --text-light:#6b5b4e;
+  --white:#fff;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.7;font-size:15px}
+header{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:var(--white);padding:2.5rem 1.2rem 2rem;text-align:center}
+header h1{font-size:1.6rem;margin-bottom:.4rem;letter-spacing:1px}
+header p{opacity:.9;font-size:.95rem}
+nav.toc{background:var(--white);border-bottom:2px solid var(--border);padding:1rem 1.2rem;position:sticky;top:0;z-index:100;display:flex;gap:.6rem;flex-wrap:wrap;justify-content:center}
+nav.toc a{text-decoration:none;color:var(--primary);font-size:.85rem;padding:.35rem .7rem;border:1px solid var(--primary);border-radius:20px;white-space:nowrap;transition:.2s}
+nav.toc a:hover,nav.toc a:focus{background:var(--primary);color:var(--white)}
+.container{max-width:800px;margin:0 auto;padding:1rem 1.2rem 3rem}
+.meta-card{background:var(--white);border-radius:12px;padding:1.2rem;margin:1.2rem 0;border-left:4px solid var(--primary);display:grid;grid-template-columns:1fr 1fr;gap:.5rem .8rem;font-size:.9rem}
+.meta-card span{display:block}
+.meta-card .label{color:var(--text-light);font-size:.8rem}
+.overview-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.85rem}
+.overview-table th{background:var(--primary);color:var(--white);padding:.6rem .5rem;text-align:left}
+.overview-table td{padding:.6rem .5rem;border-bottom:1px solid var(--border);background:var(--white)}
+.overview-table tr:hover td{background:var(--card)}
+.tips{background:var(--white);border-left:4px solid var(--primary);border-radius:8px;padding:1rem 1.2rem;margin:1.2rem 0}
+.tips h2{color:var(--primary);font-size:1.1rem;margin-bottom:.6rem}
+.tips li{margin-bottom:.5rem;font-size:.9rem}
+.day-section{margin-top:2rem}
+.day-header{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:var(--white);padding:1rem 1.2rem;border-radius:12px 12px 0 0;font-size:1.2rem}
+.day-body{background:var(--white);border-radius:0 0 12px 12px;padding:.5rem 0;border:1px solid var(--border);border-top:none}
+.time-block{margin:.8rem 1rem;padding:1rem;background:var(--time-bg);border-radius:10px;border-left:4px solid var(--accent)}
+.time-block .time{color:var(--accent);font-weight:700;font-size:.95rem;margin-bottom:.3rem}
+.time-block h3{font-size:1rem;margin-bottom:.5rem;color:var(--primary-dark)}
+.core-action{background:var(--white);padding:.7rem;border-radius:8px;margin-bottom:.6rem;font-size:.9rem}
+.best-pick{background:rgba(180,83,44,.08);padding:.7rem;border-radius:8px;margin-bottom:.6rem}
+.best-pick .name{font-weight:700;color:var(--primary);font-size:.95rem}
+.best-pick .stars{color:#e8a735}
+.best-pick .reason{font-size:.88rem;color:var(--text-light);margin:.3rem 0}
+.info-line{font-size:.85rem;margin:.15rem 0;color:var(--text-light)}
+.info-line .icon{margin-right:.2rem}
+.alts{margin-top:.6rem}
+.alts summary{cursor:pointer;font-weight:600;color:var(--accent);font-size:.9rem;padding:.3rem 0}
+.alt-item{padding:.5rem .6rem;margin:.3rem 0;background:var(--white);border-radius:6px;font-size:.88rem;border-left:3px solid var(--border)}
+.alt-item .alt-name{font-weight:600;color:var(--primary-dark)}
+.alt-item .alt-stars{color:#e8a735;font-size:.82rem}
+a.loc{color:var(--primary);text-decoration:none;border-bottom:1px dashed var(--primary);font-weight:500}
+a.loc:hover{color:var(--primary-dark);border-bottom-style:solid}
+.budget-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.88rem}
+.budget-table th{background:var(--primary);color:var(--white);padding:.5rem;text-align:left}
+.budget-table td{padding:.5rem;border-bottom:1px solid var(--border);background:var(--white)}
+.budget-table tr:last-child td{font-weight:700;background:var(--card)}
+.compare-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.85rem}
+.compare-table th{background:var(--accent);color:var(--white);padding:.5rem;text-align:left}
+.compare-table td{padding:.5rem;border-bottom:1px solid var(--border);background:var(--white)}
+.compare-table td:first-child{font-weight:600;color:var(--accent)}
+.back-to-top{position:fixed;bottom:1.5rem;right:1.5rem;width:44px;height:44px;border-radius:50%;background:var(--primary);color:var(--white);border:none;font-size:1.3rem;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.2);display:none;align-items:center;justify-content:center;z-index:99}
+.back-to-top:hover{background:var(--primary-dark)}
+.quick-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.78rem;overflow-x:auto;display:block}
+.quick-table th{background:var(--accent);color:var(--white);padding:.4rem .3rem;white-space:nowrap;font-size:.78rem}
+.quick-table td{padding:.4rem .3rem;border-bottom:1px solid var(--border);background:var(--white);white-space:nowrap}
+.food-list{list-style:none;padding:0}
+.food-list li{padding:.4rem .5rem;margin:.3rem 0;background:var(--white);border-radius:6px;font-size:.88rem;border-left:3px solid var(--primary)}
+.highlight-box{background:rgba(180,83,44,.06);border:1px dashed var(--primary);border-radius:8px;padding:.8rem;margin:.6rem 0;font-size:.88rem}
+@media(max-width:600px){
+  header h1{font-size:1.3rem}
+  .meta-card{grid-template-columns:1fr}
+  nav.toc{gap:.4rem}
+  nav.toc a{font-size:.78rem;padding:.3rem .5rem}
+  .time-block{margin:.6rem .6rem;padding:.8rem}
+  .quick-table{font-size:.72rem}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🏮 漳州·东山岛 清明旅游攻略</h1>
+  <p>方案B：住云霄深度游东山岛 ｜ 2026年4月4日-6日</p>
+  <p style="font-size:.85rem;margin-top:.3rem;opacity:.8">闽南古城慢生活 × 深度海岛体验 × 吃遍漳州特色美食</p>
+</header>
+
+<nav class="toc" id="top">
+  <a href="#day-43">4/3 抵达</a>
+  <a href="#day-44">4/4 漳州古城</a>
+  <a href="#day-45">4/5 云霄+东山岛</a>
+  <a href="#day-46">4/6 返程</a>
+  <a href="#budget">💰 预算</a>
+  <a href="#compare">📊 对比</a>
+</nav>
+
+<div class="container">
+
+  <div class="meta-card">
+    <span><span class="label">📍 目的地</span>福建漳州 + 云霄 + 东山岛</span>
+    <span><span class="label">📅 出行日期</span>2026年4月3日-6日（清明节）</span>
+    <span><span class="label">👥 出行人数</span>2人同行</span>
+    <span><span class="label">💰 预算档次</span>轻奢（体验优先）</span>
+    <span><span class="label">🏷️ 标签</span>美食 · 海岛 · 古城 · 闽南文化</span>
+    <span><span class="label">🌡️ 气温</span>18-28℃，短袖+薄外套</span>
+  </div>
+
+  <div class="highlight-box">
+    <strong>🌟 方案B核心优势：</strong>住在云霄/东山岛附近，4/5可从容深度游东山岛（不赶夜路），能看到马銮湾日落，能赶上下午4点渔船返港最鲜海鲜，4/6从云霄站直接高铁回深圳。
+  </div>
+
+  <h2 style="color:var(--primary);margin:1.5rem 0 .5rem;border-bottom:2px solid var(--accent);padding-bottom:.3rem">📋 行程概览</h2>
+  <table class="overview-table">
+    <tr><th>日期</th><th>主题</th></tr>
+    <tr><td>4/3（周五）晚</td><td>深圳→漳州高铁，抵达入住</td></tr>
+    <tr><td>4/4（周六）</td><td>漳州古城 + 云洞岩 + 吃遍特色美食</td></tr>
+    <tr><td>4/5（周日）</td><td>退房→高铁到云霄→东山岛深度游→住云霄/东山</td></tr>
+    <tr><td>4/6（周一）</td><td>住云霄：悠闲→高铁回深圳 / 住东山：清晨补漏→云霄站回深圳</td></tr>
+  </table>
+
+  <h2 style="color:var(--primary);margin:1.5rem 0 .5rem;border-bottom:2px solid var(--accent);padding-bottom:.3rem">🗺️ 一页速览</h2>
+  <div style="overflow-x:auto">
+  <table class="quick-table">
+    <tr><th>日期</th><th>早餐</th><th>上午</th><th>午餐</th><th>下午</th><th>晚餐</th><th>备注</th></tr>
+    <tr><td>4/4</td><td>锅边糊+油条</td><td>漳州古城漫步</td><td>卤面/手抓面</td><td>云洞岩登山</td><td>古城夜市大扫荡</td><td>美食主线</td></tr>
+    <tr><td>4/5</td><td>沙茶面→退房</td><td>高铁→云霄→东山岛</td><td>东山海鲜大餐</td><td>苏峰山+马銮湾日落</td><td>铜陵镇海鲜+小吃</td><td>住云霄</td></tr>
+    <tr><td>4/6</td><td>云霄早餐 或 东山早餐</td><td>云霄悠闲 或 东山补漏</td><td>简单午餐</td><td>云霄站高铁回深圳</td><td>—</td><td>住哪就在哪活动</td></tr>
+  </table>
+  </div>
+
+  <div class="tips">
+    <h2>💡 重要提示</h2>
+    <ul>
+      <li><strong>清明人流：</strong>热门餐厅建议错峰用餐（避开 11:30-13:00、17:30-19:00）</li>
+      <li><strong>天气穿衣：</strong>4月初约 18-28℃，短袖+薄外套，携带雨伞</li>
+      <li><strong>行李安排：</strong>4/5早上漳州退房，行李随身带到云霄酒店，轻装上东山岛</li>
+      <li><strong>海鲜采购：</strong>铜陵人民市场下午4点后最新鲜；可自购到餐厅加工（10-15元/斤）</li>
+      <li><strong>返程便利：</strong>4/6从云霄站直接坐高铁回深圳，云霄站每日61趟车经停</li>
+    </ul>
+  </div>
+
+  <!-- ===== 4/3 ===== -->
+  <div class="day-section" id="day-43">
+    <div class="day-header">🗓️ 4/3（周五）：深圳出发，夜抵漳州</div>
+    <div class="day-body">
+      <div class="time-block">
+        <div class="time">⏰ 18:00 – 21:00</div>
+        <h3>深圳→漳州高铁</h3>
+        <div class="core-action"><strong>核心行动：</strong>从深圳北站乘高铁前往漳州站，车程约2.5-3小时。</div>
+        <div class="info-line"><span class="icon">📍</span> <a class="loc" href="https://uri.amap.com/search?keyword=深圳北站" target="_blank" rel="noopener">深圳北站</a> → <a class="loc" href="https://uri.amap.com/search?keyword=漳州站" target="_blank" rel="noopener">漳州站</a></div>
+        <div class="info-line"><span class="icon">💰</span> 二等座约209元/人，一等座约335元/人</div>
+        <div class="info-line"><span class="icon">⚠️</span> 建议选17:00-18:00的车次；到达后打车约15分钟到古城附近酒店</div>
+        <div class="info-line"><span class="icon">⚠️</span> 如21:00前到达，可先逛古城夜市感受闽南烟火气</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 4/4 ===== -->
+  <div class="day-section" id="day-44">
+    <div class="day-header">🗓️ 4/4（周六）：漳州古城美食深度游</div>
+    <div class="day-body">
+
+      <div class="time-block">
+        <div class="time">⏰ 07:30 – 08:30</div>
+        <h3>早餐：锅边糊 + 本地早点</h3>
+        <div class="core-action"><strong>核心行动：</strong>品尝漳州最地道的早餐——锅边糊配油条，开启闽南味蕾之旅。</div>
+        <div class="best-pick">
+          <span class="name">天添锅边糊</span> <span class="stars">⭐⭐⭐⭐⭐</span>
+          <div class="reason">连续2年大众点评必吃榜。米浆沿锅边凝固的薄片配蚬子虾干香菇汤底，是漳州人的早餐灵魂。</div>
+          <div class="info-line"><span class="icon">📍</span> <a class="loc" href="https://uri.amap.com/search?keyword=天添锅边糊悦港路" target="_blank" rel="noopener">天添锅边糊（悦港路100-13号）</a></div>
+          <div class="info-line"><span class="icon">💰</span> 人均：约10-15元</div>
+          <div class="info-line"><span class="icon">⚠️</span> 清明假期人多，建议7:30前到</div>
+        </div>
+        <details class="alts">
+          <summary>📋 备选行动项（3个）</summary>
+          <div class="alt-item"><span class="alt-name">东华豆花</span> <span class="alt-stars">⭐⭐⭐⭐⭐</span><br>📍 <a class="loc" href="https://uri.amap.com/search?keyword=东华豆花漳州" target="_blank" rel="noopener">东华豆花（新生巷25-16）</a>。14年老店，豆花滑嫩。人均8-12元。</div>
+          <div class="alt-item"><span class="alt-name">新行头五香</span> <span class="alt-stars">⭐⭐⭐⭐</span><br>📍 <a class="loc" href="https://uri.amap.com/search?keyword=新行头五香漳州" target="_blank" rel="noopener">新行头五香</a>。大众点评必吃榜。人均10-15元。</div>
+          <div class="alt-item"><span class="alt-name">正宗洋老洲卤面</span> <span class="alt-stars">⭐⭐⭐⭐</span><br>📍 <a class="loc" href="https://uri.amap.com/search?keyword=正宗洋老洲卤面漳州" target="_blank" rel="noopener">洋老洲卤面</a>。1300年历史。人均8-15元。</div>
+        </details>
+      </div>
+
+      <div class="time-block">
+        <div class="time">⏰ 09:00 – 11:30</div>
+        <h3>漳州古城深度漫步</h3>
+        <div class="core-action"><strong>核心行动：</strong>漫步千年古城，感受明清骑楼与闽南慢生活，边逛边吃古城小吃。</div>
+        <div class="best-pick">
+          <span class="name">漳州古城（台湾路-香港路历史街区）</span> <span class="stars">⭐⭐⭐⭐⭐</span>
+          <div class="reason">全天免费开放，1.2公里石板路串联唐宋子城遗址、明清骑楼、非遗体验馆。"老街情、慢生活、闽南味、民国风"。</div>
+          <div class="info-line"><span class="icon">📍</span> <a class="loc" href="https://uri.amap.com/search?keyword=漳州古城" target="_blank" rel="noopener">漳州古城</a></div>
+          <div class="info-line"><span class="icon">💰</span> 免费</div>
+          <div class="info-line"><span class="icon">📸</span> 台湾路骑楼、香港路牌坊、文庙</div>
+        </div>
+        <p style="font-weight:600;color:var(--accent);margin:.6rem 0 .3rem;font-size:.9rem">🍜 沿途必吃小吃：</p>
+        <ul class="food-list">
+          <li><strong>建国蚵煎蚵面</strong> ⭐⭐⭐⭐⭐ — 连续2年必吃榜，海蛎煎外脆里嫩。人均15-25元</li>
+          <li><strong>面煎粿</strong> ⭐⭐⭐⭐⭐ — 中国地域十大名小吃，皮脆馅软。人均5-8元</li>
+          <li><strong>四果汤</strong> ⭐⭐⭐⭐ — 绿豆+薏仁+仙草+蜂蜜水。人均5-8元</li>
+          <li><strong>清叶鸡蛋汉堡</strong> ⭐⭐⭐⭐ — 网红小吃。人均8-12元</li>
+        </ul>
+        <details class="alts">
+          <summary>📋 备选行动项（3个）</summary>
+          <div class="alt-item"><span class="alt-name">漳州文庙</span> <span class="alt-stars">⭐⭐⭐⭐</span><br>📍 <a class="loc" href="https://uri.amap.com/search?keyword=漳州文庙" target="_blank" rel="noopener">漳州文庙</a>。传统文化地标，免费。</div>
+          <div class="alt-item"><span class="alt-name">非遗体验馆</span> <span class="alt-stars">⭐⭐⭐⭐</span><br>台湾路。木版年画、木偶头雕刻等。</div>
+          <div class="alt-item"><span class="alt-name">漳州博物馆</span> <span class="alt-stars">⭐⭐⭐</span><br>📍 <a class="loc" href="https://uri.amap.com/search?keyword=漳州博物馆" target="_blank" rel="noopener">漳州博物馆</a>。免费开放，约需1小时。</div>
+        </details>
+      </div>
+
+      <div class="time-block">
+        <div class="time">⏰ 11:30 – 13:00</div>
+        <h3>午餐：漳州卤面 + 手抓面</h3>
+        <div class="core-action"><strong>核心行动：</strong>品尝漳州小吃之冠——卤面和独特的手抓面配五香卷。</div>
+        <div class="best-pick">
+          <span class="name">达聪小巷五香面</span> <span class="stars">⭐⭐⭐⭐⭐</span>
+          <div class="reason">手抓面标杆老店，金黄碱面配五香卷、炸肉等十多种配料，用手抓食别有风味。</div>
+          <div class="info-line"><span class="icon">📍</span> <a class="loc" href="https://uri.amap.com/search?keyword=达聪小巷五香面漳州" target="_blank" rel="noopener">达聪小巷五香面</a></div>
+          <div class="info-line"><span class="icon">💰</span> 人均：约16-25元</div>
+          <div class="info-line"><span class="icon">⚠️</span> 11:30前到避免排队</div>
+        </div>
+        <details class="alts">
+          <summary>📋 备选行动项（3个）</summary>
+          <div class="alt-item"><span class="alt-name">阿芳卤面</span> <span class="alt-stars">⭐⭐⭐⭐⭐</span><br>📍 <a class="loc" href="https://uri.amap.com/search?keyword=阿芳卤面漳州" target="_blank" rel="noopener">阿芳卤面</a>。鲜甜浓郁。人均10-20元。</div>
+          <div class="alt-item"><span class="alt-name">阿蛤正宗洋老洲卤面</span> <span class="alt-stars">⭐⭐⭐⭐⭐</span><br>📍 <a class="loc" href="https://uri.amap.com/search?keyword=阿蛤正宗洋老洲卤面漳州" target="_blank" rel="noopener">洋老洲卤面</a>。大众点评必吃榜。人均10-20元。</div>
+          <div class="alt-item"><span class="alt-name">松树干拌面</span> <span class="alt-stars">⭐⭐⭐⭐</span><br>古城美食18家之一。人均10-15元。</div>
+        </details>
+      </div>
+
+      <div class="time-block">
+        <div class="time">⏰ 13:30 – 16:00</div>
+        <h3>云洞岩登山</h3>
+        <div class="core-action"><strong>核心行动：</strong>攀登"闽南第一碑林"，赏怪石嶙峋、摩崖石刻，登顶俯瞰漳州全景。</div>
+        <div class="best-pick">
+          <span class="name">云洞岩风景名胜区</span> <span class="stars">⭐⭐⭐⭐</span>
+          <div class="reason">海拔280米，有风动石、一线天、天梯等奇观，40余处洞穴和200余处历代摩崖石刻。</div>
+          <div class="info-line"><span class="icon">📍</span> <a class="loc" href="https://uri.amap.com/search?keyword=云洞岩风景名胜区漳州" target="_blank" rel="noopener">云洞岩风景名胜区</a></div>
+          <div class="info-line"><span class="icon">💰</span> 免费（部分信息显示收费，建议现场确认）</div>
+          <div class="info-line"><span class="icon">⏰</span> 07:30-18:00</div>
+          <div class="info-line"><span class="icon">⚠️</span> 天梯坡度超70度，注意安全</div>
+        </div>
+        <details class="alts">
+          <summary>📋 备选行动项（3个）</summary>
+          <div class="alt-item"><span class="alt-name">南山寺</span> <span class="alt-stars">⭐⭐⭐⭐</span><br>📍 <a class="loc" href="https://uri.amap.com/search?keyword=南山寺漳州" target="_blank" rel="noopener">南山寺</a>。千年古刹，免费。不想爬山的替代。</div>
+          <div class="alt-item"><span class="alt-name">龙文塔公园</span> <span class="alt-stars">⭐⭐⭐</span><br>📍 <a class="loc" href="https://uri.amap.com/search?keyword=龙文塔公园漳州" target="_blank" rel="noopener">龙文塔公园</a>。江边散步赏景。</div>
+          <div class="alt-item"><span class="alt-name">九龙江畔散步</span> <span class="alt-stars">⭐⭐⭐</span><br>📍 <a class="loc" href="https://uri.amap.com/search?keyword=九龙江畔漳州" target="_blank" rel="noopener">九龙江畔</a>。感受漳州慢节奏。</div>
+        </details>
+      </div>
+
+      <div class="time-block">
+        <div class="time">⏰ 16:30 – 17:30</div>
+        <h3>下午茶：四果汤 + 面煎粿</h3>
+        <div class="core-action"><strong>核心行动：</strong>登山后来一碗清凉四果汤解渴。</div>
+        <div class="best-pick">
+          <span class="name">古城周边四果汤老店</span> <span class="stars">⭐⭐⭐⭐</span>
+          <div class="reason">木薯圆子（阿达子）Q弹、仙草冻清凉、配上蜂蜜水。</div>
+          <div class="info-line"><span class="icon">💰</span> 人均：约5-10元</div>
+        </div>
+        <details class="alts">
+          <summary>📋 备选行动项（3个）</summary>
+          <div class="alt-item"><span class="alt-name">石花膏</span> <span class="alt-stars">⭐⭐⭐⭐</span><br>闽南传统甜品。人均5-10元。</div>
+          <div class="alt-item"><span class="alt-name">白水贡糖</span> <span class="alt-stars">⭐⭐⭐⭐</span><br>清朝贡品，入口即化。人均10-20元。</div>
+          <div class="alt-item"><span class="alt-name">片仔癀果汁</span> <span class="alt-stars">⭐⭐⭐</span><br>漳州特色饮品。人均5-8元。</div>
+        </details>
+      </div>
+
+      <div class="time-block">
+        <div class="time">⏰ 18:00 – 20:30</div>
+        <h3>古城夜市美食大扫荡</h3>
+        <div class="core-action"><strong>核心行动：</strong>华灯初上，漳州古城夜市一路吃到撑。</div>
+        <div class="best-pick">
+          <span class="name">漳州古城夜市</span> <span class="stars">⭐⭐⭐⭐⭐</span>
+          <div class="reason">年客流285万人次，老字号汇聚，灯光秀值得一看。</div>
+          <div class="info-line"><span class="icon">📍</span> <a class="loc" href="https://uri.amap.com/search?keyword=漳州古城夜市" target="_blank" rel="noopener">漳州古城夜市</a></div>
+          <div class="info-line"><span class="icon">💰</span> 人均50-80元（少量多样）</div>
+        </div>
+        <p style="font-weight:600;color:var(--accent);margin:.6rem 0 .3rem;font-size:.9rem">🍗 必吃清单：</p>
+        <ul class="food-list">
+          <li><strong>九根鸡腿</strong> ⭐⭐⭐⭐⭐ — 20年老卤汤。人均20元</li>
+          <li><strong>李太忙盐焗手枪腿</strong> ⭐⭐⭐⭐⭐ — 夜市人气王。人均15-20元</li>
+          <li><strong>郑水根卤味馆</strong> ⭐⭐⭐⭐ — 卤味配啤酒。人均20-30元</li>
+          <li><strong>阿琴牛肉面</strong> ⭐⭐⭐⭐ — 独特牛肉卤料。人均20-30元</li>
+          <li><strong>老郑烧烤</strong> ⭐⭐⭐⭐ — 古城烧烤名店。人均30-50元</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== 4/5 ===== -->
+  <div class="day-section" id="day-45">
+    <div class="day-header">🗓️ 4/5（周日）：转战云霄 + 东山岛深度游</div>
+    <div class="day-body">
+
+      <div class="time-block">
+        <div class="time">⏰ 07:30 – 08:30</div>
+        <h3>早餐：沙茶面 + 退房</h3>
+        <div class="core-action"><strong>核心行动：</strong>在漳州吃完最后一餐沙茶面，退房出发。</div>
+        <div class="best-pick">
+          <span class="name">宝珠园老牌沙茶面</span> <span class="stars">⭐⭐⭐⭐⭐</span>
+          <div class="reason">手工现熬沙茶酱坚守35年，汤底鲜香浓郁，比厦门版更地道。</div>
+          <div class="info-line"><span class="icon">📍</span> <a class="loc" href="https://uri.amap.com/search?keyword=宝珠园老牌沙茶面漳州" target="_blank" rel="noopener">宝珠园老牌沙茶面</a></div>
+          <div class="info-line"><span class="icon">💰</span> 人均：约20元</div>
+        </div>
+        <details class="alts">
+          <summary>📋 备选行动项（3个）</summary>
+          <div class="alt-item"><span class="alt-name">天添锅边糊</span> <span class="alt-stars">⭐⭐⭐⭐⭐</span><br>想再吃一次也值。人均10-15元。</div>
+          <div class="alt-item"><span class="alt-name">正宗洋老洲卤面</span> <span class="alt-stars">⭐⭐⭐⭐</span><br>再来一碗卤面。人均10-15元。</div>
+          <div class="alt-item"><span class="alt-name">干拌面+扁肉</span> <span class="alt-stars">⭐⭐⭐⭐</span><br>猪蹄肉花生酱干拌面+手打扁肉汤。人均10-15元。</div>
+        </details>
+      </div>
+
+      <div class="time-block">
+        <div class="time">⏰ 09:00 – 10:00</div>
+        <h3>漳州→云霄（高铁）🚄</h3>
+        <div class="core-action"><strong>核心行动：</strong>高铁仅25-35分钟即到云霄，非常方便。</div>
+        <div class="info-line"><span class="icon">📍</span> <a class="loc" href="https://uri.amap.com/search?keyword=漳州站" target="_blank" rel="noopener">漳州站</a> → <a class="loc" href="https://uri.amap.com/search?keyword=云霄站" target="_blank" rel="noopener">云霄站</a></div>
+        <div class="info-line"><span class="icon">💰</span> 二等座约23-37元/人</div>
+        <div class="info-line"><span class="icon">⏰</span> 每天10班以上，选9:00-10:00之间的车次</div>
+        <div class="info-line"><span class="icon">⚠️</span> 到达云霄后先到酒店寄存行李或入住，再轻装出发东山岛</div>
+      </div>
+
+      <div class="time-block">
+        <div class="time">⏰ 10:00 – 10:40</div>
+        <h3>云霄→东山岛</h3>
+        <div class="core-action"><strong>核心行动：</strong>从云霄站前往东山岛，交通很便利。</div>
+        <div class="best-pick">
+          <span class="name">打车/网约车（推荐）</span> <span class="stars">⭐⭐⭐⭐⭐</span>
+          <div class="reason">云霄站→东山岛铜陵镇约20-30分钟，费用约50-60元。方便快捷。</div>
+        </div>
+        <details class="alts">
+          <summary>📋 备选交通</summary>
+          <div class="alt-item"><span class="alt-name">K15路公交</span> <span class="alt-stars">⭐⭐⭐⭐</span><br>云霄站出站右侧，10元/人，约40分钟，每20分钟一班。</div>
+          <div class="alt-item"><span class="alt-name">拼车</span> <span class="alt-stars">⭐⭐⭐</span><br>云霄站出口常有拼车，约30元/人，30分钟。</div>
+          <div class="alt-item"><span class="alt-name">15路公交</span> <span class="alt-stars">⭐⭐⭐</span><br>10元/人，约1小时，班次较少。</div>
+        </details>
+      </div>
+
+      <div class="time-block">
+        <div class="time">⏰ 11:00 – 12:30</div>
+        <h3>南门湾 + 风动石景区</h3>
+        <div class="core-action"><strong>核心行动：</strong>游览东山岛最经典的南门湾彩色渔村和风动石景区。</div>
+        <div class="best-pick">
+          <span class="name">南门湾 + 风动石景区</span> <span class="stars">⭐⭐⭐⭐⭐</span>
+          <div class="reason">南门湾是电影《左耳》取景地，彩色渔村面朝大海。风动石景区有"天下第一奇石"、关帝庙、海边木栈道。</div>
+          <div class="info-line"><span class="icon">📍</span> <a class="loc" href="https://uri.amap.com/search?keyword=南门湾东山岛" target="_blank" rel="noopener">南门湾</a> + <a class="loc" href="https://uri.amap.com/search?keyword=东山风动石景区" target="_blank" rel="noopener">风动石景区</a></div>
+          <div class="info-line"><span class="icon">💰</span> 风动石门票42-45元/人</div>
+          <div class="info-line"><span class="icon">⏰</span> 07:30-18:00</div>
+          <div class="info-line"><span class="icon">📸</span> 南门湾堤坝拍彩色房子、左耳天台</div>
+        </div>
+        <details class="alts">
+          <summary>📋 备选行动项（3个）</summary>
+          <div class="alt-item"><span class="alt-name">铜山古城</span> <span class="alt-stars">⭐⭐⭐⭐</span><br>📍 <a class="loc" href="https://uri.amap.com/search?keyword=铜山古城东山岛" target="_blank" rel="noopener">铜山古城</a>。明代古城墙，与风动石相邻。免费。</div>
+          <div class="alt-item"><span class="alt-name">关帝庙</span> <span class="alt-stars">⭐⭐⭐⭐</span><br>风动石景区内，东山岛香火最旺的庙宇。</div>
+          <div class="alt-item"><span class="alt-name">东门屿</span> <span class="alt-stars">⭐⭐⭐</span><br>📍 <a class="loc" href="https://uri.amap.com/search?keyword=东门屿东山岛" target="_blank" rel="noopener">东门屿</a>。需坐船，时间充裕可以去。</div>
+        </details>
+      </div>
+
+      <div class="time-block">
+        <div class="time">⏰ 12:30 – 14:00</div>
+        <h3>午餐：东山岛海鲜大餐 🦐</h3>
+        <div class="core-action"><strong>核心行动：</strong>大快朵颐东山岛新鲜海鲜！</div>
+        <div class="best-pick">
+          <span class="name">铜陵镇海鲜餐厅 / 自购加工</span> <span class="stars">⭐⭐⭐⭐⭐</span>
+          <div class="reason">东山岛海鲜以新鲜著称。可在铜陵人民市场自购海鲜到餐厅加工。</div>
+          <div class="info-line"><span class="icon">📍</span> <a class="loc" href="https://uri.amap.com/search?keyword=铜陵人民市场东山岛" target="_blank" rel="noopener">铜陵人民市场</a></div>
+          <div class="info-line"><span class="icon">💰</span> 人均80-150元</div>
+        </div>
+        <p style="font-weight:600;color:var(--accent);margin:.6rem 0 .3rem;font-size:.9rem">🦀 必点海鲜：</p>
+        <ul class="food-list">
+          <li><strong>白灼小管</strong> — 肉质脆弹鲜甜，15元/斤起</li>
+          <li><strong>巴浪鱼</strong> — 东山招牌，"游走的氨基酸"</li>
+          <li><strong>清蒸生蚝</strong> — 肉肥多汁，Q弹鲜嫩</li>
+          <li><strong>酱油水煮午鱼</strong> — 脂肪丰富肉质鲜美</li>
+        </ul>
+        <details class="alts">
+          <summary>📋 备选行动项（4个）</summary>
+          <div class="alt-item"><span class="alt-name">陈记肉丸</span> <span class="alt-stars">⭐⭐⭐⭐</span><br>📍 <a class="loc" href="https://uri.amap.com/search?keyword=陈记肉丸东山岛" target="_blank" rel="noopener">陈记肉丸</a>。紫菜炒饭+丸子汤，人均25元。</div>
+          <div class="alt-item"><span class="alt-name">旧戏院猫仔粥</span> <span class="alt-stars">⭐⭐⭐⭐</span><br>📍 <a class="loc" href="https://uri.amap.com/search?keyword=旧戏院猫仔粥东山岛" target="_blank" rel="noopener">旧戏院猫仔粥</a>。海鲜粥，人均20元。</div>
+          <div class="alt-item"><span class="alt-name">忠义蚵仔煎</span> <span class="alt-stars">⭐⭐⭐⭐</span><br>📍 <a class="loc" href="https://uri.amap.com/search?keyword=忠义蚵仔煎东山岛" target="_blank" rel="noopener">忠义蚵仔煎</a>。东山版海蛎煎，人均15元。</div>
+          <div class="alt-item"><span class="alt-name">团结路小吃街</span> <span class="alt-stars">⭐⭐⭐</span><br>📍 <a class="loc" href="https://uri.amap.com/search?keyword=团结路小吃街东山岛" target="_blank" rel="noopener">团结路小吃街</a>。各种东山小吃汇集。</div>
+        </details>
+      </div>
+
+      <div class="time-block">
+        <div class="time">⏰ 14:30 – 16:30</div>
+        <h3>苏峰山环岛路</h3>
+        <div class="core-action"><strong>核心行动：</strong>驱车走福建最美海岸线，蓝桥段必停打卡。</div>
+        <div class="best-pick">
+          <span class="name">苏峰山环岛路</span> <span class="stars">⭐⭐⭐⭐⭐</span>
+          <div class="reason">"福建最美海岸线"，蓝桥段可拍蓝色大桥与碧海蓝天绝美合影。全程约1-1.5小时。</div>
+          <div class="info-line"><span class="icon">📍</span> <a class="loc" href="https://uri.amap.com/search?keyword=苏峰山环岛路东山岛" target="_blank" rel="noopener">苏峰山环岛路</a></div>
+          <div class="info-line"><span class="icon">💰</span> 免费</div>
+          <div class="info-line"><span class="icon">📸</span> 蓝桥段、沿途观景台</div>
+        </div>
+        <details class="alts">
+          <summary>📋 备选行动项（3个）</summary>
+          <div class="alt-item"><span class="alt-name">岩雅古村</span> <span class="alt-stars">⭐⭐⭐⭐</span><br>📍 <a class="loc" href="https://uri.amap.com/search?keyword=岩雅古村东山岛" target="_blank" rel="noopener">岩雅古村</a>。"岩雅恋人"拍照点。</div>
+          <div class="alt-item"><span class="alt-name">澳角村</span> <span class="alt-stars">⭐⭐⭐⭐</span><br>📍 <a class="loc" href="https://uri.amap.com/search?keyword=澳角村东山岛" target="_blank" rel="noopener">澳角村</a>。白色灯塔+渔港。</div>
+          <div class="alt-item"><span class="alt-name">金銮湾</span> <span class="alt-stars">⭐⭐⭐</span><br>📍 <a class="loc" href="https://uri.amap.com/search?keyword=金銮湾东山岛" target="_blank" rel="noopener">金銮湾</a>。沙滩踏浪。</div>
+        </details>
+      </div>
+
+      <div class="time-block" style="border-left-color:var(--primary)">
+        <div class="time">⏰ 16:30 – 18:30</div>
+        <h3>🌅 马銮湾海滩 + 看日落（方案B独享）</h3>
+        <div class="core-action"><strong>核心行动：</strong>方案B不赶时间，可以从容享受马銮湾日落——这是方案B相比方案A最大的体验升级！</div>
+        <div class="best-pick">
+          <span class="name">马銮湾日落</span> <span class="stars">⭐⭐⭐⭐⭐</span>
+          <div class="reason">东山岛最大海滨浴场，沙滩细软海水清澈。日落时分金色光线洒满沙滩，剪影绝美。</div>
+          <div class="info-line"><span class="icon">📍</span> <a class="loc" href="https://uri.amap.com/search?keyword=马銮湾东山岛" target="_blank" rel="noopener">马銮湾</a></div>
+          <div class="info-line"><span class="icon">💰</span> 免费</div>
+          <div class="info-line"><span class="icon">📸</span> 日落剪影、海浪金色光线（约18:00-18:30）</div>
+        </div>
+        <details class="alts">
+          <summary>📋 备选行动项（3个）</summary>
+          <div class="alt-item"><span class="alt-name">南屿双面海</span> <span class="alt-stars">⭐⭐⭐⭐</span><br>退潮时沙洲连岛，两面是海。需查潮汐。</div>
+          <div class="alt-item"><span class="alt-name">鱼骨沙洲</span> <span class="alt-stars">⭐⭐⭐⭐</span><br>退潮时出现鱼骨形沙洲。需查潮汐。</div>
+          <div class="alt-item"><span class="alt-name">金銮湾日落</span> <span class="alt-stars">⭐⭐⭐⭐</span><br>📍 <a class="loc" href="https://uri.amap.com/search?keyword=金銮湾东山岛" target="_blank" rel="noopener">金銮湾</a>。另一个看日落的好选择。</div>
+        </details>
+      </div>
+
+      <div class="time-block" style="border-left-color:var(--primary)">
+        <div class="time">⏰ 18:30 – 20:00</div>
+        <h3>🦀 晚餐：东山岛海鲜+小吃（方案B独享）</h3>
+        <div class="core-action"><strong>核心行动：</strong>不用赶回漳州！从容享用晚餐，还能赶上下午4点渔船返港后的最鲜海鲜。</div>
+        <div class="best-pick">
+          <span class="name">铜陵镇海鲜 + 特色小吃</span> <span class="stars">⭐⭐⭐⭐⭐</span>
+          <div class="reason">下午4点后渔船返港，铜陵人民市场海鲜最新鲜最便宜！这是方案B独有的优势。</div>
+          <div class="info-line"><span class="icon">📍</span> <a class="loc" href="https://uri.amap.com/search?keyword=铜陵人民市场东山岛" target="_blank" rel="noopener">铜陵人民市场</a></div>
+          <div class="info-line"><span class="icon">💰</span> 人均80-120元</div>
+        </div>
+        <p style="font-weight:600;color:var(--accent);margin:.6rem 0 .3rem;font-size:.9rem">🍗 必吃小吃：</p>
+        <ul class="food-list">
+          <li><strong>铜山鸡腿</strong> ⭐⭐⭐⭐⭐ — 蒜香浓郁。人均10元</li>
+          <li><strong>海鲜烧麦（肖米）</strong> ⭐⭐⭐⭐⭐ — 鱼虾碾肉馅，皮薄馅多。人均10-15元</li>
+          <li><strong>烧腱灵</strong> ⭐⭐⭐⭐ — 猪网油包肉炭火烤制。人均10-15元</li>
+          <li><strong>手打鱼丸汤</strong> ⭐⭐⭐⭐ — Q弹鲜美。人均10元</li>
+          <li><strong>三角点姜母鸭</strong> ⭐⭐⭐⭐ — 番鸭+芝麻油+老黄姜慢炖。人均40-60元</li>
+        </ul>
+      </div>
+
+      <div class="time-block">
+        <div class="time">⏰ 20:00 – 21:00</div>
+        <h3>返回云霄酒店</h3>
+        <div class="core-action"><strong>核心行动：</strong>晚餐后返回云霄酒店休息。</div>
+        <div class="best-pick">
+          <span class="name">云霄县城酒店（推荐）</span> <span class="stars">⭐⭐⭐⭐⭐</span>
+          <div class="reason">打车回云霄约20-30分钟（50-60元）。第二天直接在云霄站坐高铁回深圳，最省事。</div>
+          <div class="info-line"><span class="icon">💰</span> 酒店约200-400元/晚（轻奢档）</div>
+        </div>
+        <details class="alts">
+          <summary>📋 备选住宿</summary>
+          <div class="alt-item"><span class="alt-name">东山岛铜陵镇民宿</span> <span class="alt-stars">⭐⭐⭐⭐</span><br>体验海岛夜晚，第二天还能逛逛。约150-300元/晚。⚠️ 次日需提前出发去云霄站。</div>
+          <div class="alt-item"><span class="alt-name">金銮湾海景酒店</span> <span class="alt-stars">⭐⭐⭐⭐</span><br>海景房体验。约300-600元/晚。⚠️ 距云霄站较远。</div>
+          <div class="alt-item"><span class="alt-name">云霄高铁站附近快捷酒店</span> <span class="alt-stars">⭐⭐⭐</span><br>最方便返程，步行到站。约150-250元/晚。</div>
+        </details>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== 4/6 ===== -->
+  <div class="day-section" id="day-46">
+    <div class="day-header">🗓️ 4/6（周一）：返程深圳</div>
+    <div class="day-body">
+
+      <div class="time-block" style="background:rgba(180,83,44,.06);border-left-color:var(--primary)">
+        <div style="font-weight:700;color:var(--primary);font-size:1rem;margin-bottom:.6rem">⚠️ 4/6 行程取决于前一晚住在哪里，下面分开写：</div>
+      </div>
+
+      <!-- 住云霄路线 -->
+      <div class="time-block" style="border-left-color:var(--primary)">
+        <div style="font-weight:700;color:var(--primary);font-size:1rem;margin-bottom:.6rem">🏨 路线一：住云霄（推荐）</div>
+        <div class="info-line">住云霄的好处：第二天不用折腾，悠闲吃个早餐，直接去云霄站坐高铁回深圳。</div>
+      </div>
+
+      <div class="time-block">
+        <div class="time">⏰ 08:00 – 09:00</div>
+        <h3>【住云霄】早餐：云霄当地特色</h3>
+        <div class="core-action"><strong>核心行动：</strong>睡到自然醒，在云霄体验当地早餐。</div>
+        <div class="best-pick">
+          <span class="name">云霄特色早餐</span> <span class="stars">⭐⭐⭐⭐</span>
+          <div class="reason">云霄也是闽南地区，芋头丸、锅边糊、卤面等都值得尝尝。</div>
+          <div class="info-line"><span class="icon">💰</span> 人均10-20元</div>
+        </div>
+        <details class="alts">
+          <summary>📋 备选行动项（3个）</summary>
+          <div class="alt-item"><span class="alt-name">锅边糊/卤面</span> <span class="alt-stars">⭐⭐⭐⭐</span><br>闽南经典早餐，各地风味略有不同。人均10-15元。</div>
+          <div class="alt-item"><span class="alt-name">云霄芋头丸</span> <span class="alt-stars">⭐⭐⭐⭐</span><br>云霄当地特色小吃。人均10-15元。</div>
+          <div class="alt-item"><span class="alt-name">酒店自助早餐</span> <span class="alt-stars">⭐⭐⭐</span><br>省时省力的选择。</div>
+        </details>
+      </div>
+
+      <div class="time-block">
+        <div class="time">⏰ 09:30 – 11:30</div>
+        <h3>【住云霄】上午：悠闲半日</h3>
+        <div class="core-action"><strong>核心行动：</strong>在云霄县城悠闲逛逛，感受闽南小县城的慢生活。</div>
+        <ul class="food-list">
+          <li><strong>云霄县城散步</strong> ⭐⭐⭐ — 感受闽南小县城悠闲生活</li>
+          <li><strong>天福茶博物院</strong> ⭐⭐⭐ — 📍 <a class="loc" href="https://uri.amap.com/search?keyword=天福茶博物院云霄" target="_blank" rel="noopener">天福茶博物院</a>。茶文化体验</li>
+          <li><strong>采购伴手礼</strong> ⭐⭐⭐ — 云霄当地特产、茶叶等</li>
+        </ul>
+      </div>
+
+      <div class="time-block">
+        <div class="time">⏰ 11:30 – 12:30</div>
+        <h3>【住云霄】午餐</h3>
+        <div class="core-action"><strong>核心行动：</strong>简单吃个午餐准备返程。</div>
+        <details class="alts">
+          <summary>📋 选择（3个）</summary>
+          <div class="alt-item"><span class="alt-name">云霄芋头丸</span> <span class="alt-stars">⭐⭐⭐⭐</span><br>云霄当地特色。人均15元。</div>
+          <div class="alt-item"><span class="alt-name">锅边糊</span> <span class="alt-stars">⭐⭐⭐⭐</span><br>再来一碗闽南味。人均10元。</div>
+          <div class="alt-item"><span class="alt-name">就近简单解决</span> <span class="alt-stars">⭐⭐⭐</span><br>不想纠结就近吃。</div>
+        </details>
+      </div>
+
+      <div class="time-block">
+        <div class="time">⏰ 13:00 – 13:30</div>
+        <h3>【住云霄】前往云霄站</h3>
+        <div class="info-line"><span class="icon">📍</span> 云霄酒店→<a class="loc" href="https://uri.amap.com/search?keyword=云霄站" target="_blank" rel="noopener">云霄站</a>：打车约10分钟（10-15元）</div>
+        <div class="info-line"><span class="icon">⚠️</span> 提前30分钟到站</div>
+      </div>
+
+      <!-- 分隔线 -->
+      <div style="margin:1.2rem 1rem;border-top:2px dashed var(--border)"></div>
+
+      <!-- 住东山岛路线 -->
+      <div class="time-block" style="border-left-color:var(--primary)">
+        <div style="font-weight:700;color:var(--primary);font-size:1rem;margin-bottom:.6rem">🏖️ 路线二：住东山岛</div>
+        <div class="info-line">住东山岛的好处：体验海岛夜晚，第二天清晨还能在岛上补漏。但返程需多预留时间去云霄站。</div>
+      </div>
+
+      <div class="time-block">
+        <div class="time">⏰ 07:00 – 08:30</div>
+        <h3>【住东山】早起 + 东山岛清晨</h3>
+        <div class="core-action"><strong>核心行动：</strong>趁清晨人少光线美，补漏游览东山岛。</div>
+        <ul class="food-list">
+          <li><strong>南门湾清晨散步</strong> ⭐⭐⭐⭐⭐ — 清晨7点光线最美、人最少，拍照最佳时段</li>
+          <li><strong>铜陵人民市场早市</strong> ⭐⭐⭐⭐ — 感受渔民日常生活，买干海鲜带走</li>
+        </ul>
+      </div>
+
+      <div class="time-block">
+        <div class="time">⏰ 08:30 – 09:30</div>
+        <h3>【住东山】早餐 + 采购特产</h3>
+        <div class="core-action"><strong>核心行动：</strong>吃东山岛早餐，采购伴手礼。</div>
+        <div class="best-pick">
+          <span class="name">鱼丸汤+肖米</span> <span class="stars">⭐⭐⭐⭐</span>
+          <div class="reason">手打鱼丸汤配海鲜烧麦，元气满满。</div>
+          <div class="info-line"><span class="icon">💰</span> 人均15-20元</div>
+        </div>
+        <details class="alts">
+          <summary>📋 备选行动项（3个）</summary>
+          <div class="alt-item"><span class="alt-name">东山沙茶面</span> <span class="alt-stars">⭐⭐⭐⭐</span><br>东山版沙茶面。人均15-20元。</div>
+          <div class="alt-item"><span class="alt-name">阿达子甜汤</span> <span class="alt-stars">⭐⭐⭐⭐</span><br>木薯圆子甜汤。人均5-8元。</div>
+          <div class="alt-item"><span class="alt-name">酒店早餐</span> <span class="alt-stars">⭐⭐⭐</span><br>省时省力。</div>
+        </details>
+        <p style="font-weight:600;color:var(--accent);margin:.5rem 0 .3rem;font-size:.88rem">🎁 伴手礼：鱼干、虾干、紫菜、鱿鱼干等干海鲜</p>
+      </div>
+
+      <div class="time-block">
+        <div class="time">⏰ 10:00 – 10:30</div>
+        <h3>【住东山】简单午餐</h3>
+        <details class="alts">
+          <summary>📋 选择（3个）</summary>
+          <div class="alt-item"><span class="alt-name">旧戏院猫仔粥</span> <span class="alt-stars">⭐⭐⭐⭐</span><br>海鲜粥快速饱腹。人均20元。</div>
+          <div class="alt-item"><span class="alt-name">肖米+鱼丸汤</span> <span class="alt-stars">⭐⭐⭐⭐</span><br>东山特色，人均15元。</div>
+          <div class="alt-item"><span class="alt-name">随便吃点</span> <span class="alt-stars">⭐⭐⭐</span><br>赶时间简单解决。</div>
+        </details>
+      </div>
+
+      <div class="time-block">
+        <div class="time">⏰ 11:00 – 12:00</div>
+        <h3>【住东山】东山岛→云霄站</h3>
+        <div class="core-action"><strong>核心行动：</strong>打车前往云霄站。</div>
+        <div class="info-line"><span class="icon">📍</span> 东山岛→<a class="loc" href="https://uri.amap.com/search?keyword=云霄站" target="_blank" rel="noopener">云霄站</a>：打车约20-30分钟（50-60元）</div>
+        <div class="info-line"><span class="icon">⚠️</span> 建议11:00前出发，预留充足时间</div>
+      </div>
+
+      <!-- 分隔线 -->
+      <div style="margin:1.2rem 1rem;border-top:2px dashed var(--border)"></div>
+
+      <!-- 共同：高铁返回 -->
+      <div class="time-block" style="border-left-color:var(--primary)">
+        <div class="time">⏰ 14:00 – 17:00</div>
+        <h3>高铁返回深圳 🚄（两条路线共同）</h3>
+        <div class="core-action"><strong>核心行动：</strong>从云霄站乘高铁回深圳，结束美好假期。</div>
+        <div class="info-line"><span class="icon">📍</span> <a class="loc" href="https://uri.amap.com/search?keyword=云霄站" target="_blank" rel="noopener">云霄站</a> → <a class="loc" href="https://uri.amap.com/search?keyword=深圳北站" target="_blank" rel="noopener">深圳北站</a></div>
+        <div class="info-line"><span class="icon">💰</span> 二等座约180-220元/人</div>
+        <div class="info-line"><span class="icon">⏰</span> 车程约2.5-3小时</div>
+        <div class="info-line"><span class="icon">⚠️</span> 云霄站每日61趟车经停，选择多；清明返程高峰务必提前购票</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 预算 -->
+  <div class="day-section" id="budget">
+    <h2 style="color:var(--primary);margin:1.5rem 0 .5rem;border-bottom:2px solid var(--accent);padding-bottom:.3rem">💰 预算估算（2人合计）</h2>
+    <table class="budget-table">
+      <tr><th>项目</th><th>预估费用</th></tr>
+      <tr><td>高铁（深圳→漳州 + 漳州→云霄 + 云霄→深圳）</td><td>约900-1000元</td></tr>
+      <tr><td>住宿（2晚漳州 + 1晚云霄/东山，轻奢档）</td><td>约1000-1600元</td></tr>
+      <tr><td>东山岛交通（云霄↔东山打车）</td><td>约120-150元</td></tr>
+      <tr><td>漳州/云霄市内交通</td><td>约200元</td></tr>
+      <tr><td>东山岛岛内包车/打车</td><td>约300-400元</td></tr>
+      <tr><td>餐饮美食</td><td>约800-1200元</td></tr>
+      <tr><td>门票（风动石等）</td><td>约100-150元</td></tr>
+      <tr><td>伴手礼</td><td>约100-200元</td></tr>
+      <tr><td><strong>合计</strong></td><td><strong>约3500-4800元</strong></td></tr>
+    </table>
+  </div>
+
+  <!-- 对比表 -->
+  <div class="day-section" id="compare">
+    <h2 style="color:var(--primary);margin:1.5rem 0 .5rem;border-bottom:2px solid var(--accent);padding-bottom:.3rem">📊 方案A vs 方案B 对比</h2>
+    <table class="compare-table">
+      <tr><th>对比项</th><th>方案A（当日来回）</th><th>方案B（住云霄/东山）✅</th></tr>
+      <tr><td>东山岛游览时间</td><td>约7小时（较赶）</td><td>约8-9小时（从容）；住东山岛则次日还可补漏</td></tr>
+      <tr><td>东山岛晚餐</td><td>匆忙吃或回漳州吃</td><td>从容享用，可赶渔船返港最鲜海鲜</td></tr>
+      <tr><td>东山岛日落</td><td>可能来不及看</td><td>可以在马銮湾看完日落 🌅</td></tr>
+      <tr><td>漳州美食时间</td><td>4/4全天+4/6半天</td><td>4/4全天（4/5早上补了沙茶面）</td></tr>
+      <tr><td>返程出发地</td><td>漳州站</td><td>云霄站（更近）</td></tr>
+      <tr><td>换酒店次数</td><td>不换（3晚同一酒店）</td><td>换1次（2晚漳州+1晚云霄或东山）</td></tr>
+      <tr><td>4/6上午</td><td>漳州补漏美食+伴手礼</td><td>住云霄：悠闲逛逛 / 住东山：清晨补漏+采购</td></tr>
+      <tr><td>总费用</td><td>约3600-5000元</td><td>约3500-4800元</td></tr>
+      <tr><td>适合人群</td><td>不想换酒店、偏好轻松</td><td>想深度体验东山岛 ✅</td></tr>
+    </table>
+  </div>
+
+</div>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+const btn=document.getElementById('backToTop');
+window.addEventListener('scroll',()=>{btn.style.display=window.scrollY>400?'flex':'none'});
+document.querySelectorAll('nav.toc a').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'})})});
+</script>
+</body>
+</html>

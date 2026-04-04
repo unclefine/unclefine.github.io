@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>越南胡志明市 + 美奈 6 日游（2026.4.29 出发 · 5/4 晚回国）</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<style>
+:root{
+  --primary:#0d9488;
+  --primary-dark:#0f766e;
+  --accent:#115e59;
+  --bg:#f0fdfa;
+  --card:#ccfbf1;
+  --time-bg:#e6fffa;
+  --border:#99f6e4;
+  --text:#134e4a;
+  --text-light:#0f766e;
+  --white:#fff;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.7;font-size:15px}
+header{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:var(--white);padding:2.5rem 1.2rem 2rem;text-align:center}
+header h1{font-size:1.55rem;margin-bottom:.4rem;letter-spacing:1px}
+header p{opacity:.95;font-size:.95rem}
+nav.toc{background:var(--white);border-bottom:2px solid var(--border);padding:1rem 1.2rem;position:sticky;top:0;z-index:200;display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center}
+nav.toc a{text-decoration:none;color:var(--primary);font-size:.78rem;padding:.32rem .65rem;border:1px solid var(--primary);border-radius:20px;white-space:nowrap;transition:.2s}
+nav.toc a:hover,nav.toc a:focus{background:var(--primary);color:var(--white)}
+.container{max-width:820px;margin:0 auto;padding:1rem 1.2rem 3.5rem}
+.meta-card{background:var(--white);border-radius:12px;padding:1.2rem;margin:1.2rem 0;border-left:4px solid var(--primary);display:grid;grid-template-columns:1fr 1fr;gap:.5rem .8rem;font-size:.9rem}
+.meta-card span{display:block}
+.meta-card .label{color:var(--text-light);font-size:.8rem}
+.section-title{color:var(--primary);margin:1.5rem 0 .5rem;border-bottom:2px solid var(--accent);padding-bottom:.3rem;font-size:1.15rem}
+.overview-table,.info-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.85rem}
+.overview-table th,.info-table th{background:var(--primary);color:var(--white);padding:.55rem .45rem;text-align:left}
+.overview-table td,.info-table td{padding:.55rem .45rem;border-bottom:1px solid var(--border);background:var(--white)}
+.overview-table tr:hover td{background:var(--card)}
+.tips{background:var(--white);border-left:4px solid var(--primary);border-radius:8px;padding:1rem 1.2rem;margin:1.2rem 0}
+.tips h2{color:var(--primary);font-size:1.08rem;margin-bottom:.55rem}
+.tips li{margin-bottom:.45rem;font-size:.9rem}
+.prep-checklist{background:var(--white);border-radius:10px;padding:1rem 1.15rem;margin:1.2rem 0;border:1px solid var(--border)}
+.prep-checklist h3{color:var(--primary-dark);font-size:1rem;margin:.9rem 0 .4rem}
+.prep-checklist h3:first-child{margin-top:0}
+.prep-checklist ul{margin-left:1.1rem;font-size:.9rem}
+.prep-checklist li{margin:.25rem 0}
+.day-section{margin-top:2rem;scroll-margin-top:72px}
+.day-section.day-today .day-header{box-shadow:0 0 0 3px rgba(13,148,136,.45)}
+.day-header{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:var(--white);padding:1rem 1.2rem;border-radius:12px 12px 0 0;font-size:1.12rem}
+.day-body{background:var(--white);border-radius:0 0 12px 12px;padding:.45rem 0 1rem;border:1px solid var(--border);border-top:none}
+.day-map-wrap{padding:0 1rem .6rem}
+.day-map-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.5rem;margin:.5rem 0 .35rem}
+.day-map-head span{font-size:.82rem;color:var(--text-light)}
+.map-fit-btn{font-size:.8rem;padding:.35rem .75rem;border-radius:8px;border:1px solid var(--primary);background:var(--white);color:var(--primary);cursor:pointer;min-height:44px}
+.map-fit-btn:hover{background:var(--primary);color:var(--white)}
+.day-map{height:min(42vh,420px);min-height:280px;border-radius:10px;border:1px solid var(--border);z-index:1}
+.leaflet-container{font-family:inherit}
+.num-marker{width:28px;height:28px;border-radius:50%;background:var(--white);border:2px solid var(--primary);color:var(--primary);font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 4px rgba(0,0,0,.18)}
+.num-marker.type-food{border-color:#ea580c;color:#c2410c}
+.num-marker.type-sight{border-color:var(--primary-dark);color:var(--accent)}
+.num-marker.type-transit{border-color:#64748b;color:#475569}
+.num-marker-icon{background:transparent!important;border:none!important}
+.time-block{margin:.75rem 1rem;padding:1rem;background:var(--time-bg);border-radius:10px;border-left:4px solid var(--accent);transition:box-shadow .2s,opacity .2s}
+.time-block.map-focus{box-shadow:0 0 0 2px var(--primary);outline-offset:2px}
+.time-block.time-done{opacity:.72}
+.time-block .time{color:var(--accent);font-weight:700;font-size:.95rem;margin-bottom:.25rem}
+.time-block h3{font-size:1rem;margin-bottom:.45rem;color:var(--primary-dark)}
+.tb-head{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:.5rem;margin-bottom:.45rem}
+.done-row{display:flex;align-items:center;gap:.35rem;font-size:.82rem;color:var(--text-light);user-select:none}
+.done-row input{width:18px;height:18px;accent-color:var(--primary)}
+.core-action{background:var(--white);padding:.65rem;border-radius:8px;margin-bottom:.55rem;font-size:.9rem}
+.best-pick{background:rgba(13,148,136,.09);padding:.65rem;border-radius:8px;margin-bottom:.55rem}
+.best-pick .name{font-weight:700;color:var(--primary);font-size:.95rem}
+.best-pick .stars{color:#e8a735}
+.best-pick .reason{font-size:.87rem;color:var(--text-light);margin:.28rem 0}
+.info-line{font-size:.84rem;margin:.12rem 0;color:var(--text-light)}
+.info-line .icon{margin-right:.2rem}
+.alts{margin-top:.55rem}
+.alts summary{cursor:pointer;font-weight:600;color:var(--accent);font-size:.88rem;padding:.25rem 0}
+.alt-item{display:flex;gap:.6rem;align-items:flex-start;padding:.5rem .55rem;margin:.28rem 0;background:var(--white);border-radius:8px;border-left:3px solid var(--border)}
+.alt-photo{flex:0 0 104px;margin:0}
+.alt-photo img{width:104px;height:78px;object-fit:cover;border-radius:6px;display:block;border:1px solid var(--border)}
+.alt-body{flex:1;min-width:0;font-size:.86rem}
+.act-photo{margin:.45rem 0 0}
+.act-photo img{width:100%;max-height:220px;object-fit:cover;border-radius:8px;display:block;border:1px solid var(--border)}
+.media-cap{font-size:.68rem;color:#64748b;margin-top:.25rem;line-height:1.35}
+@media(max-width:600px){
+  .alt-item{flex-direction:column}
+  .alt-photo{flex:none;width:100%}
+  .alt-photo img{width:100%;height:auto;max-height:160px}
+}
+.rain-alt{background:rgba(20,184,166,.12);margin:.75rem 1rem;padding:.75rem 1rem;border-radius:10px;font-size:.88rem;border-left:4px solid var(--primary)}
+.rain-alt strong{color:var(--primary-dark)}
+a.loc,span.loc-link{color:var(--primary);text-decoration:none;border-bottom:1px dashed var(--primary);font-weight:500;cursor:pointer}
+a.loc:hover,span.loc-link:hover{color:var(--primary-dark);border-bottom-style:solid}
+.quick-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.76rem;display:block;overflow-x:auto}
+.quick-table th{background:var(--accent);color:var(--white);padding:.38rem .3rem;white-space:nowrap}
+.quick-table td{padding:.38rem .3rem;border-bottom:1px solid var(--border);background:var(--white);white-space:nowrap}
+.back-to-top{position:fixed;bottom:1.5rem;right:1.5rem;width:44px;height:44px;border-radius:50%;background:var(--primary);color:var(--white);border:none;font-size:1.25rem;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.2);display:none;align-items:center;justify-content:center;z-index:199}
+.back-to-top:hover{background:var(--primary-dark)}
+.footnote{font-size:.82rem;color:var(--text-light);margin-top:2rem;padding-top:1rem;border-top:1px dashed var(--border)}
+@media(max-width:600px){
+  header h1{font-size:1.28rem}
+  .meta-card{grid-template-columns:1fr}
+  nav.toc a{font-size:.72rem;padding:.28rem .5rem}
+  .time-block{margin:.6rem .6rem;padding:.85rem}
+  .day-map{min-height:260px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>越南胡志明市 + 美奈 6 日游</h1>
+  <p>2026年4月29日出发 ｜ 5月4日晚上航班回国</p>
+  <p style="font-size:.85rem;margin-top:.35rem;opacity:.88">西贡法式风情与咖啡 × 美奈沙丘与海岸线</p>
+</header>
+
+<nav class="toc" id="top">
+  <a href="#prep">出发前清单</a>
+  <a href="#day-429">4/29</a>
+  <a href="#day-430">4/30</a>
+  <a href="#day-501">5/1</a>
+  <a href="#day-502">5/2</a>
+  <a href="#day-503">5/3</a>
+  <a href="#day-504">5/4</a>
+  <a href="#flight-table">赴机场表</a>
+</nav>
+
+<div class="container">
+
+  <div class="meta-card">
+    <span><span class="label">出发地</span>中国深圳（可香港/广州飞）</span>
+    <span><span class="label">核心城市</span>胡志明市（SGN）+ 美奈 Mũi Né</span>
+    <span><span class="label">出行日期</span>2026年4月29日 — 5月4日（晚班机回）</span>
+    <span><span class="label">地图底图</span>OpenStreetMap（WGS-84）</span>
+    <span><span class="label">标签</span>美食 · 人文 · 海滩 · 沙丘</span>
+    <span><span class="label">提示</span>坐标供参考，出发前请与 Google Maps 核对</span>
+  </div>
+
+  <h2 class="section-title">行程概览</h2>
+  <table class="overview-table">
+    <tr><th>日期</th><th>主题</th></tr>
+    <tr><td>4/29（三）</td><td>飞抵胡志明市，入住第一郡，河粉/法棍入门</td></tr>
+    <tr><td>4/30（四）</td><td>战争遗迹博物馆、统一宫、邮局/红教堂、滨城夜市</td></tr>
+    <tr><td>5/1（五）</td><td>古芝地道团或堤岸；按摩；第四郡海鲜或范五老</td></tr>
+    <tr><td>5/2（六）</td><td>大巴赴美奈，仙女溪，海鲜排挡</td></tr>
+    <tr><td>5/3（日）</td><td>白沙丘日出吉普线，下午返西贡，简餐早睡</td></tr>
+    <tr><td>5/4（一）</td><td>粉教堂、午餐伴手礼、商场休整，晚上航班回国</td></tr>
+  </table>
+
+  <h2 class="section-title">一页速览</h2>
+  <div style="overflow-x:auto">
+  <table class="quick-table">
+    <tr><th>日期</th><th>早餐</th><th>上午</th><th>午餐</th><th>下午</th><th>晚餐</th><th>备注</th></tr>
+    <tr><td>4/29</td><td>飞机/酒店</td><td>—</td><td>—</td><td>入境+入住</td><td>河粉/法棍</td><td>电子签打印</td></tr>
+    <tr><td>4/30</td><td>酒店</td><td>博物馆+统一宫</td><td>越南菜</td><td>邮局+红教堂</td><td>滨城小吃</td><td>避开周一闭馆</td></tr>
+    <tr><td>5/1</td><td>酒店</td><td>古芝团</td><td>团餐/华人区</td><td>SPA</td><td>海鲜/范五老</td><td>劳动节人多</td></tr>
+    <tr><td>5/2</td><td>酒店</td><td>大巴→美奈</td><td>美奈简餐</td><td>仙女溪</td><td>Boke海鲜</td><td>备晕车药</td></tr>
+    <tr><td>5/3</td><td>简餐</td><td>日出吉普</td><td>酒店早午餐</td><td>大巴返西贡</td><td>河粉外卖</td><td>早睡</td></tr>
+    <tr><td>5/4</td><td>酒店</td><td>粉教堂</td><td>越南菜+手信</td><td>商场休整</td><td>机场餐</td><td>按起飞−3h</td></tr>
+  </table>
+  </div>
+
+  <div class="tips">
+    <h2>重要提示</h2>
+    <ul>
+      <li><strong>签证：</strong>提前办越南电子签，打印 PDF；以出发前官方政策为准。</li>
+      <li><strong>天气：</strong>4月底～5月初闷热，5月起阵雨增多；吉普日出带薄外套防风沙。</li>
+      <li><strong>劳动节：</strong>机票酒店紧、班车与吉普提前 1～2 天订。</li>
+      <li><strong>5/4 晚班回国：</strong>国际航班建议起飞前 <strong>3 小时</strong>到机场；第一郡→SGN 晚高峰预留 <strong>60～90 分钟</strong>车程。</li>
+      <li><strong>安全：</strong>范五老/滨城注意手机与背包；Grab 备好零钱。</li>
+    </ul>
+  </div>
+
+  <h2 class="section-title" id="prep">出发前准备清单</h2>
+  <div class="prep-checklist">
+    <h3>预订与票务</h3>
+    <ul>
+      <li>往返机票（SZX/HKG/CAN → SGN）</li>
+      <li>越南电子签（预留 5～10 个工作日）</li>
+      <li>胡志明市酒店（第一郡/第三郡）</li>
+      <li>美奈住宿（Ham Tiến 沿海一带）</li>
+      <li>胡志明 ⇄ 美奈大巴（Futa / Kumho / Sinh）</li>
+      <li>美奈日出吉普半日</li>
+    </ul>
+    <h3>必备 App</h3>
+    <ul>
+      <li>Grab、Google Maps、翻译、航司 App、汇率</li>
+    </ul>
+    <h3>行李与证件</h3>
+    <ul>
+      <li>防晒、拖鞋（仙女溪）、薄外套、晕车药、充电宝</li>
+      <li>护照有效期 6 个月以上、电子签打印、保险（建议）</li>
+    </ul>
+    <h3>出发当天</h3>
+    <ul>
+      <li>5/4 设「最晚去机场」闹钟；国际段提前 3 小时到机场</li>
+    </ul>
+  </div>
+
+  <!-- ========== 4/29 ========== -->
+  <div class="day-section" id="day-429" data-trip-date="2026-04-29">
+    <div class="day-header">4/29（三）抵达胡志明市，第一顿越南味</div>
+    <div class="day-body">
+      <div class="day-map-wrap">
+        <div class="day-map-head">
+          <span>当日动线（点击地图序号或左侧时段可联动）</span>
+          <button type="button" class="map-fit-btn" data-map-day="day-429">全览当日</button>
+        </div>
+        <div id="map-day-429" class="day-map" role="img" aria-label="4月29日地图"></div>
+      </div>
+
+      <div class="time-block" data-day-id="day-429" data-map-seq="1">
+        <div class="tb-head">
+          <div class="time">15:00 – 18:30 入境、Grab 至酒店</div>
+          <label class="done-row"><input type="checkbox" data-store="day-429-1"> 已完成</label>
+        </div>
+        <h3>新山一国际机场 SGN → 市区</h3>
+        <div class="core-action"><strong>核心行动：</strong>落地后入境、取行李，Grab 至第一郡/第三郡酒店。</div>
+        <div class="best-pick">
+          <span class="name">Tan Son Nhat International Airport</span> <span class="stars">⭐⭐⭐⭐⭐</span>
+          <div class="reason">机场距第一郡约 30～45 分钟车程（视拥堵），Grab 较省心。</div>
+          <figure class="act-photo"><img src="https://images.pexels.com/photos/30853558/pexels-photo-30853558.jpeg?auto=compress&cs=tinysrgb&w=640" alt="胡志明市天际线（抵达市区示意）" width="640" height="194" loading="lazy" decoding="async"><figcaption class="media-cap">抵达西贡/市区方向示意 · Pexels</figcaption></figure>
+          <div class="info-line"><span class="icon">📍</span><span class="loc-link" data-q="Tan Son Nhat Airport Ho Chi Minh">新山一国际机场</span></div>
+          <div class="info-line"><span class="icon">💰</span>Grab 至第一郡约 15～25 万盾（以 App 预估为准）</div>
+          <div class="info-line"><span class="icon">⚠️</span>电子签打印件与护照随身携带</div>
+        </div>
+        <details class="alts"><summary>备选（3）</summary>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/6613027/pexels-photo-6613027.jpeg?auto=compress&cs=tinysrgb&w=320" alt="市区交通/打车示意" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">机场出租车柜台</span> — Grab 排队过长时选用。</div></div>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/32698015/pexels-photo-32698015.jpeg?auto=compress&cs=tinysrgb&w=640" alt="越南河粉" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">Klook 接机</span> — 行李多、带娃可固定价。</div></div>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/7999857/pexels-photo-7999857.jpeg?auto=compress&cs=tinysrgb&w=320" alt="机场简餐示意" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">机场简餐后 17:30 再进城</span> — 错峰晚高峰。</div></div>
+        </details>
+      </div>
+
+      <div class="time-block" data-day-id="day-429" data-map-seq="2">
+        <div class="tb-head">
+          <div class="time">19:00 – 21:30 河粉 + 范五老散步</div>
+          <label class="done-row"><input type="checkbox" data-store="day-429-2"> 已完成</label>
+        </div>
+        <h3>Phở / Bánh mì 入门</h3>
+        <div class="core-action"><strong>核心行动：</strong>Pasteur 街一带河粉，范五老浅逛即可。</div>
+        <div class="best-pick">
+          <span class="name">Phở Hòa Pasteur（参考）</span> <span class="stars">⭐⭐⭐⭐</span>
+          <div class="reason">名店聚集区，营业状态以当日地图为准。</div>
+          <figure class="act-photo"><img src="https://images.pexels.com/photos/32698015/pexels-photo-32698015.jpeg?auto=compress&cs=tinysrgb&w=640" alt="越南牛肉河粉 Phở" width="640" height="427" loading="lazy" decoding="async"><figcaption class="media-cap">Phở · Pexels</figcaption></figure>
+          <div class="info-line"><span class="icon">📍</span><span class="loc-link" data-q="Pho Hoa Pasteur Ho Chi Minh">Pasteur 街一带</span></div>
+          <div class="info-line"><span class="icon">💰</span>约 8～15 万盾</div>
+        </div>
+        <details class="alts"><summary>备选（3）</summary>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/6646074/pexels-photo-6646074.jpeg?auto=compress&cs=tinysrgb&w=320" alt="越南法棍 Bánh mì" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">Bánh Mì Huỳnh Hoa</span> — 法棍专门店。</div></div>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/6646022/pexels-photo-6646022.jpeg?auto=compress&cs=tinysrgb&w=640" alt="碎米饭 Cơm tấm" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">Cơm tấm 排挡</span> — 换米饭主食。</div></div>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/34074950/pexels-photo-34074950.jpeg?auto=compress&cs=tinysrgb&w=960" alt="室内美食广场/商场餐饮示意" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">Saigon Centre 美食广场</span> — 室内冷气保守口味。</div></div>
+        </details>
+      </div>
+
+      <div class="rain-alt"><strong>雨天：</strong>改 Saigon Centre 室内晚餐；大雨 Grab 选 GrabCar。</div>
+    </div>
+  </div>
+
+  <!-- ========== 4/30 ========== -->
+  <div class="day-section" id="day-430" data-trip-date="2026-04-30">
+    <div class="day-header">4/30（四）西贡市区经典一日</div>
+    <div class="day-body">
+      <div class="day-map-wrap">
+        <div class="day-map-head">
+          <span>市区步行轴 + 滨城</span>
+          <button type="button" class="map-fit-btn" data-map-day="day-430">全览当日</button>
+        </div>
+        <div id="map-day-430" class="day-map"></div>
+      </div>
+
+      <div class="time-block" data-day-id="day-430" data-map-seq="1">
+        <div class="tb-head">
+          <div class="time">08:00 – 12:00 战争遗迹博物馆 + 统一宫</div>
+          <label class="done-row"><input type="checkbox" data-store="day-430-1"> 已完成</label>
+        </div>
+        <h3>博物馆与统一宫</h3>
+        <div class="best-pick">
+          <span class="name">War Remnants Museum</span> <span class="stars">⭐⭐⭐⭐⭐</span>
+          <div class="reason">建议早到；展陈较沉重。</div>
+          <figure class="act-photo"><img src="https://images.pexels.com/photos/14481034/pexels-photo-14481034.jpeg?auto=compress&cs=tinysrgb&w=640" alt="战争遗迹博物馆外景" width="640" height="425" loading="lazy" decoding="async"><figcaption class="media-cap">战争遗迹博物馆 · Pexels</figcaption></figure>
+          <div class="info-line"><span class="icon">📍</span><span class="loc-link" data-q="War Remnants Museum Ho Chi Minh">28 Võ Văn Tần, D3</span></div>
+          <div class="info-line"><span class="icon">💰</span>门票约 4 万盾级</div>
+        </div>
+        <details class="alts"><summary>备选（3）</summary>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/32445526/pexels-photo-32445526.jpeg?auto=compress&cs=tinysrgb&w=320" alt="统一宫" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">Independence Palace</span> — 同日步行可达。</div></div>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/30853558/pexels-photo-30853558.jpeg?auto=compress&cs=tinysrgb&w=640" alt="美术馆/市区建筑（示意）" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">胡志明市美术馆</span> — 艺术向。</div></div>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/2133989/pexels-photo-2133989.jpeg?auto=compress&cs=tinysrgb&w=320" alt="阮惠街高层咖啡一带（示意）" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">咖啡公寓</span> — 轻松拍照。</div></div>
+        </details>
+      </div>
+
+      <div class="time-block" data-day-id="day-430" data-map-seq="2">
+        <div class="tb-head">
+          <div class="time">12:30 – 14:00 午餐</div>
+          <label class="done-row"><input type="checkbox" data-store="day-430-2"> 已完成</label>
+        </div>
+        <h3>Propaganda Restaurant</h3>
+        <div class="best-pick">
+          <span class="name">Propaganda Restaurant</span> <span class="stars">⭐⭐⭐⭐</span>
+          <figure class="act-photo"><img src="https://images.pexels.com/photos/6646034/pexels-photo-6646034.jpeg?auto=compress&cs=tinysrgb&w=640" alt="越南春卷" width="640" height="426" loading="lazy" decoding="async"><figcaption class="media-cap">越南菜示意 · Pexels</figcaption></figure>
+          <div class="info-line"><span class="icon">📍</span><span class="loc-link" data-q="Propaganda Restaurant Ho Chi Minh">District 1</span></div>
+          <div class="info-line"><span class="icon">💰</span>约 25～45 万盾</div>
+        </div>
+        <details class="alts"><summary>备选（3）</summary>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/32698015/pexels-photo-32698015.jpeg?auto=compress&cs=tinysrgb&w=640" alt="河粉" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">Phở 2000 等</span> — 快吃河粉。</div></div>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/6646077/pexels-photo-6646077.jpeg?auto=compress&cs=tinysrgb&w=320" alt="烤肉米粉" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">Bếp Mẹ Ỉn</span> — 家常菜。</div></div>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/6646034/pexels-photo-6646034.jpeg?auto=compress&cs=tinysrgb&w=320" alt="披萨" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">Pizza 4P's</span> — 换口味。</div></div>
+        </details>
+      </div>
+
+      <div class="time-block" data-day-id="day-430" data-map-seq="3">
+        <div class="tb-head">
+          <div class="time">14:30 – 17:30 中央邮局 · 红教堂 · 咖啡</div>
+          <label class="done-row"><input type="checkbox" data-store="day-430-3"> 已完成</label>
+        </div>
+        <h3>Saigon Central Post Office</h3>
+        <div class="best-pick">
+          <span class="name">西贡中央邮局</span> <span class="stars">⭐⭐⭐⭐⭐</span>
+          <figure class="act-photo"><img src="https://images.pexels.com/photos/28119463/pexels-photo-28119463.jpeg?auto=compress&cs=tinysrgb&w=640" alt="西贡中央邮局内景" width="640" height="427" loading="lazy" decoding="async"><figcaption class="media-cap">中央邮局 · Pexels</figcaption></figure>
+          <div class="info-line"><span class="icon">📍</span><span class="loc-link" data-q="Saigon Central Post Office">2 Công xã Paris, D1</span></div>
+        </div>
+        <details class="alts"><summary>备选（3）</summary>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/18483566/pexels-photo-18483566.jpeg?auto=compress&cs=tinysrgb&w=320" alt="红教堂" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">红教堂外观</span> — 广场打卡。</div></div>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/30853558/pexels-photo-30853558.jpeg?auto=compress&cs=tinysrgb&w=640" alt="步行街区/书街一带（示意）" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">书街</span> — 阴凉文艺。</div></div>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/2133989/pexels-photo-2133989.jpeg?auto=compress&cs=tinysrgb&w=320" alt="咖啡馆简餐（示意）" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">Highlands Coffee</span> — 连锁冷气足。</div></div>
+        </details>
+      </div>
+
+      <div class="time-block" data-day-id="day-430" data-map-seq="4">
+        <div class="tb-head">
+          <div class="time">18:00 – 21:00 滨城夜市</div>
+          <label class="done-row"><input type="checkbox" data-store="day-430-4"> 已完成</label>
+        </div>
+        <h3>Bến Thành Market</h3>
+        <div class="best-pick">
+          <span class="name">滨城市场</span> <span class="stars">⭐⭐⭐⭐</span>
+          <figure class="act-photo"><img src="https://images.pexels.com/photos/11811321/pexels-photo-11811321.jpeg?auto=compress&cs=tinysrgb&w=640" alt="滨城市场" width="640" height="427" loading="lazy" decoding="async"><figcaption class="media-cap">滨城市场 · Pexels</figcaption></figure>
+          <div class="info-line"><span class="icon">📍</span><span class="loc-link" data-q="Ben Thanh Market">District 1</span></div>
+          <div class="info-line"><span class="icon">⚠️</span>先问价；防盗</div>
+        </div>
+        <details class="alts"><summary>备选（3）</summary>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/11811321/pexels-photo-11811321.jpeg?auto=compress&cs=tinysrgb&w=640" alt="夜市小吃（示意）" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">Tân Định 夜市</span> — 更本地化夜市。</div></div>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/6646074/pexels-photo-6646074.jpeg?auto=compress&cs=tinysrgb&w=320" alt="烧烤/大排档（示意）" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">5KU Station</span> — 烧烤聚场。</div></div>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/32698015/pexels-photo-32698015.jpeg?auto=compress&cs=tinysrgb&w=320" alt="外卖简餐示意" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">Grab Food</span> — 酒店外卖。</div></div>
+        </details>
+      </div>
+
+      <div class="rain-alt"><strong>雨天：</strong>改商场连贯动线；博物馆闭馆改水上木偶或市内博物馆。</div>
+    </div>
+  </div>
+
+  <!-- ========== 5/1 ========== -->
+  <div class="day-section" id="day-501" data-trip-date="2026-05-01">
+    <div class="day-header">5/1（五）古芝地道 + SPA + 海鲜夜</div>
+    <div class="day-body">
+      <div class="day-map-wrap">
+        <div class="day-map-head">
+          <span>古芝 ↔ 市区（直线示意）</span>
+          <button type="button" class="map-fit-btn" data-map-day="day-501">全览当日</button>
+        </div>
+        <div id="map-day-501" class="day-map"></div>
+      </div>
+
+      <div class="time-block" data-day-id="day-501" data-map-seq="1">
+        <div class="tb-head">
+          <div class="time">07:30 – 14:00 古芝地道团</div>
+          <label class="done-row"><input type="checkbox" data-store="day-501-1"> 已完成</label>
+        </div>
+        <h3>Củ Chi Tunnels</h3>
+        <div class="best-pick">
+          <span class="name">古芝地道</span> <span class="stars">⭐⭐⭐⭐⭐</span>
+          <figure class="act-photo"><img src="https://images.pexels.com/photos/14481034/pexels-photo-14481034.jpeg?auto=compress&cs=tinysrgb&w=640" alt="古芝地道" width="640" height="427" loading="lazy" decoding="async"><figcaption class="media-cap">古芝地道 · Pexels</figcaption></figure>
+          <div class="info-line"><span class="icon">📍</span><span class="loc-link" data-q="Cu Chi Tunnels Ben Duoc">Củ Chi District</span></div>
+        </div>
+        <details class="alts"><summary>备选（3）</summary>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/33095799/pexels-photo-33095799.jpeg?auto=compress&cs=tinysrgb&w=320" alt="湄公河水上市集" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">古芝+湄公河全日联团</span> — 水乡联游。</div></div>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/32445526/pexels-photo-32445526.jpeg?auto=compress&cs=tinysrgb&w=320" alt="统一宫" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">市区统一宫+咖啡公寓</span> — 不出城。</div></div>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/11811321/pexels-photo-11811321.jpeg?auto=compress&cs=tinysrgb&w=320" alt="堤岸/华人区市集（示意）" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">堤岸天后宫 + 平西市场</span> — 华人区。</div></div>
+        </details>
+      </div>
+
+      <div class="time-block" data-day-id="day-501" data-map-seq="2">
+        <div class="tb-head">
+          <div class="time">15:00 – 17:30 酒店 / SPA</div>
+          <label class="done-row"><input type="checkbox" data-store="day-501-2"> 已完成</label>
+        </div>
+        <h3>越式按摩</h3>
+        <div class="best-pick">
+          <span class="name">District 1 SPA（参考）</span> <span class="stars">⭐⭐⭐⭐</span>
+          <figure class="act-photo"><img src="https://images.pexels.com/photos/8839541/pexels-photo-8839541.jpeg?auto=compress&cs=tinysrgb&w=640" alt="足部按摩示意" width="640" height="480" loading="lazy" decoding="async"><figcaption class="media-cap">按摩示意 · Pexels</figcaption></figure>
+          <div class="info-line"><span class="icon">📍</span><span class="loc-link" data-q="Temple Leaf Spa Saigon">第一郡按摩店（地图择优）</span></div>
+        </div>
+        <details class="alts"><summary>备选（3）</summary>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/8839541/pexels-photo-8839541.jpeg?auto=compress&cs=tinysrgb&w=320" alt="酒店 SPA" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">酒店 SPA</span> — 不出酒店。</div></div>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/34074950/pexels-photo-34074950.jpeg?auto=compress&cs=tinysrgb&w=960" alt="商场/室内动线（示意）" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">商场+电影</span> — 冷气放空。</div></div>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/30853558/pexels-photo-30853558.jpeg?auto=compress&cs=tinysrgb&w=640" alt="胡志明市天际线 · Bitexco 金融塔" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">Landmark 81 咖啡</span> — 高空城景。</div></div>
+        </details>
+      </div>
+
+      <div class="time-block" data-day-id="day-501" data-map-seq="3">
+        <div class="tb-head">
+          <div class="time">18:30 – 21:30 第四郡海鲜</div>
+          <label class="done-row"><input type="checkbox" data-store="day-501-3"> 已完成</label>
+        </div>
+        <h3>Bến Vân Đồn 海鲜排挡</h3>
+        <div class="best-pick">
+          <span class="name">第四郡海鲜（高分店）</span> <span class="stars">⭐⭐⭐⭐</span>
+          <figure class="act-photo"><img src="https://images.pexels.com/photos/33673617/pexels-photo-33673617.jpeg?auto=compress&cs=tinysrgb&w=640" alt="海鲜餐示意" width="640" height="480" loading="lazy" decoding="async"><figcaption class="media-cap">海鲜餐示意 · Pexels</figcaption></figure>
+          <div class="info-line"><span class="icon">📍</span><span class="loc-link" data-q="Ben Van Don seafood District 4 Ho Chi Minh">District 4</span></div>
+        </div>
+        <details class="alts"><summary>备选（3）</summary>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/6646074/pexels-photo-6646074.jpeg?auto=compress&cs=tinysrgb&w=320" alt="越南小吃集合示意" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">Nhà hàng Ngon</span> — 小吃合集庭院。</div></div>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/6646034/pexels-photo-6646034.jpeg?auto=compress&cs=tinysrgb&w=320" alt="披萨" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">Pizza 4P's</span> — 换口味。</div></div>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/6646074/pexels-photo-6646074.jpeg?auto=compress&cs=tinysrgb&w=320" alt="范五老街边小吃" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">Bui Vien 简餐</span> — 氛围向。</div></div>
+        </details>
+      </div>
+
+      <div class="rain-alt"><strong>雨天：</strong>古芝取消改堤岸/商场；海鲜改 Nhà hàng Ngon。</div>
+    </div>
+  </div>
+
+  <!-- ========== 5/2 ========== -->
+  <div class="day-section" id="day-502" data-trip-date="2026-05-02">
+    <div class="day-header">5/2（六）胡志明市 → 美奈</div>
+    <div class="day-body">
+      <div class="day-map-wrap">
+        <div class="day-map-head">
+          <span>车站 → 美奈沿海</span>
+          <button type="button" class="map-fit-btn" data-map-day="day-502">全览当日</button>
+        </div>
+        <div id="map-day-502" class="day-map"></div>
+      </div>
+
+      <div class="time-block" data-day-id="day-502" data-map-seq="1">
+        <div class="tb-head">
+          <div class="time">08:00 – 09:00 赴车站</div>
+          <label class="done-row"><input type="checkbox" data-store="day-502-1"> 已完成</label>
+        </div>
+        <h3>Futa / 东站乘车</h3>
+        <div class="best-pick">
+          <span class="name">Miền Đông / Futa 上车点</span> <span class="stars">⭐⭐⭐⭐⭐</span>
+          <figure class="act-photo"><img src="https://images.pexels.com/photos/33095799/pexels-photo-33095799.jpeg?auto=compress&cs=tinysrgb&w=500" alt="潘切—美奈方向长途巴士" width="500" height="618" loading="lazy" decoding="async"><figcaption class="media-cap">长途巴士示意 · Pexels</figcaption></figure>
+          <div class="info-line"><span class="icon">📍</span><span class="loc-link" data-q="Mien Dong Bus Station Ho Chi Minh">以东站/车票为准</span></div>
+          <div class="info-line"><span class="icon">⚠️</span>以购票凭证为准；晕车药+外套</div>
+        </div>
+        <details class="alts"><summary>备选（3）</summary>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/33095799/pexels-photo-33095799.jpeg?auto=compress&cs=tinysrgb&w=320" alt="其他客运公司巴士" width="320" height="396" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">Kumho / Sinh Tourist</span> — 时刻与接驳规则不同。</div></div>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/33095799/pexels-photo-33095799.jpeg?auto=compress&cs=tinysrgb&w=320" alt="包车/打车出城" width="320" height="97" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">包车</span> — 舒适贵价。</div></div>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/2133989/pexels-photo-2133989.jpeg?auto=compress&cs=tinysrgb&w=320" alt="上午简餐" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">下午班车</span> — 上午可补觉+咖啡。</div></div>
+        </details>
+      </div>
+
+      <div class="time-block" data-day-id="day-502" data-map-seq="2">
+        <div class="tb-head">
+          <div class="time">14:00 – 15:30 美奈入住 · 简餐</div>
+          <label class="done-row"><input type="checkbox" data-store="day-502-2"> 已完成</label>
+        </div>
+        <h3>Ham Tiến 沿海</h3>
+        <div class="best-pick">
+          <span class="name">美奈滨海住宿区</span> <span class="stars">⭐⭐⭐⭐⭐</span>
+          <figure class="act-photo"><img src="https://images.pexels.com/photos/17406353/pexels-photo-17406353.jpeg?auto=compress&cs=tinysrgb&w=320" alt="美奈沿海度假村一带" width="640" height="503" loading="lazy" decoding="async"><figcaption class="media-cap">美奈滨海住宿示意 · Pexels</figcaption></figure>
+          <div class="info-line"><span class="icon">📍</span><span class="loc-link" data-q="Ham Tien Mui Ne">Nguyễn Đình Chiểu 沿线</span></div>
+        </div>
+        <details class="alts"><summary>备选（3）</summary>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/29674870/pexels-photo-29674870.jpeg?auto=compress&cs=tinysrgb&w=320" alt="美奈海滩" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">镇北安静住宿</span> — 更静、打车略多。</div></div>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/6646022/pexels-photo-6646022.jpeg?auto=compress&cs=tinysrgb&w=320" alt="度假村午餐" width="320" height="240" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">度假村午餐</span> — 少走动。</div></div>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/32698015/pexels-photo-32698015.jpeg?auto=compress&cs=tinysrgb&w=640" alt="河粉简餐" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">就近河粉</span> — 快吃补觉。</div></div>
+        </details>
+      </div>
+
+      <div class="time-block" data-day-id="day-502" data-map-seq="3">
+        <div class="tb-head">
+          <div class="time">16:00 – 18:00 仙女溪</div>
+          <label class="done-row"><input type="checkbox" data-store="day-502-3"> 已完成</label>
+        </div>
+        <h3>Fairy Stream</h3>
+        <div class="best-pick">
+          <span class="name">Suối Tiên</span> <span class="stars">⭐⭐⭐⭐⭐</span>
+          <figure class="act-photo"><img src="https://images.pexels.com/photos/18696713/pexels-photo-18696713.jpeg?auto=compress&cs=tinysrgb&w=640" alt="美奈仙女溪" width="640" height="480" loading="lazy" decoding="async"><figcaption class="media-cap">仙女溪 Suối Tiên · Pexels</figcaption></figure>
+          <div class="info-line"><span class="icon">📍</span><span class="loc-link" data-q="Fairy Stream Mui Ne">Mũi Né</span></div>
+        </div>
+        <details class="alts"><summary>备选（3）</summary>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/29674870/pexels-photo-29674870.jpeg?auto=compress&cs=tinysrgb&w=320" alt="海滩散步" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">海滩散步</span> — 沙滩放空。</div></div>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/16162632/pexels-photo-16162632.jpeg?auto=compress&cs=tinysrgb&w=320" alt="红白沙丘" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">红沙丘日落</span> — 与仙女溪二选一防晒。</div></div>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/17406353/pexels-photo-17406353.jpeg?auto=compress&cs=tinysrgb&w=320" alt="酒店泳池" width="320" height="251" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">酒店泳池</span> — 零强度。</div></div>
+        </details>
+      </div>
+
+      <div class="time-block" data-day-id="day-502" data-map-seq="4">
+        <div class="tb-head">
+          <div class="time">18:30 – 21:00 Boke 海鲜</div>
+          <label class="done-row"><input type="checkbox" data-store="day-502-4"> 已完成</label>
+        </div>
+        <h3>海鲜排挡</h3>
+        <div class="best-pick">
+          <span class="name">Boke 一线（4.5★+ 优先）</span> <span class="stars">⭐⭐⭐⭐</span>
+          <figure class="act-photo"><img src="https://images.pexels.com/photos/33673617/pexels-photo-33673617.jpeg?auto=compress&cs=tinysrgb&w=640" alt="美奈海鲜" width="640" height="480" loading="lazy" decoding="async"><figcaption class="media-cap">美奈海鲜排挡示意 · Pexels</figcaption></figure>
+          <div class="info-line"><span class="icon">📍</span><span class="loc-link" data-q="Boke seafood Nguyen Dinh Chieu Mui Ne">沿海主路</span></div>
+        </div>
+        <details class="alts"><summary>备选（3）</summary>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/20810996/pexels-photo-20810996.jpeg?auto=compress&cs=tinysrgb&w=320" alt="海鲜火锅" width="320" height="240" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">海鲜火锅</span> — 两人以上。</div></div>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/6646034/pexels-photo-6646034.jpeg?auto=compress&cs=tinysrgb&w=320" alt="披萨" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">西餐披萨</span> — 换口味。</div></div>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/6646022/pexels-photo-6646022.jpeg?auto=compress&cs=tinysrgb&w=320" alt="酒店餐厅" width="320" height="251" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">酒店餐厅</span> — 省事价高。</div></div>
+        </details>
+      </div>
+
+      <div class="rain-alt"><strong>雨天：</strong>仙女溪改 SPA；大巴延误则压缩行程。</div>
+    </div>
+  </div>
+
+  <!-- ========== 5/3 ========== -->
+  <div class="day-section" id="day-503" data-trip-date="2026-05-03">
+    <div class="day-header">5/3（日）日出吉普 · 返西贡</div>
+    <div class="day-body">
+      <div class="day-map-wrap">
+        <div class="day-map-head">
+          <span>美奈沙丘线（不含长途大巴轨迹）</span>
+          <button type="button" class="map-fit-btn" data-map-day="day-503">全览当日</button>
+        </div>
+        <div id="map-day-503" class="day-map"></div>
+      </div>
+
+      <div class="time-block" data-day-id="day-503" data-map-seq="1">
+        <div class="tb-head">
+          <div class="time">04:30 – 09:00 日出吉普线</div>
+          <label class="done-row"><input type="checkbox" data-store="day-503-1"> 已完成</label>
+        </div>
+        <h3>白沙丘 — 渔村 — 红沙丘</h3>
+        <div class="best-pick">
+          <span class="name">White Sand Dunes</span> <span class="stars">⭐⭐⭐⭐⭐</span>
+          <figure class="act-photo"><img src="https://images.pexels.com/photos/16162632/pexels-photo-16162632.jpeg?auto=compress&cs=tinysrgb&w=640" alt="美奈白沙丘与沙丘" width="640" height="427" loading="lazy" decoding="async"><figcaption class="media-cap">美奈沙丘 · Pexels</figcaption></figure>
+          <div class="info-line"><span class="icon">📍</span><span class="loc-link" data-q="White Sand Dunes Mui Ne">Mũi Né NE</span></div>
+          <div class="info-line"><span class="icon">⚠️</span>防风沙外套、口罩</div>
+        </div>
+        <details class="alts"><summary>备选（3）</summary>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/16162632/pexels-photo-16162632.jpeg?auto=compress&cs=tinysrgb&w=320" alt="红沙丘日落" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">红沙丘日落改前一日</span> — 不凌晨出门。</div></div>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/29674870/pexels-photo-29674870.jpeg?auto=compress&cs=tinysrgb&w=320" alt="风筝冲浪海滩" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">风筝冲浪体验课</span> — 运动向。</div></div>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/17406353/pexels-photo-17406353.jpeg?auto=compress&cs=tinysrgb&w=320" alt="酒店休息" width="320" height="251" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">酒店睡到自然醒</span> — 纯度假。</div></div>
+        </details>
+      </div>
+
+      <div class="time-block" data-day-id="day-503" data-map-seq="2">
+        <div class="tb-head">
+          <div class="time">09:30 – 13:00 早午餐 · 退房</div>
+          <label class="done-row"><input type="checkbox" data-store="day-503-2"> 已完成</label>
+        </div>
+        <h3>酒店休整</h3>
+        <div class="core-action">补觉、泳池、海边咖啡；确认退房时间。</div>
+        <div class="best-pick">
+          <span class="name">酒店早午餐 / 泳池</span> <span class="stars">⭐⭐⭐⭐</span>
+          <figure class="act-photo"><img src="https://images.pexels.com/photos/17406353/pexels-photo-17406353.jpeg?auto=compress&cs=tinysrgb&w=640" alt="美奈酒店泳池与花园" width="640" height="503" loading="lazy" decoding="async"><figcaption class="media-cap">度假村休整示意 · Pexels</figcaption></figure>
+        </div>
+        <details class="alts"><summary>备选（3）</summary>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/2133989/pexels-photo-2133989.jpeg?auto=compress&cs=tinysrgb&w=320" alt="海边咖啡" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">海边咖啡馆 Brunch</span> — 海景+咖啡因。</div></div>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/30097233/pexels-photo-30097233.jpeg?auto=compress&cs=tinysrgb&w=320" alt="便利店" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">便利店 + 回房睡</span> — 最快恢复。</div></div>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/32698015/pexels-photo-32698015.jpeg?auto=compress&cs=tinysrgb&w=320" alt="简餐" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">就近简餐后补觉</span></div></div>
+        </details>
+      </div>
+
+      <div class="time-block" data-day-id="day-503" data-map-seq="3">
+        <div class="tb-head">
+          <div class="time">14:00 – 20:30 大巴返胡志明市</div>
+          <label class="done-row"><input type="checkbox" data-store="day-503-3"> 已完成</label>
+        </div>
+        <h3>美奈 → 西贡</h3>
+        <div class="best-pick">
+          <span class="name">乘车点（以车票为准）</span> <span class="stars">⭐⭐⭐⭐⭐</span>
+          <figure class="act-photo"><img src="https://images.pexels.com/photos/33095799/pexels-photo-33095799.jpeg?auto=compress&cs=tinysrgb&w=500" alt="美奈—西贡长途巴士" width="500" height="618" loading="lazy" decoding="async"><figcaption class="media-cap">长途巴士示意 · Pexels</figcaption></figure>
+          <div class="info-line"><span class="icon">📍</span><span class="loc-link" data-q="Mui Ne bus stop Nguyen Dinh Chieu">主路旅行社/接驳点</span></div>
+        </div>
+        <details class="alts"><summary>备选（3）</summary>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/33095799/pexels-photo-33095799.jpeg?auto=compress&cs=tinysrgb&w=320" alt="晚班车" width="320" height="97" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">晚班车返西贡</span> — 5/4 上午更赶。</div></div>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/33095799/pexels-photo-33095799.jpeg?auto=compress&cs=tinysrgb&w=320" alt="包车" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">包车直送机场</span> — 仅改红眼航班时用。</div></div>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/17406353/pexels-photo-17406353.jpeg?auto=compress&cs=tinysrgb&w=320" alt="多住一晚" width="320" height="251" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">多住一晚改早班</span> — 需改票。</div></div>
+        </details>
+      </div>
+
+      <div class="time-block" data-day-id="day-503">
+        <div class="tb-head">
+          <div class="time">21:00 – 22:30 西贡简餐</div>
+          <label class="done-row"><input type="checkbox" data-store="day-503-4"> 已完成</label>
+        </div>
+        <h3>河粉 / 外卖</h3>
+        <div class="core-action">早点休息，5/4 仍有全天行程+晚班机。</div>
+        <div class="best-pick">
+          <span class="name">Phở / 连锁粉店</span> <span class="stars">⭐⭐⭐⭐</span>
+          <figure class="act-photo"><img src="https://images.pexels.com/photos/32698015/pexels-photo-32698015.jpeg?auto=compress&cs=tinysrgb&w=640" alt="越南河粉" width="640" height="427" loading="lazy" decoding="async"><figcaption class="media-cap">河粉简餐 · Pexels</figcaption></figure>
+        </div>
+        <details class="alts"><summary>备选（3）</summary>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/6646074/pexels-photo-6646074.jpeg?auto=compress&cs=tinysrgb&w=320" alt="外卖" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">Grab Food</span> — 到酒店不再出门。</div></div>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/30097233/pexels-photo-30097233.jpeg?auto=compress&cs=tinysrgb&w=320" alt="便利店" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">便利店便当</span></div></div>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/6646074/pexels-photo-6646074.jpeg?auto=compress&cs=tinysrgb&w=320" alt="快餐" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">麦当劳/肯德基</span> — 熟悉口味。</div></div>
+        </details>
+      </div>
+
+      <div class="rain-alt"><strong>雨天：</strong>吉普改期或退款规则以平台为准；大巴延误则 5/4 仍晚飞有缓冲。</div>
+    </div>
+  </div>
+
+  <!-- ========== 5/4 ========== -->
+  <div class="day-section" id="day-504" data-trip-date="2026-05-04">
+    <div class="day-header">5/4（一）粉教堂 · 伴手礼 · 晚上航班回国</div>
+    <div class="day-body">
+      <div class="day-map-wrap">
+        <div class="day-map-head">
+          <span>市区 → 机场</span>
+          <button type="button" class="map-fit-btn" data-map-day="day-504">全览当日</button>
+        </div>
+        <div id="map-day-504" class="day-map"></div>
+      </div>
+
+      <h2 class="section-title" id="flight-table" style="margin:1rem 1rem .5rem;font-size:1rem">5/4 赴机场时间反推（示例）</h2>
+      <table class="info-table" style="margin-left:1rem;margin-right:1rem;width:calc(100% - 2rem)">
+        <tr><th>起飞（示例）</th><th>建议到机场</th><th>建议市区上车</th></tr>
+        <tr><td>20:00</td><td>约 17:00 前</td><td>约 15:30～16:00</td></tr>
+        <tr><td>21:30</td><td>约 18:30 前</td><td>约 17:00～17:30</td></tr>
+        <tr><td>22:30</td><td>约 19:30 前</td><td>约 18:00～18:30</td></tr>
+        <tr><td>23:59</td><td>约 21:00 前</td><td>约 19:30～20:00</td></tr>
+      </table>
+
+      <div class="time-block" data-day-id="day-504" data-map-seq="1">
+        <div class="tb-head">
+          <div class="time">08:30 – 11:00 粉红教堂 + 咖啡</div>
+          <label class="done-row"><input type="checkbox" data-store="day-504-1"> 已完成</label>
+        </div>
+        <h3>Tân Định Pink Church</h3>
+        <div class="best-pick">
+          <span class="name">耶稣圣心堂</span> <span class="stars">⭐⭐⭐⭐⭐</span>
+          <figure class="act-photo"><img src="https://images.pexels.com/photos/32445530/pexels-photo-32445530.jpeg?auto=compress&cs=tinysrgb&w=960" alt="胡志明市耶稣圣心堂（粉教堂）" width="500" height="667" loading="lazy" decoding="async"><figcaption class="media-cap">粉教堂 · Pexels</figcaption></figure>
+          <div class="info-line"><span class="icon">📍</span><span class="loc-link" data-q="Tan Dinh Pink Church Ho Chi Minh">289 Hai Bà Trưng, D3</span></div>
+        </div>
+        <details class="alts"><summary>备选（3）</summary>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/30853558/pexels-photo-30853558.jpeg?auto=compress&cs=tinysrgb&w=320" alt="Landmark/天际线" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">Landmark 81</span> — 现代天际线。</div></div>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/28119463/pexels-photo-28119463.jpeg?auto=compress&cs=tinysrgb&w=320" alt="印度庙示意" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">马里阿曼印度庙</span> — 宗教建筑多样本。</div></div>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/11811321/pexels-photo-11811321.jpeg?auto=compress&cs=tinysrgb&w=640" alt="滨城市场" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">滨城手信</span> — 咖啡腰果果干。</div></div>
+        </details>
+      </div>
+
+      <div class="time-block" data-day-id="day-504" data-map-seq="2">
+        <div class="tb-head">
+          <div class="time">11:30 – 13:30 午餐 + 补货</div>
+          <label class="done-row"><input type="checkbox" data-store="day-504-2"> 已完成</label>
+        </div>
+        <h3>Cục Gạch / Ngon</h3>
+        <div class="best-pick">
+          <span class="name">Cục Gạch Quán（建议预约）</span> <span class="stars">⭐⭐⭐⭐</span>
+          <figure class="act-photo"><img src="https://images.pexels.com/photos/6646022/pexels-photo-6646022.jpeg?auto=compress&cs=tinysrgb&w=640" alt="越南家常菜示意" width="640" height="480" loading="lazy" decoding="async"><figcaption class="media-cap">越南菜示意 · Pexels</figcaption></figure>
+          <div class="info-line"><span class="icon">📍</span><span class="loc-link" data-q="Cuc Gach Quan restaurant Ho Chi Minh">District 1</span></div>
+        </div>
+        <details class="alts"><summary>备选（3）</summary>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/6646074/pexels-photo-6646074.jpeg?auto=compress&cs=tinysrgb&w=320" alt="小吃合集" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">Nhà hàng Ngon</span> — 小吃合集。</div></div>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/6646022/pexels-photo-6646022.jpeg?auto=compress&cs=tinysrgb&w=320" alt="高端越菜" width="320" height="240" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">Anan Saigon</span> — 高端预约。</div></div>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/30097233/pexels-photo-30097233.jpeg?auto=compress&cs=tinysrgb&w=320" alt="便利店" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">便利店速战</span> — 时间极紧时。</div></div>
+        </details>
+      </div>
+
+      <div class="time-block" data-day-id="day-504" data-map-seq="3">
+        <div class="tb-head">
+          <div class="time">14:00 – 17:30 商场休整</div>
+          <label class="done-row"><input type="checkbox" data-store="day-504-3"> 已完成</label>
+        </div>
+        <h3>Saigon Centre</h3>
+        <div class="best-pick">
+          <span class="name">Takashimaya 连通商场</span> <span class="stars">⭐⭐⭐⭐</span>
+          <figure class="act-photo"><img src="https://images.pexels.com/photos/30853558/pexels-photo-30853558.jpeg?auto=compress&cs=tinysrgb&w=320" alt="胡志明市第一郡商圈" width="640" height="427" loading="lazy" decoding="async"><figcaption class="media-cap">市区商场动线示意 · Pexels</figcaption></figure>
+          <div class="info-line"><span class="icon">📍</span><span class="loc-link" data-q="Saigon Centre Ho Chi Minh">65 Lê Lợi, D1</span></div>
+        </div>
+        <details class="alts"><summary>备选（3）</summary>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/17406353/pexels-photo-17406353.jpeg?auto=compress&cs=tinysrgb&w=320" alt="酒店午睡" width="320" height="251" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">延迟退房+午睡</span></div></div>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/30853558/pexels-photo-30853558.jpeg?auto=compress&cs=tinysrgb&w=320" alt="Landmark 商圈" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">Landmark 81 商场</span> — 起飞较晚者。</div></div>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/8839541/pexels-photo-8839541.jpeg?auto=compress&cs=tinysrgb&w=320" alt="足疗" width="320" height="240" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">足疗</span> — 勿误机。</div></div>
+        </details>
+      </div>
+
+      <div class="time-block" data-day-id="day-504" data-map-seq="4">
+        <div class="tb-head">
+          <div class="time">按表：Grab → SGN 国际出发</div>
+          <label class="done-row"><input type="checkbox" data-store="day-504-4"> 已完成</label>
+        </div>
+        <h3>新山一国际机场</h3>
+        <div class="best-pick">
+          <span class="name">Tan Son Nhat SGN</span> <span class="stars">⭐⭐⭐⭐⭐</span>
+          <figure class="act-photo"><img src="https://images.pexels.com/photos/18034296/pexels-photo-18034296.jpeg?auto=compress&cs=tinysrgb&w=640" alt="前往机场/离境示意" width="640" height="194" loading="lazy" decoding="async"><figcaption class="media-cap">离境动线示意 · Pexels</figcaption></figure>
+          <div class="info-line"><span class="icon">📍</span><span class="loc-link" data-q="Tan Son Nhat International Airport">国际出发</span></div>
+          <div class="info-line"><span class="icon">⚠️</span>护照+电子签+登机牌；宁早勿晚</div>
+        </div>
+        <details class="alts"><summary>备选（3）</summary>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/33095799/pexels-photo-33095799.jpeg?auto=compress&cs=tinysrgb&w=320" alt="预约送机" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">预约送机</span> — Klook/酒店。</div></div>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/17406353/pexels-photo-17406353.jpeg?auto=compress&cs=tinysrgb&w=320" alt="钟点房" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">机场周边钟点房</span> — 极少数红眼衔接。</div></div>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/7999857/pexels-photo-7999857.jpeg?auto=compress&cs=tinysrgb&w=320" alt="中转" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">中转航班</span> — 预留 ≥120 分钟。</div></div>
+        </details>
+      </div>
+
+      <div class="time-block" data-day-id="day-504">
+        <div class="tb-head">
+          <div class="time">起飞前 1～2 小时 · 机场简餐（可选）</div>
+          <label class="done-row"><input type="checkbox" data-store="day-504-5"> 已完成</label>
+        </div>
+        <div class="core-action">勿耽误登机口关闭；可市区提前吃好。</div>
+        <div class="best-pick">
+          <span class="name">机场餐饮区</span> <span class="stars">⭐⭐⭐⭐</span>
+          <figure class="act-photo"><img src="https://images.pexels.com/photos/7999857/pexels-photo-7999857.jpeg?auto=compress&cs=tinysrgb&w=320" alt="机场简餐示意" width="640" height="427" loading="lazy" decoding="async"><figcaption class="media-cap">机场餐示意 · Pexels</figcaption></figure>
+        </div>
+        <details class="alts"><summary>备选（3）</summary>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/6646074/pexels-photo-6646074.jpeg?auto=compress&cs=tinysrgb&w=320" alt="市区先吃" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">市区提前吃好</span> — 机场只买水。</div></div>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/7999857/pexels-photo-7999857.jpeg?auto=compress&cs=tinysrgb&w=320" alt="贵宾厅休息" width="320" height="240" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">航司贵宾厅</span> — 持卡权益。</div></div>
+          <div class="alt-item"><figure class="alt-photo"><img src="https://images.pexels.com/photos/6646074/pexels-photo-6646074.jpeg?auto=compress&cs=tinysrgb&w=320" alt="登机口零食" width="320" height="213" loading="lazy" decoding="async"></figure><div class="alt-body"><span class="alt-name">登机口零食</span> — 极简。</div></div>
+        </details>
+      </div>
+
+      <div class="rain-alt"><strong>雨天：</strong>粉教堂改商场；去机场路堵用 GrabCar XL。</div>
+    </div>
+  </div>
+
+  <p class="footnote">本页根据《越南胡志明-美奈6日攻略.md》生成，信息检索于 2026-04-04。地图需联网加载 OSM 瓦片；坐标请与 Google Maps 交叉核对。勾选「已完成」会保存在本机浏览器。</p>
+
+</div>
+
+<button type="button" class="back-to-top" id="backToTop" aria-label="返回顶部">↑</button>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="https://cdn.jsdelivr.net/npm/leaflet-polylinedecorator@1.6.0/dist/leaflet.polylineDecorator.js"></script>
+<script>
+(function(){
+  var TRIP_SLUG = 'travel-guide-vn-hcmc-muine-2026';
+  function openMap(query){
+    window.open('https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(query), '_blank');
+  }
+  window.openMap = openMap;
+
+  document.querySelectorAll('.loc-link').forEach(function(el){
+    el.addEventListener('click', function(){ openMap(el.getAttribute('data-q') || el.textContent); });
+    el.addEventListener('keydown', function(e){ if(e.key==='Enter'){ openMap(el.getAttribute('data-q')||el.textContent); }});
+    el.setAttribute('role','button');
+    el.setAttribute('tabindex','0');
+  });
+
+  document.querySelectorAll('.time-block input[type=checkbox][data-store]').forEach(function(cb){
+    var k = TRIP_SLUG + '-done-' + cb.dataset.store;
+    cb.checked = localStorage.getItem(k) === '1';
+    if(cb.checked) cb.closest('.time-block').classList.add('time-done');
+    cb.addEventListener('change', function(){
+      localStorage.setItem(k, cb.checked ? '1' : '0');
+      cb.closest('.time-block').classList.toggle('time-done', cb.checked);
+    });
+  });
+
+  var maps = {};
+  var accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#115e59';
+
+  var TRIP_MAP_DAYS = [
+    { id:'day-429', label:'4/29', tileRegion:'intl', spots:[
+      {seq:1,time:'15:00–18:30',name:'SGN 机场',type:'transit',lat:10.8188,lng:106.6519,brief:'入境+Grab',navQ:'Tan Son Nhat International Airport'},
+      {seq:2,time:'19:00–21:30',name:'Pasteur 河粉区',type:'food',lat:10.7807,lng:106.6942,brief:'Phở / 范五老',navQ:'Pho Hoa Pasteur District 1'}
+    ]},
+    { id:'day-430', label:'4/30', tileRegion:'intl', spots:[
+      {seq:1,time:'08:00–12:00',name:'战争遗迹博物馆',type:'sight',lat:10.7793,lng:106.6921,brief:'+统一宫动线',navQ:'War Remnants Museum Ho Chi Minh'},
+      {seq:2,time:'12:30–14:00',name:'Propaganda',type:'food',lat:10.7768,lng:106.7047,brief:'创意越南菜',navQ:'Propaganda Restaurant Ho Chi Minh'},
+      {seq:3,time:'14:30–17:30',name:'中央邮局',type:'sight',lat:10.7798,lng:106.6990,brief:'红教堂广场',navQ:'Saigon Central Post Office'},
+      {seq:4,time:'18:00–21:00',name:'滨城市场',type:'sight',lat:10.7720,lng:106.6983,brief:'夜市小吃',navQ:'Ben Thanh Market'}
+    ]},
+    { id:'day-501', label:'5/1', tileRegion:'intl', spots:[
+      {seq:1,time:'07:30–14:00',name:'古芝地道',type:'sight',lat:11.1430,lng:106.5140,brief:'半日团',navQ:'Cu Chi Tunnels'},
+      {seq:2,time:'15:00–17:30',name:'SPA',type:'other',lat:10.7690,lng:106.6945,brief:'第一郡按摩',navQ:'Spa District 1 Ho Chi Minh'},
+      {seq:3,time:'18:30–21:30',name:'第四郡海鲜',type:'food',lat:10.7570,lng:106.7050,brief:'Bến Vân Đồn',navQ:'Ben Van Don seafood District 4'}
+    ]},
+    { id:'day-502', label:'5/2', tileRegion:'intl', spots:[
+      {seq:1,time:'08:00–',name:'东站/乘车点',type:'transit',lat:10.8148,lng:106.7118,brief:'Futa 参考坐标',navQ:'Mien Dong Bus Station Ho Chi Minh'},
+      {seq:2,time:'14:00–',name:'Ham Tiến',type:'sight',lat:10.9500,lng:108.2770,brief:'美奈入住',navQ:'Ham Tien Mui Ne'},
+      {seq:3,time:'16:00–18:00',name:'仙女溪',type:'sight',lat:10.9483,lng:108.2775,brief:'涉水徒步',navQ:'Fairy Stream Mui Ne'},
+      {seq:4,time:'18:30–',name:'Boke 海鲜',type:'food',lat:10.9510,lng:108.2785,brief:'沿海排挡',navQ:'Boke seafood street Mui Ne'}
+    ]},
+    { id:'day-503', label:'5/3', tileRegion:'intl', spots:[
+      {seq:1,time:'04:30–09:00',name:'白沙丘',type:'sight',lat:10.9760,lng:108.3100,brief:'日出吉普',navQ:'White Sand Dunes Mui Ne'},
+      {seq:2,time:'途中',name:'美奈渔村',type:'sight',lat:10.9315,lng:108.2830,brief:'拍照',navQ:'Mui Ne Fishing Village'},
+      {seq:3,time:'途中',name:'红沙丘',type:'sight',lat:10.9240,lng:108.2795,brief:'滑沙',navQ:'Red Sand Dunes Mui Ne'},
+      {seq:4,time:'09:30–',name:'酒店',type:'other',lat:10.9500,lng:108.2770,brief:'休整退房',navQ:'Nguyen Dinh Chieu Mui Ne'}
+    ]},
+    { id:'day-504', label:'5/4', tileRegion:'intl', spots:[
+      {seq:1,time:'08:30–11:00',name:'粉红教堂',type:'sight',lat:10.7889,lng:106.6873,brief:'外观打卡',navQ:'Tan Dinh Pink Church'},
+      {seq:2,time:'11:30–13:30',name:'Cục Gạch',type:'food',lat:10.7870,lng:106.7040,brief:'告别午餐',navQ:'Cuc Gach Quan Ho Chi Minh'},
+      {seq:3,time:'14:00–17:30',name:'Saigon Centre',type:'other',lat:10.7738,lng:106.7043,brief:'商场休整',navQ:'Saigon Centre Ho Chi Minh'},
+      {seq:4,time:'赴机场',name:'SGN',type:'transit',lat:10.8188,lng:106.6519,brief:'国际出发',navQ:'Tan Son Nhat International Airport'}
+    ]}
+  ];
+
+  function markerIcon(seq, type){
+    var t = type || 'sight';
+    var cls = 'num-marker type-' + t;
+    return L.divIcon({
+      className: 'num-marker-icon',
+      html: '<div class="'+cls+'">'+seq+'</div>',
+      iconSize: [28, 28],
+      iconAnchor: [14, 14]
+    });
+  }
+
+  function clearFocus(){
+    document.querySelectorAll('.time-block.map-focus').forEach(function(n){ n.classList.remove('map-focus'); });
+  }
+
+  function focusBlock(dayId, seq){
+    clearFocus();
+    var tb = document.querySelector('.time-block[data-day-id=\"'+dayId+'\"][data-map-seq=\"'+seq+'\"]');
+    if(tb){
+      tb.classList.add('map-focus');
+      tb.scrollIntoView({ behavior:'smooth', block:'center' });
+    }
+  }
+
+  TRIP_MAP_DAYS.forEach(function(day){
+    var el = document.getElementById('map-' + day.id);
+    if(!el) return;
+    var map = L.map(el, { scrollWheelZoom: false });
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+      maxZoom: 19,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+    }).addTo(map);
+    var latlngs = [];
+    var layer = L.featureGroup();
+    day.spots.forEach(function(s){
+      var m = L.marker([s.lat, s.lng], { icon: markerIcon(s.seq, s.type) });
+      var q = s.navQ || s.name;
+      m.bindPopup(
+        '<strong>'+s.seq+'. '+s.name+'</strong><br>'+s.time+'<br>'+s.brief+
+        '<br><button type=\"button\" style=\"margin-top:6px;padding:6px 10px;cursor:pointer\" onclick=\"openMap(\\''+q.replace(/'/g, "\\'")+'\\')\">Google 导航</button>'
+      );
+      m.on('click', function(){ focusBlock(day.id, s.seq); });
+      m.addTo(layer);
+      latlngs.push([s.lat, s.lng]);
+    });
+    layer.addTo(map);
+    if(latlngs.length === 1){
+      map.setView(latlngs[0], 14);
+    } else {
+      map.fitBounds(layer.getBounds().pad(0.12));
+    }
+    if(latlngs.length >= 2){
+      var pl = L.polyline(latlngs, { color: accent, weight: 3, dashArray: '8 6' }).addTo(map);
+      try{
+        if(typeof L.polylineDecorator === 'function' && L.Symbol && typeof L.Symbol.arrowHead === 'function'){
+          L.polylineDecorator(pl, {
+            patterns: [
+              { offset: '8%', repeat: '80px', symbol: L.Symbol.arrowHead({ pixelSize: 9, polygon: false, pathOptions: { stroke: true, color: accent, weight: 2 } }) }
+            ]
+          }).addTo(map);
+        }
+      }catch(e){}
+    }
+    maps[day.id] = { map: map, layer: layer, spots: day.spots };
+  });
+
+  document.querySelectorAll('.map-fit-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var id = btn.getAttribute('data-map-day');
+      if(maps[id] && maps[id].layer) maps[id].map.fitBounds(maps[id].layer.getBounds().pad(0.12));
+    });
+  });
+
+  document.querySelectorAll('.time-block[data-map-seq]').forEach(function(tb){
+    var dayId = tb.getAttribute('data-day-id');
+    var seq = parseInt(tb.getAttribute('data-map-seq'), 10);
+    if(!dayId || !seq || !maps[dayId]) return;
+    tb.style.cursor = 'pointer';
+    tb.addEventListener('click', function(e){
+      if(e.target.closest('input') || e.target.closest('summary') || e.target.closest('a') || e.target.closest('button') || e.target.closest('figure') || e.target.closest('img')) return;
+      var spot = maps[dayId].spots.filter(function(s){ return s.seq === seq; })[0];
+      if(!spot) return;
+      clearFocus();
+      tb.classList.add('map-focus');
+      maps[dayId].map.setView([spot.lat, spot.lng], Math.max(maps[dayId].map.getZoom(), 15), { animate: true });
+    });
+  });
+
+  function highlightToday(){
+    var start = new Date('2026-04-29T00:00:00');
+    var end = new Date('2026-05-04T23:59:59');
+    var now = new Date();
+    if(now < start || now > end) return;
+    var y = now.getFullYear(), m = String(now.getMonth()+1).padStart(2,'0'), d = String(now.getDate()).padStart(2,'0');
+    var iso = y+'-'+m+'-'+d;
+    var sec = document.querySelector('.day-section[data-trip-date=\"'+iso+'\"]');
+    if(sec){
+      sec.classList.add('day-today');
+      setTimeout(function(){ sec.scrollIntoView({ behavior:'smooth', block:'start' }); }, 400);
+    }
+  }
+  highlightToday();
+
+  var btop = document.getElementById('backToTop');
+  window.addEventListener('scroll', function(){
+    btop.style.display = window.scrollY > 400 ? 'flex' : 'none';
+  });
+  btop.addEventListener('click', function(){ window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+  document.querySelectorAll('nav.toc a[href^=\"#\"]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      var id = a.getAttribute('href').slice(1);
+      var t = document.getElementById(id);
+      if(t){ e.preventDefault(); t.scrollIntoView({ behavior:'smooth', block:'start' }); }
+    });
+  });
+})();
+</script>
+</body>
+</html>
