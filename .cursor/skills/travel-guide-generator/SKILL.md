@@ -104,7 +104,7 @@ description: 通过多轮对话覆盖「不知道去哪→推荐目的地→收�
 
 - **时间**：必须「HH:MM – HH:MM」。**禁止**「早上」「上午」「下午」「晚上」「中午」「傍晚」「清晨」。
 - **半天**：拆成 **≥2 段**（如 13:30–15:30、16:00–18:00）。
-- **内容**：核心行动（一句）+ 最优项（店名/理由/位置/人均或票价/评分 ⭐）+ **备选行动项 ≥3 个**（其中至少 1 个与最优项不同活动类型）。每天覆盖早/午/晚与景点；全篇统一图标 ⏰📍💰⚠️📸🔗。
+- **内容**：核心行动（一句）+ 最优项（店名/理由/⭐评分/📍位置/💰价格/🚌可行时段/🏷️标签）+ **备选行动项 ≥3 个**（同样写全 ⭐/📍/💰/🚌/🏷️，其中至少 1 个与最优项不同活动类型）。每天覆盖早/午/晚与景点；全篇统一图标 ⏰📍💰🚌🏷️⚠️📸🔗。这些字段阶段四会被解析为结构化数据驱动 HTML（见 [reference.md](reference.md)「三」「十三」），缺字段会导致页面对应位置留白。
 - **坐标备注**：每个最优项名称后紧跟坐标注释，格式：`<!-- coords: [lat, lng] -->`，供阶段四地图提取。
 - **地点**：境内高德 `[地点名](https://uri.amap.com/search?keyword=地点名)`，境外 Google 或「**地点名**」+📍；格式详见 [reference.md](reference.md)「四、地图链接规则」。
 
@@ -121,15 +121,31 @@ description: 通过多轮对话覆盖「不知道去哪→推荐目的地→收�
 
 ## 阶段四：生成 HTML
 
-- **配色**：按目的地类型与季节选用 [reference.md](reference.md)「二、目的地与季节配色表」一套变量，整页统一。
-- **结构**：`lang="zh-CN"`，viewport；首页元信息卡片（可选）+ 概览卡片 + 重要提示 + 出发前准备清单；每日 `day-section`，多段 `time-block`；地点境内用高德 `<a class="loc">`，境外用 `openMap()`，见 reference 四；返回顶部、锚点平滑滚动、移动端友好。
-- **每日交互地图**：每个 `day-section` 顶部嵌入 Leaflet.js 交互地图，实现序号标记 + 方向路线 + 地图/列表双向联动 + 一键导航。完整实现规范见 [reference.md](reference.md)「十二、每日交互地图实现规范」。
+### 输出目录（必须）
+
+- 所有攻略产物放在仓库 **`trip/`** 下，**不要**散落在仓库根目录。
+- 目录命名：`trip/<英文目的地slug>-<出发日YYYYMMDD>/`  
+  例：`trip/kyushu-fukuoka-kumamoto-20260929/`、`trip/vietnam-hcmc-nhatrang-20260429/`。
+- 同目录必须包含：`index.html` + 对应 `.md`（可另有 `img/`）。
+
+### HTML 格式（数据驱动架构，必须以 trip 现有页为准）
+
+- **权威模板**：优先对齐 `trip/kyushu-fukuoka-kumamoto-20260929/index.html`（页内 `TRIP` 数据 + JS 渲染，三层信息密度分层 + 三视图，规范见 [reference.md](reference.md)「十三、数据驱动单文件 HTML 架构」）；`trip/vietnam-hcmc-nhatrang-20260429/index.html` 仅供参考 CSS 变量与整体版式，其手写 DOM/`TRIP_MAP_DAYS` 的写法**不再新用**；`trip/snow/index.html` / `trip/anti-theft/index.html` 更早样式仅当用户明确要求简化页时参考。
+- **禁止**：① 自创另一套 class 命名或布局；② 手写 29+ 段 time-block 静态 DOM 或让 `<details class="alts">` 全部默认展开（会导致单页等效多页 A4 纯文本、不可读）；③ 手写 `TRIP_MAP_DAYS`（必须从 `TRIP.days` 派生，见 reference 12.3，否则易出现序号断档）。
+- **核心架构**：页内 `const TRIP = {...}` 承载全部日期/时段/最优项/备选数据（字段见 reference 13.1），JS 渲染函数 `renderTimeline()` / `renderThemes()` / `renderProgress()` / `applyFilters()` / `switchView()` 生成 DOM（见 reference 13.2）；**保持单文件可分享**，不拆分外部 JS/JSON。
+- **三层信息密度分层**（必选）：L1 摘要行（默认，一行看完时间+标题+最优项+评分/价格）→ 点击展开 L2 详情（核心行动+最优项 chip 化信息）→ L2 内 L3 备选抽屉（默认折叠，聚合 summary，逐条再展开看详情）。
+- **三视图**（必选）：时间轴（默认）、主题速查（按 `tags` 聚合购物/美食/打卡机位/交通，点击跳回时间轴）、打卡总览（总进度 + 每日方块网格）。
+- **配色**：按目的地类型与季节选用 [reference.md](reference.md)「二、目的地与季节配色表」一套 CSS 变量，替换 `--primary` / `--accent` / `--bg` 等，整页统一。
+- **结构**：`lang="zh-CN"`，viewport；首页元信息 + 概览表 + 重要提示 + 出发前准备清单（静态）；`<div id="itinerary">` 由 `renderTimeline()` 填充；地点境外用 `.loc-link` + `openMap()`，境内用高德，见 reference 四；返回顶部、锚点平滑滚动、移动端友好、`@media print` 强制全展开。
+- **每日交互地图**：每个 `day-section` 顶部嵌入 Leaflet.js，序号标记 + 折线 + 地图/列表双向联动 + 弹窗导航；数据由 `deriveMapDays()` 从 `TRIP.days` 派生。规范见 [reference.md](reference.md)「十二、每日交互地图实现规范」。
 - **HTML 交互增强**：
-  - 每个 time-block 含「✓ 已完成」勾选按钮（localStorage 持久化，刷新不丢失）
-  - 页面加载时根据当前日期自动高亮/滚动到对应 day-section
-  - 地图标记与列表 time-block 双向联动（点标记→列表滚动高亮；点时间块→地图飞行高亮）
-- **可选模块**：交通时刻小表、预算汇总、紧急联系、图片位（`img/` + `loading="lazy"`）。详见 [reference.md](reference.md)「九、HTML 丰富度与可选模块」。
-- 生成后将 `index.html` 放于与 MD 同目录，提示用户可浏览器打开。
+  - 每个时间段含「已完成」勾选（localStorage，键前缀用行程 slug），勾选后视觉变暗，刷新后保留
+  - 按当前日期高亮/滚动到对应 `day-section`
+  - 地图标记 ↔ 列表时间段双向联动
+  - 全局筛选（仅看未完成，有价格数据时可加预算档筛选）；筛选降低透明度而非删除 DOM
+- **可选模块**：交通时刻小表、预算汇总、紧急联系、图片位。详见 [reference.md](reference.md)「九、HTML 丰富度与可选模块」。
+- **验收**：生成后校验 `blocks`/`alts`/坐标点数量与 MD 一致、内联脚本语法、标签配对；有条件时用浏览器实测三视图切换、折叠展开、地图联动、勾选持久化，不能只凭代码审查判断可用。
+- 生成后提示用户用浏览器打开 `trip/.../index.html`。
 
 ---
 
@@ -139,6 +155,6 @@ description: 通过多轮对话覆盖「不知道去哪→推荐目的地→收�
 1. **阶段一** → 必采字段追问（含出发城市、同行人群），每轮给完成度；**≥85%** 进入阶段二。
 2. **阶段二** → **逐日、逐段**检索；同步搜集坐标；检查节假日影响；搜天气备选；标记方案分歧；渠道见 reference 六（国外/国内），重要信息两处验证。
 3. **阶段三** → **逐日、逐段**写 MD；时间必为 HH:MM–HH:MM，半天≥2 段，每段**≥3 备选**（含异类）；坐标备注写入；每天末尾雨天方案块；出发前准备清单；信息时效声明；方案分歧先对比后展开；用户确认后再继续。
-4. **阶段四** → 按 reference 二选配色，生成单页 HTML，境内高德、境外 Google；每日嵌入 Leaflet 交互地图；HTML 交互增强（进度勾选/当日高亮/地图列表联动）。
+4. **阶段四** → 输出到 `trip/<slug>-YYYYMMDD/`；HTML **对齐 kyushu 数据驱动模板**（页内 `TRIP` 数据 + JS 渲染，三层信息密度分层 + 时间轴/主题速查/打卡总览三视图，见 reference 十三）；按 reference 二选配色；境内高德、境外 Google；每日 Leaflet 地图（`TRIP_MAP_DAYS` 从 `TRIP.days` 派生）+ 勾选/当日高亮/列表联动。
 
-更多细节（必采清单、配色表、MD/HTML 模板、检索式、地图实现规范）见 [reference.md](reference.md)。
+更多细节（必采清单、配色表、MD/HTML 模板、检索式、地图实现规范）见 [reference.md](reference.md)。权威示例页见仓库 `trip/` 目录。

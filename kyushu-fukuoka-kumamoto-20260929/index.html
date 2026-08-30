@@ -1,0 +1,3463 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>九州福冈·熊本·天草·阿苏·黑川 8日攻略</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<style>
+:root{
+  --primary:#1e6b4f;
+  --primary-dark:#14532d;
+  --accent:#2d8a6b;
+  --bg:#f0fdf4;
+  --card:#dcfce7;
+  --time-bg:#e8f5e9;
+  --border:#b7d4c4;
+  --text:#1a2e24;
+  --text-light:#3d6b54;
+  --white:#fff;
+  --chip-bg:#eef7f1;
+  --warn-bg:#fff6e5;
+  --warn-border:#e8b84b;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.7;font-size:15px}
+header{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:var(--white);padding:2.2rem 1.2rem 1.8rem;text-align:center}
+header h1{font-size:1.5rem;margin-bottom:.4rem;letter-spacing:1px}
+header p{opacity:.95;font-size:.92rem}
+.container{max-width:820px;margin:0 auto;padding:.8rem 1rem 3rem}
+
+/* ---------- 控制栏：视图切换 + 日期 Tab + 筛选 ---------- */
+.controlbar{background:var(--white);border-bottom:2px solid var(--border);position:sticky;top:0;z-index:200;padding:.55rem .7rem}
+.view-switch{display:flex;gap:.4rem;justify-content:center;flex-wrap:wrap;margin-bottom:.45rem}
+.view-switch button{font-size:.82rem;padding:.36rem .85rem;border-radius:20px;border:1px solid var(--primary);background:var(--white);color:var(--primary);cursor:pointer;min-height:36px}
+.view-switch button.active{background:var(--primary);color:var(--white);font-weight:600}
+.day-tabs{display:flex;gap:.35rem;flex-wrap:wrap;justify-content:center;margin-bottom:.4rem}
+.day-tabs a{text-decoration:none;color:var(--primary);font-size:.74rem;padding:.26rem .55rem;border:1px solid var(--primary);border-radius:16px;white-space:nowrap}
+.day-tabs a:hover,.day-tabs a:focus{background:var(--primary);color:var(--white)}
+.filter-bar{display:flex;gap:.35rem;flex-wrap:wrap;justify-content:center}
+.filter-bar .flabel{font-size:.72rem;color:var(--text-light);align-self:center;margin-right:.1rem}
+.filter-bar button{font-size:.72rem;padding:.24rem .55rem;border-radius:14px;border:1px solid var(--border);background:var(--white);color:var(--text-light);cursor:pointer;min-height:32px}
+.filter-bar button.active{background:var(--accent);color:var(--white);border-color:var(--accent)}
+.filter-bar .fsep{width:1px;background:var(--border);margin:.1rem .3rem}
+
+/* ---------- 首屏静态区 ---------- */
+.meta-card{background:var(--white);border-radius:10px;padding:1rem;margin:1rem 0;border-left:4px solid var(--primary);display:grid;grid-template-columns:1fr 1fr;gap:.4rem .8rem;font-size:.88rem}
+.meta-card .label{color:var(--text-light);font-size:.78rem}
+.section-title{color:var(--primary);margin:1.4rem 0 .45rem;border-bottom:2px solid var(--accent);padding-bottom:.28rem;font-size:1.1rem}
+.overview-table,.info-table{width:100%;border-collapse:collapse;margin:.8rem 0;font-size:.85rem}
+.overview-table th,.info-table th{background:var(--primary);color:var(--white);padding:.5rem .4rem;text-align:left}
+.overview-table td,.info-table td{padding:.5rem .4rem;border-bottom:1px solid var(--border);background:var(--white)}
+.overview-table tr:hover td{background:var(--card)}
+.src-note{font-size:.8rem;color:var(--text-light);margin:.6rem 0 0;padding:.5rem .7rem;background:var(--white);border-radius:6px;border:1px dashed var(--border)}
+.tips{background:var(--white);border-left:4px solid var(--primary);border-radius:8px;padding:.9rem 1.1rem;margin:1rem 0}
+.tips h2{color:var(--primary);font-size:1rem;margin-bottom:.5rem}
+.tips li{margin-bottom:.4rem;font-size:.88rem}
+.prep-checklist{background:var(--white);border-radius:10px;padding:.9rem 1rem;margin:1rem 0;border:1px solid var(--border)}
+.prep-checklist h3{color:var(--primary-dark);font-size:.95rem;margin:.8rem 0 .35rem}
+.prep-checklist h3:first-child{margin-top:0}
+.prep-checklist ul{margin-left:1rem;font-size:.88rem}
+.prep-checklist li{margin:.22rem 0}
+
+/* ---------- 视图容器 ---------- */
+.view{display:none}
+.view.active{display:block}
+
+/* ---------- 每日区块 / 地图 ---------- */
+.day-section{margin-top:1.8rem;scroll-margin-top:118px}
+.day-section.day-today .day-header{box-shadow:0 0 0 3px rgba(30,107,79,.45)}
+.day-header{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:var(--white);padding:.9rem 1.1rem;border-radius:10px 10px 0 0;font-size:1.08rem;display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:.3rem .6rem}
+.day-header .day-progress{font-size:.76rem;opacity:.9;font-weight:400}
+.day-body{background:var(--white);border-radius:0 0 10px 10px;padding:.4rem 0 .9rem;border:1px solid var(--border);border-top:none}
+.day-map-wrap{padding:0 .9rem .5rem}
+.day-map-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.4rem;margin:.45rem 0 .3rem}
+.day-map-head span{font-size:.8rem;color:var(--text-light)}
+.map-fit-btn{font-size:.78rem;padding:.3rem .7rem;border-radius:8px;border:1px solid var(--primary);background:var(--white);color:var(--primary);cursor:pointer;min-height:40px}
+.map-fit-btn:hover{background:var(--primary);color:var(--white)}
+.day-map{height:min(40vh,400px);min-height:260px;border-radius:9px;border:1px solid var(--border);z-index:1}
+.leaflet-container{font-family:inherit}
+.num-marker{width:26px;height:26px;border-radius:50%;background:var(--white);border:2px solid var(--primary);color:var(--primary);font-weight:700;font-size:11px;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+.num-marker.type-food{border-color:#e67e22;color:#ca6f1e}
+.num-marker.type-sight{border-color:var(--primary-dark);color:var(--accent)}
+.num-marker.type-transit{border-color:#64748b;color:#475569}
+.num-marker.type-hotel{border-color:#7c3aed;color:#6d28d9}
+.num-marker-icon{background:transparent!important;border:none!important}
+.day-note{margin:.5rem .9rem;padding:.55rem .7rem;background:var(--card);border-radius:7px;font-size:.84rem;color:var(--text-light)}
+
+/* ---------- L1 时段摘要行 ---------- */
+.time-block{margin:.55rem .9rem;background:var(--time-bg);border-radius:9px;border-left:4px solid var(--accent);transition:box-shadow .2s,opacity .2s}
+.time-block.map-focus{box-shadow:0 0 0 2px var(--primary)}
+.time-block.time-done{opacity:.62}
+.time-block.filtered-out{opacity:.32}
+.tb-summary{all:unset;display:flex;align-items:center;gap:.5rem;width:100%;padding:.62rem .75rem;cursor:pointer;flex-wrap:wrap;min-height:44px}
+.tb-summary:hover{background:rgba(30,107,79,.06);border-radius:9px}
+.tb-time{color:var(--accent);font-weight:700;font-size:.86rem;white-space:nowrap}
+.tb-type-icon{font-size:.9rem}
+.tb-title{font-weight:600;color:var(--primary-dark);font-size:.9rem;white-space:nowrap}
+.tb-best{color:var(--text-light);font-size:.84rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1 1 120px;min-width:0}
+.tb-chips{display:flex;gap:.3rem;flex-wrap:nowrap}
+.tb-caret{margin-left:auto;color:var(--text-light);transition:transform .2s;flex-shrink:0}
+.time-block.expanded .tb-caret{transform:rotate(90deg)}
+.tb-done-row{display:flex;align-items:center;gap:.3rem;font-size:.74rem;color:var(--text-light);user-select:none;padding:0 .75rem .5rem;margin-top:-.3rem}
+.tb-done-row input{width:16px;height:16px;accent-color:var(--primary)}
+
+/* ---------- chip 标签 ---------- */
+.chip{display:inline-flex;align-items:center;gap:.15rem;font-size:.74rem;padding:.1rem .45rem;border-radius:10px;background:var(--chip-bg);color:var(--text-light);white-space:nowrap}
+.chip-score{background:#fdf3da;color:#a3730a}
+.chip-price{background:#e6f2ff;color:#1a5aa3}
+.chip-price.b-economy{background:#e7f7ee;color:#1e6b4f}
+.chip-price.b-mid{background:#fff4e0;color:#a3600a}
+.chip-price.b-high{background:#fde8e8;color:#b23c3c}
+.chip-price.b-covered{background:#eef2f7;color:#5a6472}
+
+/* ---------- L2 展开详情 ---------- */
+.tb-detail{display:none;padding:0 .75rem .8rem}
+.time-block.expanded .tb-detail{display:block}
+.core-action{background:var(--white);padding:.6rem;border-radius:7px;margin-bottom:.5rem;font-size:.88rem}
+.best-pick{background:rgba(30,107,79,.07);padding:.65rem .7rem;border-radius:7px;margin-bottom:.55rem}
+.bp-head{display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;margin-bottom:.3rem}
+.bp-head .name{font-weight:700;color:var(--primary);font-size:.92rem}
+.stars{color:#e8a735;letter-spacing:1px}
+.reason{font-size:.85rem;color:var(--text-light);margin:.2rem 0 .45rem}
+.chip-row{display:flex;flex-wrap:wrap;gap:.32rem;margin:.3rem 0}
+.warn-line{font-size:.8rem;color:#8a5a12;background:var(--warn-bg);border-left:3px solid var(--warn-border);padding:.32rem .5rem;border-radius:4px;margin-top:.4rem}
+.warn-line .src{color:var(--text-light);display:block;font-size:.74rem;margin-top:.15rem}
+a.loc,span.loc-link{color:var(--primary);text-decoration:none;border-bottom:1px dashed var(--primary);font-weight:500;cursor:pointer}
+a.loc:hover,span.loc-link:hover{color:var(--primary-dark);border-bottom-style:solid}
+
+/* ---------- L3 备选抽屉 ---------- */
+.alts{margin-top:.4rem}
+.alts>summary{cursor:pointer;font-weight:600;color:var(--accent);font-size:.86rem;padding:.35rem .1rem;list-style:none}
+.alts>summary::-webkit-details-marker{display:none}
+.alts>summary::before{content:'▸ ';display:inline-block;transition:transform .15s}
+.alts[open]>summary::before{content:'▾ '}
+.alt-list{display:flex;flex-direction:column;gap:.35rem;margin-top:.3rem}
+.alt-card{background:var(--white);border-radius:7px;border-left:3px solid var(--border);font-size:.84rem;overflow:hidden}
+.alt-summary{cursor:pointer;padding:.5rem .6rem;list-style:none;display:flex;align-items:baseline;gap:.4rem;flex-wrap:wrap}
+.alt-summary::-webkit-details-marker{display:none}
+.alt-summary .alt-name{font-weight:600;color:var(--text)}
+.alt-summary .alt-preview{color:var(--text-light);font-size:.8rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1 1 100px;min-width:0}
+.alt-full{padding:0 .6rem .6rem}
+
+/* ---------- 主题速查视图 ---------- */
+.theme-group{background:var(--white);border-radius:10px;border:1px solid var(--border);margin:1rem 0;overflow:hidden}
+.theme-group h3{background:var(--accent);color:var(--white);padding:.55rem .8rem;font-size:.95rem}
+.theme-item{display:flex;gap:.5rem;align-items:baseline;padding:.55rem .8rem;border-bottom:1px solid var(--border);cursor:pointer;flex-wrap:wrap}
+.theme-item:last-child{border-bottom:none}
+.theme-item:hover{background:var(--card)}
+.theme-item .ti-day{font-size:.74rem;color:var(--white);background:var(--primary);border-radius:10px;padding:.1rem .5rem;white-space:nowrap}
+.theme-item .ti-name{font-weight:600;font-size:.88rem;color:var(--primary-dark)}
+.theme-item .ti-reason{font-size:.8rem;color:var(--text-light);flex:1 1 140px;min-width:0}
+
+/* ---------- 打卡总览视图 ---------- */
+.progress-summary{background:var(--white);border-radius:10px;padding:.9rem 1rem;margin:1rem 0;border:1px solid var(--border);font-size:.9rem}
+.progress-bar-outer{background:var(--card);border-radius:6px;height:10px;overflow:hidden;margin-top:.4rem}
+.progress-bar-inner{background:var(--primary);height:100%;border-radius:6px;transition:width .3s}
+.progress-day{background:var(--white);border-radius:9px;border:1px solid var(--border);margin:.6rem 0;overflow:hidden}
+.progress-day h4{background:var(--time-bg);padding:.5rem .8rem;font-size:.88rem;color:var(--primary-dark);display:flex;justify-content:space-between}
+.progress-grid{display:flex;flex-wrap:wrap;gap:.4rem;padding:.6rem .8rem}
+.progress-cell{width:34px;height:34px;border-radius:7px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.72rem;color:var(--text-light);background:var(--bg)}
+.progress-cell.done{background:var(--primary);color:var(--white);border-color:var(--primary)}
+
+.rain-alt{background:rgba(30,107,79,.08);margin:.65rem .9rem;padding:.7rem .9rem;border-radius:9px;font-size:.86rem;border-left:4px solid var(--primary);transition:box-shadow .2s}
+.rain-alt strong{color:var(--primary-dark)}
+#itinerary.show-rain .rain-alt{box-shadow:0 0 0 2px var(--warn-border);background:var(--warn-bg)}
+
+.back-to-top{position:fixed;bottom:1.4rem;right:1.4rem;width:42px;height:42px;border-radius:50%;background:var(--primary);color:var(--white);border:none;font-size:1.2rem;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.25);display:none;align-items:center;justify-content:center;z-index:199}
+.back-to-top:hover{background:var(--primary-dark)}
+.footnote{font-size:.8rem;color:var(--text-light);margin-top:1.8rem;padding-top:.9rem;border-top:1px dashed var(--border)}
+.noscript-warn{background:#fde8e8;color:#8a1f1f;padding:.9rem 1rem;text-align:center;font-size:.9rem}
+
+@media(max-width:600px){
+  header h1{font-size:1.25rem}
+  .meta-card{grid-template-columns:1fr}
+  .day-tabs a{font-size:.7rem;padding:.22rem .45rem}
+  .time-block{margin:.5rem .5rem}
+  .day-map{min-height:240px}
+  .tb-best{flex-basis:100%;order:5}
+}
+
+@media print{
+  .controlbar,.back-to-top,.map-fit-btn,.tb-done-row,.view-switch,.filter-bar{display:none!important}
+  .view{display:block!important}
+  .tb-detail{display:block!important}
+  .alts>*,.alt-card>*{display:block!important}
+  .time-block.filtered-out{opacity:1}
+  .day-map{display:none!important}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>九州福冈·熊本·天草·阿苏·黑川 8日攻略</h1>
+  <p>2026年9月29日 — 10月6日 ｜ 北部九州 JR Pass 5日轴心</p>
+  <p style="font-size:.84rem;margin-top:.3rem;opacity:.9">备选已按 Tabelog/官方交通筛选：含评分、位置、交通方式与可行时段</p>
+  <p style="font-size:.84rem;margin-top:.3rem;opacity:.9">海景列车 × 追海豚 × 火山草原 × 黑川温泉 × 博多购物</p>
+</header>
+
+<noscript><div class="noscript-warn">本页依赖 JavaScript 渲染每日行程与地图，请在浏览器中启用 JavaScript 后查看；也可直接阅读同目录下的 .md 攻略文本。</div></noscript>
+
+<div class="controlbar" id="top">
+  <div class="view-switch">
+    <button type="button" data-view="timeline" class="active">🗓️ 时间轴</button>
+    <button type="button" data-view="themes">🏷️ 主题速查</button>
+    <button type="button" data-view="progress">✅ 打卡总览</button>
+  </div>
+  <div class="day-tabs">
+    <a href="#prep">出发清单</a>
+    <a href="#day-929">9/29</a><a href="#day-930">9/30</a><a href="#day-1001">10/1</a><a href="#day-1002">10/2</a><a href="#day-1003">10/3</a><a href="#day-1004">10/4</a><a href="#day-1005">10/5</a><a href="#day-1006">10/6</a>
+  </div>
+  <div class="filter-bar">
+    <span class="flabel">预算</span>
+    <button type="button" data-budget="all" class="active">全部预算</button><button type="button" data-budget="economy">经济¥≤1000</button><button type="button" data-budget="mid">适中¥1000–3000</button><button type="button" data-budget="high">较高¥3000+</button><button type="button" data-budget="covered">含通票/免费</button>
+    <span class="fsep"></span>
+    <button type="button" id="filter-undone">仅看未完成</button>
+    <button type="button" id="filter-rain">强调雨天预案</button>
+  </div>
+</div>
+
+<div class="container">
+  <div class="meta-card">
+    <span><span class="label">目的地</span>福冈 / 熊本 / 天草 / 阿苏 / 黑川</span>
+    <span><span class="label">行程日期</span>2026-09-29 — 2026-10-06（8天）</span>
+    <span><span class="label">季节·预算</span>秋季 · 舒适档</span>
+    <span><span class="label">主题标签</span>自然 · 美食 · 温泉 · 购物 · 观光列车</span>
+    <span><span class="label">核心票券</span>北部九州 JR Pass 5日（不含市电/西铁/地铁/船/横断巴士）</span>
+    <span><span class="label">住宿</span>熊本大仓 → 黑川温泉宿 → 博多站酒店</span>
+  </div>
+  <div class="src-note"><strong>备选筛选原则：</strong>① Tabelog / 西铁·JR九州·产交·Sea Cruise 等交叉验证；② 与该时段地理可达（含换乘时耗）；③ 标注实际营业/班次窗口；④ 每段≥3备选且至少1个不同类型。关键校正：银杏ビュッフェ常规至18:00；海豚10/13/15；横断阿苏14:09→黑川、黑川回10:45/15:25/16:25。购物/美食/机位检索渠道：UNIQLO/UNITED ARROWS/BEAMS 官网、Tabelog、樂吃購日本、WaTabi、japantravel.co、i-fukuoka.jp、GOOD LUCK TRIP（检索于 2026-08-30）。</div>
+
+  <h2 class="section-title">行程概览</h2>
+  <table class="overview-table">
+    <tr><th>日期</th><th>主题</th></tr>
+    <tr><td>9/29（二）</td><td>落地直奔熊本 · 熊本城</td></tr>
+    <tr><td>9/30（三）</td><td>天草追海豚</td></tr>
+    <tr><td>10/1（四）</td><td>阿苏 · 草千里 · 黑川</td></tr>
+    <tr><td>10/2（五）</td><td>黑川入汤 · 返回博多</td></tr>
+    <tr><td>10/3（六）</td><td>博多购物 · 太宰府</td></tr>
+    <tr><td>10/4（日）</td><td>天神潮牌扫货 · 大濠打卡 · 屋台</td></tr>
+    <tr><td>10/5（一）</td><td>弹性缓冲日</td></tr>
+    <tr><td>10/6（二）</td><td>返程福冈机场</td></tr>
+
+  </table>
+
+  <div class="tips">
+    <h2>核心提醒（已校正原稿）</h2>
+    <ul>
+      <li><strong>A列车：</strong>最早约 10:21（非 07:30）；9/30 周三可能停运，查 JR 九州运行日历。</li>
+      <li><strong>海豚船：</strong>松岛（前岛）港，10:00/13:00/15:00，约 2 小时，大人约 5,400–6,000 日元。</li>
+      <li><strong>阿苏：</strong>索道停运；男孩号约 09:57→11:27；去黑川参考阿苏 <strong>14:09→15:00</strong>；查 aso-volcano.jp。</li>
+      <li><strong>横断巴士 ≠ JR Pass</strong>；入汤手形 <strong>1,500</strong> 日元；回程黑川参考 <strong>15:25</strong>。</li>
+      <li><strong>机场线：</strong>地铁空港线博多→机场约 5 分/260 日元（不是 Hakata-Minami）。</li>
+      <li><strong>紧急：</strong>警察 110 · 急救 119 · 领事保护查外交部领事服务网。</li>
+    </ul>
+  </div>
+
+  <h2 class="section-title" id="prep">出发前准备清单</h2>
+  <div class="prep-checklist">
+    <h3>预订与票务</h3>
+    <ul>
+      <li>北部九州 JR Pass 5日（启用日=9/29）</li>
+      <li>9/29 Sakura、10/1 阿苏男孩号指定席</li>
+      <li>9/30 A列车运行日确认；Sea Cruise 海豚船网订</li>
+      <li>10/1 阿苏→黑川、10/2 黑川→熊本 横断巴士座位</li>
+      <li>熊本大仓 / 黑川一泊二食 / 博多站酒店</li>
+    </ul>
+    <h3>必备 App</h3>
+    <ul>
+      <li>Google Maps、JR 九州 App / e5489、Japan Bus Online</li>
+      <li>翻译、汇率、酒店确认单离线保存</li>
+    </ul>
+    <h3>证件与行李</h3>
+    <ul>
+      <li>护照、交通系 IC、现金（船/屋台）、退税护照</li>
+      <li>步行鞋、薄外套、防水手机袋（追海豚）</li>
+      <li><strong>轻装策略：</strong>行李箱预留1/3空间，或用宅急便把10/3–10/4买的衣物提前寄到最后一晚酒店/机场</li>
+    </ul>
+  </div>
+
+  <div id="view-timeline" class="view active">
+    <h2 class="section-title">每日行程时间轴</h2>
+    <p class="src-note">点时段行可展开核心行动与最优项；备选默认折叠，点「备选 N 个」查看，再点单条看详情与来源。</p>
+    <div id="itinerary"></div>
+  </div>
+
+  <div id="view-themes" class="view">
+    <h2 class="section-title">主题速查：购物 · 美食 · 打卡机位 · 交通</h2>
+  </div>
+
+  <div id="view-progress" class="view">
+    <h2 class="section-title">打卡总览</h2>
+  </div>
+
+  <h2 class="section-title">预算粗估（1人·舒适·不含国际机票）</h2>
+  <table class="info-table">
+    <tr><th>类别</th><th>约计（日元）</th></tr>
+    <tr><td>北部九州 JR Pass 5日</td><td>16,000–17,000</td></tr>
+    <tr><td>市电·地铁·西铁·巴士·横断</td><td>12,000–21,000</td></tr>
+    <tr><td>海豚+渡轮</td><td>8,000–10,000</td></tr>
+    <tr><td>阿苏/骑马/博物馆/手形</td><td>4,500–7,500</td></tr>
+    <tr><td>餐饮（8天）</td><td>40,000–70,000</td></tr>
+    <tr><td>住宿</td><td>60,000–150,000+</td></tr>
+    <tr><td><strong>合计参考</strong></td><td><strong>约15–30万+</strong></td></tr>
+  </table>
+  <p class="footnote">本攻略信息检索于 2026-08-30，出发前请复核 JR 运行日历、海豚船、阿苏警戒、横断巴士与酒店。坐标供参考，请与 Google Maps 核对。页面已升级为数据驱动的时间轴/主题速查/打卡总览三视图，默认折叠备选项以提升可读性。</p>
+</div>
+
+<button type="button" class="back-to-top" id="backToTop" aria-label="返回顶部">↑</button>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script>
+(function(){
+  var TRIP = {
+ "slug": "kyushu-fukuoka-kumamoto-20260929",
+ "title": "九州福冈·熊本·天草·阿苏·黑川 8日攻略",
+ "dateRange": "2026年9月29日 — 10月6日",
+ "days": [
+  {
+   "id": "day-929",
+   "date": "2026-09-29",
+   "label": "9/29（二）",
+   "theme": "落地直奔熊本 · 熊本城",
+   "note": "校正：国际线西铁巴士约 400 日元；地铁空港线 260 日元/约5分。住宿：熊本大仓。JR Pass Day 1。",
+   "rain": "城域改室内商场；晚餐改站内餐厅；城外景注意防滑。",
+   "blocks": [
+    {
+     "seq": 1,
+     "store": "day-929-1",
+     "start": "08:00",
+     "end": "09:15",
+     "title": "机场→博多站",
+     "subtitle": "西铁巴士国际线→博多筑紫口",
+     "core": "出关取行李，尽快进城换乘新干线。",
+     "best": {
+      "name": "福冈机场国际线 → 博多站",
+      "navQ": "Fukuoka Airport International Terminal",
+      "score": 5,
+      "reason": "国际线下机免转航站楼，约30–35分钟直达博多站附近。",
+      "loc": "国际线 6·7 号乘车处",
+      "price": "约400日元",
+      "hours": "",
+      "photo": "",
+      "shop": "",
+      "warn": "JR Pass 不含机场巴士与地铁",
+      "src": "",
+      "lat": 33.5979,
+      "lng": 130.4487,
+      "type": "transit",
+      "brief": "西铁巴士约400円",
+      "tags": [
+       "打卡机位",
+       "交通"
+      ],
+      "priceBucket": "economy"
+     },
+     "alts": [
+      {
+       "name": "地铁空港线（国内线航站）",
+       "navQ": "Fukuoka Airport Subway Station",
+       "score": 5,
+       "reason": "最快进城；国际线先免费接驳巴士至国内线，再乘地铁约5分到博多。",
+       "loc": "国内线地下「福岡空港」站 → 博多站",
+       "price": "地铁260日元（JR Pass不含）",
+       "hours": "可行时段：首末班约05:30–24:00；落地后接驳+换乘约25–40分可达博多",
+       "photo": "",
+       "shop": "",
+       "warn": "行李多时换乘略累；与巴士二选一即可",
+       "src": "福冈市地下铁 / 西铁空港接驳",
+       "tags": [
+        "打卡机位",
+        "交通"
+       ],
+       "priceBucket": "economy"
+      },
+      {
+       "name": "出租车直达博多站",
+       "navQ": "Hakata Station Fukuoka",
+       "score": 4,
+       "reason": "行李多/夜间延误最省心，门到门。",
+       "loc": "国际线出租车上车点 → 博多站",
+       "price": "约2,000–3,500日元",
+       "hours": "可行时段：全天；车程约20–25分（拥堵可至35分）",
+       "photo": "",
+       "shop": "",
+       "warn": "高峰贵；赶09:30新干线建议落地后立刻上车",
+       "src": "Google Maps / 机场出租指引",
+       "tags": [
+        "交通"
+       ],
+       "priceBucket": "high"
+      },
+      {
+       "name": "机场简餐缓冲后再出发",
+       "navQ": "Fukuoka Airport International Terminal food court",
+       "score": 3,
+       "reason": "航班延误或饥饿时先吃再进城，避免空胃赶车。",
+       "loc": "国际线出发/到达层餐饮区",
+       "price": "简餐约800–1,500日元",
+       "hours": "可行时段：多数店铺约07:00–21:00；须预留≥60分再走巴士/地铁",
+       "photo": "",
+       "shop": "",
+       "warn": "若目标赶09:30 Sakura，缓冲后可能赶不上指定席——改下一班つばめ/さくら",
+       "src": "机场官网餐饮一览",
+       "tags": [
+        "打卡机位",
+        "交通"
+       ],
+       "priceBucket": "mid"
+      }
+     ]
+    },
+    {
+     "seq": 2,
+     "store": "day-929-2",
+     "start": "09:30",
+     "end": "10:30",
+     "title": "博多→熊本",
+     "subtitle": "九州新干线 Sakura 号指定席",
+     "core": "开启 JR Pass Day 1，赴熊本。",
+     "best": {
+      "name": "博多站 → 熊本站（さくら号）",
+      "navQ": "Hakata Station Shinkansen",
+      "score": 5,
+      "reason": "约35–45分钟；建议靠左窗；提前1个月划位。",
+      "loc": "博多站新干线检票口",
+      "price": "含北部九州 JR Pass",
+      "hours": "",
+      "photo": "",
+      "shop": "",
+      "warn": "指定席热门车次易满",
+      "src": "",
+      "lat": 33.5897,
+      "lng": 130.4207,
+      "type": "transit",
+      "brief": "新干线赴熊本",
+      "tags": [
+       "交通"
+      ],
+      "priceBucket": "covered"
+     },
+     "alts": [
+      {
+       "name": "自由席（同车次）",
+       "navQ": "Hakata Station Shinkansen",
+       "score": 3,
+       "reason": "未划指定席时可上车；高峰常站立至熊本。",
+       "loc": "博多站新干线自由席车厢",
+       "price": "含北部九州 JR Pass",
+       "hours": "可行时段：各さくら/つばめ发车时刻；建议09:20前到检票口",
+       "photo": "",
+       "shop": "",
+       "warn": "带大件行李不推荐；舒适档优先指定席",
+       "src": "JR九州 e5489 / 站内电子屏",
+       "tags": [
+        "交通"
+       ],
+       "priceBucket": "covered"
+      },
+      {
+       "name": "つばめ号（班次更多）",
+       "navQ": "Tsubame Shinkansen Hakata Kumamoto",
+       "score": 4,
+       "reason": "停站略多、稍慢，但班次密，延误后易衔接。",
+       "loc": "博多→熊本，车程约40–50分",
+       "price": "含 JR Pass（指定席建议提前划）",
+       "hours": "可行时段：约每20–30分一班（查当日时刻）；10:00–12:00窗口最稳",
+       "photo": "",
+       "shop": "",
+       "warn": "指定席仍建议提前1个月",
+       "src": "JR九州时刻表",
+       "tags": [
+        "交通"
+       ],
+       "priceBucket": "covered"
+      },
+      {
+       "name": "高速巴士博多→熊本",
+       "navQ": "Nishitetsu Bus Hakata Kumamoto",
+       "score": 2,
+       "reason": "约2–2.5小时，不含 JR Pass，仅适合无新干线票时兜底。",
+       "loc": "博多站筑紫口/西铁巴士中心 → 熊本站/樱町",
+       "price": "约2,000–2,800日元",
+       "hours": "可行时段：日间约每30–60分；本行程赶下午城彩苑——不推荐",
+       "photo": "",
+       "shop": "",
+       "warn": "耗时翻倍，压缩城下时间",
+       "src": "西铁高速巴士 / Japan Bus Online",
+       "tags": [
+        "交通"
+       ],
+       "priceBucket": "mid"
+      }
+     ]
+    },
+    {
+     "seq": 3,
+     "store": "day-929-3",
+     "start": "10:30",
+     "end": "12:00",
+     "title": "入住·午餐",
+     "subtitle": "Amu Plaza 简餐 + 酒店寄行李",
+     "core": "酒店寄行李或早入住，站内解决午餐。",
+     "best": {
+      "name": "アミュプラザくまもと",
+      "navQ": "Amu Plaza Kumamoto",
+      "score": 5,
+      "reason": "熊本站直结，选择多、动线短。",
+      "loc": "熊本站直结",
+      "price": "人均约1,000–1,800日元",
+      "hours": "",
+      "photo": "",
+      "shop": "顺路购物：UNIQLO就在4F、BEAMS熊本店就在1F（同栋不同楼层），午餐后一次逛完两个牌子，省专程往返（均10:00–20:00）",
+      "warn": "",
+      "src": "",
+      "lat": 32.7895,
+      "lng": 130.6889,
+      "type": "hotel",
+      "brief": "寄行李午餐",
+      "tags": [
+       "购物",
+       "美食"
+      ],
+      "priceBucket": "mid"
+     },
+     "alts": [
+      {
+       "name": "熊本駅弁（ホーム/改札内）",
+       "navQ": "Kumamoto Station ekiben",
+       "score": 4,
+       "reason": "边等边吃，零绕路；适合早入酒店寄行李后立刻出门。",
+       "loc": "熊本站改札内外便当柜台",
+       "price": "约900–1,500日元",
+       "hours": "可行时段：约07:00–20:00；本段10:30–12:00完全覆盖",
+       "photo": "",
+       "shop": "",
+       "warn": "座位有限，可带回酒店门口长椅",
+       "src": "JR九州駅弁情报",
+       "tags": [
+        "购物",
+        "美食"
+       ],
+       "priceBucket": "mid"
+      },
+      {
+       "name": "黑亭拉面（蒜香黑麻油系）",
+       "navQ": "Kokutei ramen Kumamoto",
+       "score": 5,
+       "reason": "黑麻油蒜香系；比涮锅轻，不拖垮下午城下。",
+       "loc": "アミュプラザくまもと 饮食楼层",
+       "price": "约900–1,200日元",
+       "hours": "可行时段：午餐约11:00–15:00（L.O.因店而异）；步行0–3分",
+       "photo": "",
+       "shop": "",
+       "warn": "注意：站内「だるま」多为拉面，不是赤牛涮老铺",
+       "src": "Tabelog / Amu 楼层导览",
+       "tags": [
+        "购物",
+        "美食",
+        "打卡机位"
+       ],
+       "priceBucket": "mid"
+      },
+      {
+       "name": "太平燕（熊本乡土汤面，虾仁春雨+炸蛋）",
+       "navQ": "Taipien Kumamoto",
+       "score": 4,
+       "reason": "熊本代表乡土料理，比拉面清爽，Amu Plaza内即有。",
+       "loc": "アミュプラザくまもと 乡土料理店",
+       "price": "约800–1,200日元",
+       "hours": "可行时段：零换乘，本段全程覆盖",
+       "photo": "",
+       "shop": "",
+       "warn": "与拉面二选一，别都点太饱",
+       "src": "熊本市观光协会",
+       "tags": [
+        "购物",
+        "美食"
+       ],
+       "priceBucket": "mid"
+      },
+      {
+       "name": "便利店饭团+咖啡",
+       "navQ": "FamilyMart Kumamoto Station",
+       "score": 3,
+       "reason": "最快、最便宜；体力不足或赶市电时用。",
+       "loc": "站内/酒店街便利店",
+       "price": "约400–700日元",
+       "hours": "可行时段：24h；本段随时",
+       "photo": "",
+       "shop": "",
+       "warn": "非美食体验，仅作缓冲",
+       "src": "现场",
+       "tags": [
+        "购物",
+        "美食"
+       ],
+       "priceBucket": "economy"
+      }
+     ]
+    },
+    {
+     "seq": 4,
+     "store": "day-929-4",
+     "start": "14:00",
+     "end": "16:00",
+     "title": "城彩苑",
+     "subtitle": "桜の馬場 城彩苑",
+     "core": "登高拍熊本城全景，吃马肉串。",
+     "best": {
+      "name": "桜の馬場 城彩苑",
+      "navQ": "Sakura no Baba Josaien Kumamoto",
+      "score": 5,
+      "reason": "免费眺望；樱之小路有马肉与伴手礼。",
+      "loc": "市电水道町或熊本城·市役所前约210日元自费",
+      "price": "园区免费；小吃约1,000–1,500",
+      "hours": "",
+      "photo": "展望台 / 行幸桥",
+      "shop": "",
+      "warn": "",
+      "src": "",
+      "lat": 32.8055,
+      "lng": 130.705,
+      "type": "sight",
+      "brief": "全景+马肉串",
+      "tags": [
+       "美食",
+       "打卡机位"
+      ],
+      "priceBucket": "covered"
+     },
+     "alts": [
+      {
+       "name": "阿蘇庭 山見茶屋（马刺/马肉烧）",
+       "navQ": "Asotei Yamami Chaya Josaien",
+       "score": 5,
+       "reason": "城彩苑内可坐着吃马肉，与最优项同园区零换乘。",
+       "loc": "桜の馬場 城彩苑 桜の小路",
+       "price": "马肉小吃约1,200–2,500日元",
+       "hours": "可行时段：约10:00–18:00（以园区店为准）；14:00–16:00本段可覆盖",
+       "photo": "",
+       "shop": "",
+       "warn": "晚餐勿指望此店营业至晚；晚间改樱町/下通",
+       "src": "城彩苑官网店铺一览 / Tabelog",
+       "tags": [
+        "美食",
+        "打卡机位",
+        "交通"
+       ],
+       "priceBucket": "mid"
+      },
+      {
+       "name": "加藤神社",
+       "navQ": "Kato Shrine Kumamoto",
+       "score": 4,
+       "reason": "城下免费参拜点，与城彩苑步行约5–8分，适合拍照换节奏。",
+       "loc": "熊本市中央区本丸附近",
+       "price": "参拜免费；御守另计",
+       "hours": "可行时段：境内终日；社务所约09:00–17:00；14:00–16:00可达",
+       "photo": "",
+       "shop": "",
+       "warn": "与最优项同活动类型（观光），可作短停",
+       "src": "熊本市观光 / Google Maps",
+       "tags": [
+        "打卡机位"
+       ],
+       "priceBucket": "covered"
+      },
+      {
+       "name": "からし蓮根（熊本芥末莲藕天妇罗）小吃摊",
+       "navQ": "Karashi renkon Kumamoto",
+       "score": 4,
+       "reason": "熊本代表乡土小吃，边走边吃打卡，樱之小路伴手礼区就有。",
+       "loc": "樱之小路伴手礼区",
+       "price": "一份约300–500日元",
+       "hours": "可行时段：零换乘，与本段完全同步",
+       "photo": "",
+       "shop": "",
+       "warn": "芥末味较冲，怕辣慎选",
+       "src": "城彩苑店铺一览",
+       "tags": [
+        "美食",
+        "打卡机位"
+       ],
+       "priceBucket": "economy"
+      }
+     ]
+    },
+    {
+     "seq": 5,
+     "store": "day-929-5",
+     "start": "16:00",
+     "end": "17:30",
+     "title": "熊本城",
+     "subtitle": "熊本城开放区域快速游览",
+     "core": "视开放区域游览，不勉强登全毁重建段。",
+     "best": {
+      "name": "熊本城",
+      "navQ": "Kumamoto Castle",
+      "score": 5,
+      "reason": "震后修复持续中，以能进区域+远景为主。",
+      "loc": "",
+      "price": "门票约800日元级",
+      "hours": "",
+      "photo": "",
+      "shop": "",
+      "warn": "出发前查官网当日开放区",
+      "src": "",
+      "lat": 32.8062,
+      "lng": 130.7056,
+      "type": "sight",
+      "brief": "开放区域游览",
+      "tags": [
+       "打卡机位"
+      ],
+      "priceBucket": "economy"
+     },
+     "alts": [
+      {
+       "name": "只拍外景不购票",
+       "navQ": "Kumamoto Castle outer bailey",
+       "score": 4,
+       "reason": "震后开放区变动大时，外墙+石垣远景性价比最高。",
+       "loc": "城下周游道 / 行幸桥方向",
+       "price": "免费",
+       "hours": "可行时段：日间至日落前；16:00–17:30本段刚好",
+       "photo": "",
+       "shop": "",
+       "warn": "无法进入天守内部展示",
+       "src": "熊本城官方开放情报",
+       "tags": [
+        "打卡机位"
+       ],
+       "priceBucket": "covered"
+      },
+      {
+       "name": "水前寺成趣园",
+       "navQ": "Suizenji Jojuen Kumamoto",
+       "score": 4,
+       "reason": "缩景庭园，与城下不同类型；适合「城累了换绿」。",
+       "loc": "水前寺公园站附近",
+       "price": "入园约400日元；市电自费约210",
+       "hours": "可行时段：约07:30–18:00（季节微调）；市电约15–20分+步行5分——须17:00前离开才吃得上18:30晚餐",
+       "photo": "",
+       "shop": "",
+       "warn": "地理上距樱町晚餐约25–35分，去则压缩城时间",
+       "src": "成趣园官网 / 熊本市电",
+       "tags": [
+        "打卡机位"
+       ],
+       "priceBucket": "economy"
+      },
+      {
+       "name": "鶴屋百貨東館1F（UNITED ARROWS）+ COCOSA 1F（FREAK'S STORE）",
+       "navQ": "Tsuruya Department Store Kumamoto",
+       "score": 5,
+       "reason": "你想要的两个品牌都在这，两栋楼步行仅2–3分，同一站下车，比熊本城更贴合购物诉求。",
+       "loc": "通町筋，与城彩苑同市电线路",
+       "price": "市电约210日元；购物预算自定",
+       "hours": "可行时段：市电约5–8分；鶴屋10:00–19:30，COCOSA 11:00–20:00",
+       "photo": "",
+       "shop": "",
+       "warn": "鶴屋19:30闭馆更早，先逛鶴屋再逛COCOSA",
+       "src": "UNITED ARROWS官网新店公告 / Daytona Park FREAK'S STORE店铺页",
+       "tags": [
+        "购物",
+        "打卡机位"
+       ],
+       "priceBucket": "economy"
+      }
+     ]
+    },
+    {
+     "seq": 6,
+     "store": "day-929-6",
+     "start": "18:30",
+     "end": "20:30",
+     "title": "晚餐",
+     "subtitle": "但馬屋 赤牛涮涮锅",
+     "core": "吃熊本代表肉食。注意：站内「だるま」多为拉面，不是赤牛涮老铺。",
+     "best": {
+      "name": "但馬屋 サクラマチ店",
+      "navQ": "Tajimaya Sakuramachi Kumamoto",
+      "score": 5,
+      "reason": "可点肥后赤牛与熊本和牛；樱町巴士中心直结。",
+      "loc": "SAKURAMACHI 3F",
+      "price": "晚餐约4,000–7,000",
+      "hours": "",
+      "photo": "",
+      "shop": "顺路购物：同栋有B:MING LIFE STORE by BEAMS（BEAMS副线非正店）/ H&M / LACOSTE / RHC Ron Herman / THE NORTH FACE，晚餐前后可逛（约10:00–20:30）；想要BEAMS正店请改到中午Amu Plaza 1F",
+      "warn": "建议预约",
+      "src": "",
+      "lat": 32.8028,
+      "lng": 130.7055,
+      "type": "food",
+      "brief": "赤牛涮涮锅",
+      "tags": [
+       "美食",
+       "交通"
+      ],
+      "priceBucket": "high"
+     },
+     "alts": [
+      {
+       "name": "菅乃屋（马肉刺身专门老字号）",
+       "navQ": "Suganoya horse sashimi Kumamoto",
+       "score": 5,
+       "reason": "Tabelog 高分马刺聚集地，与赤牛涮不同类型；下通夜景。",
+       "loc": "下通アーケード / 上通一带",
+       "price": "人均约3,500–6,000日元",
+       "hours": "可行时段：多数18:00–23:00；城彩苑/城下市电或步行约10–20分可达，18:30–20:30完全覆盖",
+       "photo": "",
+       "shop": "",
+       "warn": "建议电话/Hot Pepper 预约；生食注意卫生",
+       "src": "Tabelog「熊本 馬刺し」排序 / Hot Pepper",
+       "tags": [
+        "美食"
+       ],
+       "priceBucket": "high"
+      },
+      {
+       "name": "ビュッフェ ぎんなん（城彩苑）",
+       "navQ": "Ginnan buffet Josaien Kumamoto",
+       "score": 3,
+       "reason": "约40种菜+乡土木料；适合早点吃或已预约的晚餐。",
+       "loc": "城彩苑 桜の小路内",
+       "price": "午约2,500–3,500；晚约3,500–4,300级",
+       "hours": "可行时段：常规11:00–18:00（オーダーストップ18:00）；18:00后须预约。本段若18:30入席——仅预约成功才可行，否则改午饭或下通",
+       "photo": "",
+       "shop": "",
+       "warn": "未预约勿在18:30硬闯",
+       "src": "城彩苑官方店铺页 1592.jp",
+       "tags": [
+        "美食",
+        "打卡机位"
+       ],
+       "priceBucket": "high"
+      },
+      {
+       "name": "博多だるま Amu店（拉面）",
+       "navQ": "Hakata Daruma Amu Plaza Kumamoto",
+       "score": 4,
+       "reason": "站内直结、排队可预期；与涮锅不同类型，适合早回站。",
+       "loc": "アミュプラザくまもと",
+       "price": "约900–1,300日元",
+       "hours": "可行时段：约11:00–22:00；从城下市电回站约15–20分，19:00前可到",
+       "photo": "",
+       "shop": "",
+       "warn": "是拉面不是赤牛涮；勿与「赤牛だるま」传闻混淆",
+       "src": "Tabelog / Amu 导览",
+       "tags": [
+        "美食"
+       ],
+       "priceBucket": "mid"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "day-930",
+   "date": "2026-09-30",
+   "label": "9/30（三）",
+   "theme": "天草追海豚",
+   "note": "校正：A列车最早约10:21；海豚在松岛港，10/13/15点班，约2小时，约5,400–6,000日元。周三建议普通列车赶10:00船。",
+   "rain": "海豚船雨天多半仍开；大浪停航则改熊本市内。",
+   "blocks": [
+    {
+     "seq": 1,
+     "store": "day-930-1",
+     "start": "07:00",
+     "end": "08:30",
+     "title": "赴三角",
+     "subtitle": "JR三角线普通列车（方案A）",
+     "core": "普通列车赶上三角港早班船。",
+     "best": {
+      "name": "熊本站 → 三角站",
+      "navQ": "Kumamoto Station JR",
+      "score": 5,
+      "reason": "平日可靠；去程多坐右侧、回程左侧（现场确认）。",
+      "loc": "",
+      "price": "含 JR Pass",
+      "hours": "",
+      "photo": "",
+      "shop": "",
+      "warn": "查准点时刻",
+      "src": "",
+      "lat": 32.7895,
+      "lng": 130.6889,
+      "type": "transit",
+      "brief": "三角线出发",
+      "tags": [
+       "交通"
+      ],
+      "priceBucket": "covered"
+     },
+     "alts": [
+      {
+       "name": "方案B：A列车1号（约10:21发）",
+       "navQ": "A Train JR Kyushu Misumi",
+       "score": 4,
+       "reason": "观光列车体验佳；但接不上10:00海豚船，须改13:00班。",
+       "loc": "熊本站 → 三角站（约52分）",
+       "price": "含 JR Pass（指定席划位）",
+       "hours": "可行时段：最早约10:21（查运行日历）；9/30周三常停运。到三角约11:10→渡轮→松岛约11:40，赶13:00船",
+       "photo": "",
+       "shop": "",
+       "warn": "与方案A互斥；选定后午餐改船后或港内简餐",
+       "src": "JR九州 A列車官方运行日",
+       "tags": [
+        "交通"
+       ],
+       "priceBucket": "covered"
+      },
+      {
+       "name": "出租车熊本→三角港",
+       "navQ": "Misumi Port taxi",
+       "score": 3,
+       "reason": "多人分摊可接受；门到港不换乘。",
+       "loc": "酒店/熊本站 → 三角港",
+       "price": "约15,000–20,000日元级",
+       "hours": "可行时段：全天；车程约70–90分；赶08:50渡轮须07:00前出发",
+       "photo": "",
+       "shop": "",
+       "warn": "单人极不划算",
+       "src": "Google Maps 预估 / 酒店叫车",
+       "tags": [
+        "交通"
+       ],
+       "priceBucket": "high"
+      },
+      {
+       "name": "天草海豚一日游包车/跟团",
+       "navQ": "Amakusa dolphin day tour from Kumamoto",
+       "score": 4,
+       "reason": "含接送+船票，适合不想算时刻者。",
+       "loc": "熊本市区集合 → 松岛港往返",
+       "price": "约12,000–20,000日元/人级",
+       "hours": "可行时段：多含10:00或13:00船；出发前核对集合时刻（常07:00–08:00）",
+       "photo": "",
+       "shop": "",
+       "warn": "自由度低；与 JR Pass 重叠浪费",
+       "src": "Klook / 当地旅行社",
+       "tags": [
+        "交通"
+       ],
+       "priceBucket": "high"
+      }
+     ]
+    },
+    {
+     "seq": 2,
+     "store": "day-930-2",
+     "start": "08:50",
+     "end": "09:40",
+     "title": "渡轮",
+     "subtitle": "天草宝岛线 三角→松岛",
+     "core": "购往返船票登船。",
+     "best": {
+      "name": "三角港",
+      "navQ": "Misumi Port Kumamoto",
+      "score": 5,
+      "reason": "约20分钟到海豚登船港。",
+      "loc": "",
+      "price": "往返约2,000日元",
+      "hours": "",
+      "photo": "",
+      "shop": "",
+      "warn": "常需现金",
+      "src": "",
+      "lat": 32.6155,
+      "lng": 130.4645,
+      "type": "transit",
+      "brief": "宝岛线渡轮",
+      "tags": [
+       "交通"
+      ],
+      "priceBucket": "mid"
+     },
+     "alts": [
+      {
+       "name": "只买单程渡轮（返程另买）",
+       "navQ": "Amakusa Takarajima Line Misumi",
+       "score": 3,
+       "reason": "不确定返程时刻时先买去程，返程柜台补。",
+       "loc": "三角港售票处",
+       "price": "单程约半价往返（约1,000级参考）",
+       "hours": "可行时段：对接海豚班——去程须在船班前≥30分到港；返程末班查当日表",
+       "photo": "",
+       "shop": "",
+       "warn": "旺季返程可能满员，优先往返票",
+       "src": "Sea Cruise / 宝島ライン",
+       "tags": [
+        "交通"
+       ],
+       "priceBucket": "economy"
+      },
+      {
+       "name": "JR+船套票（若有贩售）",
+       "navQ": "JR Kyushu Amakusa ticket set",
+       "score": 4,
+       "reason": "偶有三角线+渡轮优惠套，值不值看 Pass 是否已覆盖火车。",
+       "loc": "熊本站旅行中心/三角站",
+       "price": "视套餐而定",
+       "hours": "可行时段：营业窗口约09:00–18:00；Pass 启用日通常火车已覆盖，套票优势小",
+       "photo": "",
+       "shop": "",
+       "warn": "已买北部九州 Pass 则多数情况不必再套",
+       "src": "JR九州旅行中心",
+       "tags": [
+        "交通"
+       ],
+       "priceBucket": "unknown"
+      },
+      {
+       "name": "改日跟团（本日取消船）",
+       "navQ": "Amakusa day tour",
+       "score": 2,
+       "reason": "风浪预警或船满时的保底方案，把海豚挪到弹性日。",
+       "loc": "熊本/福冈集合点",
+       "price": "团费另计",
+       "hours": "可行时段：依赖团期；本日若已在三角则损失交通时间",
+       "photo": "",
+       "shop": "",
+       "warn": "与当日最优互斥，仅天气/满员触发",
+       "src": "OTA 取消政策",
+       "tags": [
+        "交通"
+       ],
+       "priceBucket": "unknown"
+      }
+     ]
+    },
+    {
+     "seq": 3,
+     "store": "day-930-3",
+     "start": "09:40",
+     "end": "12:10",
+     "title": "追海豚",
+     "subtitle": "Sea Cruise 10:00班",
+     "core": "柜台取票登船追野生海豚。",
+     "best": {
+      "name": "Sea Cruise 海豚观光",
+      "navQ": "Mio Camino Amakusa Dolphin",
+      "score": 5,
+      "reason": "遭遇率约90%+；网订约9折；约2小时。",
+      "loc": "松岛（前岛）港",
+      "price": "约5,400–6,000",
+      "hours": "",
+      "photo": "",
+      "shop": "",
+      "warn": "恶天候全额退",
+      "src": "",
+      "lat": 32.525,
+      "lng": 130.43,
+      "type": "sight",
+      "brief": "Sea Cruise约2h",
+      "tags": [
+       "其他"
+      ],
+      "priceBucket": "high"
+     },
+     "alts": [
+      {
+       "name": "13:00班（接A列车方案）",
+       "navQ": "Sea Cruise Amakusa 13:00",
+       "score": 5,
+       "reason": "官方三班之一；遭遇率同样高，适合坐10:21 A列车者。",
+       "loc": "松岛（前岛）港 Mio Camino 柜台",
+       "price": "网订约5,400 / 现场约6,000日元",
+       "hours": "可行时段：13:00开船，约2h，约15:00回港；须12:40前取票。衔接：三角渡轮约12:00–12:30到松岛",
+       "photo": "",
+       "shop": "",
+       "warn": "回程赶A列车4号（约16:35）仍可能，但缓冲紧",
+       "src": "seacruise.jp 时刻·料金",
+       "tags": [
+        "交通"
+       ],
+       "priceBucket": "high"
+      },
+      {
+       "name": "15:00班（夕光）",
+       "navQ": "Sea Cruise Amakusa 15:00",
+       "score": 4,
+       "reason": "光线柔、游客略少；但返熊本偏晚。",
+       "loc": "松岛（前岛）港",
+       "price": "同价约5,400–6,000",
+       "hours": "可行时段：15:00–约17:00；须确认三角末班渡轮+三角→熊本末班车",
+       "photo": "",
+       "shop": "",
+       "warn": "与早出早回冲突；仅住上天草或接受晚归时选",
+       "src": "Sea Cruise 官方",
+       "tags": [
+        "其他"
+       ],
+       "priceBucket": "high"
+      },
+      {
+       "name": "停航改陆地：天草五桥展望/岛巡",
+       "navQ": "Amakusa Five Bridges viewpoint",
+       "score": 4,
+       "reason": "恶天候全额退海豚款后，改拍天门桥·松岛多岛海。",
+       "loc": "松岛港周边 / 岛巡游船码头",
+       "price": "岛巡约1,800–2,000日元级",
+       "hours": "可行时段：岛巡约09:20–16:20有班（季节表）；停航当日现场问询",
+       "photo": "",
+       "shop": "",
+       "warn": "非野生海豚体验",
+       "src": "Sea Cruise 欠航规定 / 岛巡时刻",
+       "tags": [
+        "打卡机位"
+       ],
+       "priceBucket": "mid"
+      }
+     ]
+    },
+    {
+     "seq": 4,
+     "store": "day-930-4",
+     "start": "12:15",
+     "end": "13:30",
+     "title": "午餐",
+     "subtitle": "海之驿海鲜丼",
+     "core": "码头现开海鲜后再返三角。",
+     "best": {
+      "name": "海の驛あまくさ",
+      "navQ": "Umi no Eki Amakusa",
+      "score": 5,
+      "reason": "海胆丼+当地柑橘汁。",
+      "loc": "",
+      "price": "约2,000–3,500",
+      "hours": "",
+      "photo": "",
+      "shop": "",
+      "warn": "",
+      "src": "",
+      "lat": 32.5255,
+      "lng": 130.431,
+      "type": "food",
+      "brief": "海胆丼",
+      "tags": [
+       "美食"
+      ],
+      "priceBucket": "high"
+     },
+     "alts": [
+      {
+       "name": "港内咖啡简餐",
+       "navQ": "Mio Camino Amakusa cafe",
+       "score": 4,
+       "reason": "船后立刻吃，少走路，保渡轮衔接。",
+       "loc": "松岛港 Mio Camino 设施内",
+       "price": "约800–1,500日元",
+       "hours": "可行时段：约10:00–16:00；12:00–13:30本段覆盖",
+       "photo": "",
+       "shop": "",
+       "warn": "选择少于海鲜丼",
+       "src": "现场 / Sea Cruise 设施",
+       "tags": [
+        "美食",
+        "交通"
+       ],
+       "priceBucket": "mid"
+      },
+      {
+       "name": "三角站前再吃",
+       "navQ": "Misumi Station restaurants",
+       "score": 4,
+       "reason": "渡轮回三角后再吃，适合船班延误、港内排队长。",
+       "loc": "三角站·三角港步行圈",
+       "price": "约1,000–2,000日元",
+       "hours": "可行时段：多数至14:00–15:00；须算渡轮20分+步行",
+       "photo": "",
+       "shop": "",
+       "warn": "若赶A列车下午班，预留检票时间",
+       "src": "Tabelog「三角」 / Google",
+       "tags": [
+        "美食",
+        "交通"
+       ],
+       "priceBucket": "mid"
+      },
+      {
+       "name": "天草大王鶏 唐揚げ（当地土鸡炸鸡）",
+       "navQ": "Amakusa Daio chicken karaage",
+       "score": 5,
+       "reason": "天草特产土鸡，肉质紧实，边走边吃即可。",
+       "loc": "Mio Camino / 松岛港周边小吃摊",
+       "price": "约500–800日元/份",
+       "hours": "可行时段：零换乘，本段全程覆盖",
+       "photo": "",
+       "shop": "",
+       "warn": "限量供应，提前问是否售罄",
+       "src": "天草观光协会",
+       "tags": [
+        "美食"
+       ],
+       "priceBucket": "economy"
+      }
+     ]
+    },
+    {
+     "seq": 5,
+     "store": "day-930-5",
+     "start": "13:40",
+     "end": "17:30",
+     "title": "返程",
+     "subtitle": "A列车4号或普通车回熊本",
+     "core": "渡轮回三角，搭列车返熊本。",
+     "best": {
+      "name": "三角站 → 熊本站",
+      "navQ": "Misumi Station Kumamoto",
+      "score": 5,
+      "reason": "若运行：A列车4号16:35→17:13。",
+      "loc": "",
+      "price": "含 Pass",
+      "hours": "",
+      "photo": "",
+      "shop": "",
+      "warn": "无A列车查普通车末班",
+      "src": "",
+      "lat": 32.617,
+      "lng": 130.467,
+      "type": "transit",
+      "brief": "A列车或普通车",
+      "tags": [
+       "交通"
+      ],
+      "priceBucket": "covered"
+     },
+     "alts": [
+      {
+       "name": "普通列车较早返熊本",
+       "navQ": "Misumi Line local train",
+       "score": 5,
+       "reason": "不依赖A列车运行日；班次更多。",
+       "loc": "三角站 → 熊本站",
+       "price": "含 JR Pass",
+       "hours": "可行时段：日间约每小时；13:00船后约15:30–16:30可发车，17:30前多半到熊本",
+       "photo": "",
+       "shop": "",
+       "warn": "无观光列车仪式感",
+       "src": "JR九州三角线时刻",
+       "tags": [
+        "交通"
+       ],
+       "priceBucket": "covered"
+      },
+      {
+       "name": "网田站短暂下车观海",
+       "navQ": "Oama Station Misumi Line",
+       "score": 3,
+       "reason": "海岸线小站拍照；仅时间充裕（非末班压力）时。",
+       "loc": "三角线 网田駅",
+       "price": "含 Pass",
+       "hours": "可行时段：须确认下一班间隔（常30–60分）；勿在17:00后冒险下车",
+       "photo": "",
+       "shop": "",
+       "warn": "误判间隔会困站",
+       "src": "JR时刻表 + Google Maps",
+       "tags": [
+        "交通"
+       ],
+       "priceBucket": "covered"
+      },
+      {
+       "name": "改住上天草（不建议本日）",
+       "navQ": "Kamiamakusa hotel",
+       "score": 2,
+       "reason": "船晚班后就近住，次日再回——打乱已订熊本/黑川链。",
+       "loc": "上天草·松岛周边宿",
+       "price": "住宿另计",
+       "hours": "可行时段：入住15:00后；仅15:00船+风浪改计划时考虑",
+       "photo": "",
+       "shop": "",
+       "warn": "与后续阿苏日冲突，默认不选",
+       "src": "Booking / 当地宿",
+       "tags": [
+        "交通",
+        "自然温泉"
+       ],
+       "priceBucket": "unknown"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "day-1001",
+   "date": "2026-10-01",
+   "label": "10/1（四）",
+   "theme": "阿苏 · 草千里 · 黑川",
+   "note": "校正：男孩号约09:57→11:27；索道停运；去黑川阿苏14:09→15:00；横断巴士不含JR Pass。",
+   "rain": "山上限制时改博物馆+草千里；巴士延误考虑阿苏过夜。",
+   "blocks": [
+    {
+     "seq": 1,
+     "store": "day-1001-1",
+     "start": "09:30",
+     "end": "11:30",
+     "title": "赴阿苏",
+     "subtitle": "阿苏男孩号1号",
+     "core": "观光列车穿越立野峡谷。",
+     "best": {
+      "name": "特急 あそぼーい！",
+      "navQ": "Aso Boy Train Kumamoto",
+      "score": 5,
+      "reason": "全车指定；查运行日历。",
+      "loc": "熊本站",
+      "price": "Pass覆盖",
+      "hours": "",
+      "photo": "",
+      "shop": "",
+      "warn": "",
+      "src": "",
+      "lat": 32.7895,
+      "lng": 130.6889,
+      "type": "transit",
+      "brief": "观光列车",
+      "tags": [
+       "交通",
+       "自然温泉"
+      ],
+      "priceBucket": "covered"
+     },
+     "alts": [
+      {
+       "name": "更早普通/快速赴阿苏",
+       "navQ": "JR Hohi Line to Aso",
+       "score": 4,
+       "reason": "男孩号满席或停运时的主备；可更早到站逛。",
+       "loc": "熊本站 → 阿苏站（丰肥本线）",
+       "price": "含 JR Pass",
+       "hours": "可行时段：建议08:00前发，约2h级；须11:30前到阿苏才够上山+14:09巴士",
+       "photo": "",
+       "shop": "",
+       "warn": "无观光列车内装",
+       "src": "JR九州丰肥本线",
+       "tags": [
+        "自然温泉"
+       ],
+       "priceBucket": "covered"
+      },
+      {
+       "name": "产交巴士 + SUNQ Pass",
+       "navQ": "Sanko Bus Kumamoto Aso",
+       "score": 3,
+       "reason": "横断系或空港经阿苏路线；适合已买 SUNQ 者。",
+       "loc": "樱町/熊本站 → 阿苏站前",
+       "price": "SUNQ 或单票约2,000+日元（Pass不含）",
+       "hours": "可行时段：参考横断上行约08:xx–10:xx到阿苏；须对14:09去黑川座位",
+       "photo": "",
+       "shop": "",
+       "warn": "班次少，误一班影响整天",
+       "src": "产交バス oudan 时刻 / SUNQ",
+       "tags": [
+        "交通",
+        "自然温泉"
+       ],
+       "priceBucket": "mid"
+      },
+      {
+       "name": "包车/跟团阿苏一日",
+       "navQ": "Aso day tour charter",
+       "score": 4,
+       "reason": "火口+草千里+黑川可定制，不受14:09硬卡（可改住阿苏）。",
+       "loc": "熊本酒店上车",
+       "price": "约30,000–50,000日元/车级",
+       "hours": "可行时段：常08:00–09:00出发；当日回到黑川视司机工时",
+       "photo": "",
+       "shop": "",
+       "warn": "成本高；已订横断座则浪费",
+       "src": "当地包车 / OTA",
+       "tags": [
+        "打卡机位",
+        "自然温泉"
+       ],
+       "priceBucket": "high"
+      }
+     ]
+    },
+    {
+     "seq": 2,
+     "store": "day-1001-2",
+     "start": "11:40",
+     "end": "13:40",
+     "title": "阿苏山上",
+     "subtitle": "火口或草千里",
+     "core": "先查警戒级别再选点。",
+     "best": {
+      "name": "草千里ヶ浜 / 中岳火口",
+      "navQ": "Kusasenri Aso",
+      "score": 5,
+      "reason": "Level1看火口；Level2+改草千里或牛奶牧场。",
+      "loc": "",
+      "price": "巴士/接驳/骑马另计",
+      "hours": "",
+      "photo": "草原+火山口丘+水塘倒影，和服/浴衣入镜效果好，清晨薄雾时段最佳（需权衡14:09巴士）· 来源：步步日本",
+      "shop": "",
+      "warn": "14:00前必须回站",
+      "src": "",
+      "lat": 32.8847,
+      "lng": 130.9847,
+      "type": "sight",
+      "brief": "视警戒级别",
+      "tags": [
+       "美食",
+       "打卡机位",
+       "自然温泉"
+      ],
+      "priceBucket": "unknown"
+     },
+     "alts": [
+      {
+       "name": "だんご汁（阿苏乡土味噌团子汤）",
+       "navQ": "Dango jiru Aso",
+       "score": 4,
+       "reason": "天冷时暖身，可与赤牛丼二选一当正餐。",
+       "loc": "阿苏站前/草千里周边食堂",
+       "price": "约700–1,000日元",
+       "hours": "可行时段：零换乘，本段全程覆盖",
+       "photo": "",
+       "shop": "",
+       "warn": "与赤牛丼合计易吃太饱",
+       "src": "阿苏市观光协会",
+       "tags": [
+        "美食",
+        "打卡机位",
+        "自然温泉"
+       ],
+       "priceBucket": "economy"
+      },
+      {
+       "name": "阿苏牛奶牧场",
+       "navQ": "Aso Farm Land milk ranch",
+       "score": 4,
+       "reason": "Level2+或索道停运时的亲子向替代；冰淇淋与牧场景。",
+       "loc": "阿苏站巴士/出租可达（车程约20–30分）",
+       "price": "入场/体验另计约500–1,500",
+       "hours": "可行时段：约10:00–17:00；⚠️ 必须13:20前返程，否则赶不上14:09横断",
+       "photo": "",
+       "shop": "",
+       "warn": "大观峰同理：排队长则放弃",
+       "src": "阿苏市观光 / Google 营业",
+       "tags": [
+        "美食",
+        "打卡机位",
+        "自然温泉"
+       ],
+       "priceBucket": "mid"
+      },
+      {
+       "name": "大观峰（时间不够勿排）",
+       "navQ": "Daikanbo Aso",
+       "score": 3,
+       "reason": "展望极佳但停车/接驳耗时，半日票极易误巴士。",
+       "loc": "阿苏北外轮山",
+       "price": "接驳+入场另计",
+       "hours": "可行时段：理论日间开放；本行程窗口仅约11:40–13:40——去则几乎必误14:09",
+       "photo": "",
+       "shop": "",
+       "warn": "评分体验高但时段可行性低 → 综合⭐⭐⭐",
+       "src": "阿苏周游巴士情报",
+       "tags": [
+        "打卡机位",
+        "交通",
+        "自然温泉"
+       ],
+       "priceBucket": "unknown"
+      },
+      {
+       "name": "阿苏站前简餐等车",
+       "navQ": "Aso Station ekiben cafe",
+       "score": 4,
+       "reason": "山上关闭或雨大时：站内吃+休息，稳上14:09。",
+       "loc": "阿蘇駅前",
+       "price": "约800–1,500日元",
+       "hours": "可行时段：11:30–14:00；地理零风险",
+       "photo": "",
+       "shop": "",
+       "warn": "放弃火口/草千里",
+       "src": "现场",
+       "tags": [
+        "打卡机位",
+        "自然温泉"
+       ],
+       "priceBucket": "mid"
+      }
+     ]
+    },
+    {
+     "seq": 3,
+     "store": "day-1001-3",
+     "start": "13:40",
+     "end": "15:00",
+     "title": "赴黑川",
+     "subtitle": "九州横断巴士",
+     "core": "登上14:09班巴士。",
+     "best": {
+      "name": "阿苏站前 → 黒川温泉",
+      "navQ": "Aso Station Bus Terminal",
+      "score": 5,
+      "reason": "关键下午班，务必预约。",
+      "loc": "",
+      "price": "约1,100–1,700或SUNQ",
+      "hours": "",
+      "photo": "",
+      "shop": "",
+      "warn": "山路易延误",
+      "src": "",
+      "lat": 32.9372,
+      "lng": 131.08,
+      "type": "transit",
+      "brief": "横断巴士赴黑川",
+      "tags": [
+       "交通",
+       "自然温泉"
+      ],
+      "priceBucket": "mid"
+     },
+     "alts": [
+      {
+       "name": "改住阿苏一晚（误巴士保底）",
+       "navQ": "Aso Plaza Hotel",
+       "score": 4,
+       "reason": "14:09没赶上或山路停运时，就近住阿苏，次日早班10:15到黑川。",
+       "loc": "阿蘇駅前旅馆圈",
+       "price": "住宿约12,000–25,000日元/人",
+       "hours": "可行时段：入住15:00后；次日横断阿苏发约09:24/10:24→黑川10:15/11:15",
+       "photo": "",
+       "shop": "",
+       "warn": "打乱已订黑川一泊；仅紧急启用",
+       "src": "产交横断时刻表",
+       "tags": [
+        "交通",
+        "自然温泉"
+       ],
+       "priceBucket": "high"
+      },
+      {
+       "name": "出租车阿苏→黑川",
+       "navQ": "taxi Aso to Kurokawa Onsen",
+       "score": 3,
+       "reason": "巴士满席/误点的紧急方案。",
+       "loc": "阿蘇駅 → 黒川温泉街",
+       "price": "约15,000–25,000日元",
+       "hours": "可行时段：日间全天；车程约50–70分；14:00后出发仍可傍晚到宿",
+       "photo": "",
+       "shop": "",
+       "warn": "贵；山路雾天谨慎",
+       "src": "阿苏站出租 / 酒店代叫",
+       "tags": [
+        "交通",
+        "自然温泉"
+       ],
+       "priceBucket": "high"
+      },
+      {
+       "name": "放弃黑川当日回熊本",
+       "navQ": "return Kumamoto from Aso",
+       "score": 2,
+       "reason": "巴士全停时：JR 回熊本，黑川改日或取消。",
+       "loc": "阿蘇駅 → 熊本駅",
+       "price": "含 Pass",
+       "hours": "可行时段：丰肥本线下午班；约16:00前离开较稳",
+       "photo": "",
+       "shop": "",
+       "warn": "损失温泉核心体验",
+       "src": "JR 时刻",
+       "tags": [
+        "交通",
+        "自然温泉"
+       ],
+       "priceBucket": "covered"
+      }
+     ]
+    },
+    {
+     "seq": 4,
+     "store": "day-1001-4",
+     "start": "15:00",
+     "end": "19:00",
+     "title": "入住",
+     "subtitle": "温泉宿一泊二食",
+     "core": "Check-in，宿内汤与会席。",
+     "best": {
+      "name": "黒川温泉旅馆",
+      "navQ": "Kurokawa Onsen",
+      "score": 5,
+      "reason": "宿内露天+乡野夜景。",
+      "loc": "",
+      "price": "常见2–5万/人",
+      "hours": "",
+      "photo": "打卡机位：丸鈴橋——木造旅馆+溪流，黄昏或点亮竹灯笼夜景最佳 · 来源：365hygge黑川攻略",
+      "shop": "",
+      "warn": "查纹身政策",
+      "src": "",
+      "lat": 33.06,
+      "lng": 131.1045,
+      "type": "hotel",
+      "brief": "一泊二食",
+      "tags": [
+       "自然温泉"
+      ],
+      "priceBucket": "unknown"
+     },
+     "alts": [
+      {
+       "name": "风の舎（询空房）",
+       "navQ": "Kaze no Sha Kurokawa",
+       "score": 5,
+       "reason": "黑川口碑名宿之一；露天与料理评价高。",
+       "loc": "黒川温泉步行圈",
+       "price": "常见3–6万日元/人含二食",
+       "hours": "可行时段：入住约15:00；巴士15:00到黑川后步行/宿接5–15分",
+       "photo": "",
+       "shop": "",
+       "warn": "须提前订；当日询空房成功率低",
+       "src": "官方/一休/楽天トラベル",
+       "tags": [
+        "美食",
+        "自然温泉"
+       ],
+       "priceBucket": "unknown"
+      },
+      {
+       "name": "南小国其他温泉宿",
+       "navQ": "Minamioguni onsen ryokan",
+       "score": 4,
+       "reason": "满愿寺·汤田周边，巴士可在南小国町役场前下。",
+       "loc": "横断「南小国町役场前」停靠",
+       "price": "价位跨度大",
+       "hours": "可行时段：巴士约14:46到役场；宿接或步行",
+       "photo": "",
+       "shop": "",
+       "warn": "离黑川中心略远，巡汤需移动",
+       "src": "产交时刻 + 宿官网",
+       "tags": [
+        "交通",
+        "自然温泉"
+       ],
+       "priceBucket": "unknown"
+      },
+      {
+       "name": "日归入浴+民宿（不优先）",
+       "navQ": "Kurokawa day trip minshuku",
+       "score": 2,
+       "reason": "省钱但无会席；与「一泊二食」目标不符。",
+       "loc": "温泉街日归受付",
+       "price": "日归约500–1,500；民宿另计",
+       "hours": "可行时段：日归常见10:00–15:00；与次日巡汤重复",
+       "photo": "",
+       "shop": "",
+       "warn": "舒适档不推荐",
+       "src": "黒川温泉观光协会",
+       "tags": [
+        "自然温泉"
+       ],
+       "priceBucket": "mid"
+      },
+      {
+       "name": "山吹色牛乳（温泉街入住前先喝一瓶）",
+       "navQ": "Yamabuki milk Kurokawa",
+       "score": 5,
+       "reason": "黑川温泉街必喝乳制品，check-in路上顺手买。",
+       "loc": "风の舎/温泉街小卖部",
+       "price": "约200–300日元",
+       "hours": "可行时段：零换乘，本段全程覆盖",
+       "photo": "",
+       "shop": "",
+       "warn": "玻璃瓶记得当场归还押金",
+       "src": "365hygge黑川攻略",
+       "tags": [
+        "美食",
+        "自然温泉"
+       ],
+       "priceBucket": "economy"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "day-1002",
+   "date": "2026-10-02",
+   "label": "10/2（五）",
+   "theme": "黑川入汤 · 返回博多",
+   "note": "校正：入汤手形1,500；回程参考15:25→约18:03。",
+   "rain": "大雨改室内居酒屋；巴士延误则晚班新干线。",
+   "blocks": [
+    {
+     "seq": 1,
+     "store": "day-1002-1",
+     "start": "08:30",
+     "end": "12:00",
+     "title": "巡汤",
+     "subtitle": "入湯手形 + 山みず木",
+     "core": "买手形选3处露天。",
+     "best": {
+      "name": "山みず木",
+      "navQ": "Yamamizuki Kurokawa Onsen",
+      "score": 5,
+      "reason": "溪谷森林系代表；露天禁止摄影。",
+      "loc": "",
+      "price": "1,500日元",
+      "hours": "",
+      "photo": "",
+      "shop": "",
+      "warn": "站寄汤常见10:00–15:00",
+      "src": "",
+      "lat": 33.0615,
+      "lng": 131.103,
+      "type": "sight",
+      "brief": "入汤手形1500",
+      "tags": [
+       "自然温泉"
+      ],
+      "priceBucket": "mid"
+     },
+     "alts": [
+      {
+       "name": "单馆日归（约500–800/馆）",
+       "navQ": "Kurokawa Onsen day bathing",
+       "score": 4,
+       "reason": "不买手形、只泡1–2馆，节奏更松。",
+       "loc": "街内各馆受付",
+       "price": "约500–800日元/馆",
+       "hours": "可行时段：多数10:00–15:00（馆别不同）；赶15:25巴士须14:40前结束离馆",
+       "photo": "",
+       "shop": "",
+       "warn": "3馆以上选手形更划算",
+       "src": "黒川温泉手形案内",
+       "tags": [
+        "自然温泉"
+       ],
+       "priceBucket": "economy"
+      },
+      {
+       "name": "宿内汤多泡（不出街）",
+       "navQ": "ryokan private outdoor bath Kurokawa",
+       "score": 4,
+       "reason": "行李寄存后宿内循环，零步行压力。",
+       "loc": "已订旅馆内",
+       "price": "已含住宿费",
+       "hours": "可行时段：退房前/后视宿规；不占街汤时段",
+       "photo": "",
+       "shop": "",
+       "warn": "少了「巡汤」街景体验",
+       "src": "宿内案内",
+       "tags": [
+        "自然温泉"
+       ],
+       "priceBucket": "covered"
+      },
+      {
+       "name": "Patisserie Roku盐麴泡芙+DoraDora铜锣烧",
+       "navQ": "Patisserie Roku Kurokawa Onsen",
+       "score": 5,
+       "reason": "巡汤间隙边走边吃，是黑川温泉街排队第一名甜点。",
+       "loc": "温泉街中心，步行3–5分",
+       "price": "泡芙约400–500日元/个",
+       "hours": "可行时段：09:00–17:00（周二休）",
+       "photo": "",
+       "shop": "",
+       "warn": "旺季排队",
+       "src": "dacchism.com / 365hygge黑川美食攻略",
+       "tags": [
+        "美食",
+        "自然温泉"
+       ],
+       "priceBucket": "economy"
+      }
+     ]
+    },
+    {
+     "seq": 2,
+     "store": "day-1002-2",
+     "start": "12:00",
+     "end": "14:30",
+     "title": "退房午餐",
+     "subtitle": "温泉街轻食",
+     "core": "轻装等车。",
+     "best": {
+      "name": "黒川温泉街カフェ",
+      "navQ": "Kurokawa Onsen cafe",
+      "score": 5,
+      "reason": "选定食/咖啡即可。",
+      "loc": "",
+      "price": "约1,000–2,000",
+      "hours": "",
+      "photo": "",
+      "shop": "",
+      "warn": "",
+      "src": "",
+      "lat": 33.0595,
+      "lng": 131.105,
+      "type": "food",
+      "brief": "轻食",
+      "tags": [
+       "美食",
+       "自然温泉"
+      ],
+      "priceBucket": "mid"
+     },
+     "alts": [
+      {
+       "name": "とうふ吉祥 豆腐定食",
+       "navQ": "Toufu Kisshou Kurokawa",
+       "score": 5,
+       "reason": "泡汤后清淡豆腐料理养胃，比甜点更适合当正餐。",
+       "loc": "温泉街内",
+       "price": "约1,200–1,800日元",
+       "hours": "可行时段：零换乘，本段全程覆盖",
+       "photo": "",
+       "shop": "",
+       "warn": "热门时段稍候位",
+       "src": "WaTabi / 樂吃購日本黑川攻略",
+       "tags": [
+        "美食",
+        "自然温泉"
+       ],
+       "priceBucket": "mid"
+      },
+      {
+       "name": "手形兑换饮食（甜点/饮品）",
+       "navQ": "Kurokawa tegata cafe exchange",
+       "score": 4,
+       "reason": "未用完的手形可兑指定饮品点心（以当年规则为准）。",
+       "loc": "手形提携店",
+       "price": "含在1,500手形内",
+       "hours": "可行时段：多在15:00前；与15:25巴士衔接紧——14:30前兑完",
+       "photo": "",
+       "shop": "",
+       "warn": "规则年年微调，出发前再确认",
+       "src": "黒川温泉手形官网",
+       "tags": [
+        "美食",
+        "自然温泉"
+       ],
+       "priceBucket": "mid"
+      },
+      {
+       "name": "温泉街便利店",
+       "navQ": "Kurokawa convenience store",
+       "score": 3,
+       "reason": "最稳、最快，适合赶车。",
+       "loc": "巴士站步行5分圈",
+       "price": "约500–900日元",
+       "hours": "可行时段：长时；14:00–15:10可买了就等车",
+       "photo": "",
+       "shop": "",
+       "warn": "选择少",
+       "src": "现场",
+       "tags": [
+        "美食",
+        "自然温泉"
+       ],
+       "priceBucket": "economy"
+      },
+      {
+       "name": "巴士上吃（预购）",
+       "navQ": "bus snack Kurokawa",
+       "score": 3,
+       "reason": "15:25车程至熊本约2.5h，车上解决。",
+       "loc": "上车前购好",
+       "price": "便当约800–1,200",
+       "hours": "可行时段：与巴士同步；注意无垃圾味重食物礼仪",
+       "photo": "",
+       "shop": "",
+       "warn": "车上颠簸，汤类不宜",
+       "src": "现场",
+       "tags": [
+        "美食",
+        "交通",
+        "自然温泉"
+       ],
+       "priceBucket": "mid"
+      }
+     ]
+    },
+    {
+     "seq": 3,
+     "store": "day-1002-3",
+     "start": "15:25",
+     "end": "18:10",
+     "title": "回博多",
+     "subtitle": "横断巴士 + 新干线",
+     "core": "巴士回熊本再新干线赴博多。",
+     "best": {
+      "name": "黒川 → 熊本 → 博多",
+      "navQ": "Kurokawa Onsen Bus Stop",
+      "score": 5,
+      "reason": "约18:03到熊本后赶新干线。",
+      "loc": "",
+      "price": "巴士约2,800+Pass",
+      "hours": "",
+      "photo": "",
+      "shop": "",
+      "warn": "巴士易晚点",
+      "src": "",
+      "lat": 33.059,
+      "lng": 131.104,
+      "type": "transit",
+      "brief": "横断+新干线",
+      "tags": [
+       "交通"
+      ],
+      "priceBucket": "mid"
+     },
+     "alts": [
+      {
+       "name": "10:45早班黑川→熊本",
+       "navQ": "Kyushu Oudan Bus 10:45 Kurokawa",
+       "score": 4,
+       "reason": "巡汤改「清晨1馆+早巴士」，午后博多更从容。",
+       "loc": "黒川温泉バス停 → 熊本駅前（约13:08到参考）",
+       "price": "约2,800日元级（Pass不含）",
+       "hours": "可行时段：10:45发；须09:30结束入浴并退房。与「泡到中午」互斥",
+       "photo": "",
+       "shop": "",
+       "warn": "牺牲深度巡汤",
+       "src": "产交バス oudan 时刻表",
+       "tags": [
+        "交通",
+        "自然温泉"
+       ],
+       "priceBucket": "mid"
+      },
+      {
+       "name": "16:25班（末段）",
+       "navQ": "Kyushu Oudan Bus 16:25 Kurokawa",
+       "score": 3,
+       "reason": "多泡1小时；到熊本约19:03，新干线与晚餐更赶。",
+       "loc": "黒川 → 熊本駅前",
+       "price": "同价巴士费",
+       "hours": "可行时段：16:25发→约19:03着；之后さくら至博多约19:40–20:30到",
+       "photo": "",
+       "shop": "",
+       "warn": "晚点风险高；屋台窗口压缩",
+       "src": "产交官方时刻",
+       "tags": [
+        "美食",
+        "交通"
+       ],
+       "priceBucket": "unknown"
+      },
+      {
+       "name": "改道由布院（不建议）",
+       "navQ": "Yufuin via Oudan Bus",
+       "score": 2,
+       "reason": "横断可续行由布院，但本行程目标是博多酒店与屋台。",
+       "loc": "黒川 → 由布院駅",
+       "price": "加算区间票价",
+       "hours": "可行时段：黑川后约1h到由布院；当日难再回博多合宿",
+       "photo": "",
+       "shop": "",
+       "warn": "打乱后续福冈日程",
+       "src": "产交时刻",
+       "tags": [
+        "美食",
+        "交通"
+       ],
+       "priceBucket": "unknown"
+      }
+     ]
+    },
+    {
+     "seq": 4,
+     "store": "day-1002-4",
+     "start": "19:30",
+     "end": "21:30",
+     "title": "屋台",
+     "subtitle": "中洲屋台",
+     "core": "入住后屋台初体验。",
+     "best": {
+      "name": "中洲屋台",
+      "navQ": "Nakasu Yatai Fukuoka",
+      "score": 5,
+      "reason": "明太子茶泡饭/烤串；20:00前相对好位。",
+      "loc": "",
+      "price": "约2,000–4,000",
+      "hours": "",
+      "photo": "",
+      "shop": "",
+      "warn": "一位一人，先问价",
+      "src": "",
+      "lat": 33.5932,
+      "lng": 130.4066,
+      "type": "food",
+      "brief": "明太子茶泡饭",
+      "tags": [
+       "美食"
+      ],
+      "priceBucket": "high"
+     },
+     "alts": [
+      {
+       "name": "明太中毒（明太子专门屋台）",
+       "navQ": "Mentai chudoku Nagahama Fukuoka",
+       "score": 5,
+       "reason": "福冈唯一专卖明太子的屋台，多次登媒体，常排长队。",
+       "loc": "长浜3-14，地铁赤坂站步行11分",
+       "price": "约1,500日元",
+       "hours": "可行时段：18:00–24:00",
+       "photo": "",
+       "shop": "",
+       "warn": "仅现金",
+       "src": "i-fukuoka.jp 福冈屋台指南",
+       "tags": [
+        "美食"
+       ],
+       "priceBucket": "mid"
+      },
+      {
+       "name": "运河城餐厅（室内）",
+       "navQ": "Canal City Hakata restaurants",
+       "score": 4,
+       "reason": "雨天/迟到首选；博多站步行或地铁1站。",
+       "loc": "博多运河城",
+       "price": "人均约1,500–4,000",
+       "hours": "可行时段：餐饮多至21:00–22:00；19:30–21:30覆盖",
+       "photo": "",
+       "shop": "",
+       "warn": "少屋台氛围",
+       "src": "Canal City 官网 / Tabelog",
+       "tags": [
+        "购物",
+        "美食",
+        "打卡机位",
+        "交通"
+       ],
+       "priceBucket": "high"
+      },
+      {
+       "name": "一兰 / 一风堂（拉面）",
+       "navQ": "Ichiran or Ippudo Hakata",
+       "score": 5,
+       "reason": "福冈代表味；排队可预期，与屋台不同类型。",
+       "loc": "中洲/运河城/天神多店",
+       "price": "约1,000–1,500日元",
+       "hours": "可行时段：多至深夜；从博多站步行10–15分，19:30后可到",
+       "photo": "",
+       "shop": "",
+       "warn": "热门店排队30分+",
+       "src": "Tabelog / 官方排队App",
+       "tags": [
+        "美食"
+       ],
+       "priceBucket": "mid"
+      },
+      {
+       "name": "酒店餐厅/外卖",
+       "navQ": "Hakata hotel restaurant",
+       "score": 4,
+       "reason": "巴士严重晚点时的体力保底。",
+       "loc": "博多站酒店内",
+       "price": "人均约2,000–5,000",
+       "hours": "可行时段：酒店餐常见至21:00–22:00",
+       "photo": "",
+       "shop": "",
+       "warn": "放弃夜市体验",
+       "src": "酒店案内",
+       "tags": [
+        "美食",
+        "交通"
+       ],
+       "priceBucket": "high"
+      },
+      {
+       "name": "努努鸡（博多マイング直营店，冷吃炸鸡）",
+       "navQ": "Yumeyume dori Hakata Maing",
+       "score": 5,
+       "reason": "福冈40年名物冷吃炸鸡，宵夜/伴手礼两用，落地博多当晚就能试。",
+       "loc": "博多站内マイング商店街1F",
+       "price": "手羽中中份约1,080日元",
+       "hours": "可行时段：09:00–21:00，须21:00前买到",
+       "photo": "",
+       "shop": "",
+       "warn": "千万不要加热，冷藏/常温直接吃",
+       "src": "博多必吃九州名物攻略",
+       "tags": [
+        "美食"
+       ],
+       "priceBucket": "mid"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "day-1003",
+   "date": "2026-10-03",
+   "label": "10/3（六）",
+   "theme": "博多购物 · 太宰府",
+   "note": "Pass用尽后西铁/地铁自费。",
+   "rain": "大雨改博多室内商场；太宰府仍可参拜。",
+   "blocks": [
+    {
+     "seq": 1,
+     "store": "day-1003-1",
+     "start": "09:00",
+     "end": "10:30",
+     "title": "伴手礼",
+     "subtitle": "博多阪急限定点心",
+     "core": "开门抢限定明太子点心。",
+     "best": {
+      "name": "博多阪急",
+      "navQ": "Hakata Hankyu",
+      "score": 5,
+      "reason": "限定易售罄；保质期短。",
+      "loc": "",
+      "price": "约1,200/盒级",
+      "hours": "",
+      "photo": "",
+      "shop": "",
+      "warn": "",
+      "src": "",
+      "lat": 33.589,
+      "lng": 130.4195,
+      "type": "sight",
+      "brief": "限定点心",
+      "tags": [
+       "美食"
+      ],
+      "priceBucket": "mid"
+     },
+     "alts": [
+      {
+       "name": "KITTE博多（伴手礼）",
+       "navQ": "KITTE Hakata",
+       "score": 5,
+       "reason": "车站直结，九州土产集中，开门即可采购。",
+       "loc": "JR博多シティ / KITTE",
+       "price": "点心约800–2,000/盒",
+       "hours": "可行时段：约10:00–21:00；本段09:00–10:30可先阪急再KITTE或二选一",
+       "photo": "",
+       "shop": "",
+       "warn": "与阪急限定可能重复SKU",
+       "src": "KITTE博多官网",
+       "tags": [
+        "购物",
+        "美食"
+       ],
+       "priceBucket": "mid"
+      },
+      {
+       "name": "福太郎明太子（工厂店/车站）",
+       "navQ": "Fukutaro mentaiko Hakata",
+       "score": 5,
+       "reason": "明太子本命伴手礼；注意保冷与安检液体规则。",
+       "loc": "博多站或天神周边",
+       "price": "约1,500–3,000日元级",
+       "hours": "可行时段：店铺约10:00–20:00；步行/站内5–10分",
+       "photo": "",
+       "shop": "",
+       "warn": "托运 vs 手提规划好",
+       "src": "福太郎官方 / 机场可补货对照",
+       "tags": [
+        "美食"
+       ],
+       "priceBucket": "mid"
+      },
+      {
+       "name": "跳过购物直奔太宰府",
+       "navQ": "Nishitetsu to Dazaifu early",
+       "score": 4,
+       "reason": "讨厌排队限定时：09:30前到西铁，参道人少。",
+       "loc": "西铁福冈（天神）→ 太宰府",
+       "price": "西铁约400–500日元（Pass已尽则自费）",
+       "hours": "可行时段：西铁日间密发；09:00酒店出发→约10:00可到参道",
+       "photo": "",
+       "shop": "",
+       "warn": "放弃阪急开门限定",
+       "src": "西铁時刻表",
+       "tags": [
+        "购物",
+        "美食"
+       ],
+       "priceBucket": "economy"
+      },
+      {
+       "name": "努努鸡 博多マイング直营店（冷吃炸鸡）",
+       "navQ": "Yumeyume dori Hakata Maing",
+       "score": 5,
+       "reason": "09:00开门，比阪急更早，开门冲免排队。",
+       "loc": "博多站中央街1-1，博多阪急步行3–5分",
+       "price": "手羽中中份约1,080日元",
+       "hours": "可行时段：09:00–21:00",
+       "photo": "",
+       "shop": "",
+       "warn": "千万不要加热",
+       "src": "博多必吃九州名物攻略",
+       "tags": [
+        "美食"
+       ],
+       "priceBucket": "mid"
+      }
+     ]
+    },
+    {
+     "seq": 2,
+     "store": "day-1003-2",
+     "start": "10:45",
+     "end": "16:00",
+     "title": "太宰府",
+     "subtitle": "天满宫 + 梅枝饼",
+     "core": "参拜学问之神、吃梅枝饼、求御守。",
+     "best": {
+      "name": "太宰府天満宮",
+      "navQ": "Dazaifu Tenmangu",
+      "score": 5,
+      "reason": "梅枝饼选かさの家或松屋。",
+      "loc": "",
+      "price": "西铁约400–500自费",
+      "hours": "",
+      "photo": "本殿、隈研吾星巴克",
+      "shop": "",
+      "warn": "",
+      "src": "",
+      "lat": 33.5195,
+      "lng": 130.5347,
+      "type": "sight",
+      "brief": "梅枝饼+御守",
+      "tags": [
+       "其他"
+      ],
+      "priceBucket": "economy"
+     },
+     "alts": [
+      {
+       "name": "九州国立博物馆",
+       "navQ": "Kyushu National Museum",
+       "score": 5,
+       "reason": "雨天最优；与天满宫步行约10–15分，文化向不同类型。",
+       "loc": "太宰府市石坂",
+       "price": "成人约700日元级",
+       "hours": "可行时段：约09:30–17:00（周一常休）；10:45–16:00窗口可覆盖半日",
+       "photo": "",
+       "shop": "",
+       "warn": "查当日休馆",
+       "src": "九州国立博物馆官网",
+       "tags": [
+        "其他"
+       ],
+       "priceBucket": "economy"
+      },
+      {
+       "name": "竈门神社",
+       "navQ": "Kamado Shrine Dazaifu",
+       "score": 4,
+       "reason": "鬼灭关联打卡；参道续行或短巴士。",
+       "loc": "太宰府市灶门",
+       "price": "参拜免费",
+       "hours": "可行时段：境内日间；须16:00前离开才赶运河城晚餐",
+       "photo": "",
+       "shop": "",
+       "warn": "周末人多",
+       "src": "大宰府观光 / Google",
+       "tags": [
+        "打卡机位",
+        "交通"
+       ],
+       "priceBucket": "covered"
+      },
+      {
+       "name": "参道午餐（うどん/定食）",
+       "navQ": "Dazaifu omotesando lunch",
+       "score": 4,
+       "reason": "梅枝饼当甜点，正餐吃乌冬或定食更稳。",
+       "loc": "天满宫参道",
+       "price": "约1,000–1,800日元",
+       "hours": "可行时段：约11:00–15:00；与最优观光同动线",
+       "photo": "",
+       "shop": "",
+       "warn": "热门店排队",
+       "src": "Tabelog「太宰府」",
+       "tags": [
+        "美食"
+       ],
+       "priceBucket": "mid"
+      },
+      {
+       "name": "維新蜂蜜蛋糕（参道烘焙店）",
+       "navQ": "Dazaifu honey castella",
+       "score": 4,
+       "reason": "与梅枝饼交替当茶点，边逛边吃。",
+       "loc": "参道中段",
+       "price": "一片约150–300日元",
+       "hours": "可行时段：零换乘，与本段完全同步",
+       "photo": "",
+       "shop": "",
+       "warn": "可整条购买当伴手礼",
+       "src": "太宰府参道店铺导览",
+       "tags": [
+        "其他"
+       ],
+       "priceBucket": "economy"
+      }
+     ]
+    },
+    {
+     "seq": 3,
+     "store": "day-1003-3",
+     "start": "17:00",
+     "end": "20:30",
+     "title": "运河城",
+     "subtitle": "补货·晚餐",
+     "core": "傍晚轻逛织物小物。",
+     "best": {
+      "name": "博多运河城",
+      "navQ": "Canal City Hakata",
+      "score": 5,
+      "reason": "晚餐选择多。",
+      "loc": "",
+      "price": "",
+      "hours": "",
+      "photo": "",
+      "shop": "",
+      "warn": "",
+      "src": "",
+      "lat": 33.5897,
+      "lng": 130.4119,
+      "type": "sight",
+      "brief": "补货晚餐",
+      "tags": [
+       "购物",
+       "美食",
+       "打卡机位"
+      ],
+      "priceBucket": "unknown"
+     },
+     "alts": [
+      {
+       "name": "博多居酒屋（室内）",
+       "navQ": "Hakata izakaya near Canal City",
+       "score": 5,
+       "reason": "Tabelog 高分室内店，雨天与空调舒适。",
+       "loc": "运河城/中洲步行圈",
+       "price": "人均约3,000–5,000",
+       "hours": "可行时段：17:00–23:00；17:00–20:30本段覆盖",
+       "photo": "",
+       "shop": "",
+       "warn": "建议预约",
+       "src": "Tabelog / Hot Pepper",
+       "tags": [
+        "购物",
+        "美食",
+        "打卡机位"
+       ],
+       "priceBucket": "high"
+      },
+      {
+       "name": "早回酒店休整",
+       "navQ": "Hakata station hotel rest",
+       "score": 4,
+       "reason": "太宰府走累后的体力管理。",
+       "loc": "博多站酒店",
+       "price": "无额外",
+       "hours": "可行时段：西铁回天神+地铁/巴士约17:30前可到酒店",
+       "photo": "",
+       "shop": "",
+       "warn": "放弃夜间购物",
+       "src": "西铁+地铁动线",
+       "tags": [
+        "购物",
+        "美食",
+        "打卡机位"
+       ],
+       "priceBucket": "unknown"
+      },
+      {
+       "name": "中洲二次屋台",
+       "navQ": "Nakasu Yatai second visit",
+       "score": 4,
+       "reason": "与10/2初体验互补；熟门熟路。",
+       "loc": "中洲沿岸",
+       "price": "约2,000–4,000",
+       "hours": "可行时段：约18:00–24:00；运河城步行10分",
+       "photo": "",
+       "shop": "",
+       "warn": "一位一人；先问价",
+       "src": "福冈屋台指引",
+       "tags": [
+        "购物",
+        "美食",
+        "打卡机位"
+       ],
+       "priceBucket": "high"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "day-1004",
+   "date": "2026-10-04",
+   "label": "10/4（日）",
+   "theme": "天神潮牌扫货 · 大濠打卡 · 屋台",
+   "note": "",
+   "rain": "雨天药妆+室内商场；屋台改室内店。",
+   "blocks": [
+    {
+     "seq": 1,
+     "store": "day-1004-1",
+     "start": "10:00",
+     "end": "12:30",
+     "title": "药妆",
+     "subtitle": "mina天神・VIORO 扫货（UNIQLO/GU/UNITED ARROWS）",
+     "core": "轻装策略核心时段：集中扫优衣库/GU/UNITED ARROWS，药妆同步解决。",
+     "best": {
+      "name": "mina天神（UNIQLO九州最大店1–2F+GU 3F） → VIORO（UNITED ARROWS）",
+      "navQ": "Mina Tenjin Fukuoka",
+      "score": 5,
+      "reason": "两栋楼步行3分内；UNIQLO为九州规模最大店、GU九州唯一全系列；VIORO内UNITED ARROWS品类齐全。地铁天神站步行2–3分，天神地下街直通。",
+      "loc": "mina天神：天神4-3-8；VIORO：天神2-10-3",
+      "price": "免税柜台在馆内，先逛完两栋再统一结账",
+      "hours": "营业10:00–20:00；地铁天神站步行2–3分，两栋间步行约5分",
+      "photo": "",
+      "shop": "",
+      "warn": "护照原件；液体限手提",
+      "src": "UNIQLO官方mina天神特辑 / UNITED ARROWS官网",
+      "lat": 33.5902,
+      "lng": 130.3995,
+      "type": "sight",
+      "brief": "UNIQLO/GU/UA扫货",
+      "tags": [
+       "购物",
+       "交通"
+      ],
+      "priceBucket": "unknown"
+     },
+     "alts": [
+      {
+       "name": "松本清 天神店（药妆）",
+       "navQ": "Matsumoto Kiyoshi Tenjin",
+       "score": 5,
+       "reason": "mina天神B1F同栋，零换乘；旅游折扣常见。",
+       "loc": "mina天神 B1F",
+       "price": "满额退税",
+       "hours": "可行时段：10:00–20:00；与UNIQLO同栋零换乘",
+       "photo": "",
+       "shop": "",
+       "warn": "护照原件、液体限手提",
+       "src": "Tabelog / 官网",
+       "tags": [
+        "购物",
+        "交通"
+       ],
+       "priceBucket": "unknown"
+      },
+      {
+       "name": "唐吉诃德（药妆+杂货）",
+       "navQ": "Don Quijote Tenjin Fukuoka",
+       "score": 4,
+       "reason": "夜间也开，品类杂；赶不及白天可晚上再补。",
+       "loc": "天神多店",
+       "price": "税前价看折扣",
+       "hours": "可行时段：多至深夜；步行10分内",
+       "photo": "",
+       "shop": "",
+       "warn": "动线长易买多",
+       "src": "唐吉诃德官网",
+       "tags": [
+        "购物"
+       ],
+       "priceBucket": "unknown"
+      },
+      {
+       "name": "@cosme store 天神（彩妆试色）",
+       "navQ": "cosme store Tenjin",
+       "score": 4,
+       "reason": "试色/排行榜导向，美妆党优于综合药妆。",
+       "loc": "天神地下街/parco 一带",
+       "price": "单品价差大",
+       "hours": "可行时段：约10:00–21:00；步行5分",
+       "photo": "",
+       "shop": "",
+       "warn": "药妆日用品不如松本清全",
+       "src": "@cosme 官方",
+       "tags": [
+        "购物"
+       ],
+       "priceBucket": "unknown"
+      }
+     ]
+    },
+    {
+     "seq": 2,
+     "store": "day-1004-2",
+     "start": "12:30",
+     "end": "15:00",
+     "title": "水炊き + 福冈PARCO（BEAMS/FREAK'S STORE）",
+     "subtitle": "先吃水炊き，再逛 PARCO 新館选物店",
+     "core": "午市水炊き补体力，再步行到 PARCO 新館集齐 BEAMS/FREAK'S STORE。",
+     "best": {
+      "name": "天神水炊き名店午市 → 福冈PARCO 新館（BEAMS+FREAK'S STORE）",
+      "navQ": "Fukuoka Parco Shinkan",
+      "score": 5,
+      "reason": "水炊き是福冈代表锅物，午市性价比高；PARCO新館集合多家选物店，与VIORO步行5分内相连。",
+      "loc": "PARCO：天神2-11-1",
+      "price": "午市水炊き人均4,000–7,000",
+      "hours": "营业10:00–20:30；天神地下街步行可达，与上一段无缝衔接",
+      "photo": "",
+      "shop": "",
+      "warn": "水炊き热门店建议提前预约",
+      "src": "Tabelog「福岡 水炊き」/ japanuts.com",
+      "lat": 33.5908,
+      "lng": 130.3985,
+      "type": "food",
+      "brief": "水炊き+BEAMS等选物店",
+      "tags": [
+       "购物",
+       "美食"
+      ],
+      "priceBucket": "high"
+     },
+     "alts": [
+      {
+       "name": "一兰总本店或天神定食",
+       "navQ": "Ichiran or teishoku Tenjin",
+       "score": 4,
+       "reason": "更快、不用预约；午餐主力备选。",
+       "loc": "天神/中洲",
+       "price": "约1,000–1,500",
+       "hours": "可行时段：12:30–14:00高峰排队",
+       "photo": "",
+       "shop": "",
+       "warn": "总本店排队久可改分店",
+       "src": "Tabelog / 一兰官方",
+       "tags": [
+        "购物",
+        "美食"
+       ],
+       "priceBucket": "mid"
+      },
+      {
+       "name": "AMU PLAZA博多 BEAMS/URBAN RESEARCH",
+       "navQ": "AMU Plaza Hakata Beams",
+       "score": 4,
+       "reason": "若不想再跑天神，可留到10/3傍晚顺手逛，减少10/4奔波。",
+       "loc": "博多站直结",
+       "price": "价位与天神店基本一致",
+       "hours": "可行时段：10:00–20:00；地铁天神→博多约5分",
+       "photo": "",
+       "shop": "",
+       "warn": "与10/3行程二选一安排",
+       "src": "japanuts.com",
+       "tags": [
+        "购物",
+        "美食"
+       ],
+       "priceBucket": "unknown"
+      },
+      {
+       "name": "努努鸡 ザ天神フクオカ PARCO店（委托店）",
+       "navQ": "Yumeyume dori Tenjin Parco",
+       "score": 5,
+       "reason": "与购物同栋零换乘，逛累了直接买回酒店当宵夜。",
+       "loc": "PARCO地下1F",
+       "price": "手羽中约1,080日元",
+       "hours": "可行时段：与PARCO营业同步",
+       "photo": "",
+       "shop": "",
+       "warn": "千万不要加热",
+       "src": "努努鸡官网委托店铺一览",
+       "tags": [
+        "购物",
+        "美食",
+        "交通"
+       ],
+       "priceBucket": "mid"
+      },
+      {
+       "name": "福冈市博物馆（室内）",
+       "navQ": "Fukuoka City Museum",
+       "score": 3,
+       "reason": "大濠公园旁，雨天无缝衔接。",
+       "loc": "中央区地行浜（大濠步行圈）",
+       "price": "约200日元级",
+       "hours": "可行时段：约09:30–17:30；地铁大濠公园站",
+       "photo": "",
+       "shop": "",
+       "warn": "查休馆日",
+       "src": "市博物馆官网",
+       "tags": [
+        "购物",
+        "美食",
+        "打卡机位"
+       ],
+       "priceBucket": "economy"
+      }
+     ]
+    },
+    {
+     "seq": 3,
+     "store": "day-1004-3",
+     "start": "15:00",
+     "end": "18:00",
+     "title": "大濠公园打卡",
+     "subtitle": "浮见堂 · 湖畔星巴克 · 草间弥生南瓜",
+     "core": "逛街后散步收胃，顺路打卡三大机位。",
+     "best": {
+      "name": "大濠公园",
+      "navQ": "Ohori Park Fukuoka",
+      "score": 5,
+      "reason": "免费24h开放；环湖步道2公里，适合逛累后慢走。",
+      "loc": "地铁大濠公园站步行3–5分",
+      "price": "公园免费；日本庭园另需约250日元",
+      "hours": "",
+      "photo": "机位①浮见堂（湖心朱红小亭，蓝天/夕阳倒影）②湖畔星巴克（玻璃窗简约风）③福冈市美术馆前草间弥生南瓜雕塑 · 来源：VISIT FUKUOKA / 樂吃購日本",
+      "shop": "",
+      "warn": "",
+      "src": "",
+      "lat": 33.5858,
+      "lng": 130.376,
+      "type": "sight",
+      "brief": "浮见堂·星巴克·南瓜",
+      "tags": [
+       "打卡机位"
+      ],
+      "priceBucket": "covered"
+     },
+     "alts": [
+      {
+       "name": "舞鹤公园·福冈城迹",
+       "navQ": "Fukuoka Castle Ruins",
+       "score": 4,
+       "reason": "与大濠公园步行相连，登高可俯瞰全景。",
+       "loc": "大濠公园北侧步行10–15分",
+       "price": "免费",
+       "hours": "可行时段：日间；15:00–17:00可达",
+       "photo": "",
+       "shop": "",
+       "warn": "石阶多，穿舒适鞋",
+       "src": "樂吃購日本",
+       "tags": [
+        "打卡机位"
+       ],
+       "priceBucket": "covered"
+      },
+      {
+       "name": "大濠テラス 稲荷寿司+出汁玉子焼き",
+       "navQ": "Ohori Terrace Cafe",
+       "score": 5,
+       "reason": "公园内咖啡厅TERRACE，稻荷寿司可打包当伴手礼零食。",
+       "loc": "大濠公园内",
+       "price": "约1,000–1,800日元",
+       "hours": "可行时段：零换乘，本段全程覆盖",
+       "photo": "",
+       "shop": "",
+       "warn": "开放式露台座位有限",
+       "src": "VISIT FUKUOKA 官方",
+       "tags": [
+        "打卡机位"
+       ],
+       "priceBucket": "mid"
+      },
+      {
+       "name": "继续药妆/潮牌比价",
+       "navQ": "",
+       "score": 3,
+       "reason": "上午没买够时补货。",
+       "loc": "返回天神",
+       "price": "预算自定",
+       "hours": "可行时段：营业至20:00–20:30",
+       "photo": "",
+       "shop": "",
+       "warn": "放弃大濠打卡",
+       "src": "现场",
+       "tags": [
+        "购物",
+        "打卡机位"
+       ],
+       "priceBucket": "unknown"
+      },
+      {
+       "name": "回酒店寄行李/休整",
+       "navQ": "",
+       "score": 4,
+       "reason": "为屋台留体力。",
+       "loc": "博多站酒店",
+       "price": "无额外",
+       "hours": "可行时段：地铁约10–15分",
+       "photo": "",
+       "shop": "",
+       "warn": "放弃打卡",
+       "src": "现场",
+       "tags": [
+        "美食",
+        "打卡机位"
+       ],
+       "priceBucket": "unknown"
+      }
+     ]
+    },
+    {
+     "seq": 4,
+     "store": "day-1004-4",
+     "start": "18:30",
+     "end": "21:00",
+     "title": "药院屋台",
+     "subtitle": "马肉刺身拼盘",
+     "core": "第二次屋台体验。",
+     "best": {
+      "name": "药院屋台",
+      "navQ": "Yakuin Yatai Fukuoka",
+      "score": 5,
+      "reason": "与中洲不同街区氛围。",
+      "loc": "",
+      "price": "约2,800级",
+      "hours": "",
+      "photo": "",
+      "shop": "",
+      "warn": "生食慎选",
+      "src": "",
+      "lat": 33.581,
+      "lng": 130.4015,
+      "type": "food",
+      "brief": "马肉刺身",
+      "tags": [
+       "美食"
+      ],
+      "priceBucket": "mid"
+     },
+     "alts": [
+      {
+       "name": "中洲屋台再访",
+       "navQ": "Nakasu Yatai",
+       "score": 4,
+       "reason": "与药院不同河岸氛围；地铁1–2站。",
+       "loc": "中洲",
+       "price": "约2,000–4,000",
+       "hours": "可行时段：18:00后；天神/药院地铁约10分",
+       "photo": "",
+       "shop": "",
+       "warn": "重复10/2体验",
+       "src": "福冈旅游局屋台案内",
+       "tags": [
+        "美食",
+        "交通"
+       ],
+       "priceBucket": "high"
+      },
+      {
+       "name": "室内马肉专门店",
+       "navQ": "basashi restaurant Tenjin",
+       "score": 5,
+       "reason": "Tabelog 高分空调店，卫生与座位更稳。",
+       "loc": "天神·药院",
+       "price": "人均约4,000–7,000",
+       "hours": "可行时段：17:30–22:00；步行/地铁5–15分",
+       "photo": "",
+       "shop": "",
+       "warn": "预约；生食风险自担",
+       "src": "Tabelog「馬刺し 福岡」",
+       "tags": [
+        "美食"
+       ],
+       "priceBucket": "high"
+      },
+      {
+       "name": "居酒屋套餐",
+       "navQ": "izakaya course Yakuin",
+       "score": 4,
+       "reason": "点套餐控预算，适合不想站着吃。",
+       "loc": "药院通",
+       "price": "套餐约3,000–5,000",
+       "hours": "可行时段：17:00–23:00；18:30–21:00覆盖",
+       "photo": "",
+       "shop": "",
+       "warn": "Hot Pepper 当日席",
+       "src": "Hot Pepper",
+       "tags": [
+        "美食"
+       ],
+       "priceBucket": "high"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "day-1005",
+   "date": "2026-10-05",
+   "label": "10/5（一）",
+   "theme": "弹性缓冲日",
+   "note": "补延误或轻松收尾。",
+   "rain": "风浪大改室内休息或柳川。",
+   "blocks": [
+    {
+     "seq": 1,
+     "store": "day-1005-1",
+     "start": "09:30",
+     "end": "16:00",
+     "title": "弹性",
+     "subtitle": "能古岛一日（首选）",
+     "core": "按体力与天气选线。",
+     "best": {
+      "name": "能古岛",
+      "navQ": "Nokonoshima Island Fukuoka",
+      "score": 5,
+      "reason": "秋日花海/海景；确认末班船。",
+      "loc": "",
+      "price": "",
+      "hours": "",
+      "photo": "",
+      "shop": "",
+      "warn": "花期以公园公告为准",
+      "src": "",
+      "lat": 33.616,
+      "lng": 130.302,
+      "type": "sight",
+      "brief": "渡轮+花海",
+      "tags": [
+       "其他"
+      ],
+      "priceBucket": "unknown"
+     },
+     "alts": [
+      {
+       "name": "补阿苏或天草（仅缺憾日）",
+       "navQ": "day trip catch-up Kyushu",
+       "score": 3,
+       "reason": "若前序因天气取消核心项，用本日补——通勤很长。",
+       "loc": "博多 → 熊本新干线再转",
+       "price": "新干线票或Pass已尽则全自费",
+       "hours": "可行时段：须07:00前出发；阿苏/海豚皆难「半日来回」从博多舒适完成",
+       "photo": "",
+       "shop": "",
+       "warn": "地理过远，仅强烈执念时",
+       "src": "JR + Sea Cruise 综合判断",
+       "tags": [
+        "自然温泉"
+       ],
+       "priceBucket": "covered"
+      },
+      {
+       "name": "柳川游船",
+       "navQ": "Yanagawa river boat",
+       "score": 5,
+       "reason": "水乡观光船，秋日舒适；西铁可达。",
+       "loc": "西铁柳川駅 → 船码头",
+       "price": "船票约1,500–2,000级+西铁票",
+       "hours": "可行时段：游船约09:00–16:00多班；往返含车约6–7h，09:30出发可16:00回博多",
+       "photo": "",
+       "shop": "",
+       "warn": "雨天船多半仍开，大风可能停",
+       "src": "柳川观光协会 / 西铁",
+       "tags": [
+        "其他"
+       ],
+       "priceBucket": "mid"
+      },
+      {
+       "name": "博多全休息日",
+       "navQ": "Hakata hotel rest day",
+       "score": 5,
+       "reason": "购物收尾+洗衣+整理行李箱，旅行品质备选。",
+       "loc": "酒店及站内商场",
+       "price": "仅餐饮花费",
+       "hours": "可行时段：全天；餐饮覆盖三餐",
+       "photo": "",
+       "shop": "",
+       "warn": "无新景点",
+       "src": "自我判断",
+       "tags": [
+        "购物"
+       ],
+       "priceBucket": "unknown"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "day-1006",
+   "date": "2026-10-06",
+   "label": "10/6（二）",
+   "theme": "返程福冈机场",
+   "note": "不是 Hakata-Minami。地铁空港线约5分/260日元。",
+   "rain": "预留交通延误缓冲即可。",
+   "blocks": [
+    {
+     "seq": 1,
+     "store": "day-1006-1",
+     "start": "",
+     "end": "",
+     "title": "依航班倒推",
+     "subtitle": "地铁空港线赴机场",
+     "core": "国际线建议提前120分钟以上。",
+     "best": {
+      "name": "博多站地铁 → 福冈机场",
+      "navQ": "Fukuoka Airport Subway Station",
+      "score": 5,
+      "reason": "国内线下直达；国际线免费接驳。",
+      "loc": "",
+      "price": "260日元",
+      "hours": "",
+      "photo": "",
+      "shop": "",
+      "warn": "",
+      "src": "",
+      "lat": 33.5897,
+      "lng": 130.4207,
+      "type": "transit",
+      "brief": "空港线",
+      "tags": [
+       "交通"
+      ],
+      "priceBucket": "economy"
+     },
+     "alts": [
+      {
+       "name": "西铁巴士直达国际线",
+       "navQ": "Nishitetsu bus Hakata to Fukuoka Airport International",
+       "score": 5,
+       "reason": "大件行李少换乘；直达国际线车坪。",
+       "loc": "博多站筑紫口 → 国际线",
+       "price": "约400日元",
+       "hours": "可行时段：约05:00–22:00密发；车程约30–35分；起飞前≥150分出发更稳",
+       "photo": "",
+       "shop": "",
+       "warn": "拥堵时不如地铁稳准",
+       "src": "西铁空港巴士",
+       "tags": [
+        "交通"
+       ],
+       "priceBucket": "economy"
+      },
+      {
+       "name": "出租车赴机场",
+       "navQ": "taxi Hakata to Fukuoka Airport",
+       "score": 4,
+       "reason": "清晨航班/行李多最省心。",
+       "loc": "酒店 → 国际线",
+       "price": "约2,000–3,500日元",
+       "hours": "可行时段：全天；约20–30分",
+       "photo": "",
+       "shop": "",
+       "warn": "费用最高",
+       "src": "酒店叫车",
+       "tags": [
+        "交通"
+       ],
+       "priceBucket": "high"
+      },
+      {
+       "name": "极早班机：前晚住机场附近",
+       "navQ": "hotel near Fukuoka Airport",
+       "score": 3,
+       "reason": "05:xx 起飞时减少当天变量。",
+       "loc": "国内线周边商务宿",
+       "price": "住宿另计",
+       "hours": "可行时段：前晚入住；步行/短出租到航站",
+       "photo": "",
+       "shop": "",
+       "warn": "已订博多站酒店则不必",
+       "src": "Booking 机场距离筛选",
+       "tags": [
+        "交通"
+       ],
+       "priceBucket": "unknown"
+      }
+     ]
+    },
+    {
+     "seq": 2,
+     "store": "day-1006-2",
+     "start": "",
+     "end": "",
+     "title": "机场补货",
+     "subtitle": "最后伴手礼",
+     "core": "时间够才逛。",
+     "best": {
+      "name": "福冈机场商业区",
+      "navQ": "Fukuoka Airport shopping",
+      "score": 5,
+      "reason": "柚子胡椒礼盒约1,500级。",
+      "loc": "",
+      "price": "",
+      "hours": "",
+      "photo": "",
+      "shop": "",
+      "warn": "液体安检",
+      "src": "",
+      "lat": 33.5859,
+      "lng": 130.45,
+      "type": "transit",
+      "brief": "国内线下；国际线接驳",
+      "tags": [
+       "其他"
+      ],
+      "priceBucket": "unknown"
+     },
+     "alts": [
+      {
+       "name": "只安检不购物",
+       "navQ": "Fukuoka Airport security only",
+       "score": 5,
+       "reason": "时间紧时最优：优先值机与安检。",
+       "loc": "国际线出发层",
+       "price": "0",
+       "hours": "可行时段：依航司值机柜台开放；建议起飞前120分到",
+       "photo": "",
+       "shop": "",
+       "warn": "放弃伴手礼可机场前一天买齐",
+       "src": "机场手续指引",
+       "tags": [
+        "购物"
+       ],
+       "priceBucket": "economy"
+      },
+      {
+       "name": "机场拉面/简餐",
+       "navQ": "Fukuoka Airport ramen",
+       "score": 4,
+       "reason": "安检前后都有餐饮，避免飞机餐饥饿。",
+       "loc": "国内线/国际线商业区",
+       "price": "约900–1,300日元",
+       "hours": "可行时段：多数07:00–20:00；留≥40分再登机口",
+       "photo": "",
+       "shop": "",
+       "warn": "国际线过安检后选择较少",
+       "src": "机场官网餐饮",
+       "tags": [
+        "美食"
+       ],
+       "priceBucket": "mid"
+      },
+      {
+       "name": "便利店最后补水",
+       "navQ": "airport convenience store",
+       "score": 4,
+       "reason": "水/零食；注意液体安检。",
+       "loc": "安检前便利店",
+       "price": "约200–600日元",
+       "hours": "可行时段：长时；登机前15分勿新开液体",
+       "photo": "",
+       "shop": "",
+       "warn": "安检后液体受限",
+       "src": "现场",
+       "tags": [
+        "其他"
+       ],
+       "priceBucket": "economy"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+};
+  var STORE_PREFIX = 'travel-guide-' + TRIP.slug + '-done-';
+  var TYPE_ICON = {transit:'\uD83D\uDE8C', sight:'\uD83D\uDCCD', food:'\uD83C\uDF5C', hotel:'\uD83C\uDFE8'};
+  var TAG_ORDER = ["购物", "美食", "打卡机位", "交通", "自然温泉", "其他"];
+  var accent = '#2d8a6b';
+
+  var state = { view:'timeline', budget:'all', onlyUndone:false, rain:false };
+
+  function esc(s){
+    return (s==null?'':String(s)).replace(/[&<>"]/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];
+    });
+  }
+  function openMap(query){
+    window.open('https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(query||''), '_blank');
+  }
+  window.openMap = openMap;
+
+  function doneKey(dayId, seq){ return STORE_PREFIX + dayId + '-' + seq; }
+  function isDone(dayId, seq){ return localStorage.getItem(doneKey(dayId, seq)) === '1'; }
+  function setDone(dayId, seq, val){ localStorage.setItem(doneKey(dayId, seq), val ? '1' : '0'); }
+
+  function starStr(n){ n = n||0; var s=''; for(var i=0;i<n;i++) s+='\u2B50'; return s; }
+
+  function chipRow(item){
+    var parts = [];
+    if(item.loc) parts.push('<span class="chip">\uD83D\uDCCD ' + esc(item.loc) + '</span>');
+    if(item.price) parts.push('<span class="chip chip-price b-' + item.priceBucket + '">\uD83D\uDCB0 ' + esc(item.price) + '</span>');
+    if(item.hours) parts.push('<span class="chip">\uD83D\uDE8C ' + esc(item.hours) + '</span>');
+    if(item.shop) parts.push('<span class="chip">\uD83D\uDECD\uFE0F ' + esc(item.shop) + '</span>');
+    if(item.photo) parts.push('<span class="chip">\uD83D\uDCF8 ' + esc(item.photo) + '</span>');
+    return parts.join('');
+  }
+
+  function bestDetailHtml(best){
+    if(!best) return '';
+    return '<div class="best-pick">' +
+      '<div class="bp-head"><span class="loc-link name" data-q="' + esc(best.navQ||best.name) + '">' + esc(best.name) + '</span> <span class="stars">' + starStr(best.score) + '</span></div>' +
+      (best.reason ? '<div class="reason">' + esc(best.reason) + '</div>' : '') +
+      '<div class="chip-row">' + chipRow(best) + '</div>' +
+      (best.warn ? ('<div class="warn-line">\u26A0\uFE0F ' + esc(best.warn) + (best.src ? '<span class="src">\u6765\u6E90\uFF1A' + esc(best.src) + '</span>' : '') + '</div>') : '') +
+    '</div>';
+  }
+
+  function altCardHtml(alt, dayId, seq, idx){
+    return '<details class="alt-card" id="alt-' + dayId + '-' + seq + '-' + idx + '">' +
+      '<summary class="alt-summary">' +
+        '<span class="alt-name">' + esc(alt.name) + '</span>' +
+        '<span class="chip chip-score">' + starStr(alt.score) + '</span>' +
+        (alt.price ? ('<span class="chip chip-price b-' + alt.priceBucket + '">\uD83D\uDCB0 ' + esc(alt.price) + '</span>') : '') +
+        '<span class="alt-preview">' + esc(alt.reason||'') + '</span>' +
+      '</summary>' +
+      '<div class="alt-full">' +
+        (alt.reason ? '<div class="reason">' + esc(alt.reason) + '</div>' : '') +
+        '<div class="chip-row">' + chipRow(alt) + '</div>' +
+        (alt.warn ? ('<div class="warn-line">\u26A0\uFE0F ' + esc(alt.warn) + (alt.src ? '<span class="src">\u6765\u6E90\uFF1A' + esc(alt.src) + '</span>' : '') + '</div>') : '') +
+      '</div>' +
+    '</details>';
+  }
+
+  function altsAggregateSummary(alts){
+    if(!alts.length) return '\u65E0\u5907\u9009';
+    var scores = alts.map(function(a){ return a.score||0; });
+    var min = Math.min.apply(null, scores), max = Math.max.apply(null, scores);
+    return '\u5907\u9009 ' + alts.length + ' \u4E2A \u00B7 \u8BC4\u5206 \u2B50' + min + (max!==min ? ('\u2013'+max) : '');
+  }
+
+  function blockHtml(day, block){
+    var best = block.best;
+    var typeIcon = TYPE_ICON[best ? best.type : 'sight'] || '\uD83D\uDCCD';
+    var timeLabel = block.start ? (block.start + '\u2013' + block.end) : '';
+    var chips = '';
+    if(best){
+      chips += '<span class="chip chip-score">\u2B50' + (best.score||'-') + '</span>';
+      if(best.price) chips += '<span class="chip chip-price b-' + best.priceBucket + '">' + esc(best.price) + '</span>';
+    }
+    var altsHtml = block.alts.map(function(a,i){ return altCardHtml(a, day.id, block.seq, i); }).join('');
+    return '<div class="time-block" id="tb-' + day.id + '-' + block.seq + '" data-day-id="' + day.id + '" data-map-seq="' + block.seq + '" data-price-bucket="' + (best?best.priceBucket:'unknown') + '">' +
+      '<button type="button" class="tb-summary" aria-expanded="false">' +
+        (timeLabel ? ('<span class="tb-time">' + timeLabel + '</span>') : '') +
+        '<span class="tb-type-icon">' + typeIcon + '</span>' +
+        '<span class="tb-title">' + esc(block.title) + '</span>' +
+        (best ? ('<span class="tb-best">' + esc(best.name) + '</span>') : '') +
+        '<span class="tb-chips">' + chips + '</span>' +
+        '<span class="tb-caret">\u203A</span>' +
+      '</button>' +
+      '<label class="tb-done-row"><input type="checkbox" data-day="' + day.id + '" data-seq="' + block.seq + '"> \u5DF2\u5B8C\u6210</label>' +
+      '<div class="tb-detail">' +
+        (block.core ? ('<div class="core-action"><strong>\u6838\u5FC3\u884C\u52A8\uFF1A</strong>' + esc(block.core) + '</div>') : '') +
+        bestDetailHtml(best) +
+        (block.alts.length ? ('<details class="alts"><summary>' + altsAggregateSummary(block.alts) + '</summary><div class="alt-list">' + altsHtml + '</div></details>') : '') +
+      '</div>' +
+    '</div>';
+  }
+
+  function dayHtml(day){
+    var blocksHtml = day.blocks.map(function(b){ return blockHtml(day, b); }).join('');
+    return '<div class="day-section" id="' + day.id + '" data-trip-date="' + day.date + '">' +
+      '<div class="day-header"><span>' + esc(day.label) + ' ' + esc(day.theme) + '</span><span class="day-progress" data-day-progress="' + day.id + '"></span></div>' +
+      '<div class="day-body">' +
+        '<div class="day-map-wrap">' +
+          '<div class="day-map-head"><span>\u5F53\u65E5\u52A8\u7EBF\uFF08\u70B9\u5730\u56FE\u5E8F\u53F7\u53EF\u9AD8\u4EAE\u5BF9\u5E94\u65F6\u6BB5\uFF09</span><button type="button" class="map-fit-btn" data-map-day="' + day.id + '">\u5168\u89C8\u5F53\u65E5</button></div>' +
+          '<div id="map-' + day.id + '" class="day-map" role="img" aria-label="day map"></div>' +
+        '</div>' +
+        (day.note ? ('<div class="day-note">' + esc(day.note) + '</div>') : '') +
+        blocksHtml +
+        (day.rain ? ('<div class="rain-alt"><strong>\u96E8\u5929/\u6076\u52A3\u5929\u6C14\uFF1A</strong>' + esc(day.rain) + '</div>') : '') +
+      '</div>' +
+    '</div>';
+  }
+
+  function renderTimeline(){
+    document.getElementById('itinerary').innerHTML = TRIP.days.map(dayHtml).join('');
+    bindTimelineEvents();
+    initMaps();
+    applyFilters();
+    updateAllProgress();
+  }
+
+  function bindTimelineEvents(){
+    document.querySelectorAll('#itinerary .tb-summary').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var tb = btn.closest('.time-block');
+        var open = tb.classList.toggle('expanded');
+        btn.setAttribute('aria-expanded', open);
+      });
+    });
+    document.querySelectorAll('#itinerary .tb-done-row input[type=checkbox]').forEach(function(cb){
+      var dayId = cb.dataset.day, seq = cb.dataset.seq;
+      cb.checked = isDone(dayId, seq);
+      var tb = document.getElementById('tb-' + dayId + '-' + seq);
+      if(cb.checked) tb.classList.add('time-done');
+      cb.addEventListener('click', function(e){ e.stopPropagation(); });
+      cb.addEventListener('change', function(){
+        setDone(dayId, seq, cb.checked);
+        tb.classList.toggle('time-done', cb.checked);
+        updateDayProgress(dayId);
+        applyFilters();
+        if(state.view==='progress') renderProgress();
+      });
+    });
+    document.querySelectorAll('#itinerary .loc-link').forEach(function(el){
+      el.setAttribute('role','button'); el.setAttribute('tabindex','0');
+      el.addEventListener('click', function(e){ e.stopPropagation(); openMap(el.getAttribute('data-q')||el.textContent); });
+      el.addEventListener('keydown', function(e){ if(e.key==='Enter'){ e.stopPropagation(); openMap(el.getAttribute('data-q')||el.textContent); } });
+    });
+  }
+
+  function dayProgress(dayId){
+    var day = TRIP.days.filter(function(d){ return d.id===dayId; })[0];
+    if(!day) return {done:0,total:0};
+    var done = day.blocks.filter(function(b){ return isDone(dayId, b.seq); }).length;
+    return {done:done, total:day.blocks.length};
+  }
+  function updateDayProgress(dayId){
+    var el = document.querySelector('[data-day-progress="' + dayId + '"]');
+    if(!el) return;
+    var p = dayProgress(dayId);
+    el.textContent = p.done + '/' + p.total + ' \u5DF2\u5B8C\u6210';
+  }
+  function updateAllProgress(){
+    TRIP.days.forEach(function(d){ updateDayProgress(d.id); });
+  }
+
+  // ---------------- 筛选：预算档 / 仅看未完成 / 雨天展示 ----------------
+  function applyFilters(){
+    document.querySelectorAll('#itinerary .time-block').forEach(function(tb){
+      var dayId = tb.getAttribute('data-day-id'), seq = tb.getAttribute('data-map-seq');
+      var bucket = tb.getAttribute('data-price-bucket');
+      var hide = false;
+      if(state.budget!=='all' && bucket!==state.budget) hide = true;
+      if(state.onlyUndone && isDone(dayId, seq)) hide = true;
+      tb.classList.toggle('filtered-out', hide);
+    });
+    document.getElementById('itinerary').classList.toggle('show-rain', state.rain);
+  }
+
+  function bindFilterBar(){
+    document.querySelectorAll('.filter-bar [data-budget]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        state.budget = btn.getAttribute('data-budget');
+        document.querySelectorAll('.filter-bar [data-budget]').forEach(function(b){ b.classList.toggle('active', b===btn); });
+        applyFilters();
+      });
+    });
+    var undoneBtn = document.getElementById('filter-undone');
+    undoneBtn.addEventListener('click', function(){
+      state.onlyUndone = !state.onlyUndone;
+      undoneBtn.classList.toggle('active', state.onlyUndone);
+      applyFilters();
+    });
+    var rainBtn = document.getElementById('filter-rain');
+    rainBtn.addEventListener('click', function(){
+      state.rain = !state.rain;
+      rainBtn.classList.toggle('active', state.rain);
+      applyFilters();
+    });
+  }
+
+  // ---------------- 视图切换 ----------------
+  function switchView(view){
+    state.view = view;
+    document.querySelectorAll('.view').forEach(function(v){ v.classList.toggle('active', v.id==='view-'+view); });
+    document.querySelectorAll('.view-switch button').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-view')===view); });
+    document.querySelector('.day-tabs').style.display = (view==='timeline') ? '' : 'none';
+    document.querySelector('.filter-bar').style.display = (view==='timeline') ? '' : 'none';
+    if(view==='themes' && !document.getElementById('view-themes').dataset.rendered){ renderThemes(); }
+    if(view==='progress'){ renderProgress(); }
+  }
+  function bindViewSwitch(){
+    document.querySelectorAll('.view-switch button').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        switchView(btn.getAttribute('data-view'));
+        var target = document.getElementById('view-' + btn.getAttribute('data-view'));
+        if(target) setTimeout(function(){ target.scrollIntoView({behavior:'smooth', block:'start'}); }, 30);
+      });
+    });
+  }
+
+  // ---------------- 主题速查视图 ----------------
+  function collectThemeItems(){
+    var groups = {};
+    TAG_ORDER.forEach(function(t){ groups[t] = []; });
+    TRIP.days.forEach(function(day){
+      day.blocks.forEach(function(block){
+        if(block.best){
+          (block.best.tags||['\u5176\u4ED6']).forEach(function(tag){
+            (groups[tag]||(groups[tag]=[])).push({day:day, block:block, item:block.best, kind:'best', idx:-1});
+          });
+        }
+        block.alts.forEach(function(alt, idx){
+          (alt.tags||['\u5176\u4ED6']).forEach(function(tag){
+            (groups[tag]||(groups[tag]=[])).push({day:day, block:block, item:alt, kind:'alt', idx:idx});
+          });
+        });
+      });
+    });
+    return groups;
+  }
+
+  function themeItemHtml(entry){
+    var item = entry.item;
+    return '<div class="theme-item" data-day="' + entry.day.id + '" data-seq="' + entry.block.seq + '" data-kind="' + entry.kind + '" data-idx="' + entry.idx + '">' +
+      '<span class="ti-day">' + esc(entry.day.label.replace(/\uFF08.*\uFF09/, '')) + ' ' + esc(entry.block.start||'') + '</span>' +
+      '<span class="ti-name">' + esc(item.name) + '</span>' +
+      '<span class="ti-reason">' + esc(item.reason||'') + '</span>' +
+    '</div>';
+  }
+
+  function renderThemes(){
+    var groups = collectThemeItems();
+    var html = '<p class="src-note">\u70B9\u51FB\u4EFB\u4E00\u6761\u53EF\u8DF3\u56DE\u65F6\u95F4\u8F74\u5E76\u5C55\u5F00\u8BE6\u60C5\u3002</p>';
+    TAG_ORDER.forEach(function(tag){
+      var items = groups[tag] || [];
+      if(!items.length) return;
+      html += '<div class="theme-group"><h3>' + esc(tag) + '\uFF08' + items.length + '\uFF09</h3>' +
+        items.map(themeItemHtml).join('') + '</div>';
+    });
+    var el = document.getElementById('view-themes');
+    el.innerHTML = html;
+    el.dataset.rendered = '1';
+    el.querySelectorAll('.theme-item').forEach(function(node){
+      node.addEventListener('click', function(){
+        jumpToTimeline(node.getAttribute('data-day'), node.getAttribute('data-seq'), node.getAttribute('data-kind'), node.getAttribute('data-idx'));
+      });
+    });
+  }
+
+  function jumpToTimeline(dayId, seq, kind, idx){
+    switchView('timeline');
+    var tb = document.getElementById('tb-' + dayId + '-' + seq);
+    if(!tb) return;
+    tb.classList.add('expanded');
+    if(kind==='alt'){
+      var altsDetails = tb.querySelector('details.alts');
+      if(altsDetails) altsDetails.setAttribute('open','');
+      var altCard = document.getElementById('alt-' + dayId + '-' + seq + '-' + idx);
+      if(altCard) altCard.setAttribute('open','');
+    }
+    setTimeout(function(){
+      (kind==='alt' ? document.getElementById('alt-' + dayId + '-' + seq + '-' + idx) : tb).scrollIntoView({behavior:'smooth', block:'center'});
+    }, 60);
+  }
+
+  // ---------------- 打卡总览视图 ----------------
+  function renderProgress(){
+    var totalDone = 0, totalAll = 0;
+    var html = '';
+    TRIP.days.forEach(function(day){
+      var p = dayProgress(day.id);
+      totalDone += p.done; totalAll += p.total;
+      var cells = day.blocks.map(function(b){
+        var done = isDone(day.id, b.seq);
+        return '<div class="progress-cell' + (done?' done':'') + '" title="' + esc(b.title) + '" data-day="' + day.id + '" data-seq="' + b.seq + '">' + (b.start||b.seq) + '</div>';
+      }).join('');
+      html += '<div class="progress-day"><h4><span>' + esc(day.label) + ' ' + esc(day.theme) + '</span><span>' + p.done + '/' + p.total + '</span></h4>' +
+        '<div class="progress-grid">' + cells + '</div></div>';
+    });
+    var pct = totalAll ? Math.round(totalDone/totalAll*100) : 0;
+    var summary = '<div class="progress-summary">\u603B\u8FDB\u5EA6 ' + totalDone + '/' + totalAll + '\uFF08' + pct + '%\uFF09' +
+      '<div class="progress-bar-outer"><div class="progress-bar-inner" style="width:' + pct + '%"></div></div></div>';
+    var el = document.getElementById('view-progress');
+    el.innerHTML = summary + html;
+    el.querySelectorAll('.progress-cell').forEach(function(cell){
+      cell.addEventListener('click', function(){
+        jumpToTimeline(cell.getAttribute('data-day'), cell.getAttribute('data-seq'), 'best', -1);
+      });
+    });
+  }
+
+  // ---------------- 地图（数据由 TRIP.days 派生，不再手写） ----------------
+  var maps = {};
+  function markerIcon(seq, type){
+    var cls = 'num-marker type-' + (type||'sight');
+    return L.divIcon({ className:'num-marker-icon', html:'<div class="'+cls+'">'+seq+'</div>', iconSize:[26,26], iconAnchor:[13,13] });
+  }
+  function clearFocus(){
+    document.querySelectorAll('.time-block.map-focus').forEach(function(n){ n.classList.remove('map-focus'); });
+  }
+  function focusBlock(dayId, seq){
+    clearFocus();
+    var tb = document.querySelector('.time-block[data-day-id="'+dayId+'"][data-map-seq="'+seq+'"]');
+    if(tb){ tb.classList.add('expanded'); tb.classList.add('map-focus'); tb.scrollIntoView({behavior:'smooth',block:'center'}); }
+  }
+  function deriveMapDays(){
+    return TRIP.days.map(function(day){
+      var spots = day.blocks.filter(function(b){ return b.best && b.best.lat!=null; }).map(function(b){
+        return { seq:b.seq, time:b.start||b.title, name:b.best.name, type:b.best.type, lat:b.best.lat, lng:b.best.lng, brief:b.best.brief||b.subtitle, navQ:b.best.navQ||b.best.name };
+      });
+      return { id:day.id, label:day.label, spots:spots };
+    });
+  }
+  function initMaps(){
+    var mapDays = deriveMapDays();
+    mapDays.forEach(function(day){
+      var el = document.getElementById('map-'+day.id);
+      if(!el || !day.spots.length) return;
+      var map = L.map(el, {scrollWheelZoom:false});
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',{
+        maxZoom:19, attribution:'&copy; OpenStreetMap &copy; CARTO'
+      }).addTo(map);
+      var latlngs = [];
+      var layer = L.featureGroup();
+      day.spots.forEach(function(s){
+        var m = L.marker([s.lat,s.lng],{icon:markerIcon(s.seq,s.type)});
+        var q = s.navQ||s.name;
+        m.bindPopup('<strong>'+s.seq+'. '+s.name+'</strong><br>'+s.time+'<br>'+s.brief+
+          '<br><button type="button" class="popup-nav" data-q="'+String(q).replace(/"/g,'&quot;')+'" style="margin-top:6px;padding:5px 9px;cursor:pointer;border:1px solid #1e6b4f;background:#fff;color:#1e6b4f;border-radius:4px">Google \u5BFC\u822A</button>');
+        m.on('popupopen', function(e){
+          var b = e.popup.getElement() && e.popup.getElement().querySelector('.popup-nav');
+          if(b){ b.onclick = function(){ openMap(b.getAttribute('data-q')); }; }
+        });
+        m.on('click', function(){ focusBlock(day.id, s.seq); });
+        m.addTo(layer);
+        latlngs.push([s.lat,s.lng]);
+      });
+      layer.addTo(map);
+      if(latlngs.length===1){ map.setView(latlngs[0],13); }
+      else { map.fitBounds(layer.getBounds().pad(0.12)); }
+      if(latlngs.length>=2){ L.polyline(latlngs,{color:accent,weight:3,dashArray:'8 6'}).addTo(map); }
+      maps[day.id] = {map:map, layer:layer, spots:day.spots};
+    });
+    document.querySelectorAll('.map-fit-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var id = btn.getAttribute('data-map-day');
+        if(!maps[id]) return;
+        if(maps[id].spots.length===1) maps[id].map.setView([maps[id].spots[0].lat,maps[id].spots[0].lng],13);
+        else maps[id].map.fitBounds(maps[id].layer.getBounds().pad(0.12));
+      });
+    });
+    document.querySelectorAll('.time-block[data-map-seq]').forEach(function(tb){
+      var dayId = tb.getAttribute('data-day-id');
+      var seq = parseInt(tb.getAttribute('data-map-seq'),10);
+      if(!dayId||!seq||!maps[dayId]) return;
+      tb.addEventListener('click', function(e){
+        if(e.target.closest('input')||e.target.closest('summary')||e.target.closest('a')||e.target.closest('button')||e.target.closest('.loc-link')) return;
+        var spot = maps[dayId].spots.filter(function(s){ return s.seq===seq; })[0];
+        if(!spot) return;
+        clearFocus(); tb.classList.add('map-focus');
+        maps[dayId].map.setView([spot.lat,spot.lng], Math.max(maps[dayId].map.getZoom(),14), {animate:true});
+      });
+    });
+  }
+
+  function highlightToday(){
+    var now = new Date();
+    var y = now.getFullYear(), m = String(now.getMonth()+1).padStart(2,'0'), d = String(now.getDate()).padStart(2,'0');
+    var sec = document.querySelector('.day-section[data-trip-date="'+y+'-'+m+'-'+d+'"]');
+    if(sec){ sec.classList.add('day-today'); setTimeout(function(){ sec.scrollIntoView({behavior:'smooth',block:'start'}); },400); }
+  }
+
+  function bindMisc(){
+    var btop = document.getElementById('backToTop');
+    window.addEventListener('scroll', function(){ btop.style.display = window.scrollY>400?'flex':'none'; });
+    btop.addEventListener('click', function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+    document.querySelectorAll('.day-tabs a[href^="#"]').forEach(function(a){
+      a.addEventListener('click', function(e){
+        var id = a.getAttribute('href').slice(1);
+        var t = document.getElementById(id);
+        if(t){ e.preventDefault(); switchView('timeline'); t.scrollIntoView({behavior:'smooth',block:'start'}); }
+      });
+    });
+  }
+
+  bindViewSwitch();
+  bindFilterBar();
+  bindMisc();
+  renderTimeline();
+  switchView('timeline');
+  highlightToday();
+})();
+</script>
+</body>
+</html>
