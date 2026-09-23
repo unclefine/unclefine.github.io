@@ -84,6 +84,7 @@ a{color:var(--primary)}
 .anchor .node{width:26px;height:26px;border-radius:50%;background:#fff;border:1.5px solid var(--g7);display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:1px;place-items:center;padding:2px;box-shadow:0 1px 2px rgba(20,83,45,.12);transition:background .18s,border-color .18s,box-shadow .18s}
 .anchor .node .d{font-family:"Silkscreen","VT323",ui-monospace,monospace;font-size:9px;line-height:1;font-weight:400;color:var(--g2);font-variant-numeric:tabular-nums}
 .anchor .node.none{display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--muted)}
+.anchor .mlabel{display:none}
 .anchor:hover .node{border-color:var(--g5);box-shadow:0 2px 8px rgba(20,83,45,.2)}
 .anchor.past .node{background:var(--g9);border-color:var(--g6)}
 .anchor.past .node .d{color:var(--g3)}
@@ -191,14 +192,17 @@ details.altd .alt-body{padding:0 .7rem .65rem}
   .app{display:flex;flex-direction:column;height:auto}
   .map-pane{height:32vh;min-height:210px;flex:0 0 auto;border-bottom:1px solid var(--line)}
   .rail-pane{position:sticky;top:calc(var(--h-top) + var(--h-tool));z-index:60;flex:0 0 auto;border-left:none;border-right:none;border-bottom:1px solid var(--line);box-shadow:0 4px 14px rgba(4,80,48,.07)}
-  .rail{flex:0 0 auto;height:72px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity}
-  .axis{height:72px;min-height:0;width:max(100%,1080px)}
-  .ascale{top:0;bottom:0;left:18px;right:18px}
-  .aline{left:0;right:0;top:36px;width:auto;height:2px;background:var(--g8)}
-  .aprog{left:0;top:36px;width:var(--w,0);height:2px;background:var(--g3)}
-  .anchor{top:36px;left:var(--p);transform:translate(-50%,-50%);width:30px;height:30px}
-  .anchor .node{width:26px;height:26px}
-  .anchor .node .d{font-size:9px}
+  .rail{flex:0 0 auto;height:62px;overflow:hidden}
+  .axis{height:62px;min-height:0;width:100%}
+  .ascale{top:0;bottom:0;left:12px;right:12px}
+  .aline{left:0;right:0;top:24px;width:auto;height:2px;background:var(--g8)}
+  .aprog{left:0;top:24px;width:var(--w,0);height:2px;background:var(--g3)}
+  .anchor{top:24px;left:var(--p);transform:translate(-50%,-50%);width:22px;height:22px}
+  .anchor .node{width:13px;height:13px;border-width:2px;padding:0;display:block}
+  .anchor .node .d{display:none}
+  .anchor .node.none{font-size:9px;display:flex}
+  .anchor.active .node{width:16px;height:16px}
+  .anchor.active .mlabel{display:block;position:absolute;left:50%;top:100%;transform:translateX(-50%);margin-top:7px;font-family:"Silkscreen",ui-monospace,monospace;font-size:10px;line-height:1;color:#0b3d20;background:#bbf7d0;border:1px solid #86efac;border-radius:6px;padding:2px 6px;white-space:nowrap;z-index:9}
   .detail-pane{flex:1 1 auto;overflow:visible}
   .detail-inner{padding:.7rem .7rem 4rem}
   .hero{height:132px}
@@ -4378,7 +4382,7 @@ function renderRail(){
   var anchors=day.blocks.map(function(b,idx){
     var hard=HARD[day.id+'-'+b.seq];
     return '<button type="button" class="anchor'+(hard?' hard':'')+'" style="--p:'+blockPerc(b,idx,n).toFixed(4)+'%" data-seq="'+b.seq+'" title="'+esc(b.title)+'（'+esc(b.start||'')+'）">'+
-      nodeHtml(b.start)+'</button>';
+      nodeHtml(b.start)+'<span class="mlabel">'+esc((b.start||'\u2014').replace(':',''))+'</span></button>';
   }).join('');
   var rail=document.getElementById('rail');
   rail.innerHTML='<div class="axis"><div class="ascale"><div class="aline"></div><div class="aprog" id="aprog"></div>'+anchors+'</div></div>';
