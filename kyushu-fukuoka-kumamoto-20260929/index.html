@@ -151,6 +151,11 @@ a{color:var(--primary)}
 .chip.price.covered{background:#d1fae5;color:#0f766e}
 .warn{font-size:.79rem;color:#3f6212;background:var(--warn);border-left:3px solid var(--warn-b);border-radius:6px;padding:.32rem .52rem;margin-top:.4rem}
 .warn .src{display:block;font-size:.7rem;color:var(--muted);margin-top:.12rem}
+.nearby-list{list-style:none;margin:.2rem 0 .6rem;padding:0}
+.nearby-list li{display:flex;align-items:center;gap:.3rem;flex-wrap:wrap;font-size:.83rem;padding:.32rem .1rem;border-bottom:1px dashed var(--line-soft)}
+.nearby-list li:last-child{border-bottom:none}
+.nearby-list .nb-name{color:var(--primary-dark);font-weight:600}
+.nearby-list .nb-meta{color:var(--muted);font-size:.74rem}
 .sec-title{font-size:.84rem;color:var(--primary-dark);margin:1rem 0 .3rem;display:flex;align-items:center;gap:.45rem}
 .sec-title::after{content:"";flex:1;height:2px;border-radius:2px;background:var(--grad-line);opacity:.5}
 details.altd{border:1px solid var(--line);border-radius:11px;background:var(--panel);margin:.42rem 0;overflow:hidden}
@@ -202,6 +207,8 @@ details.altd .alt-body{padding:0 .7rem .65rem}
   .anchor .node .d{display:none}
   .anchor .node.none{font-size:9px;display:flex}
   .anchor.active .node{width:16px;height:16px}
+  .anchor[data-edge="l"] .mlabel{left:0;transform:none}
+  .anchor[data-edge="r"] .mlabel{left:auto;right:0;transform:none}
   .anchor.active .mlabel{display:block;position:absolute;left:50%;top:100%;transform:translateX(-50%);margin-top:7px;font-family:"Silkscreen",ui-monospace,monospace;font-size:10px;line-height:1;color:#0b3d20;background:#bbf7d0;border:1px solid #86efac;border-radius:6px;padding:2px 6px;white-space:nowrap;z-index:9}
   .detail-pane{flex:1 1 auto;overflow:visible}
   .detail-inner{padding:.7rem .7rem 4rem}
@@ -236,7 +243,7 @@ details.altd .alt-body{padding:0 .7rem .65rem}
   </section>
 
   <section class="pane rail-pane">
-    <div class="rail" id="rail"></div>
+    <div class="rail" id="rail" title="时间轴为非等距比例：压缩 0–6 点与 22–24 点，放大白天的时段"></div>
   </section>
 
   <section class="pane detail-pane" id="detailPane">
@@ -411,7 +418,8 @@ var TRIP = {
        "priceBucket": "mid"
       }
      ],
-     "store": "day-929-1"
+     "store": "day-929-1",
+     "nearby": []
     },
     {
      "seq": 2,
@@ -503,7 +511,17 @@ var TRIP = {
        "priceBucket": "covered"
       }
      ],
-     "store": "day-929-2"
+     "store": "day-929-2",
+     "nearby": [
+      {
+       "name": "LOPIA 博多ヨドバシ",
+       "dist": 0.23,
+       "how": "步行3分",
+       "rating": "4.2(1,852)",
+       "price": "—",
+       "cat": "超市"
+      }
+     ]
     },
     {
      "seq": 3,
@@ -537,8 +555,8 @@ var TRIP = {
       {
        "name": "Shin-Shin／一幸舎（博多站 KITTE·B1）",
        "navQ": "Shin-Shin 博多駅 KITTE",
-       "lat": 33.5891,
-       "lng": 130.4219,
+       "lat": 33.5927,
+       "lng": 130.3968,
        "type": "food",
        "score": 4,
        "reason": "博多豚骨代表，站内/KITTE 都有分店，比天神本店排队短。",
@@ -579,8 +597,8 @@ var TRIP = {
       {
        "name": "The Full Full Hakata（明太子法棍·外带）",
        "navQ": "The Full Full Hakata",
-       "lat": 33.5935,
-       "lng": 130.4145,
+       "lat": 33.5899,
+       "lng": 130.4125,
        "type": "food",
        "score": 4,
        "reason": "Google 4.4（1,648）明太子法棍，酥脆蒜香；当餐后点心或上车零食。",
@@ -619,7 +637,25 @@ var TRIP = {
        "priceBucket": "mid"
       }
      ],
-     "store": "day-929-3"
+     "store": "day-929-3",
+     "nearby": [
+      {
+       "name": "努努鶏 博多マイング",
+       "dist": 0.13,
+       "how": "步行2分",
+       "rating": "4.4(399)",
+       "price": "¥1,000–2,000",
+       "cat": "炸鸡"
+      },
+      {
+       "name": "Menya ISHII（沾面）",
+       "dist": 0.46,
+       "how": "步行7分",
+       "rating": "4.3(783)",
+       "price": "¥1,000–2,000",
+       "cat": "沾面"
+      }
+     ]
     },
     {
      "seq": 4,
@@ -712,7 +748,8 @@ var TRIP = {
        "priceBucket": "unknown"
       }
      ],
-     "store": "day-929-4"
+     "store": "day-929-4",
+     "nearby": []
     },
     {
      "seq": 5,
@@ -807,7 +844,8 @@ var TRIP = {
        "priceBucket": "mid"
       }
      ],
-     "store": "day-929-5"
+     "store": "day-929-5",
+     "nearby": []
     },
     {
      "seq": 6,
@@ -829,7 +867,7 @@ var TRIP = {
       "hours": "土产 9:00–18:00／餐饮 11:00–18:00（L.O.18:00）",
       "shop": "桜の小路21–23店（くまもと旬彩館、杉養蜂園、五木屋本舗等）",
       "photo": "城彩苑展望台、行幸橋方向拍熊本城",
-      "warn": "⚠️ 18:00 打烊：17:00 后到只能快逛；若航班延误就只做夜景外景＋晚餐",
+      "warn": "⚠️ 18:00 打烊：17:00 后到只能快逛；若航班延误就只做夜景外景＋晚餐  ⏱ 时间硬赶：16:30–18:00 要完成「取行李→新干线→酒店放行李→城彩苑」，城彩苑 18:00 打烊——建议只快拍+买伴手礼，或直接跳到外景。",
       "src": "城彩苑官网1592.jp/shisetsu（营业时间）+ castle.kumamoto-guide.jp/info（城彩苑介绍）",
       "tags": [
        "观光",
@@ -927,7 +965,8 @@ var TRIP = {
        "priceBucket": "covered"
       }
      ],
-     "store": "day-929-6"
+     "store": "day-929-6",
+     "nearby": []
     },
     {
      "seq": 7,
@@ -1049,7 +1088,8 @@ var TRIP = {
        "priceBucket": "covered"
       }
      ],
-     "store": "day-929-7"
+     "store": "day-929-7",
+     "nearby": []
     },
     {
      "seq": 8,
@@ -1178,7 +1218,8 @@ var TRIP = {
        "picBy": "熊本这盆刺身50人民币….！"
       }
      ],
-     "store": "day-929-8"
+     "store": "day-929-8",
+     "nearby": []
     }
    ]
   },
@@ -1310,7 +1351,8 @@ var TRIP = {
        "picSrc": "https://www.xiaohongshu.com/search_result/66e3a6e5000000000c01ac59?xsec_token=ABiflWnDbvT7ALYRgVsHvhoxJN2M5ibpbiqIi4WFSBtKo=&xsec_source=",
        "picBy": "日本｜熊本一日citywalk，超全攻略❗️"
       }
-     ]
+     ],
+     "nearby": []
     },
     {
      "seq": 2,
@@ -1404,7 +1446,8 @@ var TRIP = {
        ],
        "priceBucket": "economy"
       }
-     ]
+     ],
+     "nearby": []
     },
     {
      "seq": 3,
@@ -1500,7 +1543,8 @@ var TRIP = {
        ],
        "priceBucket": "economy"
       }
-     ]
+     ],
+     "nearby": []
     },
     {
      "seq": 4,
@@ -1596,7 +1640,8 @@ var TRIP = {
        ],
        "priceBucket": "mid"
       }
-     ]
+     ],
+     "nearby": []
     },
     {
      "seq": 5,
@@ -1690,7 +1735,8 @@ var TRIP = {
        ],
        "priceBucket": "covered"
       }
-     ]
+     ],
+     "nearby": []
     },
     {
      "seq": 6,
@@ -1712,7 +1758,7 @@ var TRIP = {
       "hours": "13:40–17:30 段（15:35船、16:09车、17:01到熊本）",
       "shop": "",
       "photo": "回程海景（方向以现场确认）",
-      "warn": "无A列车，别按旧攻略等16:35的A列车4号；JR普通末班18:23，务必看清班次。",
+      "warn": "无A列车，别按旧攻略等16:35的A列车4号；JR普通末班18:23，务必看清班次。  ⏱ 渡轮 15:35 班次请以 Sea Cruise 当日时刻表为准（平日班次少）；错过改直行巴士返熊本。",
       "src": "Sea Cruise官方「A列車運休ダイヤ」：松岛15:35→三角15:55、JR三角16:09→熊本17:01；JR九州A列车日历9/30運休",
       "tags": [
        "交通",
@@ -1785,7 +1831,8 @@ var TRIP = {
        ],
        "priceBucket": "mid"
       }
-     ]
+     ],
+     "nearby": []
     },
     {
      "seq": 7,
@@ -1891,7 +1938,8 @@ var TRIP = {
        "picSrc": "https://www.xiaohongshu.com/search_result/6a61e797000000001303e117?xsec_token=ABY0rSRSMDBqHegmPkR-hGBPuL-eVmuqMq61Xw9P5-2fU=&xsec_source=",
        "picBy": "熊本这盆刺身50人民币….！"
       }
-     ]
+     ],
+     "nearby": []
     }
    ]
   },
@@ -1899,39 +1947,59 @@ var TRIP = {
    "id": "day-1001",
    "date": "2026-10-01",
    "label": "10/1（四）",
-   "theme": "阿苏一日团 → 终点黑川温泉",
-   "note": "已订阿苏一日团，结束时**直接送达黑川温泉**（不跟团回程）→ 入住后以泡汤为主，穿插温泉街打卡。因 10/2 上午 11:00 就离开，入汤手形 3 汤用不完，建议以宿内汤为主。",
-   "rain": "跟团照常；火口若因警戒关闭，团方一般改草千里/博物馆，以当日团安排为准。",
+   "theme": "阿苏一日团（上色见→阿苏山→草千里）→ 14:00 抵黑川，整个下午泡汤",
+   "note": "团表：08:00 出发 → **10:00 上色见熊野座神社 → 11:00 阿苏山 → 11:40 草千里 → 14:00 到黑川**（不跟团回程）。14:00 即可入住，比原计划多 2.5 小时 —— 下午以泡汤为主，穿插温泉街打卡与甜点。",
+   "rain": "跟团照常；火口若因警戒关闭，团方一般改山上展望/博物馆，以当日团安排为准。",
    "blocks": [
     {
      "seq": 1,
      "start": "08:00",
-     "end": "16:30",
-     "title": "阿苏一日团（已订·终点黑川）",
-     "subtitle": "含接送与主要景点，结束时送达黑川温泉",
-     "core": "跟团走阿苏主要景点；**上车先和司机/导游确认「今晚在黒川温泉下车」**，并问清预计到达时间。",
+     "end": "10:00",
+     "title": "出发 → 上色见（团）",
+     "subtitle": "跟团移动·车上补眠",
+     "core": "08:00 集合出发；上车先和导游确认「今晚在黑川下车」与每站集合时间。",
      "best": {
-      "name": "阿苏一日团（已订·送到黑川温泉）",
-      "navQ": "阿蘇 一日バスツアー 黒川温泉",
-      "lat": 32.9483,
-      "lng": 131.0844,
-      "type": "sight",
-      "score": 5,
-      "reason": "你已订的一日团：省去自己换乘横断巴士/阿苏男孩号的麻烦，终点直接到黑川，正好衔接入住。",
-      "loc": "依团指定集合点（多为熊本站/博多）",
+      "name": "跟团移动（集合点 → 上色见）",
+      "navQ": "阿蘇 上色見 観光バス",
+      "lat": 32.7898,
+      "lng": 130.688,
+      "type": "transit",
+      "score": 4,
+      "reason": "团车直达，省去自己换乘；上车先确认黑川下车点与各站集合时间。",
+      "loc": "依团指定集合点",
       "price": "已订",
-      "hours": "依团行程（通常 08:00 前后出发 → 傍晚抵黑川）",
+      "hours": "08:00 出发 → 10:00 抵上色见",
       "shop": "",
       "photo": "",
-      "warn": "务必提前确认「黑川下车点」与到达时间；行李随车放行李舱",
-      "src": "你提供的预订信息（以供应商确认为准）",
+      "warn": "每站务必按导游集合时间返回",
+      "src": "团行程（以供应商确认为准）",
       "tags": [
        "交通",
        "跟团"
       ],
-      "priceBucket": "unknown"
+      "priceBucket": "covered"
      },
      "alts": [
+      {
+       "name": "不跟团：熊本→阿苏→上色见（折腾）",
+       "navQ": "熊本 阿蘇 上色見 交通",
+       "lat": 32.7898,
+       "lng": 130.688,
+       "type": "transit",
+       "score": 3,
+       "reason": "公共交通需熊本→阿苏→高森方向多次换乘，班次少，强烈不建议。",
+       "loc": "熊本站→阿苏站→上色见",
+       "price": "约3,000–5,000日元",
+       "hours": "班次少，需先查",
+       "shop": "",
+       "photo": "",
+       "warn": "仅作对比，不建议",
+       "src": "JR九州/产交巴士（以官网为准）",
+       "tags": [
+        "交通"
+       ],
+       "priceBucket": "mid"
+      },
       {
        "name": "特急「あそぼーい！」1号 熊本09:57→阿蘇11:27",
        "navQ": "熊本駅 特急あそぼーい",
@@ -1973,37 +2041,321 @@ var TRIP = {
         "巴士"
        ],
        "priceBucket": "mid"
-      },
-      {
-       "name": "包车 熊本→阿苏→黑川",
-       "navQ": "チャーター 熊本 阿蘇 黒川",
-       "lat": 32.7898,
-       "lng": 130.688,
-       "type": "transit",
-       "score": 3,
-       "reason": "自由度高、可随停草千里/大观峰，但费用高（约4–6万日元级/车）。",
-       "loc": "熊本出发",
-       "price": "约40,000–60,000日元/车",
-       "hours": "全天",
-       "shop": "",
-       "photo": "",
-       "warn": "需提前预订；司机可能不英语",
-       "src": "一般包车行情（以实际报价为准）",
-       "tags": [
-        "交通",
-        "包车"
-       ],
-       "priceBucket": "high"
       }
-     ]
+     ],
+     "nearby": []
     },
     {
      "seq": 2,
-     "start": "16:30",
-     "end": "17:30",
+     "start": "10:00",
+     "end": "11:00",
+     "title": "上色见熊野座神社（团）",
+     "subtitle": "《萤火之森》取景地·二之鸟居+石灯笼参道",
+     "core": "1 小时走参道：二之鸟居 → 石灯笼石阶 → 上宫，拍完按时回车上。",
+     "best": {
+      "name": "上色见熊野座神社（《萤火之森》取景地）",
+      "navQ": "上色見熊野座神社",
+      "lat": 32.9942,
+      "lng": 131.069,
+      "type": "sight",
+      "score": 5,
+      "reason": "团表第一站：《萤火之森》取景地，二之鳥居+石灯笼石阶参道是热门机位；参拜免费，约30–60分可走完。",
+      "loc": "熊本県阿蘇郡高森町上色見2619",
+      "price": "免费",
+      "hours": "参拜自由（团停约1小时）",
+      "shop": "",
+      "photo": "",
+      "warn": "石阶湿滑穿防滑鞋；早到先拍，避开人潮入镜",
+      "src": "旅游攻略（Ken&Alice/樂吃購日本）；团表 10:00 到",
+      "tags": [
+       "景点",
+       "神社",
+       "打卡"
+      ],
+      "priceBucket": "covered"
+     },
+     "alts": [
+      {
+       "name": "二之鸟居摄影位（经典机位）",
+       "navQ": "上色見熊野座神社 二之鳥居",
+       "lat": 32.994,
+       "lng": 131.0688,
+       "type": "sight",
+       "score": 4,
+       "reason": "一之鸟居到二之鸟居之间的石灯笼参道，逆光剪影最出片。",
+       "loc": "参道中段",
+       "price": "免费",
+       "hours": "—",
+       "shop": "",
+       "photo": "",
+       "warn": "别久占机位",
+       "src": "经验建议",
+       "tags": [
+        "打卡"
+       ],
+       "priceBucket": "covered"
+      },
+      {
+       "name": "御朱印·御守（社务所）",
+       "navQ": "上色見熊野座神社 御朱印",
+       "lat": 32.9942,
+       "lng": 131.069,
+       "type": "sight",
+       "score": 3,
+       "reason": "想留纪念可买御朱印/御守。",
+       "loc": "神社社务所",
+       "price": "约300–1,000日元",
+       "hours": "—",
+       "shop": "",
+       "photo": "",
+       "warn": "售完即止",
+       "src": "一般神社信息",
+       "tags": [
+        "伴手礼"
+       ],
+       "priceBucket": "economy"
+      },
+      {
+       "name": "参道口小卖店（休息）",
+       "navQ": "上色見 茶屋",
+       "lat": 32.9935,
+       "lng": 131.068,
+       "type": "food",
+       "score": 3,
+       "reason": "买饮料/冰淇淋，等车时歇脚。",
+       "loc": "参道入口周边",
+       "price": "约300–800日元",
+       "hours": "—",
+       "shop": "",
+       "photo": "",
+       "warn": "—",
+       "src": "经验建议",
+       "tags": [
+        "休息"
+       ],
+       "priceBucket": "economy"
+      }
+     ],
+     "nearby": []
+    },
+    {
+     "seq": 3,
+     "start": "11:00",
+     "end": "11:40",
+     "title": "阿苏山（团·视警戒级别）",
+     "subtitle": "山上/火口区域·40分钟（火山灰冰箱贴在这买）",
+     "core": "看能走到哪（警戒级别决定），拍地貌；留 10 分钟在山上卖店买「火山灰冰箱贴」。",
+     "best": {
+      "name": "阿苏山（山上/火口区域·视当日警戒）",
+      "navQ": "阿蘇山 中岳 火口",
+      "lat": 32.8847,
+      "lng": 131.0782,
+      "type": "sight",
+      "score": 5,
+      "reason": "团表 11:00 到：Level 1 可近火口；Level 2+ 火口周边管制，改山上展望与卖店（以当日团安排为准）。",
+      "loc": "阿苏山上区域（阿蘇山上ターミナル周边）",
+      "price": "免费（火口接驳另计）",
+      "hours": "依团安排（约40分钟）",
+      "shop": "",
+      "photo": "",
+      "warn": "火山气体敏感者别勉强；当日警戒级别见 aso-volcano.jp",
+      "src": "阿苏火山防灾协议会 aso-volcano.jp；团表 11:00 到",
+      "tags": [
+       "景点",
+       "火山"
+      ],
+      "priceBucket": "covered"
+     },
+     "alts": [
+      {
+       "name": "わが灰（くまモン）火山灰冰箱贴（山上土产店）",
+       "navQ": "阿蘇山上ターミナル お土産 わが灰",
+       "lat": 32.8847,
+       "lng": 131.0782,
+       "type": "sight",
+       "score": 5,
+       "reason": "産交バス官方：用阿苏中岳火山灰做的熊本熊，含**マグネットA（45mm）/ B（50×40×16mm）**——你要的火山灰冰箱贴，**这站就是最佳购买点**。",
+       "loc": "阿蘇山上ターミナル 土产店",
+       "price": "约800–1,500日元",
+       "hours": "9:00–16:30（以现场为准）",
+       "shop": "",
+       "photo": "",
+       "warn": "错过可「くまトク」网购 kumamotomiyage.com 寄酒店/家",
+       "src": "産交バス 阿苏山火口穿梭官网 商品页",
+       "tags": [
+        "购物",
+        "伴手礼",
+        "火山灰"
+       ],
+       "priceBucket": "mid"
+      },
+      {
+       "name": "阿蘇山上茶店（いきなり団子/咖啡）",
+       "navQ": "阿蘇山上茶店",
+       "lat": 32.8847,
+       "lng": 131.0782,
+       "type": "food",
+       "score": 3,
+       "reason": "山上卖店的いきなり団子与咖啡，短暂补给。",
+       "loc": "阿蘇山上ターミナル",
+       "price": "约200–800日元",
+       "hours": "9:00–16:30",
+       "shop": "",
+       "photo": "",
+       "warn": "—",
+       "src": "旅游攻略/卖店信息",
+       "tags": [
+        "小吃"
+       ],
+       "priceBucket": "economy"
+      },
+      {
+       "name": "草千里咖啡＋ASO MILK 焦糖冰淇淋",
+       "navQ": "草千里 カフェ ASO MILK",
+       "lat": 32.8856,
+       "lng": 131.0616,
+       "type": "food",
+       "score": 4,
+       "reason": "草千里的咖啡与 ASO MILK 焦糖冰淇淋/阿苏酸奶，下一站就能吃。",
+       "loc": "草千里ヶ浜 周边卖店",
+       "price": "约400–1,500日元",
+       "hours": "随草千里营业",
+       "shop": "",
+       "photo": "",
+       "warn": "—",
+       "src": "小红书真实笔记（@不吃这个就白来阿苏火山 81赞）",
+       "tags": [
+        "美食",
+        "甜点"
+       ],
+       "priceBucket": "economy"
+      }
+     ],
+     "nearby": []
+    },
+    {
+     "seq": 4,
+     "start": "11:40",
+     "end": "14:00",
+     "title": "草千里（团·含午餐）",
+     "subtitle": "草原+水塘倒影·赤牛丼午餐（2h20m）",
+     "core": "先草原拍照（水塘倒影机位），再吃赤牛丼/だんご汁；14:00 前回车上出发黑川。",
+     "best": {
+      "name": "草千里ヶ浜（草原·水塘倒影·骑马）",
+      "navQ": "Kusasenri Aso",
+      "lat": 32.8856,
+      "lng": 131.0616,
+      "type": "sight",
+      "score": 5,
+      "reason": "阿苏代表草原：环形草原+水塘倒影+中岳背景；草原免费，可骑马约1,300–1,500日元/圈；团停 11:40–14:00 够拍+午餐。",
+      "loc": "阿苏市 草千里（阿蘇火山博物館前）",
+      "price": "草原免费；骑马约1,300–1,500日元/圈",
+      "hours": "随团（约11:40–14:00）",
+      "shop": "",
+      "photo": "",
+      "warn": "火口 Level 2 期间无法近火口；务必14:00前回车上",
+      "src": "阿苏火山防灾协议会/旅游攻略；团表 11:40 到",
+      "tags": [
+       "景点",
+       "草原"
+      ],
+      "priceBucket": "covered"
+     },
+     "alts": [
+      {
+       "name": "草千里レストラン（赤牛丼・だんご汁）",
+       "navQ": "草千里 レストラン",
+       "lat": 32.888,
+       "lng": 131.058,
+       "type": "food",
+       "score": 4,
+       "reason": "草千里旁一次吃到阿苏乡土料理：赤牛丼、だんご汁、高菜饭。",
+       "loc": "草千里ヶ浜 周边食堂",
+       "price": "约1,200–2,000日元",
+       "hours": "约10:00–16:00",
+       "shop": "",
+       "photo": "",
+       "warn": "旺季排队，注意集合时间",
+       "src": "旅游攻略（Tabelog/小红书）",
+       "tags": [
+        "美食",
+        "乡土料理"
+       ],
+       "priceBucket": "mid"
+      },
+      {
+       "name": "草千里骑马体验",
+       "navQ": "草千里 乗馬",
+       "lat": 32.8856,
+       "lng": 131.0616,
+       "type": "sight",
+       "score": 4,
+       "reason": "绕草原短程骑马，拍照效果好；雨天/强风常停。",
+       "loc": "草千里ヶ浜 骑马场",
+       "price": "约1,300–1,500日元/圈",
+       "hours": "约10:00–16:00（视天候）",
+       "shop": "",
+       "photo": "",
+       "warn": "名额有限，别错过集合",
+       "src": "草千里周边（旅游攻略）",
+       "tags": [
+        "活动",
+        "骑马"
+       ],
+       "priceBucket": "mid"
+      },
+      {
+       "name": "阿蘇火山博物館",
+       "navQ": "阿蘇火山博物館",
+       "lat": 32.8879,
+       "lng": 131.0578,
+       "type": "sight",
+       "score": 4,
+       "reason": "火山地质/喷火史与实时火口影像，就在草千里旁；火口管制时最值得。",
+       "loc": "草千里ヶ浜 阿蘇火山博物館前",
+       "price": "约880日元",
+       "hours": "约9:00–17:00",
+       "shop": "",
+       "photo": "",
+       "warn": "需留出时间别误集合",
+       "src": "阿苏火山防灾协议会 aso-volcano.jp",
+       "tags": [
+        "景点",
+        "博物馆"
+       ],
+       "priceBucket": "economy"
+      },
+      {
+       "name": "いまきん食堂（赤牛丼名店·仅自由行可去）",
+       "navQ": "Imakin Shokudo Aso",
+       "lat": 32.9479,
+       "lng": 131.0575,
+       "type": "food",
+       "score": 5,
+       "reason": "阿苏排名第一的赤牛丼老店，但离草千里/阿苏站约10分钟车程且常排到15:00——跟团无法安排，仅自由行/自驾时考虑。",
+       "loc": "阿苏市内牧290",
+       "price": "约1,500–2,500日元",
+       "hours": "11:00–15:00（售完即止）",
+       "shop": "",
+       "photo": "",
+       "warn": "跟团不可行，仅供改自由行参考",
+       "src": "小红书真实用户（@阿苏排名第一的赤牛丼百年老店 101赞）",
+       "tags": [
+        "美食",
+        "赤牛"
+       ],
+       "priceBucket": "mid"
+      }
+     ],
+     "nearby": []
+    },
+    {
+     "seq": 5,
+     "start": "14:00",
+     "end": "15:30",
      "title": "黑川温泉 入住 + 第一泡",
-     "subtitle": "Check-in → 宿内汤",
-     "core": "办好入住先泡一轮宿内汤，洗去一天车程。",
+     "subtitle": "团送达 → Check-in → 宿内汤",
+     "core": "14:00 到黑川直接入住（行李随团车），先泡一轮宿内汤。",
      "best": {
       "name": "已订黑川温泉旅馆（入住·宿内汤）",
       "navQ": "黒川温泉 旅館 チェックイン",
@@ -2026,30 +2378,6 @@ var TRIP = {
       "priceBucket": "high"
      },
      "alts": [
-      {
-       "name": "わろく屋（あか牛御膳・丸鈴橋旁）",
-       "navQ": "黒川温泉 わろく屋",
-       "lat": 33.066,
-       "lng": 131.1495,
-       "type": "food",
-       "score": 4,
-       "reason": "明治古民家移筑，主打くまもとあか牛（あか牛御膳/まぶし/カレー），位于丸鈴橋桥头；若宿内晚餐前想加一顿乡土正餐，此为最近选择。与最优项活动类型不同。",
-       "loc": "黒川温泉 丸鈴橋たもと",
-       "price": "约2,000–3,500円",
-       "hours": "11:00–16:00；周四、周五定休（周五有时营业）",
-       "shop": "わろく屋（御客屋系）",
-       "photo": "丸鈴橋+あか牛御膳",
-       "warn": "定休须先确认；晚餐时段不营业",
-       "src": "https://www.kurokawaonsen.or.jp/omise/detail.php?intSKey=17",
-       "tags": [
-        "美食",
-        "郷土料理"
-       ],
-       "priceBucket": "mid",
-       "pic": "img/68634e42000000001c031d99.jpg",
-       "picSrc": "https://www.xiaohongshu.com/search_result/68634e42000000001c031d99?xsec_token=ABsZrjI8ien3ETTWUtm5GEsFwVPvSc0s8TdM3iZAA1yn0=&xsec_source=",
-       "picBy": "福冈黑川温泉♨️小镇里震撼人心的美味"
-      },
       {
        "name": "湯音 / 山のいぶき（山吹色ジャージー牛乳・ソフト）",
        "navQ": "黒川温泉 湯音 ジャージー牛乳",
@@ -2091,39 +2419,58 @@ var TRIP = {
         "甜点"
        ],
        "priceBucket": "economy"
+      },
+      {
+       "name": "丸鈴橋・温泉街散策（白天）",
+       "navQ": "丸鈴橋 黒川温泉",
+       "lat": 33.066,
+       "lng": 131.1495,
+       "type": "sight",
+       "score": 4,
+       "reason": "温泉街地标，白天拍木造旅馆+溪流；15:30 后再出门走。",
+       "loc": "黑川温泉 丸鈴橋周边",
+       "price": "免费",
+       "hours": "全天",
+       "shop": "",
+       "photo": "",
+       "warn": "路窄注意车辆",
+       "src": "黑川温泉组合官网",
+       "tags": [
+        "景点",
+        "打卡"
+       ],
+       "priceBucket": "covered"
       }
-     ]
+     ],
+     "nearby": []
     },
     {
-     "seq": 3,
-     "start": "17:30",
-     "end": "18:30",
-     "title": "温泉街打卡（黄昏）",
-     "subtitle": "丸鈴橋·地藏汤·足汤",
-     "core": "趁日落拍丸鈴橋与木造旅馆，再顺路买个甜点。",
+     "seq": 6,
+     "start": "15:30",
+     "end": "17:30",
+     "title": "温泉街散步·打卡+甜点",
+     "subtitle": "丸鈴橋·足汤·麓泡芙/どらどら",
+     "core": "下午光线好：丸鈴橋拍照 → 免费足汤 → 买麓泡芙/どらどら，17:30 回旅馆准备晚餐。",
      "best": {
-      "name": "わろく屋（あか牛御膳・丸鈴橋旁）",
-      "navQ": "黒川温泉 わろく屋",
+      "name": "丸鈴橋・温泉街散策（白天/黄昏）",
+      "navQ": "丸鈴橋 黒川温泉 散策",
       "lat": 33.066,
       "lng": 131.1495,
-      "type": "food",
+      "type": "sight",
       "score": 4,
-      "reason": "明治古民家移筑，主打くまもとあか牛（あか牛御膳/まぶし/カレー），位于丸鈴橋桥头；若宿内晚餐前想加一顿乡土正餐，此为最近选择。与最优项活动类型不同。",
-      "loc": "黒川温泉 丸鈴橋たもと",
-      "price": "约2,000–3,500円",
-      "hours": "11:00–16:00；周四、周五定休（周五有时营业）",
-      "shop": "わろく屋（御客屋系）",
-      "photo": "丸鈴橋+あか牛御膳",
-      "warn": "定休须先确认；晚餐时段不营业",
-      "src": "https://www.kurokawaonsen.or.jp/omise/detail.php?intSKey=17",
+      "reason": "温泉街地标：木造旅馆+溪流，白天光线好、黄昏点灯更美；顺路走到足汤与甜点店。",
+      "loc": "黑川温泉 丸鈴橋周边",
+      "price": "免费",
+      "hours": "全天（商店约9:00–17:00）",
+      "shop": "",
+      "photo": "",
+      "warn": "路面窄、注意车辆与住客",
+      "src": "黑川温泉组合官网",
       "tags": [
-       "美食",
-       "郷土料理"
+       "景点",
+       "打卡"
       ],
-      "priceBucket": "mid",
-      "pic": "img/68634e42000000001c031d99.jpg",
-      "picSrc": "https://www.xiaohongshu.com/search_result/68634e42000000001c031d99?xsec_token=ABsZrjI8ien3ETTWUtm5GEsFwVPvSc0s8TdM3iZAA1yn0=&xsec_source=",
-      "picBy": "福冈黑川温泉♨️小镇里震撼人心的美味"
+      "priceBucket": "covered"
      },
      "alts": [
       {
@@ -2189,15 +2536,16 @@ var TRIP = {
        ],
        "priceBucket": "economy"
       }
-     ]
+     ],
+     "nearby": []
     },
     {
-     "seq": 4,
-     "start": "18:30",
-     "end": "20:00",
+     "seq": 7,
+     "start": "18:00",
+     "end": "19:30",
      "title": "宿内晚餐（会席/怀石）",
-     "subtitle": "一泊二食的第二餐",
-     "core": "回旅馆吃会席；饭后休息半小时再泡汤。",
+     "subtitle": "一泊二食第二餐",
+     "core": "按旅馆时间吃会席，饭后休息半小时再泡汤。",
      "best": {
       "name": "旅馆内晚餐（会席/怀石）",
       "navQ": "黒川温泉 旅館 夕食",
@@ -2292,15 +2640,16 @@ var TRIP = {
        "picSrc": "https://www.xiaohongshu.com/search_result/68634e42000000001c031d99?xsec_token=ABsZrjI8ien3ETTWUtm5GEsFwVPvSc0s8TdM3iZAA1yn0=&xsec_source=",
        "picBy": "福冈黑川温泉♨️小镇里震撼人心的美味"
       }
-     ]
+     ],
+     "nearby": []
     },
     {
-     "seq": 5,
-     "start": "20:00",
+     "seq": 8,
+     "start": "19:30",
      "end": "22:00",
      "title": "夜间泡汤 + 竹灯笼夜景",
-     "subtitle": "留足泡汤时间（次日 11:00 就走）",
-     "core": "今晚是这趟唯一完整的泡汤夜：宿内汤多轮＋丸鈴橋夜间点灯。",
+     "subtitle": "今晚时间充裕·多泡几轮",
+     "core": "今晚是唯一完整的泡汤夜：宿内汤多轮 + 丸鈴橋夜间点灯。",
      "best": {
       "name": "宿内夜汤（露天/私汤）",
       "navQ": "黒川温泉 夜の湯",
@@ -2344,25 +2693,24 @@ var TRIP = {
        "priceBucket": "covered"
       },
       {
-       "name": "黑川温泉 一泊二食（已订名宿；例：山みず木 / 御客屋 / いこい旅館）",
-       "navQ": "黒川温泉 旅館",
-       "lat": 33.0645,
-       "lng": 131.149,
-       "type": "hotel",
-       "score": 5,
-       "reason": "黑川精髓=宿内露天+乡野夜景，全部宿均在组合官网在册；名宿需提前数月。山みず木为溪谷系露天代表，御客屋为300年历史宿，いこい旅館以洞窟风吕闻名。",
-       "loc": "黒川温泉（南小国町満願寺）",
-       "price": "一泊二食 约20,000–50,000円/人（名宿更高）",
-       "hours": "15:00入住→约18:00/19:00晚餐（可先逛温泉街、丸鈴橋点灯）",
-       "shop": "各旅馆 / 风の舎",
-       "photo": "丸鈴橋（黄昏·夜间竹灯笼）、溪谷露天",
-       "warn": "纹身政策各宿不同；浴衣勿湿身着餐；露天原则上禁止摄影",
-       "src": "https://www.kurokawaonsen.or.jp/oyado/",
+       "name": "新明館（洞窟风吕·日归）",
+       "navQ": "新明館 黒川温泉 日帰り入浴",
+       "lat": 33.062,
+       "lng": 131.147,
+       "type": "sight",
+       "score": 4,
+       "reason": "著名洞窟风吕，官方日归 10:30–15:00、500日元（黑川最低价档），上午时段完全可用。",
+       "loc": "黑川温泉 川端通り",
+       "price": "日归500日元",
+       "hours": "10:30–15:00（最终受付14:30）",
+       "shop": "",
+       "photo": "",
+       "warn": "可能需等候",
+       "src": "黑川温泉组合 日归入浴一览",
        "tags": [
-        "住宿",
         "温泉"
        ],
-       "priceBucket": "high"
+       "priceBucket": "economy"
       },
       {
        "name": "歴史の宿 御客屋（日归入浴）",
@@ -2384,7 +2732,8 @@ var TRIP = {
        ],
        "priceBucket": "economy"
       }
-     ]
+     ],
+     "nearby": []
     }
    ]
   },
@@ -2491,7 +2840,8 @@ var TRIP = {
        "priceBucket": "economy"
       }
      ],
-     "store": "day-1002-1"
+     "store": "day-1002-1",
+     "nearby": []
     },
     {
      "seq": 2,
@@ -2592,7 +2942,8 @@ var TRIP = {
        "priceBucket": "economy"
       }
      ],
-     "store": "day-1002-2"
+     "store": "day-1002-2",
+     "nearby": []
     },
     {
      "seq": 3,
@@ -2686,7 +3037,8 @@ var TRIP = {
        "priceBucket": "covered"
       }
      ],
-     "store": "day-1002-3"
+     "store": "day-1002-3",
+     "nearby": []
     },
     {
      "seq": 4,
@@ -2780,7 +3132,8 @@ var TRIP = {
        "priceBucket": "mid"
       }
      ],
-     "store": "day-1002-4"
+     "store": "day-1002-4",
+     "nearby": []
     },
     {
      "seq": 5,
@@ -2802,7 +3155,7 @@ var TRIP = {
       "hours": "10:00–20:00（各店不同；不定期休）",
       "shop": "",
       "photo": "",
-      "warn": "⚠️ 直行巴士**末班较早**（小红书实测：周中16:30/周末17:30 前后，且建议在 highwaybus.com 先订）——若想逛到 19:30，**回程改 JR 鳥栖→博多**（约40分，班次到晚上都有）；另有避坑：别坐到「弥生丘」站（打车难、公交久）。",
+      "warn": "⚠️ 直行巴士**末班较早**（小红书实测：周中16:30/周末17:30 前后，且建议在 highwaybus.com 先订）——若想逛到 19:30，**回程改 JR 鳥栖→博多**（约40分，班次到晚上都有）；另有避坑：别坐到「弥生丘」站（打车难、公交久）。  ⏱ 回程：直行巴士末班约 16:30/17:30 → 建议 JR 鳥栖→博多（约40分）；19:30 离店→20:45 到中洲可行但紧。",
       "src": "鸟栖Premium Outlets官网（170店/10:00–20:00；西鉄天神BT直行巴士约50分每日运行；JR鳥栖站バス约15分/280日元）",
       "tags": [
        "购物",
@@ -2895,7 +3248,8 @@ var TRIP = {
        "priceBucket": "covered"
       }
      ],
-     "store": "day-1002-5"
+     "store": "day-1002-5",
+     "nearby": []
     },
     {
      "seq": 6,
@@ -2933,8 +3287,8 @@ var TRIP = {
       {
        "name": "博多だるま 総本店（浓厚豚骨拉面）",
        "navQ": "Hakata Daruma Honten",
-       "lat": 33.5896,
-       "lng": 130.4084,
+       "lat": 33.5852,
+       "lng": 130.406,
        "type": "food",
        "score": 4,
        "reason": "Google 4.0（3,168 评价）；小红书实测：正统浓厚豚骨，不少艺人造访，地铁站走过去约7–8分。",
@@ -2957,8 +3311,8 @@ var TRIP = {
       {
        "name": "Shin-Shin／一幸舎（博多站 KITTE·B1）",
        "navQ": "Shin-Shin 博多駅 KITTE",
-       "lat": 33.5891,
-       "lng": 130.4219,
+       "lat": 33.5927,
+       "lng": 130.3968,
        "type": "food",
        "score": 4,
        "reason": "博多豚骨代表，站内/KITTE 都有分店，比天神本店排队短。",
@@ -3000,8 +3354,8 @@ var TRIP = {
       {
        "name": "一兰 本社总本店（中洲·发源总店）",
        "navQ": "Ichiran Honten Nakasu",
-       "lat": 33.5905,
-       "lng": 130.406,
+       "lat": 33.5932,
+       "lng": 130.4046,
        "type": "food",
        "score": 4,
        "reason": "Google 4.2（13,214 评价）；小红书：一兰发源总店，中洲川端站步行可达，傍晚5点前人少不用排队。",
@@ -3022,7 +3376,17 @@ var TRIP = {
        "picBy": "🇯🇵福冈必吃|拉面发源地一兰总店不排队！"
       }
      ],
-     "store": "day-1002-6"
+     "store": "day-1002-6",
+     "nearby": [
+      {
+       "name": "Itookashi（定食）",
+       "dist": 0.27,
+       "how": "步行4分",
+       "rating": "4.4(1,530)",
+       "price": "¥2,000–3,000",
+       "cat": "定食"
+      }
+     ]
     },
     {
      "seq": 7,
@@ -3120,7 +3484,25 @@ var TRIP = {
        "priceBucket": "covered"
       }
      ],
-     "store": "day-1002-7"
+     "store": "day-1002-7",
+     "nearby": [
+      {
+       "name": "Hakata Ramen Hakataya 川端",
+       "dist": 0.34,
+       "how": "步行5分",
+       "rating": "4.1(2,410)",
+       "price": "¥1–1,000",
+       "cat": "拉面"
+      },
+      {
+       "name": "一兰 本社总本店（中洲）",
+       "dist": 0.24,
+       "how": "步行3分",
+       "rating": "4.2(13,214)",
+       "price": "¥1,000–2,000",
+       "cat": "拉面"
+      }
+     ]
     }
    ]
   },
@@ -3164,8 +3546,8 @@ var TRIP = {
       {
        "name": "コメダ珈琲 博多駅東店（早餐咖啡）",
        "navQ": "コメダ珈琲店 博多駅東店",
-       "lat": 33.591,
-       "lng": 130.4235,
+       "lat": 33.5882,
+       "lng": 130.4234,
        "type": "food",
        "score": 4,
        "reason": "点咖啡送吐司（6:00–11:00 早餐时段），中文菜单，离博多站步行约5分。",
@@ -3185,8 +3567,8 @@ var TRIP = {
       {
        "name": "The Full Full Hakata（明太子法棍·外带）",
        "navQ": "The Full Full Hakata",
-       "lat": 33.5935,
-       "lng": 130.4145,
+       "lat": 33.5899,
+       "lng": 130.4125,
        "type": "food",
        "score": 4,
        "reason": "Google 4.4（1,648）明太子法棍，酥脆蒜香；当餐后点心或上车零食。",
@@ -3223,6 +3605,32 @@ var TRIP = {
         "伴手礼"
        ],
        "priceBucket": "mid"
+      }
+     ],
+     "nearby": [
+      {
+       "name": "Cafe Mutsukado",
+       "dist": 0.11,
+       "how": "步行2分",
+       "rating": "4.1(995)",
+       "price": "¥1,000–2,000",
+       "cat": "咖啡"
+      },
+      {
+       "name": "Komeda 珈琲 博多駅東店",
+       "dist": 0.31,
+       "how": "步行4分",
+       "rating": "4.1(1,334)",
+       "price": "¥1–1,000",
+       "cat": "咖啡"
+      },
+      {
+       "name": "Dacomecca（面包）",
+       "dist": 0.3,
+       "how": "步行4分",
+       "rating": "4.1(2,274)",
+       "price": "¥1,000–2,000",
+       "cat": "面包"
       }
      ]
     },
@@ -3303,8 +3711,8 @@ var TRIP = {
       {
        "name": "LOPIA 博多友都八喜店（超市·本地人采购）",
        "navQ": "LOPIA Hakata Yodobashi",
-       "lat": 33.5893,
-       "lng": 130.4255,
+       "lat": 33.5879,
+       "lng": 130.4216,
        "type": "sight",
        "score": 4,
        "reason": "Google 4.2（1,852 评价）；小红书：10点开门，和牛、现烤披萨、三文鱼/鳗鱼饭便宜，可买回酒店当宵夜。",
@@ -3324,7 +3732,8 @@ var TRIP = {
        "picSrc": "https://www.xiaohongshu.com/search_result/68561156000000001c032f56?xsec_token=AB4tfZdcWbEcXPKk0KGc0QwtN3K749Khy0ukrVOef4J-k=&xsec_source=",
        "picBy": "福冈超市LOPIA推荐本地人最爱逛"
       }
-     ]
+     ],
+     "nearby": []
     },
     {
      "seq": 3,
@@ -3427,7 +3836,8 @@ var TRIP = {
        ],
        "priceBucket": "mid"
       }
-     ]
+     ],
+     "nearby": []
     },
     {
      "seq": 4,
@@ -3534,7 +3944,8 @@ var TRIP = {
        "picSrc": "https://www.xiaohongshu.com/search_result/68e8e6360000000003035041?xsec_token=ABYWvIpEsqOH7bW05A65T9HU53bK9u-mUPnvRlAWi_qfc=&xsec_source=",
        "picBy": "答应我一定要空着肚子来太宰府好吗！"
       }
-     ]
+     ],
+     "nearby": []
     },
     {
      "seq": 5,
@@ -3568,8 +3979,8 @@ var TRIP = {
       {
        "name": "LOPIA 博多友都八喜店（超市·本地人采购）",
        "navQ": "LOPIA Hakata Yodobashi",
-       "lat": 33.5893,
-       "lng": 130.4255,
+       "lat": 33.5879,
+       "lng": 130.4216,
        "type": "sight",
        "score": 4,
        "reason": "Google 4.2（1,852 评价）；小红书：10点开门，和牛、现烤披萨、三文鱼/鳗鱼饭便宜，可买回酒店当宵夜。",
@@ -3629,7 +4040,8 @@ var TRIP = {
        ],
        "priceBucket": "unknown"
       }
-     ]
+     ],
+     "nearby": []
     },
     {
      "seq": 6,
@@ -3725,6 +4137,16 @@ var TRIP = {
        ],
        "priceBucket": "mid"
       }
+     ],
+     "nearby": [
+      {
+       "name": "まぐろとごはん 黒田飯",
+       "dist": 0.17,
+       "how": "步行2分",
+       "rating": "4.9(2,609)",
+       "price": "¥2,000–6,000",
+       "cat": "海鲜丼"
+      }
      ]
     },
     {
@@ -3787,8 +4209,8 @@ var TRIP = {
       {
        "name": "博多だるま 総本店（浓厚豚骨拉面）",
        "navQ": "Hakata Daruma Honten",
-       "lat": 33.5896,
-       "lng": 130.4084,
+       "lat": 33.5852,
+       "lng": 130.406,
        "type": "food",
        "score": 4,
        "reason": "Google 4.0（3,168 评价）；小红书实测：正统浓厚豚骨，不少艺人造访，地铁站走过去约7–8分。",
@@ -3830,6 +4252,32 @@ var TRIP = {
        ],
        "priceBucket": "mid"
       }
+     ],
+     "nearby": [
+      {
+       "name": "Yakitori 634 武蔵",
+       "dist": 0.21,
+       "how": "步行3分",
+       "rating": "4.2(1,042)",
+       "price": "¥2,000–6,000",
+       "cat": "烧鸟"
+      },
+      {
+       "name": "博多だるま 総本店",
+       "dist": 0.56,
+       "how": "步行8分",
+       "rating": "4.0(3,168)",
+       "price": "¥1,000–2,000",
+       "cat": "拉面"
+      },
+      {
+       "name": "黒毛和牛 博多和牛まぶし 武蔵 天神店",
+       "dist": 0.1,
+       "how": "步行1分",
+       "rating": "4.4(221)",
+       "price": "¥2,000–3,000",
+       "cat": "和牛"
+      }
      ]
     }
    ]
@@ -3852,8 +4300,8 @@ var TRIP = {
      "best": {
       "name": "FUGLEN FUKUOKA（世界知名咖啡·大名）",
       "navQ": "FUGLEN Fukuoka",
-      "lat": 33.5883,
-      "lng": 130.395,
+      "lat": 33.5867,
+      "lng": 130.4065,
       "type": "food",
       "score": 4,
       "reason": "Google 4.4（1,002 评价）；小红书：挪威名店福冈分店，Brown Cheese 羊奶吐司+冰拿铁是招牌。",
@@ -3877,7 +4325,7 @@ var TRIP = {
       {
        "name": "Pain Stock 天神店（明太子面包）",
        "navQ": "Pain Stock Tenjin",
-       "lat": 33.593,
+       "lat": 33.5917,
        "lng": 130.404,
        "type": "food",
        "score": 4,
@@ -3900,8 +4348,8 @@ var TRIP = {
       {
        "name": "Dacomecca（排队面包店）",
        "navQ": "Dacomecca Fukuoka",
-       "lat": 33.5895,
-       "lng": 130.3945,
+       "lat": 33.5874,
+       "lng": 130.4193,
        "type": "food",
        "score": 4,
        "reason": "Google 4.1（2,274 评价）；小红书：福冈排队面包店，明太子面包人气第一（明太子酱可带回自制）。",
@@ -3944,6 +4392,32 @@ var TRIP = {
        "pic": "img/68046d52000000000903b74d.jpg",
        "picSrc": "https://www.xiaohongshu.com/search_result/68046d52000000000903b74d?xsec_token=AB45vsHoeFQqKVAFc2hWtp0NzQe7F8mockBQkNpCKwHTU=&xsec_source=",
        "picBy": "来福冈🍳一定要吃的大濠公园湖景日式早餐"
+      }
+     ],
+     "nearby": [
+      {
+       "name": "Pain Stock Tenjin",
+       "dist": 0.6,
+       "how": "步行9分",
+       "rating": "4.1(2,085)",
+       "price": "¥1,000–2,000",
+       "cat": "面包"
+      },
+      {
+       "name": "The Full Full Hakata",
+       "dist": 0.66,
+       "how": "步行9分",
+       "rating": "4.4(1,648)",
+       "price": "¥1–1,000",
+       "cat": "面包"
+      },
+      {
+       "name": "FUGLEN FUKUOKA",
+       "dist": 0.0,
+       "how": "步行1分",
+       "rating": "4.4(1,002)",
+       "price": "¥1,000–2,000",
+       "cat": "咖啡"
       }
      ]
     },
@@ -4000,8 +4474,8 @@ var TRIP = {
       {
        "name": "Dacomecca（排队面包店）",
        "navQ": "Dacomecca Fukuoka",
-       "lat": 33.5895,
-       "lng": 130.3945,
+       "lat": 33.5874,
+       "lng": 130.4193,
        "type": "food",
        "score": 4,
        "reason": "Google 4.1（2,274 评价）；小红书：福冈排队面包店，明太子面包人气第一（明太子酱可带回自制）。",
@@ -4024,8 +4498,8 @@ var TRIP = {
       {
        "name": "Pâtisserie au fil du jour（法式甜点）",
        "navQ": "Patisserie au fil du jour",
-       "lat": 33.5862,
-       "lng": 130.3924,
+       "lat": 33.5788,
+       "lng": 130.3877,
        "type": "food",
        "score": 5,
        "reason": "Google 4.4（709 评价）；小红书：多位日本主厨推荐「全福冈最好吃」的法甜，香草千层最惊艳。",
@@ -4065,7 +4539,8 @@ var TRIP = {
        ],
        "priceBucket": "mid"
       }
-     ]
+     ],
+     "nearby": []
     },
     {
      "seq": 3,
@@ -4100,8 +4575,8 @@ var TRIP = {
       {
        "name": "麺や兼虎 福冈PARCO店（浓厚沾面）",
        "navQ": "Kanetora Fukuoka Parco",
-       "lat": 33.5899,
-       "lng": 130.399,
+       "lat": 33.5907,
+       "lng": 130.3987,
        "type": "food",
        "score": 5,
        "reason": "Google 4.3（687 评价）；小红书：本店排到吓人，「直接去 PARCO B1 分店」，多为本地人几乎不用排，且与 PARCO 同栋。",
@@ -4124,8 +4599,8 @@ var TRIP = {
       {
        "name": "黒毛和牛 博多和牛まぶし 武蔵（天神店）",
        "navQ": "Hakata Wagyu Mabushi Musashi Tenjin",
-       "lat": 33.59,
-       "lng": 130.4,
+       "lat": 33.5876,
+       "lng": 130.4012,
        "type": "food",
        "score": 4,
        "reason": "Google 4.4（221 评价）；小红书：和牛「まぶし」三种吃法，博多站筑紫口店开门前排约百人，天神店更易入座。",
@@ -4148,8 +4623,8 @@ var TRIP = {
       {
        "name": "Maguro to Gohan KURODAHAN（海鲜丼·4.9）",
        "navQ": "Maguro to Gohan Kurodahan",
-       "lat": 33.589,
-       "lng": 130.401,
+       "lat": 33.5886,
+       "lng": 130.4096,
        "type": "food",
        "score": 5,
        "reason": "Google 4.9（2,609 评价）——地址收藏里评分最高档；主打鲔鱼海鲜丼，人均2,000–6,000日元。",
@@ -4172,8 +4647,8 @@ var TRIP = {
       {
        "name": "麺や我ガ Menya GAGA（药院·豚骨辛味）",
        "navQ": "Menya Gaga Tenjin",
-       "lat": 33.5848,
-       "lng": 130.4015,
+       "lat": 33.5856,
+       "lng": 130.3967,
        "type": "food",
        "score": 4,
        "reason": "Google 4.4（1,453 评价）；小红书：药院巷内小店、门口排队即到，「豚骨×辛味」有一兰影子但更清爽。",
@@ -4192,6 +4667,48 @@ var TRIP = {
        "pic": "img/pl_pl_gaga.jpg",
        "picSrc": "https://www.xiaohongshu.com/search_result/6a883ff6000000002b003e0a?xsec_token=ABHRJ9BgJlJQw4W14J1sVabPB6XA3iyzAJcwvdqlDhdTg=&xsec_source=",
        "picBy": "福冈吃饭12家店大推荐（J人超自信版）"
+      }
+     ],
+     "nearby": [
+      {
+       "name": "Paila（印度/尼泊尔菜）",
+       "dist": 1.8,
+       "how": "车约6分",
+       "rating": "4.6(108)",
+       "price": "¥1,000–2,000",
+       "cat": "咖喱"
+      },
+      {
+       "name": "麺や兼虎 福岡PARCO店",
+       "dist": 0.07,
+       "how": "步行1分",
+       "rating": "4.3(687)",
+       "price": "¥1,000–2,000",
+       "cat": "拉面"
+      },
+      {
+       "name": "Shin-Shin 天神本店",
+       "dist": 0.33,
+       "how": "步行5分",
+       "rating": "4.3(7,907)",
+       "price": "¥1,000–2,000",
+       "cat": "拉面"
+      },
+      {
+       "name": "Menya 我ガ（薬院）",
+       "dist": 0.53,
+       "how": "步行8分",
+       "rating": "4.4(1,453)",
+       "price": "¥1,000–2,000",
+       "cat": "拉面"
+      },
+      {
+       "name": "博多市場 魚辰食堂",
+       "dist": 1.0,
+       "how": "步行14分",
+       "rating": "4.2(300)",
+       "price": "¥1–1,000",
+       "cat": "食堂"
       }
      ]
     },
@@ -4321,7 +4838,8 @@ var TRIP = {
        "picSrc": "https://www.xiaohongshu.com/search_result/6915f666000000000700e9bc?xsec_token=ABiCGQVAAvWPvZq40FJLOZvZ1FbxQVmlyBpRwyeS7xgdY=&xsec_source=",
        "picBy": "福冈必吃❗️米其林推荐水炊鸡「橙」🍲"
       }
-     ]
+     ],
+     "nearby": []
     },
     {
      "seq": 5,
@@ -4417,7 +4935,8 @@ var TRIP = {
        ],
        "priceBucket": "covered"
       }
-     ]
+     ],
+     "nearby": []
     },
     {
      "seq": 6,
@@ -4494,8 +5013,8 @@ var TRIP = {
       {
        "name": "LOPIA 博多友都八喜店（超市·本地人采购）",
        "navQ": "LOPIA Hakata Yodobashi",
-       "lat": 33.5893,
-       "lng": 130.4255,
+       "lat": 33.5879,
+       "lng": 130.4216,
        "type": "sight",
        "score": 4,
        "reason": "Google 4.2（1,852 评价）；小红书：10点开门，和牛、现烤披萨、三文鱼/鳗鱼饭便宜，可买回酒店当宵夜。",
@@ -4514,6 +5033,24 @@ var TRIP = {
        "pic": "img/pl_pl_lopia.jpg",
        "picSrc": "https://www.xiaohongshu.com/search_result/68561156000000001c032f56?xsec_token=AB4tfZdcWbEcXPKk0KGc0QwtN3K749Khy0ukrVOef4J-k=&xsec_source=",
        "picBy": "福冈超市LOPIA推荐本地人最爱逛"
+      }
+     ],
+     "nearby": [
+      {
+       "name": "Fuk Coffee",
+       "dist": 0.95,
+       "how": "步行14分",
+       "rating": "3.6(1,956)",
+       "price": "¥1,000–2,000",
+       "cat": "咖啡"
+      },
+      {
+       "name": "Pâtisserie au fil du jour",
+       "dist": 1.38,
+       "how": "车约5分",
+       "rating": "4.4(709)",
+       "price": "—",
+       "cat": "甜点"
       }
      ]
     },
@@ -4574,8 +5111,8 @@ var TRIP = {
       {
        "name": "Yakitori 634 武蔵（烧鸟·需预约）",
        "navQ": "Yakitori 634 Musashi",
-       "lat": 33.588,
-       "lng": 130.398,
+       "lat": 33.5885,
+       "lng": 130.4038,
        "type": "food",
        "score": 5,
        "reason": "Google 4.2（1,042 评价）；小红书「福冈烧鸟天花板、无差评」：中文菜单、可直接看柜追加，气氛极好，务必预约。",
@@ -4598,8 +5135,8 @@ var TRIP = {
       {
        "name": "Paila Restaurant & Bar（印度/尼泊尔菜 4.6）",
        "navQ": "Paila Restaurant Bar Fukuoka",
-       "lat": 33.588,
-       "lng": 130.396,
+       "lat": 33.5926,
+       "lng": 130.3793,
        "type": "food",
        "score": 4,
        "reason": "Google 4.6（108 评价）；小红书：「在日本人的严格评分软件里也遥遥领先」，换口味的好选择。",
@@ -4641,7 +5178,8 @@ var TRIP = {
        ],
        "priceBucket": "mid"
       }
-     ]
+     ],
+     "nearby": []
     }
    ]
   },
@@ -4769,7 +5307,8 @@ var TRIP = {
        ],
        "priceBucket": "covered"
       }
-     ]
+     ],
+     "nearby": []
     },
     {
      "seq": 2,
@@ -4792,7 +5331,7 @@ var TRIP = {
       "hours": "约每4–6分一班；天神→机场约11分；接驳约10分",
       "shop": "",
       "photo": "",
-      "warn": "18:00 起飞 → 建议 15:00 前抵达国际线；JR Pass 不含地铁",
+      "warn": "18:00 起飞 → 建议 15:00 前抵达国际线；JR Pass 不含地铁  ⏱ 若上午去北九州 Outlets：12:00 必须离店；スペースワールド→博多约1h→天神取行李→机场，约 14:00 到国际线，缓冲仅1小时，务必卡死时间。",
       "src": "福冈市地铁空港线；福冈机场 access",
       "tags": [
        "交通"
@@ -4862,7 +5401,8 @@ var TRIP = {
        ],
        "priceBucket": "economy"
       }
-     ]
+     ],
+     "nearby": []
     },
     {
      "seq": 3,
@@ -4963,7 +5503,8 @@ var TRIP = {
        ],
        "priceBucket": "economy"
       }
-     ]
+     ],
+     "nearby": []
     }
    ]
   }
@@ -5075,6 +5616,15 @@ function nameHtml(item){
   return '<span class="bc-name link" data-q="'+esc(item.navQ||nm)+'">'+esc(nm)+'</span>'+
     '<button type="button" class="copy-btn" data-copy="'+esc(nm)+'" title="\u590D\u5236\u540D\u79F0" aria-label="\u590D\u5236\u540D\u79F0">\u29C9</button>';
 }
+function nearbyHtml(block){
+  var ns=block.nearby||[]; if(!ns.length) return '';
+  var rows=ns.map(function(n){
+    return '<li><span class="nb-name">'+esc(n.name)+'</span>'+
+      '<span class="nb-meta">'+esc(n.rating||'')+(n.price&&n.price!=='—'?(' · '+esc(n.price)):'')+' · '+esc(n.how||'')+'</span>'+
+      '<button type="button" class="copy-btn" data-copy="'+esc(n.name)+'" title="\u590D\u5236\u540D\u79F0">\u29C9</button></li>';
+  }).join('');
+  return '<div class="sec-title">\uD83D\uDCCC \u4F60\u6536\u85CF\u7684\u9644\u8FD1\u5730\u70B9\uff08Google \u540D\u5355\uff09</div><ul class="nearby-list">'+rows+'</ul>';
+}
 function detailHtml(day,block){
   var b=block.best||{}, h='';
   h+=heroHtml(day,block);
@@ -5096,6 +5646,7 @@ function detailHtml(day,block){
          (a.warn?'<div class="warn">\u26A0\uFE0F '+esc(a.warn)+(a.src?'<span class="src">\u6765\u6E90\uFF1A'+esc(a.src)+'</span>':'')+'</div>':'')+'</div></details>';
     }
   }
+  h+=nearbyHtml(block);
   if(day.rain)h+='<div class="warn" style="margin-top:.8rem">\u2602 \u96E8\u5929/\u6076\u52A3\u5929\u6C14\uFF1A'+esc(day.rain)+'</div>';
   h+='<div class="nav-row"><button type="button" id="prevBtn">\u2039 \u4E0A\u4E00\u6BB5</button><button type="button" id="nextBtn">\u4E0B\u4E00\u6BB5 \u203A</button></div>';
   return h;
@@ -5103,10 +5654,23 @@ function detailHtml(day,block){
 
 /* ---------- 24h 时间轴（按真实时刻等比定位） ---------- */
 function parseMin(s){ if(!s)return null; var m=/^\s*(\d{1,2}):(\d{2})/.exec(s); if(!m)return null; return parseInt(m[1],10)*60+parseInt(m[2],10); }
+/* 非线性时间比例：压缩深夜/凌晨，放大 06:00–21:00 的活动时段（余弦平滑的分段曲线） */
+var TIME_CTRL=[[0,0],[6,0.040],[8,0.103],[10,0.212],[12,0.376],[14,0.593],[16,0.720],[18,0.810],[20,0.898],[22,0.988],[24,1]];
+function timeFrac(h){
+  h=Math.max(0,Math.min(24,h));
+  for(var i=1;i<TIME_CTRL.length;i++){
+    var a=TIME_CTRL[i-1], b=TIME_CTRL[i];
+    if(h<=b[0]){
+      var t=(h-a[0])/(b[0]-a[0]);
+      return a[1]+(b[1]-a[1])*t;   /* 分段非线性：夜间压缩、白天放大，保证相邻锚点最小间距 */
+    }
+  }
+  return 1;
+}
 function blockPerc(block,i,n){
   var mins=parseMin(block.start);
   if(mins==null) mins=Math.round((i+1)/(n+1)*1440);
-  return Math.max(0,Math.min(100,mins/1440*100));
+  return Math.max(0,Math.min(100,timeFrac(mins/60)*100));
 }
 function nodeHtml(t){
   var d=(t||'').replace(/\D/g,'');
@@ -5119,7 +5683,9 @@ function renderRail(){
   var day=getDay(state.dayId), n=day.blocks.length, i;
   var anchors=day.blocks.map(function(b,idx){
     var hard=HARD[day.id+'-'+b.seq];
-    return '<button type="button" class="anchor'+(hard?' hard':'')+'" style="--p:'+blockPerc(b,idx,n).toFixed(4)+'%" data-seq="'+b.seq+'" title="'+esc(b.title)+'（'+esc(b.start||'')+'）">'+
+    var pv=blockPerc(b,idx,n);
+    var edge=pv<12?' data-edge="l"':(pv>88?' data-edge="r"':'');
+    return '<button type="button" class="anchor'+(hard?' hard':'')+'" style="--p:'+pv.toFixed(4)+'%"'+edge+' data-seq="'+b.seq+'" title="'+esc(b.title)+'（'+esc(b.start||'')+'）">'+
       nodeHtml(b.start)+'<span class="mlabel">'+esc((b.start||'\u2014').replace(':',''))+'</span></button>';
   }).join('');
   var rail=document.getElementById('rail');
