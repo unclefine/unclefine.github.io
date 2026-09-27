@@ -97,14 +97,15 @@ a{color:var(--primary)}
 .anchor.hard.active .node .d{color:#fff}
 
 /* ---------- detail ---------- */
-.detail-inner{padding:.85rem 1rem 3.2rem;max-width:1100px;margin:0 auto}
-.hero{position:relative;height:152px;border-radius:16px;overflow:hidden;box-shadow:var(--shadow);color:#0b3d20}
+.detail-inner{padding:.85rem 1rem 1rem;max-width:1100px;margin:0 auto}
+.hero{position:relative;min-height:110px;border-radius:16px;overflow:hidden;box-shadow:var(--shadow);color:#0b3d20;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:.6rem}
 .hero .scene{position:absolute;inset:0;width:100%;height:100%}
 .hero .shade{position:absolute;inset:0;background:rgba(255,255,255,.16)}
-.hero .htxt{position:absolute;left:.9rem;right:.9rem;bottom:.65rem;background:rgba(255,255,255,.62);border-radius:10px;padding:.34rem .55rem;backdrop-filter:blur(2px)}
+.hero .htxt{position:relative;margin:0 .9rem;background:rgba(255,255,255,.62);border-radius:10px;padding:.34rem .55rem;backdrop-filter:blur(2px)}
 .hero .htype{display:inline-block;font-size:.68rem;background:rgba(255,255,255,.75);border:1px solid rgba(11,61,32,.2);border-radius:10px;padding:.05rem .45rem;margin-bottom:.25rem}
-.hero .htxt strong{display:block;font-size:1.24rem;line-height:1.25;text-shadow:0 1px 0 rgba(255,255,255,.55)}
+.hero .htxt strong{display:block;font-size:1.12rem;line-height:1.25;text-shadow:0 1px 0 rgba(255,255,255,.55)}
 .hero .htxt .sub{display:block;font-size:.79rem;opacity:.96}
+.hero .dsub{display:block;font-size:.7rem;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .hero .hh{position:absolute;top:.6rem;right:.6rem;background:rgba(255,255,255,.88);color:#166534;border:1px solid rgba(11,61,32,.18);border-radius:8px;padding:.1rem .5rem;font-size:.7rem}
 .scene-train{background:#bbf7d0}
 .scene-sea{background:#a7f3d0}
@@ -118,56 +119,61 @@ a{color:var(--primary)}
 .scene-plane{background:#bff2e4}
 .scene-generic{background:#bbf7d0}
 
-.meta-line{display:flex;align-items:center;gap:.45rem;flex-wrap:wrap;margin:.75rem 0 .4rem;font-size:.8rem;color:var(--muted)}
+.meta-line{display:flex;align-items:center;gap:.45rem;flex-wrap:nowrap;margin:.75rem 0 .4rem;font-size:.8rem;color:var(--muted)}
 .gm-link{color:var(--primary-dark);border-bottom:1px dashed var(--primary);cursor:pointer;font-weight:600;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .gm-link:hover{color:var(--primary)}
-.meta-line .when{background:#bbf7d0;color:#0b3d20;border-radius:9px;padding:.1rem .55rem;font-weight:700;font-variant-numeric:tabular-nums}
+.meta-line .when{background:#bbf7d0;color:#0b3d20;border-radius:9px;padding:.1rem .55rem;font-weight:700;font-variant-numeric:tabular-nums;flex-shrink:0}
 .core{background:var(--panel);border-left:4px solid #4ade80;border-radius:10px;padding:.6rem .75rem;font-size:.88rem;margin:.45rem 0;box-shadow:var(--shadow)}
-.block-card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:.7rem .8rem;margin:.6rem 0;box-shadow:var(--shadow)}
+.block-card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:.6rem .7rem;margin:.45rem 0;box-shadow:var(--shadow)}
 .block-card.best{border-color:#86efac;background:#f4fdf7}
-.bc-head{display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;margin-bottom:.22rem}
-.bc-tag{font-size:.68rem;background:#bbf7d0;color:#0b3d20;border-radius:8px;padding:.05rem .42rem}
+.best-top{display:flex;gap:.55rem;align-items:flex-start}
+.best-main{flex:1;min-width:0}
+.bc-head{display:flex;align-items:center;gap:.35rem;flex-wrap:wrap;margin-bottom:.12rem}
+.bc-tag{font-size:.66rem;background:#bbf7d0;color:#0b3d20;border-radius:8px;padding:.05rem .4rem;flex-shrink:0}
 .bc-tag.alt{background:#a7f3d0;color:#0b3d20}
-.bc-name{font-weight:700;color:var(--primary-dark);font-size:1rem}
+.bc-name{font-weight:700;color:var(--primary-dark);font-size:.95rem;line-height:1.35}
 .bc-name.link{cursor:pointer;border-bottom:1px dashed var(--primary);-webkit-user-select:text;user-select:text}
-.bp-pic{display:block;margin:0 0 .55rem;border-radius:10px;overflow:hidden;height:158px;cursor:pointer;background:#e9f5ee}
+.bp-pic{flex:0 0 110px;width:110px;height:110px;display:block;margin:0;border-radius:10px;overflow:hidden;cursor:pointer;background:#e9f5ee}
 .bp-pic img{width:100%;height:100%;object-fit:cover;display:block}
-.alt-thumb-wrap{flex:0 0 auto;display:inline-flex;margin-left:.1rem}
+.alt-thumb-wrap{flex:0 0 auto;display:inline-flex}
 .alt-thumb{width:40px;height:40px;border-radius:7px;object-fit:cover;display:block}
-.pic-cred{font-size:.72rem;color:var(--muted);margin:.15rem 0 .2rem}
-.pic-cred .pic-link{color:var(--primary);border-bottom:1px dashed var(--primary);cursor:pointer}
 .copy-btn{flex-shrink:0;border:none;background:none;color:var(--muted);font-size:1rem;line-height:1;padding:.18rem .22rem;margin-left:.12rem;opacity:.62;vertical-align:middle}
 .copy-btn:hover{opacity:1;color:var(--primary-dark)}
 .copy-btn.copied{opacity:1;color:var(--primary)}
 #toast{position:fixed;left:50%;bottom:1.4rem;transform:translateX(-50%) translateY(10px);background:rgba(20,83,45,.95);color:#fff;font-size:.8rem;padding:.45rem .9rem;border-radius:8px;z-index:990;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;max-width:80vw;text-align:center}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .stars{color:#4d7c0f;font-size:.82rem;letter-spacing:.5px}
-.reason{font-size:.86rem;color:var(--muted);margin:.25rem 0 .4rem}
-.chips{display:flex;flex-wrap:wrap;gap:.3rem;margin:.25rem 0}
-.chip{display:inline-flex;align-items:center;gap:.12rem;font-size:.73rem;padding:.12rem .48rem;border-radius:9px;background:var(--chip);color:var(--muted)}
+.reason{font-size:.8rem;color:var(--muted);line-height:1.5;margin:.12rem 0 .28rem}
+.chips{display:flex;flex-wrap:wrap;gap:.24rem;margin:.18rem 0}
+.chip{display:inline-flex;align-items:center;gap:.12rem;font-size:.7rem;padding:.08rem .42rem;border-radius:8px;background:var(--chip);color:var(--muted)}
+.chip.pic-link{cursor:pointer;border:1px dashed var(--line)}
+.chip.pic-link:hover{border-color:var(--primary);color:var(--primary-dark)}
 .chip.price.economy{background:#dcfce7;color:#166534}
 .chip.price.mid{background:#bbf7d0;color:#14532d}
 .chip.price.high{background:#86efac;color:#052e16}
 .chip.price.covered{background:#d1fae5;color:#0f766e}
-.warn{font-size:.79rem;color:#3f6212;background:var(--warn);border-left:3px solid var(--warn-b);border-radius:6px;padding:.32rem .52rem;margin-top:.4rem}
-.warn .src{display:block;font-size:.7rem;color:var(--muted);margin-top:.12rem}
-.nearby-list{list-style:none;margin:.2rem 0 .6rem;padding:0}
-.nearby-list li{display:flex;align-items:center;gap:.3rem;flex-wrap:wrap;font-size:.83rem;padding:.32rem .1rem;border-bottom:1px dashed var(--line-soft)}
+.warn{font-size:.78rem;color:#3f6212;background:var(--warn);border-left:3px solid var(--warn-b);border-radius:6px;padding:.28rem .48rem;margin-top:.3rem}
+.warn .src{display:block;font-size:.7rem;color:var(--muted);margin-top:.1rem}
+.nearby-list{list-style:none;margin:.15rem 0 .5rem;padding:0}
+.nearby-list li{display:flex;align-items:center;gap:.3rem;flex-wrap:wrap;font-size:.82rem;padding:.26rem .1rem;border-bottom:1px dashed var(--line-soft)}
 .nearby-list li:last-child{border-bottom:none}
 .nearby-list .nb-name{color:var(--primary-dark);font-weight:600}
-.nearby-list .nb-meta{color:var(--muted);font-size:.74rem}
-.sec-title{font-size:.84rem;color:var(--primary-dark);margin:1rem 0 .3rem;display:flex;align-items:center;gap:.45rem}
+.nearby-list .nb-meta{color:var(--muted);font-size:.72rem}
+.sec-title{font-size:.84rem;color:var(--primary-dark);margin:.8rem 0 .25rem;display:flex;align-items:center;gap:.45rem}
 .sec-title::after{content:"";flex:1;height:2px;border-radius:2px;background:var(--grad-line);opacity:.5}
-details.altd{border:1px solid var(--line);border-radius:11px;background:var(--panel);margin:.42rem 0;overflow:hidden}
-details.altd>summary{list-style:none;cursor:pointer;padding:.55rem .7rem;display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;min-height:44px}
+details.altd{border:1px solid var(--line);border-radius:11px;background:var(--panel);margin:.35rem 0;overflow:hidden}
+details.altd>summary{list-style:none;cursor:pointer;padding:.45rem .6rem;display:flex;align-items:center;gap:.4rem;flex-wrap:nowrap;min-height:44px}
+details.altd>summary .bc-name{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1 1 auto}
+details.altd>summary .stars,details.altd>summary .bc-tag{flex-shrink:0}
 details.altd>summary::-webkit-details-marker{display:none}
 details.altd>summary::before{content:"▸";color:#34d399;flex-shrink:0}
 details.altd[open]>summary::before{content:"▾"}
-details.altd .alt-body{padding:0 .7rem .65rem}
+details.altd .alt-body{padding:0 .6rem .5rem}
 .nav-row{display:flex;gap:.5rem;margin-top:1rem}
 .nav-row button{flex:1;border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:.6rem;font-size:.82rem;color:var(--primary-dark);min-height:46px;box-shadow:var(--shadow)}
 .nav-row button:hover{border-color:#86efac;background:#f0fdf4}
 .nav-row button:disabled{opacity:.4;cursor:default;box-shadow:none}
+@media(min-width:1024px){.nav-row{display:none}}
 
 /* ---------- drawer ---------- */
 .mask{position:fixed;inset:0;background:rgba(2,44,26,.5);opacity:0;pointer-events:none;transition:opacity .2s;z-index:950}
@@ -211,9 +217,10 @@ details.altd .alt-body{padding:0 .7rem .65rem}
   .anchor[data-edge="r"] .mlabel{left:auto;right:0;transform:none}
   .anchor.active .mlabel{display:block;position:absolute;left:50%;top:100%;transform:translateX(-50%);margin-top:7px;font-family:"Silkscreen",ui-monospace,monospace;font-size:10px;line-height:1;color:#0b3d20;background:#bbf7d0;border:1px solid #86efac;border-radius:6px;padding:2px 6px;white-space:nowrap;z-index:9}
   .detail-pane{flex:1 1 auto;overflow:visible}
-  .detail-inner{padding:.7rem .7rem 4rem}
-  .hero{height:132px}
-  .hero .htxt strong{font-size:1.06rem}
+  .detail-inner{padding:.7rem .7rem 1.6rem}
+  .hero{min-height:96px}
+  .hero .htxt strong{font-size:1rem}
+  .bp-pic{flex-basis:92px;width:92px;height:92px}
 }
 @media(max-width:520px){
   .brand h1{font-size:1.05rem;letter-spacing:1px}
@@ -255,53 +262,49 @@ details.altd .alt-body{padding:0 .7rem .65rem}
 <aside class="drawer" id="drawer" aria-hidden="true">
   <div class="dh"><h2>行前信息 · 硬约束 · 预算</h2><button type="button" id="drawerClose" aria-label="关闭">✕</button></div>
   <div class="dbody">
-    <h3>⏱️ 硬约束时刻表（错过即崩）</h3>
+    <h3>⏱️ 硬约束（错过即崩）</h3>
     <table class="hard">
-      <tr><th>日期</th><th>硬约束</th><th>时刻</th></tr>
-      <tr><td>9/30</td><td>海豚船（松岛港）</td><td><b>10:00 / 13:00 / 15:00</b></td></tr>
-      <tr><td>10/1</td><td>阿苏→黑川 横断巴士</td><td>阿苏站前 <b>14:09</b></td></tr>
-      <tr><td>10/2</td><td>黑川→熊本 横断巴士</td><td>黑川 <b>10:45 / 15:25 / 16:25</b></td></tr>
-      <tr><td>10/5</td><td>机场移动（<b>18:00 起飞</b>）</td><td>15:00 前抵达国际线</td></tr>
+      <tr><th>日期</th><th>事项</th><th>时刻</th></tr>
+      <tr><td>9/30</td><td>海豚船·松岛港（已订 13:00 班）</td><td><b>12:40 前取票</b></td></tr>
+      <tr><td>10/1</td><td>跟团 08:00 出发 → 团车直达黑川</td><td>14:00 抵达·勿随团回</td></tr>
+      <tr><td>10/2</td><td>黑川→熊本 横断巴士</td><td><b>10:45</b> 发（≈11:00）</td></tr>
+      <tr><td>10/5</td><td>返程（<b>18:00 起飞</b>）</td><td>12:00 收尾 · 15:00 到国际线</td></tr>
     </table>
-    <p class="note">以上为全篇主轴，其余安排围绕它们前后浮动。</p>
+    <p class="note">其余安排围绕这四点前后浮动。</p>
 
-    <h3>⚠️ 重要提示（已校正原稿）</h3>
+    <h3>⚠️ 重要提示</h3>
     <ul id="impList"></ul>
 
-    <h3>🧳 出发前准备清单</h3>
+    <h3>🧳 出发清单</h3>
     <ul>
-      <li><b>8/29 10:00 JST</b>：北部九州 JR Pass 5日（启用日 9/29）</li>
-      <li><b>8/29</b>：9/29 さくら 指定席（划右侧窗）</li>
-      <li><b>8/30</b>：A列车运行日确认；Sea Cruise 海豚船网订</li>
-      <li><b>9/1</b>：阿苏男孩号指定席；阿苏→黑川 14:09 横断巴士座位</li>
-      <li><b>9/2</b>：黑川→熊本 15:25 横断巴士座位</li>
-      <li>已订：熊本 ONE STATION HOTEL／福冈 HOTEL LiVEMAX 天神WEST／黑川温泉一泊二食</li>
-      <li>宅急便：9/29 把大件行李直送福冈 HOTEL LiVEMAX 天神WEST，黑川只带随身</li>
-      <li><b>10/5（返程）</b>：10:00 退房、行李寄前台；<b>14:00 前出发</b>，15:00 前到国际线（18:00 起飞）</li>
-      <li>证件：护照、交通系 IC、现金（船/屋台/黑川，备 2–3 万日元）、退税护照</li>
-      <li>必备 App：Google Maps、JR 九州 App / e5489、Japan Bus Online</li>
-      <li>装备：步行鞋、薄外套、防水手机袋（追海豚）</li>
+      <li><b>JR Pass</b>：9/29 启用（有效至 10/3）；9/29 さくら 指定席划右侧窗</li>
+      <li><b>海豚船</b>：确认 13:00 班＋取票方式；备晕船药、防水袋</li>
+      <li><b>10/1 团</b>：确认集合点与「黑川下车」</li>
+      <li><b>宅急便</b>：9/29 博多 → LiVEMAX 天神WEST 直送大件；黑川只带随身一晚</li>
+      <li><b>出发前查</b>：JR 运行日 · 海豚出航 · 阿苏警戒 · 台风/天气</li>
+      <li><b>证件/现金</b>：护照 · IC 卡 · 现金 2–3 万（船/屋台/黑川）· 退税护照</li>
+      <li><b>App/装备</b>：Google Maps · JR九州/e5489 · Japan Bus Online；步行鞋 · 薄外套 · 防水袋</li>
     </ul>
 
-    <h3>💴 预算粗估（1人 · 舒适档 · 不含国际机票）</h3>
+    <h3>💴 预算粗估（1人 · 舒适档）</h3>
     <table>
       <tr><th>类别</th><th>约计（日元）</th></tr>
-      <tr><td>住宿（熊本2+黑川1+博多4）</td><td>60,000–150,000+</td></tr>
-      <tr><td>餐饮（8天）</td><td>40,000–70,000</td></tr>
-      <tr><td>北部九州 JR Pass 5日</td><td>16,000–17,000</td></tr>
-      <tr><td>市电·地铁·西铁·巴士·横断</td><td>12,000–21,000</td></tr>
-      <tr><td>海豚+渡轮</td><td>8,000–10,000</td></tr>
-      <tr><td>阿苏/骑马/博物馆/入汤手形</td><td>4,500–7,500</td></tr>
-      <tr><td><b>合计参考</b></td><td><b>约 15–30 万+</b></td></tr>
+      <tr><td>住宿（熊本2+黑川1+博多3）</td><td>60,000–150,000+</td></tr>
+      <tr><td>餐饮（7 天）</td><td>35,000–60,000</td></tr>
+      <tr><td>JR Pass 5日 + 指定席</td><td>16,000–23,000</td></tr>
+      <tr><td>市内交通 + 横断巴士</td><td>12,000–21,000</td></tr>
+      <tr><td>海豚船 + 渡轮</td><td>8,000–10,000</td></tr>
+      <tr><td>门票（入汤手形/博物馆/骑马）</td><td>4,500–7,500</td></tr>
+      <tr><td><b>合计参考</b></td><td><b>约 14–27 万+</b></td></tr>
     </table>
 
-    <h3>🔄 待核实（出发前 1–2 周逐一核对）</h3>
+    <h3>🔄 出发前 48h 复核</h3>
     <ul>
-      <li>みずほ是否被北部九州 Pass 覆盖；指定席次数上限与 2026 票价</li>
-      <li>阿苏男孩 09:57→阿苏 11:27；A列车 9/30（周三）是否运行</li>
-      <li>入汤手形价格；能古岛渡轮时刻/票价；海豚船与横断巴士时刻</li>
+      <li>JR 运行日与指定席（さくら／横断巴士 10:45）</li>
+      <li>海豚船出航 · 阿苏山警戒级别（以当日为准）</li>
+      <li>天气/台风 · 酒店 Check-in（LiVEMAX 15:00 起）· 宅急便到达</li>
     </ul>
-    <p class="note">信息检索于 2026-08-30；JR 运行日历、海豚船、阿苏警戒级别、横断巴士与酒店请出发前复核。坐标供参考，请与 Google Maps 核对。</p>
+    <p class="note">信息截至 2026-09-27；坐标供参考，请与 Google Maps 核对。</p>
   </div>
 </aside>
 
@@ -1161,7 +1164,7 @@ var TRIP = {
      "end": "21:00",
      "title": "晚餐（赤牛涮涮锅／炸猪排／烧肉／拉面）",
      "subtitle": "但馬屋 樱花町（赤牛）／勝烈亭／たんと 烧肉／黑亭",
-     "core": "赤牛涮涮锅或马肉收尾；吃完早点回酒店，次日 8:04 出发去天草。",
+     "core": "赤牛涮涮锅或马肉收尾；吃完早点回酒店，次日 08:30 进熊本城、10:15 出发去天草。",
      "best": {
       "name": "牛しゃぶ牛すき 但馬屋（SAKURA MACHI 3F，あか牛/九州和牛食べ放題）",
       "navQ": "牛しゃぶ牛すき 但馬屋 サクラマチ熊本",
@@ -1816,7 +1819,7 @@ var TRIP = {
       "lng": 130.4226,
       "type": "transit",
       "score": 5,
-      "reason": "9/30 A列车运休，故用渡轮15:35→三角15:55，接JR普通16:09→熊本17:01；本日海豚10:00班+午餐后最从容的返程组合，含JR Pass。",
+      "reason": "回程：渡轮 15:35 → 三角 15:55，接 JR 普通 16:09 → 熊本 17:01（含 JR Pass）；A列车当日运休，别按旧攻略等 16:35。",
       "loc": "松岛（前岛）港 → 三角港 → 三角站",
       "price": "渡轮2,000（往返已含）+ JR含Pass",
       "hours": "13:40–17:30 段（15:35船、16:09车、17:01到熊本）",
@@ -1881,7 +1884,7 @@ var TRIP = {
        "lng": 130.6881,
        "type": "food",
        "score": 4,
-       "reason": "17:01到熊本，回站前酒店放东西后即在站直结美食街吃晚餐，早睡为次日阿苏男孩号。",
+       "reason": "17:01到熊本，回站前酒店放东西后即在站直结美食街吃晚餐，早睡，次日 08:00 跟团出发。",
        "loc": "熊本站 肥後よかもん市場",
        "price": "约1,000–2,500日元",
        "hours": "约10:00–22:00",
@@ -3130,26 +3133,25 @@ var TRIP = {
      },
      "alts": [
       {
-       "name": "キャナルシティ博多（B1 ラーメンスタジアム／一蘭・もつ鍋 一慶）＋噴水ショー",
-       "navQ": "キャナルシティ博多",
-       "lat": 33.5896,
-       "lng": 130.411,
+       "name": "博多站 JR博多城（AMU EST 1F UNIQLO｜AMU 3F BEAMS·UNITED ARROWS）",
+       "navQ": "JR博多シティ アミュプラザ博多",
+       "lat": 33.5898,
+       "lng": 130.4207,
        "type": "sight",
-       "score": 4,
-       "reason": "よかなび ランキング第2位；B1 食街与 2026 重新开业的ラーメンスタジアム聚集拉面/もつ鍋，晚餐一站式；雨天备案强。",
-       "loc": "福岡市博多区住吉1-2（博多站步行约10分／地鐵祇園・呉服町）",
-       "price": "约1,500日元",
-       "hours": "购物 10:00–21:00／餐饮 11:00–23:00（以官网 /service/#hours 为准）",
-       "shop": "一蘭（B1F）／博多もつ鍋 一慶（B1F）／ラーメンスタジアム（5F）／魚之丸秀（B1F）／ウルフギャング・ステーキハウス（1F）",
-       "photo": "噴水ショー・運河夜景",
-       "warn": "2026年9月东馆再开业；餐饮高峰排长队，19:00 前入店较稳；「能古うどん製造所」9/1–12月下旬休業。",
-       "src": "キャナルシティ博多官网 グルメガイド／ショップニュース（東ビル再始動）",
+       "score": 5,
+       "reason": "官网楼层核实：UNIQLO 在 AMU EST 1F（10:00–21:00，免税）；BEAMS、UNITED ARROWS 在 AMU 3F；URBAN RESEARCH／MHL. 在 AMU 4F——都在同一栋。",
+       "loc": "博多站直结 JR博多城",
+       "price": "购物自定",
+       "hours": "10:00–21:00（UNIQLO AMU EST 1F 10:00–21:00）",
+       "shop": "",
+       "photo": "",
+       "warn": "买完回寄存处取行李再去新干线；退税需护照原件",
+       "src": "JR博多城官网楼层指南",
        "tags": [
         "购物",
-        "美食",
-        "夜景"
+        "潮牌"
        ],
-       "priceBucket": "mid"
+       "priceBucket": "unknown"
       },
       {
        "name": "博多もつ鍋 一慶（キャナルシティ B1F）",
@@ -5365,15 +5367,15 @@ var TRIP = {
  ],
  "meta": {
   "important": [
-   "A列车 9/30（周三）运休——改普通车 熊本8:04→三角8:56 追10:00海豚船；出发前再查JR九州运行日历。",
-   "海豚船在松岛（前岛）港，10:00/13:00/15:00，约2小时，大人约6,000（网订约5,400）；三角港仅现金/PayPay。",
-   "阿苏中岳喷火警戒 Level 2（2026/9/1起）：火口周边1km立入禁止、火口接驳停运 → 改草千里ヶ浜+火山博物馆。",
-   "九州横断巴士不含JR Pass；阿苏→黑川14:09、黑川→熊本15:25 为硬约束，务必预约座位。",
-   "JR Pass 于9/29启用，10/3为最后有效日；10/4起西铁/地铁/巴士自费。",
-   "博多阪急10:00开门（非09:00）；太宰府御本殿改修中，正面参拜改仮殿。",
-   "「努努鸡」机场**国内线2F「玉屋」**可买（明太子味，量少）；博多站マイング/天神也有。",
-   "熊本城（2026-09-18 官网）：**通常営業**，但**最终入园 16:00**（9月–翌6月 9:00–17:00、平日仅南口）；因令和8年熊本地震，**城彩苑「わくわく座」临时休馆**，桜の小路/案内所正常，运营状态可能随时调整。",
-   "熊本城目前**终夜亮灯**（日落到23:00全灯、24:00前月光）：傍晚/夜景外景很好拍；免费机位推荐 行幸坂、二之丸广场、加藤神社、**市役所14F展望ロビー**（平日8:30–22:00／土日祝9:00–22:00）。"
+   "JR Pass：北部九州 5 日，9/29 启用、10/3 最后一天；10/4–10/5 西铁/地铁/巴士自费。",
+   "9/30 天草：去程「熊本⇄リゾラテラス天草」直达巴士免换乘；回程 15:35 渡轮 → 三角 16:09 JR → 熊本 17:01（A列车当日运休，别按旧攻略等 16:35）。",
+   "海豚船 13:00 班：12:40 前到松岛港取票；三角港仅现金/PayPay；备晕船药与防水袋。",
+   "阿苏山警戒 Level 2（2026/9/1 起）：火口 1km 禁入、接驳停运 → 走草千里＋火山博物馆；出发当日查 aso-volcano.jp。",
+   "九州横断巴士不含 JR Pass：仅剩 10/2 黑川 10:45 → 熊本一段，务必预约座位。",
+   "熊本城：通常営業，最终入园 16:00（平日仅南口）；城彩苑「わくわく座」休馆；夜间亮灯至 23:00；机位：行幸坂/二之丸/加藤神社/市役所 14F。",
+   "太宰府御本殿改修中（改仮殿参拜）；参道约 18:00 收摊 → 10/3 先去参道再进本殿。",
+   "购物：退税带护照（10/2 运河城、10/4 天神）；「努努鸡」机场国内线2F「玉屋」/博多站マイング有售。",
+   "紧急：警察 110 · 急救 119 · 中国驻福冈总领馆应急电话出发前自查。"
   ]
  }
 };
@@ -5441,7 +5443,8 @@ function heroHtml(day,block){
   var hard=HARD[day.id+'-'+block.seq];
   return '<div class="hero scene-'+k+'">'+sceneSVG(k)+'<div class="shade"></div>'+
     '<div class="htxt"><span class="htype">'+tp.e+' '+tp.l+'</span><strong>'+esc(block.title)+'</strong>'+
-    (block.subtitle?'<span class="sub">'+esc(block.subtitle)+'</span>':'')+'</div>'+
+    (block.subtitle?'<span class="sub">'+esc(block.subtitle)+'</span>':'')+
+    (day.label?'<span class="dsub">'+esc(day.label)+(day.theme?' \u00B7 '+esc(day.theme):'')+'</span>':'')+'</div>'+
     (hard?'<span class="hh">\u23F1 '+esc(hard)+'</span>':'')+'</div>';
 }
 function chips(item){
@@ -5451,6 +5454,7 @@ function chips(item){
   if(item.hours)p.push('<span class="chip">\uD83D\uDE8C '+esc(item.hours)+'</span>');
   if(item.photo)p.push('<span class="chip">\uD83D\uDCF8 '+esc(item.photo)+'</span>');
   if(item.shop)p.push('<span class="chip">\uD83D\uDECD\uFE0F '+esc(item.shop)+'</span>');
+  if(item.pic)p.push('<span class="chip pic-link" data-href="'+esc(item.picSrc||'')+'" title="\u770B\u539F\u5E16\uFF1A'+esc(item.picBy||'\u5C0F\u7EA2\u4E66')+'">\uD83D\uDCF7 \u539F\u5E16</span>');
   return '<div class="chips">'+p.join('')+'</div>';
 }
 function picHero(it){
@@ -5460,10 +5464,6 @@ function picHero(it){
 function picThumb(it){
   if(!it||!it.pic) return '';
   return '<span class="pic-link alt-thumb-wrap" data-href="'+esc(it.picSrc||'')+'" title="看原帖：'+esc(it.picBy||'')+'"><img class="alt-thumb" src="'+esc(it.pic)+'" loading="lazy" alt=""></span>';
-}
-function picCred(it){
-  if(!it||!it.pic) return '';
-  return '<div class="pic-cred"><span class="pic-link" data-href="'+esc(it.picSrc||'')+'">\uD83D\uDCF7 原帖：'+esc(it.picBy||'小红书')+'</span></div>';
 }
 function nameHtml(item){
   var nm=item.name||'';
@@ -5477,17 +5477,17 @@ function nearbyHtml(block){
       '<span class="nb-meta">'+esc(n.rating||'')+(n.price&&n.price!=='—'?(' · '+esc(n.price)):'')+' · '+esc(n.how||'')+'</span>'+
       '<button type="button" class="copy-btn" data-copy="'+esc(n.name)+'" title="\u590D\u5236\u540D\u79F0">\u29C9</button></li>';
   }).join('');
-  return '<div class="sec-title">\uD83D\uDCCC \u4F60\u6536\u85CF\u7684\u9644\u8FD1\u5730\u70B9\uff08Google \u540D\u5355\uff09</div><ul class="nearby-list">'+rows+'</ul>';
+  return '<details class="altd"><summary><span class="bc-tag alt">\uD83D\uDCCC</span><span class="bc-name" style="font-size:.88rem">\u4F60\u6536\u85CF\u7684\u9644\u8FD1\u5730\u70B9</span><span class="nb-meta" style="font-size:.72rem;color:var(--muted)">Google \u540D\u5355 \u00B7 '+ns.length+' \u4E2A \u00B7 \u70B9\u5F00\u770B</span></summary><div class="alt-body" style="padding-top:.1rem"><ul class="nearby-list">'+rows+'</ul></div></details>';
 }
 function detailHtml(day,block){
   var b=block.best||{}, h='';
   h+=heroHtml(day,block);
-  h+='<div class="meta-line"><span class="when">'+esc(block.start||'依航班')+(block.end?(' \u2013 '+esc(block.end)):'')+'</span><span>'+esc(day.label)+' · '+esc(day.theme)+'</span>'+
+  h+='<div class="meta-line"><span class="when">'+esc(block.start||'依航班')+(block.end?(' \u2013 '+esc(block.end)):'')+'</span>'+
      (b.name?'<span class="gm-link" data-q="'+esc(b.navQ||b.name)+'" role="button" tabindex="0" title="在 Google 地图打开">\uD83D\uDDFA '+esc(b.name)+'</span>':'')+'</div>';
   if(block.core)h+='<div class="core"><b>\u6838\u5FC3\u884C\u52A8\uFF1A</b>'+esc(block.core)+'</div>';
   if(b.name){
-    h+='<div class="block-card best">'+picHero(b)+'<div class="bc-head"><span class="bc-tag">\u6700\u4F18\u9879</span>'+nameHtml(b)+'<span class="stars">'+stars(b.score)+'</span></div>'+
-       (b.reason?'<div class="reason">'+esc(b.reason)+'</div>':'')+chips(b)+picCred(b)+
+    h+='<div class="block-card best"><div class="best-top">'+picHero(b)+'<div class="best-main"><div class="bc-head"><span class="bc-tag">\u6700\u4F18\u9879</span>'+nameHtml(b)+'<span class="stars">'+stars(b.score)+'</span></div>'+
+       (b.reason?'<div class="reason">'+esc(b.reason)+'</div>':'')+'</div></div>'+chips(b)+
        (b.warn?'<div class="warn">\u26A0\uFE0F '+esc(b.warn)+(b.src?'<span class="src">\u6765\u6E90\uFF1A'+esc(b.src)+'</span>':'')+'</div>':'')+'</div>';
   }
   var alts=block.alts||[];
@@ -5495,13 +5495,12 @@ function detailHtml(day,block){
     h+='<div class="sec-title">\u5907\u9009\u65B9\u6848 ('+alts.length+')</div>';
     for(var i=0;i<alts.length;i++){var a=alts[i];
       h+='<details class="altd"><summary><span class="bc-tag alt">\u5907\u9009</span>'+nameHtml(a)+picThumb(a)+'<span class="stars">'+stars(a.score)+'</span>'+
-         (a.reason?'<span style="font-size:.78rem;color:var(--muted);flex:1 1 100px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(a.reason)+'</span>':'')+
-         '</summary><div class="alt-body">'+(a.reason?'<div class="reason">'+esc(a.reason)+'</div>':'')+chips(a)+picCred(a)+
+         '</summary><div class="alt-body">'+(a.reason?'<div class="reason">'+esc(a.reason)+'</div>':'')+chips(a)+
          (a.warn?'<div class="warn">\u26A0\uFE0F '+esc(a.warn)+(a.src?'<span class="src">\u6765\u6E90\uFF1A'+esc(a.src)+'</span>':'')+'</div>':'')+'</div></details>';
     }
   }
   h+=nearbyHtml(block);
-  if(day.rain)h+='<div class="warn" style="margin-top:.8rem">\u2602 \u96E8\u5929/\u6076\u52A3\u5929\u6C14\uFF1A'+esc(day.rain)+'</div>';
+  if(day.rain && day.blocks && day.blocks[0] && day.blocks[0].seq===block.seq)h+='<div class="warn" style="margin-top:.8rem">\u2602 \u96E8\u5929/\u6076\u52A3\u5929\u6C14\uFF08\u5168\u5929\u901A\u7528\uFF09\uFF1A'+esc(day.rain)+'</div>';
   h+='<div class="nav-row"><button type="button" id="prevBtn">\u2039 \u4E0A\u4E00\u6BB5</button><button type="button" id="nextBtn">\u4E0B\u4E00\u6BB5 \u203A</button></div>';
   return h;
 }
