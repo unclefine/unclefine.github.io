@@ -6202,15 +6202,17 @@ function xhsAppOpen(nid,webUrl){
   var ua=navigator.userAgent||'';
   var isAndroid=/Android/i.test(ua), isIOS=/iPhone|iPad|iPod/i.test(ua);
   if(!nid||(!isAndroid&&!isIOS)) return false;
-  var alive=true, t1=null, t2=null;
-  document.addEventListener('visibilitychange',function h(){ if(document.hidden){ alive=false; clearTimeout(t1); clearTimeout(t2); } },{once:true});
+  var w=window.open('', '_blank');           /* 在用户手势内同步开新页签 */
+  if(!w) return false;                       /* 被拦截则退回 <a target=_blank> 默认行为 */
+  try{ w.document.write('<title>\u6B63\u5728\u6253\u5F00\u5C0F\u7EA2\u4E66\u2026</title><body style="font:15px -apple-system,sans-serif;padding:2rem;color:#0b3d20">\u6B63\u5728\u6253\u5F00\u5C0F\u7EA2\u4E66\u2026<br><span style="color:#4b8670;font-size:13px">\u82E5\u672A\u8DF3\u8F6C\uFF0C\u5C06\u81EA\u52A8\u6253\u5F00\u7F51\u9875\u7248\u3002</span></body>'); }catch(e){}
+  var go=function(u){ try{ if(w&&!w.closed) w.location.href=u; }catch(e){} };
   if(isAndroid){
-    t1=setTimeout(function(){ if(alive&&webUrl) location.href=webUrl; },1800);
-    location.href='intent://item/'+nid+'#Intent;scheme=xhsdiscover;package=com.xingin.xhs;S.browser_fallback_url='+encodeURIComponent(webUrl||'')+';end';
+    go('intent://item/'+nid+'#Intent;scheme=xhsdiscover;package=com.xingin.xhs;S.browser_fallback_url='+encodeURIComponent(webUrl||'')+';end');
+    setTimeout(function(){ go(webUrl||'https://www.xiaohongshu.com/'); },1800);
   }else{
-    t1=setTimeout(function(){ if(alive){ try{ location.href='xhsdiscovery://item/'+nid; }catch(e){} } },700);
-    t2=setTimeout(function(){ if(alive&&webUrl) location.href=webUrl; },1900);
-    location.href='xhsdiscover://item/'+nid;
+    go('xhsdiscover://item/'+nid);
+    setTimeout(function(){ go('xhsdiscovery://item/'+nid); },700);
+    setTimeout(function(){ go(webUrl||'https://www.xiaohongshu.com/'); },1800);
   }
   return true;
 }
