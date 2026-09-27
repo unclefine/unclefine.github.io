@@ -512,16 +512,7 @@ var TRIP = {
       }
      ],
      "store": "day-929-2",
-     "nearby": [
-      {
-       "name": "LOPIA 博多ヨドバシ",
-       "dist": 0.23,
-       "how": "步行3分",
-       "rating": "4.2(1,852)",
-       "price": "—",
-       "cat": "超市"
-      }
-     ]
+     "nearby": []
     },
     {
      "seq": 3,
@@ -642,18 +633,50 @@ var TRIP = {
       {
        "name": "努努鶏 博多マイング",
        "dist": 0.13,
-       "how": "步行2分",
        "rating": "4.4(399)",
        "price": "¥1,000–2,000",
-       "cat": "炸鸡"
+       "cat": "炸鸡",
+       "how": "步行2分"
       },
       {
        "name": "Menya ISHII（沾面）",
        "dist": 0.46,
-       "how": "步行7分",
        "rating": "4.3(783)",
        "price": "¥1,000–2,000",
-       "cat": "沾面"
+       "cat": "沾面",
+       "how": "步行7分"
+      },
+      {
+       "name": "Cafe Mutsukado",
+       "dist": 0.11,
+       "rating": "4.1(995)",
+       "price": "¥1,000–2,000",
+       "cat": "咖啡",
+       "how": "步行2分"
+      },
+      {
+       "name": "LOPIA 博多ヨドバシ",
+       "dist": 0.23,
+       "rating": "4.2(1,852)",
+       "price": "—",
+       "cat": "超市",
+       "how": "步行3分"
+      },
+      {
+       "name": "Dacomecca（面包）",
+       "dist": 0.3,
+       "rating": "4.1(2,274)",
+       "price": "¥1,000–2,000",
+       "cat": "面包",
+       "how": "步行4分"
+      },
+      {
+       "name": "Komeda 珈琲 博多駅東店",
+       "dist": 0.31,
+       "rating": "4.1(1,334)",
+       "price": "¥1–1,000",
+       "cat": "咖啡",
+       "how": "步行4分"
       }
      ]
     },
@@ -749,7 +772,48 @@ var TRIP = {
       }
      ],
      "store": "day-929-4",
-     "nearby": []
+     "nearby": [
+      {
+       "name": "Cafe Mutsukado",
+       "dist": 0.11,
+       "rating": "4.1(995)",
+       "price": "¥1,000–2,000",
+       "cat": "咖啡",
+       "how": "步行2分"
+      },
+      {
+       "name": "努努鶏 博多マイング",
+       "dist": 0.13,
+       "rating": "4.4(399)",
+       "price": "¥1,000–2,000",
+       "cat": "炸鸡",
+       "how": "步行2分"
+      },
+      {
+       "name": "LOPIA 博多ヨドバシ",
+       "dist": 0.23,
+       "rating": "4.2(1,852)",
+       "price": "—",
+       "cat": "超市",
+       "how": "步行3分"
+      },
+      {
+       "name": "Dacomecca（面包）",
+       "dist": 0.3,
+       "rating": "4.1(2,274)",
+       "price": "¥1,000–2,000",
+       "cat": "面包",
+       "how": "步行4分"
+      },
+      {
+       "name": "Komeda 珈琲 博多駅東店",
+       "dist": 0.31,
+       "rating": "4.1(1,334)",
+       "price": "¥1–1,000",
+       "cat": "咖啡",
+       "how": "步行4分"
+      }
+     ]
     },
     {
      "seq": 5,
@@ -2741,12 +2805,13 @@ var TRIP = {
    "id": "day-1002",
    "date": "2026-10-02",
    "label": "10/2（五）",
-   "theme": "黑川晨汤 → 11:00 出发回福冈（下午到，晚上屋台）",
-   "note": "10/2 上午 11:00 离开黑川（10:45 横断バス ≈13:23 熊本 → 新干线回博多）→ 14:30 前后到福冈、酒店寄行李 → **下午直奔鸟栖 Premium Outlets（购物主战场）** → 晚上回中洲屋台。",
-   "rain": "雨天：黑川晨汤照旧；福冈改博多站/天神地下街室内。",
+   "theme": "黑川晨汤 → 11:00 出发 → 博多 → 太宰府 → 中洲屋台",
+   "note": "10/2 上午 11:00 离开黑川 → 熊本 13:23 → 新干线回博多、酒店寄行李 → **下午直接去太宰府**（西铁约50分；参道 18:00 前、本殿开到19:00）→ 晚上中洲屋台。天神扫货改到 10/4，运河城改到 10/3。",
+   "rain": "雨天：太宰府改九州国立博物馆＋参道室内店；晚上屋台照旧（备室内拉面）。",
    "blocks": [
     {
      "seq": 1,
+     "store": "day-1002-1",
      "start": "07:00",
      "end": "08:30",
      "title": "朝汤 + 早餐（宿内）",
@@ -2795,28 +2860,25 @@ var TRIP = {
        "priceBucket": "economy"
       },
       {
-       "name": "わろく屋（あか牛御膳・丸鈴橋旁）",
-       "navQ": "黒川温泉 わろく屋",
+       "name": "丸鈴橋・温泉街散策（白天）",
+       "navQ": "丸鈴橋 黒川温泉",
        "lat": 33.066,
        "lng": 131.1495,
-       "type": "food",
+       "type": "sight",
        "score": 4,
-       "reason": "明治古民家移筑，主打くまもとあか牛（あか牛御膳/まぶし/カレー），位于丸鈴橋桥头；若宿内晚餐前想加一顿乡土正餐，此为最近选择。与最优项活动类型不同。",
-       "loc": "黒川温泉 丸鈴橋たもと",
-       "price": "约2,000–3,500円",
-       "hours": "11:00–16:00；周四、周五定休（周五有时营业）",
-       "shop": "わろく屋（御客屋系）",
-       "photo": "丸鈴橋+あか牛御膳",
-       "warn": "定休须先确认；晚餐时段不营业",
-       "src": "https://www.kurokawaonsen.or.jp/omise/detail.php?intSKey=17",
+       "reason": "温泉街地标，白天拍木造旅馆+溪流；15:30 后再出门走。",
+       "loc": "黑川温泉 丸鈴橋周边",
+       "price": "免费",
+       "hours": "全天",
+       "shop": "",
+       "photo": "",
+       "warn": "路窄注意车辆",
+       "src": "黑川温泉组合官网",
        "tags": [
-        "美食",
-        "郷土料理"
+        "景点",
+        "打卡"
        ],
-       "priceBucket": "mid",
-       "pic": "img/68634e42000000001c031d99.jpg",
-       "picSrc": "https://www.xiaohongshu.com/search_result/68634e42000000001c031d99?xsec_token=ABsZrjI8ien3ETTWUtm5GEsFwVPvSc0s8TdM3iZAA1yn0=&xsec_source=",
-       "picBy": "福冈黑川温泉♨️小镇里震撼人心的美味"
+       "priceBucket": "covered"
       },
       {
        "name": "湯音 / 山のいぶき（山吹色ジャージー牛乳・ソフト）",
@@ -2840,11 +2902,11 @@ var TRIP = {
        "priceBucket": "economy"
       }
      ],
-     "store": "day-1002-1",
      "nearby": []
     },
     {
      "seq": 2,
+     "store": "day-1002-2",
      "start": "08:30",
      "end": "10:30",
      "title": "温泉街晨间（甜点+散步）",
@@ -2873,28 +2935,25 @@ var TRIP = {
      },
      "alts": [
       {
-       "name": "わろく屋（あか牛御膳・丸鈴橋旁）",
-       "navQ": "黒川温泉 わろく屋",
+       "name": "丸鈴橋・温泉街散策（白天）",
+       "navQ": "丸鈴橋 黒川温泉",
        "lat": 33.066,
        "lng": 131.1495,
-       "type": "food",
+       "type": "sight",
        "score": 4,
-       "reason": "明治古民家移筑，主打くまもとあか牛（あか牛御膳/まぶし/カレー），位于丸鈴橋桥头；若宿内晚餐前想加一顿乡土正餐，此为最近选择。与最优项活动类型不同。",
-       "loc": "黒川温泉 丸鈴橋たもと",
-       "price": "约2,000–3,500円",
-       "hours": "11:00–16:00；周四、周五定休（周五有时营业）",
-       "shop": "わろく屋（御客屋系）",
-       "photo": "丸鈴橋+あか牛御膳",
-       "warn": "定休须先确认；晚餐时段不营业",
-       "src": "https://www.kurokawaonsen.or.jp/omise/detail.php?intSKey=17",
+       "reason": "温泉街地标，白天拍木造旅馆+溪流；15:30 后再出门走。",
+       "loc": "黑川温泉 丸鈴橋周边",
+       "price": "免费",
+       "hours": "全天",
+       "shop": "",
+       "photo": "",
+       "warn": "路窄注意车辆",
+       "src": "黑川温泉组合官网",
        "tags": [
-        "美食",
-        "郷土料理"
+        "景点",
+        "打卡"
        ],
-       "priceBucket": "mid",
-       "pic": "img/68634e42000000001c031d99.jpg",
-       "picSrc": "https://www.xiaohongshu.com/search_result/68634e42000000001c031d99?xsec_token=ABsZrjI8ien3ETTWUtm5GEsFwVPvSc0s8TdM3iZAA1yn0=&xsec_source=",
-       "picBy": "福冈黑川温泉♨️小镇里震撼人心的美味"
+       "priceBucket": "covered"
       },
       {
        "name": "手形饮食兑换（とうふ吉祥 だんご/豆乳ソフト・杉養蜂園ソフト・山のいぶきソフト）",
@@ -2942,16 +3001,16 @@ var TRIP = {
        "priceBucket": "economy"
       }
      ],
-     "store": "day-1002-2",
      "nearby": []
     },
     {
      "seq": 3,
+     "store": "day-1002-3",
      "start": "10:30",
-     "end": "13:30",
-     "title": "黑川 → 熊本（10:45 班）",
-     "subtitle": "横断バス约2h40 → 熊本站前 13:23",
-     "core": "10:45 横断バス出发（≈11:00），约 13:23 到熊本站前。",
+     "end": "13:45",
+     "title": "黑川 → 熊本 → 博多 + 酒店寄行李",
+     "subtitle": "横断バス2h40 + 新干线35–40分",
+     "core": "10:45 横断バス（≈11:00）→ 熊本 13:23 → 新干线 → 博多约14:10 → 酒店寄行李；14:45 出发去太宰府。",
      "best": {
       "name": "九州横断バス 2号 黑川10:45→熊本駅前13:23",
       "navQ": "黒川温泉 バス停 10:45",
@@ -2975,47 +3034,6 @@ var TRIP = {
      },
      "alts": [
       {
-       "name": "包车/出租车 黑川 → 博多（门到门）",
-       "navQ": "黒川温泉 タクシー 博多",
-       "lat": 33.064,
-       "lng": 131.148,
-       "type": "transit",
-       "score": 4,
-       "reason": "直接送到博多酒店，约2.5–3h，免换乘；人多/行李多更值。",
-       "loc": "黑川温泉旅馆门口 → 博多",
-       "price": "约25,000–35,000日元/车",
-       "hours": "全天（需预约）",
-       "shop": "",
-       "photo": "",
-       "warn": "费用高；山区配车少，提前一天订",
-       "src": "一般包车/出租车行情（以报价为准）",
-       "tags": [
-        "交通",
-        "包车"
-       ],
-       "priceBucket": "high"
-      },
-      {
-       "name": "熊本駅 名物（黑亭拉面 / いきなり団子）",
-       "navQ": "熊本駅 黒亭 いきなり団子",
-       "lat": 32.7898,
-       "lng": 130.688,
-       "type": "food",
-       "score": 4,
-       "reason": "等待新干线时在熊本站快速吃熊本拉面/乡土点心，填肚子后再上车。与最优项活动类型不同。",
-       "loc": "熊本站 站内/站前",
-       "price": "约800–1,500円",
-       "hours": "约11:00–22:00",
-       "shop": "黑亭拉面 / 熊本站売店",
-       "photo": "熊本拉面",
-       "warn": "控制时间，勿误新干线",
-       "src": "https://tabelog.com/kumamoto/",
-       "tags": [
-        "美食"
-       ],
-       "priceBucket": "economy"
-      },
-      {
        "name": "九州新干线 さくら号 指定席（博多→熊本）",
        "navQ": "博多駅 新幹線ホーム",
        "lat": 33.5898,
@@ -3035,40 +3053,7 @@ var TRIP = {
         "新干线"
        ],
        "priceBucket": "covered"
-      }
-     ],
-     "store": "day-1002-3",
-     "nearby": []
-    },
-    {
-     "seq": 4,
-     "start": "13:30",
-     "end": "14:30",
-     "title": "熊本→博多 + 酒店寄行李",
-     "subtitle": "さくら约35–40分；LiVEMAX 15:00 后 check-in",
-     "core": "到博多后转地铁去天神/赤坂的酒店先寄行李（15:00 才能入住）。",
-     "best": {
-      "name": "九州新干线 さくら号 指定席（博多→熊本）",
-      "navQ": "博多駅 新幹線ホーム",
-      "lat": 33.5898,
-      "lng": 130.4207,
-      "type": "transit",
-      "score": 5,
-      "reason": "约33–40分直达熊本，班次密；北部九州JR Pass覆盖博多–熊本区间，指定席提前划位最稳。",
-      "loc": "博多站 新干线月台",
-      "price": "含JR Pass（无Pass单程约5,500日元级）",
-      "hours": "09:30–10:30 发车（约每10–20分一班）",
-      "shop": "",
-      "photo": "南下时明海多在行进方向右侧，优先划右侧窗（以车型/方向现场确认）",
-      "warn": "みずほ是否被北部九州Pass覆盖需以JR九州现行规定核实，稳妥选さくら/つばめ；热门车次指定席易满，建议开通日1个月前10:00划位。",
-      "src": "JR九州官网（さくら/つばめ时刻与Pass覆盖）；北部九州Pass条款以官网为准",
-      "tags": [
-       "交通",
-       "新干线"
-      ],
-      "priceBucket": "covered"
-     },
-     "alts": [
+      },
       {
        "name": "酒店寄存行李（LiVEMAX 天神WEST）",
        "navQ": "ホテルリブマックス福岡天神WEST",
@@ -3109,39 +3094,536 @@ var TRIP = {
         "交通"
        ],
        "priceBucket": "economy"
-      },
-      {
-       "name": "高速巴士 熊本 → 博多",
-       "navQ": "熊本 博多 高速バス",
-       "lat": 32.7898,
-       "lng": 130.688,
-       "type": "transit",
-       "score": 3,
-       "reason": "无 Pass 或新干线满席时的备选：约2–2.5h。",
-       "loc": "熊本站/桜町 → 博多站",
-       "price": "约2,000–2,800日元",
-       "hours": "日间约每30–60分",
-       "shop": "",
-       "photo": "",
-       "warn": "耗时翻倍",
-       "src": "西铁高速巴士（以官网为准）",
-       "tags": [
-        "交通",
-        "巴士"
-       ],
-       "priceBucket": "mid"
       }
      ],
+     "nearby": []
+    },
+    {
+     "seq": 4,
      "store": "day-1002-4",
+     "start": "14:45",
+     "end": "18:15",
+     "title": "太宰府天满宫 + 参道",
+     "subtitle": "西铁约50分·本殿改修中（仮殿）",
+     "core": "15:40 前后到：先参道（おいげん/梅枝饼，18:00 前收摊），再进天满宫本殿；余力足够才加竈門神社（+1.5h）。",
+     "best": {
+      "name": "和牛めんたい神楽 太宰府天満宮参道（参道午餐）",
+      "navQ": "和牛めんたい神楽 太宰府天満宮参道",
+      "lat": 33.5206,
+      "lng": 130.5347,
+      "type": "food",
+      "score": 4,
+      "reason": "ホットペッパー核定：参道内、太宰府駅步行3分，午餐预算 2,001–3,000，可尝当地和牛与明太子。",
+      "loc": "太宰府天満宮参道内（太宰府駅步行约3分）",
+      "price": "约2,500日元",
+      "hours": "以店家为准（午市；建议预约）",
+      "shop": "和牛・明太子御膳",
+      "photo": "",
+      "warn": "热门时段排队，建议 12:00 前或预约。",
+      "src": "ホットペッパーグルメ（太宰府・和食／和牛めんたい神楽 太宰府天満宮参道）",
+      "tags": [
+       "美食",
+       "午餐"
+      ],
+      "priceBucket": "mid"
+     },
+     "alts": [
+      {
+       "name": "おいげん／魁源（虾油拉面·太宰府店）",
+       "navQ": "Oigen Dazaifu",
+       "lat": 33.5195,
+       "lng": 130.534,
+       "type": "food",
+       "score": 5,
+       "reason": "小红书两篇强推：站步行1分钟，豚骨＋虾油两种汤底，虾油“香气满满却清爽”；叉烧拉面1050–1350日元，饺子300日元。",
+       "loc": "太宰府市宰府1-10-32（西铁太宰府站步行约1分）",
+       "price": "约1,050–1,600日元",
+       "hours": "10:00–16:00",
+       "shop": "",
+       "photo": "",
+       "warn": "只有约十个座位，饭点排队；比五角碗一兰更值得",
+       "src": "小红书真实用户（@只懂吃一兰拉面 106赞 / @空着肚子来太宰府 438赞）",
+       "tags": [
+        "美食",
+        "拉面"
+       ],
+       "priceBucket": "mid",
+       "pic": "img/68eb8af5000000000301e5db.jpg",
+       "picSrc": "https://www.xiaohongshu.com/search_result/68eb8af5000000000301e5db?xsec_token=ABvGOTx8VwKuWvE-vEzd3g8_4s8AoZlS7ySb4JfKX9RNA=&xsec_source=",
+       "picBy": "福冈🇯🇵|太宰府是谁还只懂吃一兰拉面!!"
+      },
+      {
+       "name": "かさの家（现烤梅枝饼）",
+       "navQ": "Kasanoya Dazaifu",
+       "lat": 33.5206,
+       "lng": 130.5344,
+       "type": "food",
+       "score": 4,
+       "reason": "小红书 438 赞合集：太宰府人气第一的梅枝饼老店，现做现卖可看制作过程；参道上多家口味相近，哪家出炉排队少买哪家即可。",
+       "loc": "太宰府参道（天满宫前）",
+       "price": "约150–500日元",
+       "hours": "约09:00–18:00",
+       "shop": "",
+       "photo": "",
+       "warn": "现烤要趁热吃；周六人多",
+       "src": "小红书真实用户（@旅行海豹 438赞）",
+       "tags": [
+        "美食",
+        "参道小吃"
+       ],
+       "priceBucket": "economy",
+       "pic": "img/68e8e6360000000003035041.jpg",
+       "picSrc": "https://www.xiaohongshu.com/search_result/68e8e6360000000003035041?xsec_token=ABYWvIpEsqOH7bW05A65T9HU53bK9u-mUPnvRlAWi_qfc=&xsec_source=",
+       "picBy": "答应我一定要空着肚子来太宰府好吗！"
+      },
+      {
+       "name": "梅ヶ枝餅 やす武本店",
+       "navQ": "梅ヶ枝餅 やす武本店",
+       "lat": 33.5211,
+       "lng": 130.5342,
+       "type": "food",
+       "score": 5,
+       "reason": "官网核定：北海道十勝小豆馅＋国産餅米，参道本店；宰府六座・鎌倉期起源老铺。",
+       "loc": "福岡県太宰府市宰府2-7-16（天満宮参道）",
+       "price": "约160日元",
+       "hours": "8:30–18:00，不定休",
+       "shop": "梅ヶ枝餅、太宰府梅サイダー",
+       "photo": "",
+       "warn": "现烤需稍等；不定休，节假日建议早去。",
+       "src": "梅ヶ枝餅 やす武官网（营业时间・店铺案内）",
+       "tags": [
+        "美食",
+        "参道小吃"
+       ],
+       "priceBucket": "economy",
+       "pic": "img/6a7b711500000000220123e9.jpg",
+       "picSrc": "https://www.xiaohongshu.com/search_result/6a7b711500000000220123e9?xsec_token=AB5SP5hMN7qfx9R05OnJmaclvx3Zu1Zy_PU_DrfX7cNcI=&xsec_source=",
+       "picBy": "太宰府半日游指南！6家超好逛小店（请收藏！）"
+      },
+      {
+       "name": "宝満宮 竈門神社（结缘神社·「竈門」朝圣）",
+       "navQ": "宝満宮竈門神社",
+       "lat": 33.533,
+       "lng": 130.5435,
+       "type": "sight",
+       "score": 4,
+       "reason": "官网：太宰府駅乘社区巴士「まほろば号」内山行き约10分/100日元（每天运行），天满宫步行约30分；结缘·方除神社，因「竈門」二字与《鬼灭之刃》同字成粉丝朝圣点，境内高处可俯瞰太宰府。",
+       "loc": "太宰府市内山883（太宰府駅→まほろば号「内山」终点，约10分/100日元）",
+       "price": "免费（巴士100日元/单程）",
+       "hours": "境内参拜自由（约09:00–17:00受理）",
+       "shop": "",
+       "photo": "",
+       "warn": "来回+参拜需预留1.5–2小时，会压缩参道逛街；周六人多；步行上山约30–40分",
+       "src": "竈門神社官网交通案内 kamadojinja.or.jp/access（まほろば号10分/100日元・步行40分）",
+       "tags": [
+        "景点",
+        "神社"
+       ],
+       "priceBucket": "economy",
+       "pic": "img/6a81e08c0000000005033504.jpg",
+       "picSrc": "https://www.xiaohongshu.com/search_result/6a81e08c0000000005033504?xsec_token=ABovR2pxz9hBxUrAVwNchy6rB3__luw-Cri_lY5pRpty8=&xsec_source=",
+       "picBy": "太宰府灶门神社，鬼灭之刃圣地，求姻缘很灵"
+      }
+     ],
      "nearby": []
     },
     {
      "seq": 5,
-     "start": "14:45",
-     "end": "20:30",
+     "store": "day-1002-5",
+     "start": "19:30",
+     "end": "21:30",
+     "title": "中洲屋台（首夜）",
+     "subtitle": "那珂川沿岸·先问价再点",
+     "core": "第一次屋台就选最经典的中洲：点一两样+一杯酒，喜欢再加。",
+     "best": {
+      "name": "中洲屋台街（中洲・那珂川沿い／中洲屋台横丁）",
+      "navQ": "中洲屋台街 福岡",
+      "lat": 33.5907,
+      "lng": 130.4058,
+      "type": "food",
+      "score": 5,
+      "reason": "福冈屋台文化代表，那珂川沿线约20家；从你的酒店（LiVEMAX 天神WEST）步行约12–15分或地铁1站到中洲，10/2为周五最热闹。",
+      "loc": "福冈市博多区中洲（中洲川端站步行约1–5分）",
+      "price": "人均约2,000–4,000円",
+      "hours": "约18:00–次日02:00（多数店周日休）",
+      "shop": "各屋台（豚骨拉面/关东煮/烧鸟/明太子）",
+      "photo": "那珂川屋台灯火、屋台内暖帘",
+      "warn": "先问清价格与支付方式（多为现金）；一人一座；勿长坐；行李精简；店外禁止立饮",
+      "src": "https://www.crossroadfukuoka.jp/feature/yatai ; https://www.japan-guide.com/e/e4803.html",
+      "tags": [
+       "美食",
+       "屋台",
+       "夜景"
+      ],
+      "priceBucket": "mid",
+      "pic": "img/6aa69040000000000b036ad1.jpg",
+      "picSrc": "https://www.xiaohongshu.com/search_result/6aa69040000000000b036ad1?xsec_token=ABRUwU2aWylMxwGhwWWixme2DiyZKg28DK_ao5U2hiS58=&xsec_source=",
+      "picBy": "福冈的夜晚，一定要留一次给屋台🏮"
+     },
+     "alts": [
+      {
+       "name": "博多だるま 総本店（浓厚豚骨拉面）",
+       "navQ": "Hakata Daruma Honten",
+       "lat": 33.5852,
+       "lng": 130.406,
+       "type": "food",
+       "score": 4,
+       "reason": "Google 4.0（3,168 评价）；小红书实测：正统浓厚豚骨，不少艺人造访，地铁站走过去约7–8分。",
+       "loc": "博多区（総本店，Google 地图可搜）",
+       "price": "约1,000–2,000日元",
+       "hours": "约11:00–23:00（以店为准）",
+       "shop": "",
+       "photo": "",
+       "warn": "不喜欢浓猪骨味慎选；饭点排队",
+       "src": "Google 地图收藏「北九州物语」（评分/评价数）；小红书真实用户笔记（@记录一家福冈很多ldh艺人认证的豚骨拉面 669赞）",
+       "tags": [
+        "美食",
+        "拉面"
+       ],
+       "priceBucket": "mid",
+       "pic": "img/pl_pl_daruma.jpg",
+       "picSrc": "https://www.xiaohongshu.com/search_result/694238ca000000001e005c8a?xsec_token=ABWb-l2ciHehLVcFd87Sq8l360Cn5KbdPHUsUyooFRZvY=&xsec_source=",
+       "picBy": "记录一家福冈很多ldh艺人认证的豚骨拉面"
+      },
+      {
+       "name": "Shin-Shin／一幸舎（博多站 KITTE·B1）",
+       "navQ": "Shin-Shin 博多駅 KITTE",
+       "lat": 33.5927,
+       "lng": 130.3968,
+       "type": "food",
+       "score": 4,
+       "reason": "博多豚骨代表，站内/KITTE 都有分店，比天神本店排队短。",
+       "loc": "博多站 KITTE B1 等",
+       "price": "约900–1,300日元",
+       "hours": "约10:00–22:00",
+       "shop": "",
+       "photo": "",
+       "warn": "饭点排队",
+       "src": "Google 4.3（7,907）；小红书真实笔记",
+       "tags": [
+        "美食",
+        "拉面"
+       ],
+       "priceBucket": "economy"
+      },
+      {
+       "name": "一兰 本社总本店（中洲·发源总店）",
+       "navQ": "Ichiran Honten Nakasu",
+       "lat": 33.5932,
+       "lng": 130.4046,
+       "type": "food",
+       "score": 4,
+       "reason": "Google 4.2（13,214 评价）；小红书：一兰发源总店，中洲川端站步行可达，傍晚5点前人少不用排队。",
+       "loc": "博多区中洲（中洲川端站步行约3分）",
+       "price": "约1,000–2,000日元",
+       "hours": "24小时（以店为准）",
+       "shop": "",
+       "photo": "",
+       "warn": "避开19:00–22:00长队",
+       "src": "Google 地图收藏「北九州物语」（评分/评价数）；小红书真实用户笔记（@🇯🇵福冈必吃|拉面发源地一兰总店不排队！ 225赞）",
+       "tags": [
+        "美食",
+        "拉面"
+       ],
+       "priceBucket": "mid",
+       "pic": "img/pl_pl_ichiran.jpg",
+       "picSrc": "https://www.xiaohongshu.com/search_result/666ead33000000000d00caa3?xsec_token=ABO26NrDbDTrZkHALoHZYRzLH1nbKAXJAivCh0aRKZlJ8=&xsec_source=",
+       "picBy": "🇯🇵福冈必吃|拉面发源地一兰总店不排队！"
+      },
+      {
+       "name": "中洲リバークルーズ（水上观屋台夜景・约30分）",
+       "navQ": "中洲クルーズ 福岡",
+       "lat": 33.5914,
+       "lng": 130.406,
+       "type": "sight",
+       "score": 4,
+       "reason": "官方介绍：约30分游船，从水面看中洲屋台与运河城灯火，16:00–21:00每小时一班；与屋台进食活动类型不同，适合饭前或饭后。",
+       "loc": "博多リバレイン／中洲 乘船场",
+       "price": "约1,000–1,800円",
+       "hours": "16:00–21:00 每小时一班（约30分）",
+       "shop": "リバークルーズ公式",
+       "photo": "水上屋台夜景",
+       "warn": "需配合班次；雨天或停航",
+       "src": "https://www.crossroadfukuoka.jp/feature/yatai",
+       "tags": [
+        "景点",
+        "夜景",
+        "游船"
+       ],
+       "priceBucket": "mid"
+      }
+     ],
+     "nearby": [
+      {
+       "name": "Itookashi（定食）",
+       "dist": 0.27,
+       "rating": "4.4(1,530)",
+       "price": "¥2,000–3,000",
+       "cat": "定食",
+       "how": "步行4分"
+      },
+      {
+       "name": "一兰 本社总本店（中洲）",
+       "dist": 0.3,
+       "rating": "4.2(13,214)",
+       "price": "¥1,000–2,000",
+       "cat": "拉面",
+       "how": "步行4分"
+      },
+      {
+       "name": "Yakitori 634 武蔵",
+       "dist": 0.31,
+       "rating": "4.2(1,042)",
+       "price": "¥2,000–6,000",
+       "cat": "烧鸟",
+       "how": "步行4分"
+      },
+      {
+       "name": "Hakata Ramen Hakataya 川端",
+       "dist": 0.41,
+       "rating": "4.1(2,410)",
+       "price": "¥1–1,000",
+       "cat": "拉面",
+       "how": "步行6分"
+      },
+      {
+       "name": "まぐろとごはん 黒田飯",
+       "dist": 0.42,
+       "rating": "4.9(2,609)",
+       "price": "¥2,000–6,000",
+       "cat": "海鲜丼",
+       "how": "步行6分"
+      },
+      {
+       "name": "博多だるま 総本店",
+       "dist": 0.61,
+       "rating": "4.0(3,168)",
+       "price": "¥1,000–2,000",
+       "cat": "拉面",
+       "how": "步行9分"
+      }
+     ]
+    },
+    {
+     "seq": 6,
+     "store": "day-1002-6",
+     "start": "21:30",
+     "end": "22:00",
+     "title": "中洲河畔夜景 / 回酒店",
+     "subtitle": "那珂川灯火",
+     "core": "沿河走一小段看夜景，回酒店休息。",
+     "best": {
+      "name": "中洲河畔夜景散步（那珂川沿岸）",
+      "navQ": "中洲 那珂川 夜景",
+      "lat": 33.5914,
+      "lng": 130.406,
+      "type": "sight",
+      "score": 4,
+      "reason": "屋台灯火+河面倒影是福冈最经典的夜拍；从春吉桥到中洲桥走 10–15 分钟。",
+      "loc": "博多区中洲 那珂川沿岸",
+      "price": "免费",
+      "hours": "全天（夜间灯火最佳）",
+      "shop": "",
+      "photo": "",
+      "warn": "河边栏杆湿滑注意；别堵住通行",
+      "src": "福冈县观光官网（屋台特集）",
+      "tags": [
+       "夜景",
+       "散步"
+      ],
+      "priceBucket": "covered"
+     },
+     "alts": [
+      {
+       "name": "中洲リバークルーズ（水上观屋台夜景・约30分）",
+       "navQ": "中洲クルーズ 福岡",
+       "lat": 33.5914,
+       "lng": 130.406,
+       "type": "sight",
+       "score": 4,
+       "reason": "官方介绍：约30分游船，从水面看中洲屋台与运河城灯火，16:00–21:00每小时一班；与屋台进食活动类型不同，适合饭前或饭后。",
+       "loc": "博多リバレイン／中洲 乘船场",
+       "price": "约1,000–1,800円",
+       "hours": "16:00–21:00 每小时一班（约30分）",
+       "shop": "リバークルーズ公式",
+       "photo": "水上屋台夜景",
+       "warn": "需配合班次；雨天或停航",
+       "src": "https://www.crossroadfukuoka.jp/feature/yatai",
+       "tags": [
+        "景点",
+        "夜景",
+        "游船"
+       ],
+       "priceBucket": "mid"
+      },
+      {
+       "name": "天神屋台 小金ちゃん（焼きラーメン元祖・天神）",
+       "navQ": "天神屋台 小金ちゃん",
+       "lat": 33.5905,
+       "lng": 130.401,
+       "type": "food",
+       "score": 4,
+       "reason": "よかなび在册：1968年创业、焼きラーメン元祖，天神エリア地元客多。",
+       "loc": "福岡市中央区天神（天神エリア）",
+       "price": "约2,000日元",
+       "hours": "18:00頃–深夜（当日为准）",
+       "shop": "焼きラーメン・焼き鳥・おでん",
+       "photo": "",
+       "warn": "排队常见。",
+       "src": "よかなび 屋台一覧（小金ちゃん）",
+       "tags": [
+        "美食",
+        "屋台"
+       ],
+       "priceBucket": "mid",
+       "pic": "img/68e067c90000000007001995.jpg",
+       "picSrc": "https://www.xiaohongshu.com/search_result/68e067c90000000007001995?xsec_token=ABj0L2nOG9Iu907Jm3YbAB8ujG_zHAygUloWBhAjdgPvo=&xsec_source=",
+       "picBy": "吃上之前没想到有这么好吃的天神屋台🍤"
+      },
+      {
+       "name": "博多だるま 総本店（浓厚豚骨拉面）",
+       "navQ": "Hakata Daruma Honten",
+       "lat": 33.5852,
+       "lng": 130.406,
+       "type": "food",
+       "score": 4,
+       "reason": "Google 4.0（3,168 评价）；小红书实测：正统浓厚豚骨，不少艺人造访，地铁站走过去约7–8分。",
+       "loc": "博多区（総本店，Google 地图可搜）",
+       "price": "约1,000–2,000日元",
+       "hours": "约11:00–23:00（以店为准）",
+       "shop": "",
+       "photo": "",
+       "warn": "不喜欢浓猪骨味慎选；饭点排队",
+       "src": "Google 地图收藏「北九州物语」（评分/评价数）；小红书真实用户笔记（@记录一家福冈很多ldh艺人认证的豚骨拉面 669赞）",
+       "tags": [
+        "美食",
+        "拉面"
+       ],
+       "priceBucket": "mid",
+       "pic": "img/pl_pl_daruma.jpg",
+       "picSrc": "https://www.xiaohongshu.com/search_result/694238ca000000001e005c8a?xsec_token=ABWb-l2ciHehLVcFd87Sq8l360Cn5KbdPHUsUyooFRZvY=&xsec_source=",
+       "picBy": "记录一家福冈很多ldh艺人认证的豚骨拉面"
+      }
+     ],
+     "nearby": []
+    }
+   ]
+  },
+  {
+   "id": "day-1003",
+   "date": "2026-10-03",
+   "label": "10/3（六）",
+   "theme": "鸟栖 Outlets（上午）→ 运河城（傍晚）→ 屋台",
+   "note": "鸟栖改到今天上午（10:00–14:00，天神直行巴士去 / JR回）；下午回博多休整，傍晚逛运河城（原10/2内容），晚上天神/渡辺通屋台。",
+   "rain": "雨天：鸟栖半户外（带伞）；运河城全室内，正好雨天。",
+   "blocks": [
+    {
+     "seq": 1,
+     "store": "day-1003-1",
+     "start": "08:00",
+     "end": "09:15",
+     "title": "早餐 → 出发去鸟栖",
+     "subtitle": "博多站早餐 or 天神上车",
+     "core": "在博多站/天神吃早餐，09:15 前到西铁天神高速BT 赶直行巴士。",
+     "best": {
+      "name": "博多一番街／マイング（明太子·海鲜）",
+      "navQ": "博多一番街 マイング 博多駅",
+      "lat": 33.5898,
+      "lng": 130.4207,
+      "type": "food",
+      "score": 5,
+      "reason": "博多站直结的两条站内食街：明太子、海鲜丼、烏冬、拉面都有，零换乘最省时间。",
+      "loc": "博多站 B1 博多一番街／マイング",
+      "price": "约900–2,000日元",
+      "hours": "约07:00–22:00（各店不同）",
+      "shop": "",
+      "photo": "",
+      "warn": "12:00–13:30 高峰稍等位",
+      "src": "JR博多City/博多一番街官网",
+      "tags": [
+       "美食",
+       "午餐"
+      ],
+      "priceBucket": "mid"
+     },
+     "alts": [
+      {
+       "name": "コメダ珈琲 博多駅東店（早餐咖啡）",
+       "navQ": "コメダ珈琲店 博多駅東店",
+       "lat": 33.5882,
+       "lng": 130.4234,
+       "type": "food",
+       "score": 4,
+       "reason": "点咖啡送吐司（6:00–11:00 早餐时段），中文菜单，离博多站步行约5分。",
+       "loc": "博多区博多駅東",
+       "price": "约600–1,200日元",
+       "hours": "早餐时段 6:00–11:00",
+       "shop": "",
+       "photo": "",
+       "warn": "常需等位",
+       "src": "小红书真实笔记（@福冈早餐咖啡必选店 566赞）",
+       "tags": [
+        "美食",
+        "早餐"
+       ],
+       "priceBucket": "economy"
+      },
+      {
+       "name": "Dacomecca（排队面包店）",
+       "navQ": "Dacomecca Fukuoka",
+       "lat": 33.5874,
+       "lng": 130.4193,
+       "type": "food",
+       "score": 4,
+       "reason": "Google 4.1（2,274 评价）；小红书：福冈排队面包店，明太子面包人气第一（明太子酱可带回自制）。",
+       "loc": "福冈市区（Google 地图为准）",
+       "price": "约400–1,200日元",
+       "hours": "约08:00–18:00（售完打烊）",
+       "shop": "",
+       "photo": "",
+       "warn": "排队多、下午常售罄",
+       "src": "Google 地图收藏「北九州物语」（评分/评价数）；小红书真实用户笔记（@福冈Fukuoka排队买面包🥯🍞🥖 371赞）",
+       "tags": [
+        "美食",
+        "面包"
+       ],
+       "priceBucket": "economy",
+       "pic": "img/pl_pl_dacomecca.jpg",
+       "picSrc": "https://www.xiaohongshu.com/search_result/6a14562200000000360000d9?xsec_token=ABzPpglXXRAWptIUa-SIOR_dFVUs5VVLsHwKtzUfAJIqI=&xsec_source=",
+       "picBy": "福冈Fukuoka排队买面包🥯🍞🥖"
+      },
+      {
+       "name": "The Full Full Hakata（明太子法棍·外带）",
+       "navQ": "The Full Full Hakata",
+       "lat": 33.5899,
+       "lng": 130.4125,
+       "type": "food",
+       "score": 4,
+       "reason": "Google 4.4（1,648）明太子法棍，酥脆蒜香；当餐后点心或上车零食。",
+       "loc": "博多区祇园町9-3（栉田神社旁）",
+       "price": "约500–1,200日元",
+       "hours": "约09:00–19:00（售完提前打烊）",
+       "shop": "",
+       "photo": "",
+       "warn": "下午常售罄",
+       "src": "Google 地图收藏「北九州物语」4.4(1,648)；小红书真实笔记",
+       "tags": [
+        "美食",
+        "面包"
+       ],
+       "priceBucket": "economy"
+      }
+     ],
+     "nearby": []
+    },
+    {
+     "seq": 2,
+     "store": "day-1003-2",
+     "start": "10:00",
+     "end": "14:00",
      "title": "鸟栖 Premium Outlets（购物主战场）",
-     "subtitle": "天神直行巴士约50分·170家店·10:00–20:00",
-     "core": "放好行李就出发：天神高速BT 坐直行巴士约50分到 outlets，逛到 19:30 收尾、坐巴士回天神。",
+     "subtitle": "170店·10:00–20:00",
+     "core": "开门即逛：先到 Information 领游客优惠券，主攻 Beams/鬼冢虎/北面/拉夫劳伦；14:00 收工。",
      "best": {
       "name": "鸟栖 Premium Outlets（170 家·购物主战场）",
       "navQ": "Tosu Premium Outlets",
@@ -3226,756 +3708,81 @@ var TRIP = {
         "夜景"
        ],
        "priceBucket": "mid"
-      },
-      {
-       "name": "回酒店休息（不去 outlets）",
-       "navQ": "ホテル 休憩",
-       "lat": 33.5885,
-       "lng": 130.397,
-       "type": "hotel",
-       "score": 3,
-       "reason": "若坐车累了，也可以放弃 outlets，在酒店休息、附近吃晚饭。",
-       "loc": "LiVEMAX 天神WEST",
-       "price": "0",
-       "hours": "—",
-       "shop": "",
-       "photo": "",
-       "warn": "—",
-       "src": "经验建议",
-       "tags": [
-        "休息"
-       ],
-       "priceBucket": "covered"
-      }
-     ],
-     "store": "day-1002-5",
-     "nearby": []
-    },
-    {
-     "seq": 6,
-     "start": "20:45",
-     "end": "22:15",
-     "title": "中洲屋台（晚场）",
-     "subtitle": "从天神回程后直接去中洲",
-     "core": "回天神后步行/地铁到中洲，点一两样+一杯酒收尾。",
-     "best": {
-      "name": "中洲屋台街（中洲・那珂川沿い／中洲屋台横丁）",
-      "navQ": "中洲屋台街 福岡",
-      "lat": 33.5907,
-      "lng": 130.4058,
-      "type": "food",
-      "score": 5,
-      "reason": "福冈屋台文化代表，那珂川沿线约20家；从你的酒店（LiVEMAX 天神WEST）步行约12–15分或地铁1站到中洲，10/2为周五最热闹。",
-      "loc": "福冈市博多区中洲（中洲川端站步行约1–5分）",
-      "price": "人均约2,000–4,000円",
-      "hours": "约18:00–次日02:00（多数店周日休）",
-      "shop": "各屋台（豚骨拉面/关东煮/烧鸟/明太子）",
-      "photo": "那珂川屋台灯火、屋台内暖帘",
-      "warn": "先问清价格与支付方式（多为现金）；一人一座；勿长坐；行李精简；店外禁止立饮",
-      "src": "https://www.crossroadfukuoka.jp/feature/yatai ; https://www.japan-guide.com/e/e4803.html",
-      "tags": [
-       "美食",
-       "屋台",
-       "夜景"
-      ],
-      "priceBucket": "mid",
-      "pic": "img/6aa69040000000000b036ad1.jpg",
-      "picSrc": "https://www.xiaohongshu.com/search_result/6aa69040000000000b036ad1?xsec_token=ABRUwU2aWylMxwGhwWWixme2DiyZKg28DK_ao5U2hiS58=&xsec_source=",
-      "picBy": "福冈的夜晚，一定要留一次给屋台🏮"
-     },
-     "alts": [
-      {
-       "name": "博多だるま 総本店（浓厚豚骨拉面）",
-       "navQ": "Hakata Daruma Honten",
-       "lat": 33.5852,
-       "lng": 130.406,
-       "type": "food",
-       "score": 4,
-       "reason": "Google 4.0（3,168 评价）；小红书实测：正统浓厚豚骨，不少艺人造访，地铁站走过去约7–8分。",
-       "loc": "博多区（総本店，Google 地图可搜）",
-       "price": "约1,000–2,000日元",
-       "hours": "约11:00–23:00（以店为准）",
-       "shop": "",
-       "photo": "",
-       "warn": "不喜欢浓猪骨味慎选；饭点排队",
-       "src": "Google 地图收藏「北九州物语」（评分/评价数）；小红书真实用户笔记（@记录一家福冈很多ldh艺人认证的豚骨拉面 669赞）",
-       "tags": [
-        "美食",
-        "拉面"
-       ],
-       "priceBucket": "mid",
-       "pic": "img/pl_pl_daruma.jpg",
-       "picSrc": "https://www.xiaohongshu.com/search_result/694238ca000000001e005c8a?xsec_token=ABWb-l2ciHehLVcFd87Sq8l360Cn5KbdPHUsUyooFRZvY=&xsec_source=",
-       "picBy": "记录一家福冈很多ldh艺人认证的豚骨拉面"
-      },
-      {
-       "name": "Shin-Shin／一幸舎（博多站 KITTE·B1）",
-       "navQ": "Shin-Shin 博多駅 KITTE",
-       "lat": 33.5927,
-       "lng": 130.3968,
-       "type": "food",
-       "score": 4,
-       "reason": "博多豚骨代表，站内/KITTE 都有分店，比天神本店排队短。",
-       "loc": "博多站 KITTE B1 等",
-       "price": "约900–1,300日元",
-       "hours": "约10:00–22:00",
-       "shop": "",
-       "photo": "",
-       "warn": "饭点排队",
-       "src": "Google 4.3（7,907）；小红书真实笔记",
-       "tags": [
-        "美食",
-        "拉面"
-       ],
-       "priceBucket": "economy"
-      },
-      {
-       "name": "中洲リバークルーズ（水上观屋台夜景・约30分）",
-       "navQ": "中洲クルーズ 福岡",
-       "lat": 33.5914,
-       "lng": 130.406,
-       "type": "sight",
-       "score": 4,
-       "reason": "官方介绍：约30分游船，从水面看中洲屋台与运河城灯火，16:00–21:00每小时一班；与屋台进食活动类型不同，适合饭前或饭后。",
-       "loc": "博多リバレイン／中洲 乘船场",
-       "price": "约1,000–1,800円",
-       "hours": "16:00–21:00 每小时一班（约30分）",
-       "shop": "リバークルーズ公式",
-       "photo": "水上屋台夜景",
-       "warn": "需配合班次；雨天或停航",
-       "src": "https://www.crossroadfukuoka.jp/feature/yatai",
-       "tags": [
-        "景点",
-        "夜景",
-        "游船"
-       ],
-       "priceBucket": "mid"
-      },
-      {
-       "name": "一兰 本社总本店（中洲·发源总店）",
-       "navQ": "Ichiran Honten Nakasu",
-       "lat": 33.5932,
-       "lng": 130.4046,
-       "type": "food",
-       "score": 4,
-       "reason": "Google 4.2（13,214 评价）；小红书：一兰发源总店，中洲川端站步行可达，傍晚5点前人少不用排队。",
-       "loc": "博多区中洲（中洲川端站步行约3分）",
-       "price": "约1,000–2,000日元",
-       "hours": "24小时（以店为准）",
-       "shop": "",
-       "photo": "",
-       "warn": "避开19:00–22:00长队",
-       "src": "Google 地图收藏「北九州物语」（评分/评价数）；小红书真实用户笔记（@🇯🇵福冈必吃|拉面发源地一兰总店不排队！ 225赞）",
-       "tags": [
-        "美食",
-        "拉面"
-       ],
-       "priceBucket": "mid",
-       "pic": "img/pl_pl_ichiran.jpg",
-       "picSrc": "https://www.xiaohongshu.com/search_result/666ead33000000000d00caa3?xsec_token=ABO26NrDbDTrZkHALoHZYRzLH1nbKAXJAivCh0aRKZlJ8=&xsec_source=",
-       "picBy": "🇯🇵福冈必吃|拉面发源地一兰总店不排队！"
-      }
-     ],
-     "store": "day-1002-6",
-     "nearby": [
-      {
-       "name": "Itookashi（定食）",
-       "dist": 0.27,
-       "how": "步行4分",
-       "rating": "4.4(1,530)",
-       "price": "¥2,000–3,000",
-       "cat": "定食"
-      }
-     ]
-    },
-    {
-     "seq": 7,
-     "start": "22:15",
-     "end": "22:45",
-     "title": "中洲河畔夜景 / 回酒店",
-     "subtitle": "那珂川灯火",
-     "core": "沿河走一小段看夜景，回酒店休息。",
-     "best": {
-      "name": "中洲河畔夜景散步（那珂川沿岸）",
-      "navQ": "中洲 那珂川 夜景",
-      "lat": 33.5914,
-      "lng": 130.406,
-      "type": "sight",
-      "score": 4,
-      "reason": "屋台灯火+河面倒影是福冈最经典的夜拍；从春吉桥到中洲桥走 10–15 分钟。",
-      "loc": "博多区中洲 那珂川沿岸",
-      "price": "免费",
-      "hours": "全天（夜间灯火最佳）",
-      "shop": "",
-      "photo": "",
-      "warn": "河边栏杆湿滑注意；别堵住通行",
-      "src": "福冈县观光官网（屋台特集）",
-      "tags": [
-       "夜景",
-       "散步"
-      ],
-      "priceBucket": "covered"
-     },
-     "alts": [
-      {
-       "name": "中洲リバークルーズ（水上观屋台夜景・约30分）",
-       "navQ": "中洲クルーズ 福岡",
-       "lat": 33.5914,
-       "lng": 130.406,
-       "type": "sight",
-       "score": 4,
-       "reason": "官方介绍：约30分游船，从水面看中洲屋台与运河城灯火，16:00–21:00每小时一班；与屋台进食活动类型不同，适合饭前或饭后。",
-       "loc": "博多リバレイン／中洲 乘船场",
-       "price": "约1,000–1,800円",
-       "hours": "16:00–21:00 每小时一班（约30分）",
-       "shop": "リバークルーズ公式",
-       "photo": "水上屋台夜景",
-       "warn": "需配合班次；雨天或停航",
-       "src": "https://www.crossroadfukuoka.jp/feature/yatai",
-       "tags": [
-        "景点",
-        "夜景",
-        "游船"
-       ],
-       "priceBucket": "mid"
-      },
-      {
-       "name": "天神屋台 小金ちゃん（焼きラーメン元祖・天神）",
-       "navQ": "天神屋台 小金ちゃん",
-       "lat": 33.5905,
-       "lng": 130.401,
-       "type": "food",
-       "score": 4,
-       "reason": "よかなび在册：1968年创业、焼きラーメン元祖，天神エリア地元客多。",
-       "loc": "福岡市中央区天神（天神エリア）",
-       "price": "约2,000日元",
-       "hours": "18:00頃–深夜（当日为准）",
-       "shop": "焼きラーメン・焼き鳥・おでん",
-       "photo": "",
-       "warn": "排队常见。",
-       "src": "よかなび 屋台一覧（小金ちゃん）",
-       "tags": [
-        "美食",
-        "屋台"
-       ],
-       "priceBucket": "mid",
-       "pic": "img/68e067c90000000007001995.jpg",
-       "picSrc": "https://www.xiaohongshu.com/search_result/68e067c90000000007001995?xsec_token=ABj0L2nOG9Iu907Jm3YbAB8ujG_zHAygUloWBhAjdgPvo=&xsec_source=",
-       "picBy": "吃上之前没想到有这么好吃的天神屋台🍤"
-      },
-      {
-       "name": "直接回酒店休息",
-       "navQ": "ホテル 帰着",
-       "lat": 33.5885,
-       "lng": 130.397,
-       "type": "hotel",
-       "score": 3,
-       "reason": "明天 10/3 还要去太宰府+运河城，早点休息也行。",
-       "loc": "LiVEMAX 天神WEST",
-       "price": "0",
-       "hours": "—",
-       "shop": "",
-       "photo": "",
-       "warn": "—",
-       "src": "经验建议",
-       "tags": [
-        "休息"
-       ],
-       "priceBucket": "covered"
-      }
-     ],
-     "store": "day-1002-7",
-     "nearby": [
-      {
-       "name": "Hakata Ramen Hakataya 川端",
-       "dist": 0.34,
-       "how": "步行5分",
-       "rating": "4.1(2,410)",
-       "price": "¥1–1,000",
-       "cat": "拉面"
-      },
-      {
-       "name": "一兰 本社总本店（中洲）",
-       "dist": 0.24,
-       "how": "步行3分",
-       "rating": "4.2(13,214)",
-       "price": "¥1,000–2,000",
-       "cat": "拉面"
-      }
-     ]
-    }
-   ]
-  },
-  {
-   "id": "day-1003",
-   "date": "2026-10-03",
-   "label": "10/3（六）",
-   "theme": "博多伴手礼 → 太宰府·竈門神社 → 运河城 → 屋台",
-   "note": "JR Pass 于10/3 为最后有效日；去太宰府走西铁自费。今天加早餐与傍晚休整，晚上走天神/渡辺通屋台（与10/2中洲不同街区）。",
-   "rain": "雨天：太宰府改九州国立博物馆＋参道室内店；晚上改运河城室内。",
-   "blocks": [
-    {
-     "seq": 1,
-     "start": "08:00",
-     "end": "09:00",
-     "title": "早餐（博多站）",
-     "subtitle": "一番街/マイング 或 コメダ",
-     "core": "站内吃早餐，9:00 直接去阪急。",
-     "best": {
-      "name": "博多一番街／マイング（明太子·海鲜）",
-      "navQ": "博多一番街 マイング 博多駅",
-      "lat": 33.5898,
-      "lng": 130.4207,
-      "type": "food",
-      "score": 5,
-      "reason": "博多站直结的两条站内食街：明太子、海鲜丼、烏冬、拉面都有，零换乘最省时间。",
-      "loc": "博多站 B1 博多一番街／マイング",
-      "price": "约900–2,000日元",
-      "hours": "约07:00–22:00（各店不同）",
-      "shop": "",
-      "photo": "",
-      "warn": "12:00–13:30 高峰稍等位",
-      "src": "JR博多City/博多一番街官网",
-      "tags": [
-       "美食",
-       "午餐"
-      ],
-      "priceBucket": "mid"
-     },
-     "alts": [
-      {
-       "name": "コメダ珈琲 博多駅東店（早餐咖啡）",
-       "navQ": "コメダ珈琲店 博多駅東店",
-       "lat": 33.5882,
-       "lng": 130.4234,
-       "type": "food",
-       "score": 4,
-       "reason": "点咖啡送吐司（6:00–11:00 早餐时段），中文菜单，离博多站步行约5分。",
-       "loc": "博多区博多駅東",
-       "price": "约600–1,200日元",
-       "hours": "早餐时段 6:00–11:00",
-       "shop": "",
-       "photo": "",
-       "warn": "常需等位",
-       "src": "小红书真实笔记（@福冈早餐咖啡必选店 566赞）",
-       "tags": [
-        "美食",
-        "早餐"
-       ],
-       "priceBucket": "economy"
-      },
-      {
-       "name": "The Full Full Hakata（明太子法棍·外带）",
-       "navQ": "The Full Full Hakata",
-       "lat": 33.5899,
-       "lng": 130.4125,
-       "type": "food",
-       "score": 4,
-       "reason": "Google 4.4（1,648）明太子法棍，酥脆蒜香；当餐后点心或上车零食。",
-       "loc": "博多区祇园町9-3（栉田神社旁）",
-       "price": "约500–1,200日元",
-       "hours": "约09:00–19:00（售完提前打烊）",
-       "shop": "",
-       "photo": "",
-       "warn": "下午常售罄",
-       "src": "Google 地图收藏「北九州物语」4.4(1,648)；小红书真实笔记",
-       "tags": [
-        "美食",
-        "面包"
-       ],
-       "priceBucket": "economy"
-      },
-      {
-       "name": "努努鶏 博多マイング店（冷吃炸鸡手羽中）",
-       "navQ": "努努鶏 博多マイング店",
-       "lat": 33.5902,
-       "lng": 130.4204,
-       "type": "food",
-       "score": 4,
-       "reason": "博多站内伴手礼型炸鸡，冷吃设计适合带上车；原稿标注手羽中约1,080日元。",
-       "loc": "博多站「マイング」内",
-       "price": "约1,080日元",
-       "hours": "约 9:00 开门（以店家为准）",
-       "shop": "手羽中（勿加热）",
-       "photo": "",
-       "warn": "千万不要加热，冷吃才好吃。",
-       "src": "原稿《博多必吃九州名物攻略》＋努努鶏店铺情报（未逐页核验）",
-       "tags": [
-        "美食",
-        "伴手礼"
-       ],
-       "priceBucket": "mid"
-      }
-     ],
-     "nearby": [
-      {
-       "name": "Cafe Mutsukado",
-       "dist": 0.11,
-       "how": "步行2分",
-       "rating": "4.1(995)",
-       "price": "¥1,000–2,000",
-       "cat": "咖啡"
-      },
-      {
-       "name": "Komeda 珈琲 博多駅東店",
-       "dist": 0.31,
-       "how": "步行4分",
-       "rating": "4.1(1,334)",
-       "price": "¥1–1,000",
-       "cat": "咖啡"
-      },
-      {
-       "name": "Dacomecca（面包）",
-       "dist": 0.3,
-       "how": "步行4分",
-       "rating": "4.1(2,274)",
-       "price": "¥1,000–2,000",
-       "cat": "面包"
-      }
-     ]
-    },
-    {
-     "seq": 2,
-     "start": "09:00",
-     "end": "10:30",
-     "title": "博多阪急 B1 伴手礼",
-     "subtitle": "10:00 开门即冲限定款",
-     "core": "开门就冲 B1：明太子、限定铭菓一次买齐。",
-     "best": {
-      "name": "博多阪急 B1「うまちか！」食料品フロア（限定銘菓・明太子）",
-      "navQ": "博多阪急",
-      "lat": 33.5898,
-      "lng": 130.4207,
-      "type": "sight",
-      "score": 5,
-      "reason": "博多站直结，B1「うまちか！」集中九州/福冈限定铭菓与明太子；从你的酒店（赤坂/天神）乘地铁空港线约5–7分到博多站，10:00 开门即冲最稳。",
-      "loc": "福岡市博多区博多駅中央街1-1（博多站直结）",
-      "price": "约1,200日元",
-      "hours": "全館 10:00–20:00（B1 食料品；以官网为准）",
-      "shop": "明月堂 博多通りもん／福太郎 めんべい／さかえ屋 なんばん往来（ラズベリー・博多あまおう）／石村萬盛堂 鶴乃子／如水庵 八日餅（每月8日限定・店头のみ）／ふくや 明太子",
-      "photo": "",
-      "warn": "保質期短，需行李/冷藏安排；限定盒与明太子开卖即排，建议先 B1 再逛。",
-      "src": "博多阪急官网 floor/map（全館10:00–20:00）＋クロスロードふくおか『福岡県民が選んだ手土産14選』（2025年10–11月县民问卷）",
-      "tags": [
-       "购物",
-       "伴手礼",
-       "明太子"
-      ],
-      "priceBucket": "mid"
-     },
-     "alts": [
-      {
-       "name": "KITTE博多（杂货/服饰补位）",
-       "navQ": "KITTE博多",
-       "lat": 33.5891,
-       "lng": 130.4219,
-       "type": "sight",
-       "score": 3,
-       "reason": "博多口侧直结，AMU 缺码时来补。",
-       "loc": "博多站直结 KITTE博多",
-       "price": "购物自定",
-       "hours": "约10:00–21:00（各店不同）",
-       "shop": "",
-       "photo": "",
-       "warn": "时间紧张时跳过",
-       "src": "KITTE博多官网",
-       "tags": [
-        "购物"
-       ],
-       "priceBucket": "unknown"
-      },
-      {
-       "name": "博多阪急B1「島本」明太子＋AMANBERRY草莓饼干",
-       "navQ": "Shimamoto Hankyu Hakata",
-       "lat": 33.5898,
-       "lng": 130.4207,
-       "type": "sight",
-       "score": 5,
-       "reason": "小红书 573 赞清单：B1 岛本明太子专门店（大排长队）、AMANBERRY 甘王草莓奶油夹心饼（下午常售罄，10:00开门冲）、PRESS BUTTER SAND 福冈限定、福砂屋蜂蜜蛋糕、なつめ尽くし栗子金团。",
-       "loc": "博多阪急 B1「うまちか！」",
-       "price": "约1,000–3,000日元/盒",
-       "hours": "全馆10:00–20:00（食品满5,000可退税）",
-       "shop": "",
-       "photo": "",
-       "warn": "限定款易售罄，建议开门即冲；保质期短注意行李",
-       "src": "小红书真实用户（@去坂急➖1楼就够了 573赞）",
-       "tags": [
-        "购物",
-        "伴手礼"
-       ],
-       "priceBucket": "mid",
-       "pic": "img/68e4b5740000000005013e38.jpg",
-       "picSrc": "https://www.xiaohongshu.com/search_result/68e4b5740000000005013e38?xsec_token=AB5WQBIDqGsisYpS4Pp04YHy0_sylJ967QqRkQX3OE15Q=&xsec_source=",
-       "picBy": "日本福冈伴手礼，去坂急➖1️⃣楼就够了"
-      },
-      {
-       "name": "LOPIA 博多友都八喜店（超市·本地人采购）",
-       "navQ": "LOPIA Hakata Yodobashi",
-       "lat": 33.5879,
-       "lng": 130.4216,
-       "type": "sight",
-       "score": 4,
-       "reason": "Google 4.2（1,852 评价）；小红书：10点开门，和牛、现烤披萨、三文鱼/鳗鱼饭便宜，可买回酒店当宵夜。",
-       "loc": "博多站旁 友都八喜 B1",
-       "price": "约1,000–3,000日元",
-       "hours": "10:00–21:00（以店为准）",
-       "shop": "",
-       "photo": "",
-       "warn": "是生鲜超市非伴手礼店；冷藏品看行程",
-       "src": "Google 地图收藏「北九州物语」（评分/评价数）；小红书真实用户笔记（@福冈超市LOPIA推荐本地人最爱逛 553赞）",
-       "tags": [
-        "购物",
-        "超市"
-       ],
-       "priceBucket": "mid",
-       "pic": "img/pl_pl_lopia.jpg",
-       "picSrc": "https://www.xiaohongshu.com/search_result/68561156000000001c032f56?xsec_token=AB4tfZdcWbEcXPKk0KGc0QwtN3K749Khy0ukrVOef4J-k=&xsec_source=",
-       "picBy": "福冈超市LOPIA推荐本地人最爱逛"
       }
      ],
      "nearby": []
     },
     {
      "seq": 3,
-     "start": "10:45",
-     "end": "12:15",
-     "title": "前往太宰府 + 参道午餐",
-     "subtitle": "西铁约50分；虾油拉面/梅枝饼",
-     "core": "西铁到太宰府，先在参道吃虾油拉面与梅枝饼。",
-     "best": {
-      "name": "おいげん／魁源（虾油拉面·太宰府店）",
-      "navQ": "Oigen Dazaifu",
-      "lat": 33.5195,
-      "lng": 130.534,
-      "type": "food",
-      "score": 5,
-      "reason": "小红书两篇强推：站步行1分钟，豚骨＋虾油两种汤底，虾油“香气满满却清爽”；叉烧拉面1050–1350日元，饺子300日元。",
-      "loc": "太宰府市宰府1-10-32（西铁太宰府站步行约1分）",
-      "price": "约1,050–1,600日元",
-      "hours": "10:00–16:00",
-      "shop": "",
-      "photo": "",
-      "warn": "只有约十个座位，饭点排队；比五角碗一兰更值得",
-      "src": "小红书真实用户（@只懂吃一兰拉面 106赞 / @空着肚子来太宰府 438赞）",
-      "tags": [
-       "美食",
-       "拉面"
-      ],
-      "priceBucket": "mid",
-      "pic": "img/68eb8af5000000000301e5db.jpg",
-      "picSrc": "https://www.xiaohongshu.com/search_result/68eb8af5000000000301e5db?xsec_token=ABvGOTx8VwKuWvE-vEzd3g8_4s8AoZlS7ySb4JfKX9RNA=&xsec_source=",
-      "picBy": "福冈🇯🇵|太宰府是谁还只懂吃一兰拉面!!"
-     },
-     "alts": [
-      {
-       "name": "かさの家（现烤梅枝饼）",
-       "navQ": "Kasanoya Dazaifu",
-       "lat": 33.5206,
-       "lng": 130.5344,
-       "type": "food",
-       "score": 4,
-       "reason": "小红书 438 赞合集：太宰府人气第一的梅枝饼老店，现做现卖可看制作过程；参道上多家口味相近，哪家出炉排队少买哪家即可。",
-       "loc": "太宰府参道（天满宫前）",
-       "price": "约150–500日元",
-       "hours": "约09:00–18:00",
-       "shop": "",
-       "photo": "",
-       "warn": "现烤要趁热吃；周六人多",
-       "src": "小红书真实用户（@旅行海豹 438赞）",
-       "tags": [
-        "美食",
-        "参道小吃"
-       ],
-       "priceBucket": "economy",
-       "pic": "img/68e8e6360000000003035041.jpg",
-       "picSrc": "https://www.xiaohongshu.com/search_result/68e8e6360000000003035041?xsec_token=ABYWvIpEsqOH7bW05A65T9HU53bK9u-mUPnvRlAWi_qfc=&xsec_source=",
-       "picBy": "答应我一定要空着肚子来太宰府好吗！"
-      },
-      {
-       "name": "梅ヶ枝餅 やす武本店",
-       "navQ": "梅ヶ枝餅 やす武本店",
-       "lat": 33.5211,
-       "lng": 130.5342,
-       "type": "food",
-       "score": 5,
-       "reason": "官网核定：北海道十勝小豆馅＋国産餅米，参道本店；宰府六座・鎌倉期起源老铺。",
-       "loc": "福岡県太宰府市宰府2-7-16（天満宮参道）",
-       "price": "约160日元",
-       "hours": "8:30–18:00，不定休",
-       "shop": "梅ヶ枝餅、太宰府梅サイダー",
-       "photo": "",
-       "warn": "现烤需稍等；不定休，节假日建议早去。",
-       "src": "梅ヶ枝餅 やす武官网（营业时间・店铺案内）",
-       "tags": [
-        "美食",
-        "参道小吃"
-       ],
-       "priceBucket": "economy",
-       "pic": "img/6a7b711500000000220123e9.jpg",
-       "picSrc": "https://www.xiaohongshu.com/search_result/6a7b711500000000220123e9?xsec_token=AB5SP5hMN7qfx9R05OnJmaclvx3Zu1Zy_PU_DrfX7cNcI=&xsec_source=",
-       "picBy": "太宰府半日游指南！6家超好逛小店（请收藏！）"
-      },
-      {
-       "name": "和牛めんたい神楽 太宰府天満宮参道（参道午餐）",
-       "navQ": "和牛めんたい神楽 太宰府天満宮参道",
-       "lat": 33.5206,
-       "lng": 130.5347,
-       "type": "food",
-       "score": 4,
-       "reason": "ホットペッパー核定：参道内、太宰府駅步行3分，午餐预算 2,001–3,000，可尝当地和牛与明太子。",
-       "loc": "太宰府天満宮参道内（太宰府駅步行约3分）",
-       "price": "约2,500日元",
-       "hours": "以店家为准（午市；建议预约）",
-       "shop": "和牛・明太子御膳",
-       "photo": "",
-       "warn": "热门时段排队，建议 12:00 前或预约。",
-       "src": "ホットペッパーグルメ（太宰府・和食／和牛めんたい神楽 太宰府天満宮参道）",
-       "tags": [
-        "美食",
-        "午餐"
-       ],
-       "priceBucket": "mid"
-      }
-     ],
-     "nearby": []
-    },
-    {
-     "seq": 4,
-     "start": "12:15",
-     "end": "15:00",
-     "title": "太宰府天满宫 + 竈門神社",
-     "subtitle": "御本殿改修中（仮殿）；竈門神社约+1.5h",
-     "core": "先拜天满宫（正面参拜改仮殿），有时间再上竈門神社（まほろば号100日元/10分）。",
-     "best": {
-      "name": "太宰府天満宮 参拝（御本殿改修中の仮殿）＋参道梅ヶ枝餅散步・午餐",
-      "navQ": "太宰府天満宮",
-      "lat": 33.5218,
-      "lng": 130.5348,
-      "type": "sight",
-      "score": 5,
-      "reason": "全国天満宮总本宫、学问之神；官网核定 9–11月 6:30 开门、19:00 闭门。西铁太宰府駅步行约5分，参道小吃与午餐可一站解决。",
-      "loc": "福岡県太宰府市宰府4-7-1（西鉄太宰府駅步行约5分）",
-      "price": "免费",
-      "hours": "6:30–19:00（9–11月；官网当前无临时参拝时间公告）",
-      "shop": "参道：梅ヶ枝餅 やす武本店（宰府2-7-16）／梅園 梅守（宰府2-6-16）；午餐：和牛めんたい神楽 太宰府天満宮参道",
-      "photo": "本殿前・仮殿・太鼓橋・参道・星巴克太宰府（隈研吾）",
-      "warn": "御本殿自2023年起大改修（约3年），正面参拝改仮殿，出发前查官网『御本殿正面参拝について』；周六人多。",
-      "src": "太宰府天満宮官网 参拝時間・おしらせ（臨時参拝時間）",
-      "tags": [
-       "景点",
-       "参拜",
-       "打卡"
-      ],
-      "priceBucket": "covered",
-      "pic": "img/697f8d3d000000000d008c44.jpg",
-      "picSrc": "https://www.xiaohongshu.com/search_result/697f8d3d000000000d008c44?xsec_token=ABztkvGW7F7HNTaGdvxPWmnfCl5d0HCMZHUTboEObzOJ0=&xsec_source=",
-      "picBy": "⛩️太宰府天滿宮旁的 BEAMS JAPAN🇯🇵"
-     },
-     "alts": [
-      {
-       "name": "宝満宮 竈門神社（结缘神社·「竈門」朝圣）",
-       "navQ": "宝満宮竈門神社",
-       "lat": 33.533,
-       "lng": 130.5435,
-       "type": "sight",
-       "score": 4,
-       "reason": "官网：太宰府駅乘社区巴士「まほろば号」内山行き约10分/100日元（每天运行），天满宫步行约30分；结缘·方除神社，因「竈門」二字与《鬼灭之刃》同字成粉丝朝圣点，境内高处可俯瞰太宰府。",
-       "loc": "太宰府市内山883（太宰府駅→まほろば号「内山」终点，约10分/100日元）",
-       "price": "免费（巴士100日元/单程）",
-       "hours": "境内参拜自由（约09:00–17:00受理）",
-       "shop": "",
-       "photo": "",
-       "warn": "来回+参拜需预留1.5–2小时，会压缩参道逛街；周六人多；步行上山约30–40分",
-       "src": "竈門神社官网交通案内 kamadojinja.or.jp/access（まほろば号10分/100日元・步行40分）",
-       "tags": [
-        "景点",
-        "神社"
-       ],
-       "priceBucket": "economy",
-       "pic": "img/6a81e08c0000000005033504.jpg",
-       "picSrc": "https://www.xiaohongshu.com/search_result/6a81e08c0000000005033504?xsec_token=ABovR2pxz9hBxUrAVwNchy6rB3__luw-Cri_lY5pRpty8=&xsec_source=",
-       "picBy": "太宰府灶门神社，鬼灭之刃圣地，求姻缘很灵"
-      },
-      {
-       "name": "梅ヶ枝餅 やす武本店",
-       "navQ": "梅ヶ枝餅 やす武本店",
-       "lat": 33.5211,
-       "lng": 130.5342,
-       "type": "food",
-       "score": 5,
-       "reason": "官网核定：北海道十勝小豆馅＋国産餅米，参道本店；宰府六座・鎌倉期起源老铺。",
-       "loc": "福岡県太宰府市宰府2-7-16（天満宮参道）",
-       "price": "约160日元",
-       "hours": "8:30–18:00，不定休",
-       "shop": "梅ヶ枝餅、太宰府梅サイダー",
-       "photo": "",
-       "warn": "现烤需稍等；不定休，节假日建议早去。",
-       "src": "梅ヶ枝餅 やす武官网（营业时间・店铺案内）",
-       "tags": [
-        "美食",
-        "参道小吃"
-       ],
-       "priceBucket": "economy",
-       "pic": "img/6a7b711500000000220123e9.jpg",
-       "picSrc": "https://www.xiaohongshu.com/search_result/6a7b711500000000220123e9?xsec_token=AB5SP5hMN7qfx9R05OnJmaclvx3Zu1Zy_PU_DrfX7cNcI=&xsec_source=",
-       "picBy": "太宰府半日游指南！6家超好逛小店（请收藏！）"
-      },
-      {
-       "name": "かさの家（现烤梅枝饼）",
-       "navQ": "Kasanoya Dazaifu",
-       "lat": 33.5206,
-       "lng": 130.5344,
-       "type": "food",
-       "score": 4,
-       "reason": "小红书 438 赞合集：太宰府人气第一的梅枝饼老店，现做现卖可看制作过程；参道上多家口味相近，哪家出炉排队少买哪家即可。",
-       "loc": "太宰府参道（天满宫前）",
-       "price": "约150–500日元",
-       "hours": "约09:00–18:00",
-       "shop": "",
-       "photo": "",
-       "warn": "现烤要趁热吃；周六人多",
-       "src": "小红书真实用户（@旅行海豹 438赞）",
-       "tags": [
-        "美食",
-        "参道小吃"
-       ],
-       "priceBucket": "economy",
-       "pic": "img/68e8e6360000000003035041.jpg",
-       "picSrc": "https://www.xiaohongshu.com/search_result/68e8e6360000000003035041?xsec_token=ABYWvIpEsqOH7bW05A65T9HU53bK9u-mUPnvRlAWi_qfc=&xsec_source=",
-       "picBy": "答应我一定要空着肚子来太宰府好吗！"
-      }
-     ],
-     "nearby": []
-    },
-    {
-     "seq": 5,
-     "start": "15:00",
+     "store": "day-1003-3",
+     "start": "14:00",
      "end": "16:30",
-     "title": "回博多·休整/补货",
-     "subtitle": "博多站 AMU 或 回酒店休息",
-     "core": "回博多放东西、歇一下，为傍晚运河城和屋台留体力。",
+     "title": "回博多 + 酒店休整",
+     "subtitle": "JR 鳥栖→博多约40分",
+     "core": "JR 回博多，放战利品、泡个澡再出门。",
      "best": {
-      "name": "博多站 JR博多城（AMU EST 1F UNIQLO｜AMU 3F BEAMS·UNITED ARROWS）",
-      "navQ": "JR博多シティ アミュプラザ博多",
+      "name": "地铁 博多→天神（去酒店）",
+      "navQ": "博多駅 地下鉄 天神",
       "lat": 33.5898,
       "lng": 130.4207,
-      "type": "sight",
-      "score": 5,
-      "reason": "官网楼层核实：UNIQLO 在 AMU EST 1F（10:00–21:00，免税）；BEAMS、UNITED ARROWS 在 AMU 3F；URBAN RESEARCH／MHL. 在 AMU 4F——都在同一栋。",
-      "loc": "博多站直结 JR博多城",
-      "price": "购物自定",
-      "hours": "10:00–21:00（UNIQLO AMU EST 1F 10:00–21:00）",
+      "type": "transit",
+      "score": 4,
+      "reason": "博多→天神 空港线约5–7分/260日元；行李多可打车。",
+      "loc": "博多站 → 天神/赤坂",
+      "price": "260日元",
+      "hours": "约每4–6分一班",
       "shop": "",
       "photo": "",
-      "warn": "买完回寄存处取行李再去新干线；退税需护照原件",
-      "src": "JR博多城官网楼层指南",
+      "warn": "高峰拥挤",
+      "src": "福冈市地铁",
       "tags": [
-       "购物",
-       "潮牌"
+       "交通"
       ],
-      "priceBucket": "unknown"
+      "priceBucket": "economy"
      },
      "alts": [
+      {
+       "name": "酒店寄存行李（LiVEMAX 天神WEST）",
+       "navQ": "ホテルリブマックス福岡天神WEST",
+       "lat": 33.5885,
+       "lng": 130.397,
+       "type": "hotel",
+       "score": 5,
+       "reason": "前台 8:00–23:00，可先寄行李；15:00 起正式 check-in。",
+       "loc": "中央区大名2-11-23（赤坂駅3分/天神駅7分）",
+       "price": "已订",
+       "hours": "前台 8:00–23:00；Check-in 15:00",
+       "shop": "",
+       "photo": "",
+       "warn": "Check-in 最晚 23:00；无停车场",
+       "src": "酒店官网",
+       "tags": [
+        "住宿",
+        "行李"
+       ],
+       "priceBucket": "covered"
+      },
+      {
+       "name": "博多站 JR博多城（AMU EST 1F UNIQLO｜AMU 3F BEAMS·UNITED ARROWS）",
+       "navQ": "JR博多シティ アミュプラザ博多",
+       "lat": 33.5898,
+       "lng": 130.4207,
+       "type": "sight",
+       "score": 5,
+       "reason": "官网楼层核实：UNIQLO 在 AMU EST 1F（10:00–21:00，免税）；BEAMS、UNITED ARROWS 在 AMU 3F；URBAN RESEARCH／MHL. 在 AMU 4F——都在同一栋。",
+       "loc": "博多站直结 JR博多城",
+       "price": "购物自定",
+       "hours": "10:00–21:00（UNIQLO AMU EST 1F 10:00–21:00）",
+       "shop": "",
+       "photo": "",
+       "warn": "买完回寄存处取行李再去新干线；退税需护照原件",
+       "src": "JR博多城官网楼层指南",
+       "tags": [
+        "购物",
+        "潮牌"
+       ],
+       "priceBucket": "unknown"
+      },
       {
        "name": "LOPIA 博多友都八喜店（超市·本地人采购）",
        "navQ": "LOPIA Hakata Yodobashi",
@@ -3999,57 +3806,18 @@ var TRIP = {
        "pic": "img/pl_pl_lopia.jpg",
        "picSrc": "https://www.xiaohongshu.com/search_result/68561156000000001c032f56?xsec_token=AB4tfZdcWbEcXPKk0KGc0QwtN3K749Khy0ukrVOef4J-k=&xsec_source=",
        "picBy": "福冈超市LOPIA推荐本地人最爱逛"
-      },
-      {
-       "name": "回酒店休息",
-       "navQ": "ホテル 休憩",
-       "lat": 33.5885,
-       "lng": 130.397,
-       "type": "hotel",
-       "score": 4,
-       "reason": "走了一天，回天神酒店泡个澡再出门。",
-       "loc": "LiVEMAX 天神WEST",
-       "price": "0",
-       "hours": "—",
-       "shop": "",
-       "photo": "",
-       "warn": "—",
-       "src": "经验建议",
-       "tags": [
-        "休息"
-       ],
-       "priceBucket": "covered"
-      },
-      {
-       "name": "KITTE博多（杂货/服饰补位）",
-       "navQ": "KITTE博多",
-       "lat": 33.5891,
-       "lng": 130.4219,
-       "type": "sight",
-       "score": 3,
-       "reason": "博多口侧直结，AMU 缺码时来补。",
-       "loc": "博多站直结 KITTE博多",
-       "price": "购物自定",
-       "hours": "约10:00–21:00（各店不同）",
-       "shop": "",
-       "photo": "",
-       "warn": "时间紧张时跳过",
-       "src": "KITTE博多官网",
-       "tags": [
-        "购物"
-       ],
-       "priceBucket": "unknown"
       }
      ],
      "nearby": []
     },
     {
-     "seq": 6,
-     "start": "16:30",
-     "end": "20:00",
-     "title": "博多运河城（喷水秀+晚餐）",
-     "subtitle": "购物+喷水秀+晚餐（B1 拉面竞技场/もつ鍋）",
-     "core": "把运河城当购物主场：B1 ラーメンスタジアム与商店街先逛，整点看喷水秀，19:00 前后在馆内吃晚饭。",
+     "seq": 4,
+     "store": "day-1003-4",
+     "start": "17:00",
+     "end": "19:30",
+     "title": "博多运河城（购物+喷水秀+晚餐）",
+     "subtitle": "B1 拉面竞技场/もつ鍋",
+     "core": "从天神过来约15分：先逛 B1/商店街，整点看喷水秀，19:00 前后馆内晚餐。",
      "best": {
       "name": "キャナルシティ博多（B1 ラーメンスタジアム／一蘭・もつ鍋 一慶）＋噴水ショー",
       "navQ": "キャナルシティ博多",
@@ -4057,7 +3825,7 @@ var TRIP = {
       "lng": 130.411,
       "type": "sight",
       "score": 4,
-      "reason": "官方：购物 10:00–21:00、餐饮 11:00–23:00；B1 与 5F ラーメンスタジアム聚集拉面/もつ鍋，喷水秀整点上演，雨天也舒服。",
+      "reason": "よかなび ランキング第2位；B1 食街与 2026 重新开业的ラーメンスタジアム聚集拉面/もつ鍋，晚餐一站式；雨天备案强。",
       "loc": "福岡市博多区住吉1-2（博多站步行约10分／地鐵祇園・呉服町）",
       "price": "约1,500日元",
       "hours": "购物 10:00–21:00／餐饮 11:00–23:00（以官网 /service/#hours 为准）",
@@ -4142,20 +3910,45 @@ var TRIP = {
       {
        "name": "まぐろとごはん 黒田飯",
        "dist": 0.17,
-       "how": "步行2分",
        "rating": "4.9(2,609)",
        "price": "¥2,000–6,000",
-       "cat": "海鲜丼"
+       "cat": "海鲜丼",
+       "how": "步行2分"
+      },
+      {
+       "name": "Hakata Ramen Hakataya 川端",
+       "dist": 0.49,
+       "rating": "4.1(2,410)",
+       "price": "¥1–1,000",
+       "cat": "拉面",
+       "how": "步行7分"
+      },
+      {
+       "name": "Menya ISHII（沾面）",
+       "dist": 0.54,
+       "rating": "4.3(783)",
+       "price": "¥1,000–2,000",
+       "cat": "沾面",
+       "how": "步行8分"
+      },
+      {
+       "name": "The Full Full Hakata",
+       "dist": 0.14,
+       "rating": "4.4(1,648)",
+       "price": "¥1–1,000",
+       "cat": "面包",
+       "how": "步行2分"
       }
      ]
     },
     {
-     "seq": 7,
-     "start": "20:30",
-     "end": "22:00",
+     "seq": 5,
+     "store": "day-1003-5",
+     "start": "20:00",
+     "end": "21:30",
      "title": "屋台（天神/渡辺通）",
      "subtitle": "焼きラーメン元祖·换街区体验",
-     "core": "换到天神/渡辺通一带的屋台，点焼きラーメン或关东煮。",
+     "core": "换到天神/渡辺通一带屋台，点焼きラーメン或关东煮。",
      "best": {
       "name": "渡辺通・天神エリア屋台（BiVi福岡前「天神屋台 ぞのちゃん」／「博多屋台 にのつぎ」）",
       "navQ": "BiVi福岡前 屋台",
@@ -4207,28 +4000,52 @@ var TRIP = {
        "picBy": "吃上之前没想到有这么好吃的天神屋台🍤"
       },
       {
-       "name": "博多だるま 総本店（浓厚豚骨拉面）",
-       "navQ": "Hakata Daruma Honten",
-       "lat": 33.5852,
-       "lng": 130.406,
+       "name": "Yakitori 634 武蔵（烧鸟·需预约）",
+       "navQ": "Yakitori 634 Musashi",
+       "lat": 33.5885,
+       "lng": 130.4038,
        "type": "food",
-       "score": 4,
-       "reason": "Google 4.0（3,168 评价）；小红书实测：正统浓厚豚骨，不少艺人造访，地铁站走过去约7–8分。",
-       "loc": "博多区（総本店，Google 地图可搜）",
-       "price": "约1,000–2,000日元",
-       "hours": "约11:00–23:00（以店为准）",
+       "score": 5,
+       "reason": "Google 4.2（1,042 评价）；小红书「福冈烧鸟天花板、无差评」：中文菜单、可直接看柜追加，气氛极好，务必预约。",
+       "loc": "福冈市区（Google 地图为准）",
+       "price": "约2,000–6,000日元",
+       "hours": "晚市；需预约",
        "shop": "",
        "photo": "",
-       "warn": "不喜欢浓猪骨味慎选；饭点排队",
-       "src": "Google 地图收藏「北九州物语」（评分/评价数）；小红书真实用户笔记（@记录一家福冈很多ldh艺人认证的豚骨拉面 669赞）",
+       "warn": "不预约基本吃不到",
+       "src": "Google 地图收藏「北九州物语」（评分/评价数）；小红书真实用户笔记（@福冈｜这家烧鸟真的让人感受到活着好幸福 239赞）",
        "tags": [
         "美食",
-        "拉面"
+        "烧鸟"
+       ],
+       "priceBucket": "high",
+       "pic": "img/pl_pl_yakitori634.jpg",
+       "picSrc": "https://www.xiaohongshu.com/search_result/68eb9f02000000000302d97b?xsec_token=ABvGOTx8VwKuWvE-vEzd3g84ax_iO96TzXQixSnDTE404=&xsec_source=",
+       "picBy": "福冈｜这家烧鸟真的让人感受到活着好幸福"
+      },
+      {
+       "name": "黒毛和牛 博多和牛まぶし 武蔵（天神店）",
+       "navQ": "Hakata Wagyu Mabushi Musashi Tenjin",
+       "lat": 33.5876,
+       "lng": 130.4012,
+       "type": "food",
+       "score": 4,
+       "reason": "Google 4.4（221 评价）；小红书：和牛「まぶし」三种吃法，博多站筑紫口店开门前排约百人，天神店更易入座。",
+       "loc": "中央区天神（武藏 天神店）",
+       "price": "约2,000–3,000日元",
+       "hours": "约11:00–22:00（以店为准）",
+       "shop": "",
+       "photo": "",
+       "warn": "可能排队；预算偏高",
+       "src": "Google 地图收藏「北九州物语」（评分/评价数）；小红书真实用户笔记（@福冈武蔵和牛，三种吃法，三种心动。 286赞）",
+       "tags": [
+        "美食",
+        "和牛"
        ],
        "priceBucket": "mid",
-       "pic": "img/pl_pl_daruma.jpg",
-       "picSrc": "https://www.xiaohongshu.com/search_result/694238ca000000001e005c8a?xsec_token=ABWb-l2ciHehLVcFd87Sq8l360Cn5KbdPHUsUyooFRZvY=&xsec_source=",
-       "picBy": "记录一家福冈很多ldh艺人认证的豚骨拉面"
+       "pic": "img/pl_pl_musashi.jpg",
+       "picSrc": "https://www.xiaohongshu.com/search_result/6903625b0000000004028c08?xsec_token=ABt33GBW7NYfBVHLH0GvBwDZgfeUfnl90U6aMwO94jTAo=&xsec_source=",
+       "picBy": "福冈武蔵和牛，三种吃法，三种心动。"
       },
       {
        "name": "中洲リバークルーズ（水上观屋台夜景・约30分）",
@@ -4255,28 +4072,44 @@ var TRIP = {
      ],
      "nearby": [
       {
+       "name": "黒毛和牛 博多和牛まぶし 武蔵 天神店",
+       "dist": 0.1,
+       "rating": "4.4(221)",
+       "price": "¥2,000–3,000",
+       "cat": "和牛",
+       "how": "步行1分"
+      },
+      {
        "name": "Yakitori 634 武蔵",
        "dist": 0.21,
-       "how": "步行3分",
        "rating": "4.2(1,042)",
        "price": "¥2,000–6,000",
-       "cat": "烧鸟"
+       "cat": "烧鸟",
+       "how": "步行3分"
+      },
+      {
+       "name": "Itookashi（定食）",
+       "dist": 0.45,
+       "rating": "4.4(1,530)",
+       "price": "¥2,000–3,000",
+       "cat": "定食",
+       "how": "步行6分"
+      },
+      {
+       "name": "Menya 我ガ（薬院）",
+       "dist": 0.55,
+       "rating": "4.4(1,453)",
+       "price": "¥1,000–2,000",
+       "cat": "拉面",
+       "how": "步行8分"
       },
       {
        "name": "博多だるま 総本店",
        "dist": 0.56,
-       "how": "步行8分",
        "rating": "4.0(3,168)",
        "price": "¥1,000–2,000",
-       "cat": "拉面"
-      },
-      {
-       "name": "黒毛和牛 博多和牛まぶし 武蔵 天神店",
-       "dist": 0.1,
-       "how": "步行1分",
-       "rating": "4.4(221)",
-       "price": "¥2,000–3,000",
-       "cat": "和牛"
+       "cat": "拉面",
+       "how": "步行8分"
       }
      ]
     }
@@ -4286,17 +4119,18 @@ var TRIP = {
    "id": "day-1004",
    "date": "2026-10-04",
    "label": "10/4（日）",
-   "theme": "天神扫货+药妆 → 水炊き → 大濠 → 海滨公园 → 屋台",
-   "note": "药妆安排在最后完整的一天：mina天神B1 松本清 + UNIQLO/GU，一次办退税；下午大濠接百道海滨看海景日落。",
-   "rain": "雨天：海滨改福冈塔/福冈市博物馆或天神地下街继续逛。",
+   "theme": "天神扫货+药妆 → 大濠 → 百道海滨 → 屋台",
+   "note": "天神扫货+药妆回到今天（最后完整一天）：mina天神B1松本清/UNIQLO/GU + 天神地下街一次退税；下午大濠接百道海滨看海日落。",
+   "rain": "雨天：海滨改福冈塔/福冈市博物馆，或天神地下街继续逛。",
    "blocks": [
     {
      "seq": 1,
+     "store": "day-1004-1",
      "start": "08:30",
      "end": "10:00",
      "title": "早餐咖啡·面包",
-     "subtitle": "FUGLEN/Pain Stock/Dacomecca",
-     "core": "先喝咖啡吃面包，10:00 商场开门就去扫货。",
+     "subtitle": "FUGLEN/Pain Stock/Full Full",
+     "core": "先喝咖啡吃面包（FUGLEN 就在酒店旁），10:00 商场开门就去扫货。",
      "best": {
       "name": "FUGLEN FUKUOKA（世界知名咖啡·大名）",
       "navQ": "FUGLEN Fukuoka",
@@ -4346,6 +4180,27 @@ var TRIP = {
        "picBy": "日福冈必吃明太子面包"
       },
       {
+       "name": "The Full Full Hakata（明太子法棍·外带）",
+       "navQ": "The Full Full Hakata",
+       "lat": 33.5899,
+       "lng": 130.4125,
+       "type": "food",
+       "score": 4,
+       "reason": "Google 4.4（1,648）明太子法棍，酥脆蒜香；当餐后点心或上车零食。",
+       "loc": "博多区祇园町9-3（栉田神社旁）",
+       "price": "约500–1,200日元",
+       "hours": "约09:00–19:00（售完提前打烊）",
+       "shop": "",
+       "photo": "",
+       "warn": "下午常售罄",
+       "src": "Google 地图收藏「北九州物语」4.4(1,648)；小红书真实笔记",
+       "tags": [
+        "美食",
+        "面包"
+       ],
+       "priceBucket": "economy"
+      },
+      {
        "name": "Dacomecca（排队面包店）",
        "navQ": "Dacomecca Fukuoka",
        "lat": 33.5874,
@@ -4368,66 +4223,43 @@ var TRIP = {
        "pic": "img/pl_pl_dacomecca.jpg",
        "picSrc": "https://www.xiaohongshu.com/search_result/6a14562200000000360000d9?xsec_token=ABzPpglXXRAWptIUa-SIOR_dFVUs5VVLsHwKtzUfAJIqI=&xsec_source=",
        "picBy": "福冈Fukuoka排队买面包🥯🍞🥖"
-      },
-      {
-       "name": "&Locals 大濠公园（湖景日式早餐·轻食）",
-       "navQ": "&Locals Ohori Park",
-       "lat": 33.587,
-       "lng": 130.3775,
-       "type": "food",
-       "score": 5,
-       "reason": "小红书 271 赞：二层落地窗正对湖景，本地食材，早餐套餐900–1590日元；腐皮饭团、厚蛋烧、海苔都好吃。",
-       "loc": "大濠公园1-9（湖畔）",
-       "price": "约900–1,600日元",
-       "hours": "9:00–18:30，周一休",
-       "shop": "",
-       "photo": "",
-       "warn": "周一休；坐窗边位要早去；10/4 为周日营业",
-       "src": "小红书真实用户（@大濠公园湖景日式早餐 271赞）",
-       "tags": [
-        "美食",
-        "轻食"
-       ],
-       "priceBucket": "mid",
-       "pic": "img/68046d52000000000903b74d.jpg",
-       "picSrc": "https://www.xiaohongshu.com/search_result/68046d52000000000903b74d?xsec_token=AB45vsHoeFQqKVAFc2hWtp0NzQe7F8mockBQkNpCKwHTU=&xsec_source=",
-       "picBy": "来福冈🍳一定要吃的大濠公园湖景日式早餐"
       }
      ],
      "nearby": [
       {
+       "name": "FUGLEN FUKUOKA",
+       "dist": 0.0,
+       "rating": "4.4(1,002)",
+       "price": "¥1,000–2,000",
+       "cat": "咖啡",
+       "how": "步行1分"
+      },
+      {
        "name": "Pain Stock Tenjin",
        "dist": 0.6,
-       "how": "步行9分",
        "rating": "4.1(2,085)",
        "price": "¥1,000–2,000",
-       "cat": "面包"
+       "cat": "面包",
+       "how": "步行9分"
       },
       {
        "name": "The Full Full Hakata",
        "dist": 0.66,
-       "how": "步行9分",
        "rating": "4.4(1,648)",
        "price": "¥1–1,000",
-       "cat": "面包"
-      },
-      {
-       "name": "FUGLEN FUKUOKA",
-       "dist": 0.0,
-       "how": "步行1分",
-       "rating": "4.4(1,002)",
-       "price": "¥1,000–2,000",
-       "cat": "咖啡"
+       "cat": "面包",
+       "how": "步行9分"
       }
      ]
     },
     {
      "seq": 2,
+     "store": "day-1004-2",
      "start": "10:00",
-     "end": "13:00",
+     "end": "12:30",
      "title": "天神扫货 + 药妆（退税）",
      "subtitle": "mina天神 B1 松本清·UNIQLO/GU",
-     "core": "集中买：药妆+衣服一次买齐，凑单退税；mina天神(B1松本清/1-2F UNIQLO/3F GU) → 天神地下街 → PARCO，带护照原件。",
+     "core": "集中买：药妆+衣服一次买齐、凑单退税；带护照原件。",
      "best": {
       "name": "mina天神（B1F 松本清／1–2F UNIQLO／3F GU）",
       "navQ": "ミーナ天神",
@@ -4472,28 +4304,25 @@ var TRIP = {
        "priceBucket": "mid"
       },
       {
-       "name": "Dacomecca（排队面包店）",
-       "navQ": "Dacomecca Fukuoka",
-       "lat": 33.5874,
-       "lng": 130.4193,
+       "name": "コメダ珈琲 博多駅東店（早餐咖啡）",
+       "navQ": "コメダ珈琲店 博多駅東店",
+       "lat": 33.5882,
+       "lng": 130.4234,
        "type": "food",
        "score": 4,
-       "reason": "Google 4.1（2,274 评价）；小红书：福冈排队面包店，明太子面包人气第一（明太子酱可带回自制）。",
-       "loc": "福冈市区（Google 地图为准）",
-       "price": "约400–1,200日元",
-       "hours": "约08:00–18:00（售完打烊）",
+       "reason": "点咖啡送吐司（6:00–11:00 早餐时段），中文菜单，离博多站步行约5分。",
+       "loc": "博多区博多駅東",
+       "price": "约600–1,200日元",
+       "hours": "早餐时段 6:00–11:00",
        "shop": "",
        "photo": "",
-       "warn": "排队多、下午常售罄",
-       "src": "Google 地图收藏「北九州物语」（评分/评价数）；小红书真实用户笔记（@福冈Fukuoka排队买面包🥯🍞🥖 371赞）",
+       "warn": "常需等位",
+       "src": "小红书真实笔记（@福冈早餐咖啡必选店 566赞）",
        "tags": [
         "美食",
-        "面包"
+        "早餐"
        ],
-       "priceBucket": "economy",
-       "pic": "img/pl_pl_dacomecca.jpg",
-       "picSrc": "https://www.xiaohongshu.com/search_result/6a14562200000000360000d9?xsec_token=ABzPpglXXRAWptIUa-SIOR_dFVUs5VVLsHwKtzUfAJIqI=&xsec_source=",
-       "picBy": "福冈Fukuoka排队买面包🥯🍞🥖"
+       "priceBucket": "economy"
       },
       {
        "name": "Pâtisserie au fil du jour（法式甜点）",
@@ -4518,32 +4347,13 @@ var TRIP = {
        "pic": "img/pl_pl_aufild.jpg",
        "picSrc": "https://www.xiaohongshu.com/search_result/698869c7000000001d01337a?xsec_token=AB3Ov1_5qpgETlK0U962PAYhLrtJbuQUtF3A3rAf3qDuE=&xsec_source=",
        "picBy": "日本Chef推荐全福冈最好吃的法式甜点店⋯"
-      },
-      {
-       "name": "天神地下街（天神地下街・服饰杂货）",
-       "navQ": "天神地下街",
-       "lat": 33.5904,
-       "lng": 130.3994,
-       "type": "sight",
-       "score": 4,
-       "reason": "直通天神各馆与地铁，雨天/日晒的零换乘动线，与 mina 互补。",
-       "loc": "福岡市中央区天神（地铁天神站直结）",
-       "price": "免费",
-       "hours": "约 10:00–20:00（各店不同，以官方为准）",
-       "shop": "服饰・杂货・咖啡",
-       "photo": "",
-       "warn": "本次未逐店核实，属补充选项。",
-       "src": "天神地下街（一般资讯；本次未逐页核验）",
-       "tags": [
-        "购物"
-       ],
-       "priceBucket": "mid"
       }
      ],
      "nearby": []
     },
     {
      "seq": 3,
+     "store": "day-1004-3",
      "start": "13:00",
      "end": "14:00",
      "title": "午餐（水炊き/沾面/海鲜丼）",
@@ -4645,75 +4455,60 @@ var TRIP = {
        "picBy": "🇯🇵福冈本地人超爱的海鲜丼，没吃🟰没去"
       },
       {
-       "name": "麺や我ガ Menya GAGA（药院·豚骨辛味）",
-       "navQ": "Menya Gaga Tenjin",
-       "lat": 33.5856,
-       "lng": 130.3967,
+       "name": "水炊き 橙（米其林推荐·大濠公园旁）",
+       "navQ": "Mizutaki Daidai Ohori",
+       "lat": 33.5868,
+       "lng": 130.381,
        "type": "food",
-       "score": 4,
-       "reason": "Google 4.4（1,453 评价）；小红书：药院巷内小店、门口排队即到，「豚骨×辛味」有一兰影子但更清爽。",
-       "loc": "中央区药院一带（天神/药院步行圈）",
-       "price": "约1,000–1,500日元",
-       "hours": "午/晚市（以店为准）",
+       "score": 5,
+       "reason": "小红书 61 赞：米其林推荐水炊鸡，全鸡套餐人均3k+，店员全程控火；就在大濠公园旁，地铁步行3分钟。",
+       "loc": "大濠公园旁（地铁大濠公园站步行约3分）",
+       "price": "人均约3,000–4,500日元",
+       "hours": "午/晚市；必须用 tablecheck 提前预约",
        "shop": "",
        "photo": "",
-       "warn": "位置隐蔽，按 Google 导航走",
-       "src": "Google 地图收藏「北九州物语」（评分/评价数）；小红书真实用户笔记（@福冈吃饭12家店大推荐（J人超自信版） 1124赞）",
+       "warn": "不预约基本吃不上；与屋台段二选一",
+       "src": "小红书真实用户（@米其林推荐水炊鸡「橙」61赞）",
        "tags": [
         "美食",
-        "拉面"
+        "水炊き"
        ],
-       "priceBucket": "mid",
-       "pic": "img/pl_pl_gaga.jpg",
-       "picSrc": "https://www.xiaohongshu.com/search_result/6a883ff6000000002b003e0a?xsec_token=ABHRJ9BgJlJQw4W14J1sVabPB6XA3iyzAJcwvdqlDhdTg=&xsec_source=",
-       "picBy": "福冈吃饭12家店大推荐（J人超自信版）"
+       "priceBucket": "high",
+       "pic": "img/6915f666000000000700e9bc.jpg",
+       "picSrc": "https://www.xiaohongshu.com/search_result/6915f666000000000700e9bc?xsec_token=ABiCGQVAAvWPvZq40FJLOZvZ1FbxQVmlyBpRwyeS7xgdY=&xsec_source=",
+       "picBy": "福冈必吃❗️米其林推荐水炊鸡「橙」🍲"
       }
      ],
      "nearby": [
       {
-       "name": "Paila（印度/尼泊尔菜）",
-       "dist": 1.8,
-       "how": "车约6分",
-       "rating": "4.6(108)",
-       "price": "¥1,000–2,000",
-       "cat": "咖喱"
-      },
-      {
        "name": "麺や兼虎 福岡PARCO店",
        "dist": 0.07,
-       "how": "步行1分",
        "rating": "4.3(687)",
        "price": "¥1,000–2,000",
-       "cat": "拉面"
+       "cat": "拉面",
+       "how": "步行1分"
       },
       {
        "name": "Shin-Shin 天神本店",
        "dist": 0.33,
-       "how": "步行5分",
        "rating": "4.3(7,907)",
        "price": "¥1,000–2,000",
-       "cat": "拉面"
+       "cat": "拉面",
+       "how": "步行5分"
       },
       {
        "name": "Menya 我ガ（薬院）",
        "dist": 0.53,
-       "how": "步行8分",
        "rating": "4.4(1,453)",
        "price": "¥1,000–2,000",
-       "cat": "拉面"
-      },
-      {
-       "name": "博多市場 魚辰食堂",
-       "dist": 1.0,
-       "how": "步行14分",
-       "rating": "4.2(300)",
-       "price": "¥1–1,000",
-       "cat": "食堂"
+       "cat": "拉面",
+       "how": "步行8分"
       }
      ]
     },
     {
      "seq": 4,
+     "store": "day-1004-4",
      "start": "14:00",
      "end": "15:30",
      "title": "大濠公园（浮见堂·南瓜）",
@@ -4839,15 +4634,25 @@ var TRIP = {
        "picBy": "福冈必吃❗️米其林推荐水炊鸡「橙」🍲"
       }
      ],
-     "nearby": []
+     "nearby": [
+      {
+       "name": "Paila（印度/尼泊尔菜）",
+       "dist": 0.74,
+       "rating": "4.6(108)",
+       "price": "¥1,000–2,000",
+       "cat": "咖喱",
+       "how": "步行11分"
+      }
+     ]
     },
     {
      "seq": 5,
+     "store": "day-1004-5",
      "start": "15:30",
      "end": "17:30",
-     "title": "海滨公园（百道浜·看海日落）",
-     "subtitle": "シーサイドももち海浜公園 → 福冈塔",
-     "core": "从大濠/西新过来，海边散步+福冈塔，日落时分最好看。",
+     "title": "百道海滨 + 福冈塔",
+     "subtitle": "シーサイドももち·看海日落",
+     "core": "从大濠/西新过来，沙滩散步+福冈塔，日落前光线最好。",
      "best": {
       "name": "シーサイドももち海浜公園（百道浜·海っぴビーチ）",
       "navQ": "シーサイドももち海浜公園 百道浜",
@@ -4893,28 +4698,6 @@ var TRIP = {
        "priceBucket": "mid"
       },
       {
-       "name": "海の中道海浜公園（国立公园·需整天）",
-       "navQ": "海の中道海浜公園",
-       "lat": 33.661,
-       "lng": 130.36,
-       "type": "sight",
-       "score": 4,
-       "reason": "更大的国立海滨公园：花田（秋季地肤/蒲苇）、动物之森、12km 骑行道；JR「海ノ中道」站或博多ふ頭渡船约20分。",
-       "loc": "福冈市东区西戸崎18-25",
-       "price": "大人450日元（园内另计）",
-       "hours": "9:30–17:30（季节变动；周休见官网日历）",
-       "shop": "",
-       "photo": "",
-       "warn": "范围极大，至少留半天；今天时间不够就别硬塞",
-       "src": "海の中道海浜公園官网 uminaka-park.jp",
-       "tags": [
-        "景点",
-        "海滨",
-        "公园"
-       ],
-       "priceBucket": "economy"
-      },
-      {
        "name": "マリゾン（百道浜海上建筑·海景）",
        "navQ": "マリゾン 百道浜",
        "lat": 33.5918,
@@ -4934,17 +4717,42 @@ var TRIP = {
         "海景"
        ],
        "priceBucket": "covered"
+      },
+      {
+       "name": "スターバックス コーヒー 福岡大濠公園店",
+       "navQ": "スターバックス 福岡大濠公園店",
+       "lat": 33.5865,
+       "lng": 130.379,
+       "type": "food",
+       "score": 4,
+       "reason": "大濠公園官网直接链接的官方门店（store detail-962），大面积玻璃窗机位，与散步同动线。",
+       "loc": "大濠公園湖畔",
+       "price": "约600日元",
+       "hours": "以门店为准",
+       "shop": "咖啡",
+       "photo": "玻璃窗湖景",
+       "warn": "坐位抢手，高峰需等。",
+       "src": "大濠公園官网（スターバックス コーヒー 福岡大濠公園店 リンク）",
+       "tags": [
+        "咖啡",
+        "打卡"
+       ],
+       "priceBucket": "economy",
+       "pic": "img/68ea76d2000000000703526d.jpg",
+       "picSrc": "https://www.xiaohongshu.com/search_result/68ea76d2000000000703526d?xsec_token=ABHjmrqVV5nrIWHsxdWT5uDBybBR89LH5f_B3pAFFRUwM=&xsec_source=",
+       "picBy": "福冈大濠公园20分钟效应！附散步指南"
       }
      ],
      "nearby": []
     },
     {
      "seq": 6,
+     "store": "day-1004-6",
      "start": "17:30",
      "end": "19:00",
-     "title": "回程休整（天神）",
-     "subtitle": "酒店放东西·地下街补货",
-     "core": "回酒店放东西、稍歇，19:00 出发吃屋台。",
+     "title": "回酒店休整",
+     "subtitle": "放东西·泡澡",
+     "core": "回酒店歇一下，19:00 出发吃屋台。",
      "best": {
       "name": "回酒店休息 + 天神地下街补货",
       "navQ": "ホテル 休憩 天神地下街",
@@ -5037,25 +4845,18 @@ var TRIP = {
      ],
      "nearby": [
       {
-       "name": "Fuk Coffee",
-       "dist": 0.95,
-       "how": "步行14分",
-       "rating": "3.6(1,956)",
+       "name": "Pain Stock Tenjin",
+       "dist": 0.74,
+       "rating": "4.1(2,085)",
        "price": "¥1,000–2,000",
-       "cat": "咖啡"
-      },
-      {
-       "name": "Pâtisserie au fil du jour",
-       "dist": 1.38,
-       "how": "车约5分",
-       "rating": "4.4(709)",
-       "price": "—",
-       "cat": "甜点"
+       "cat": "面包",
+       "how": "步行11分"
       }
      ]
     },
     {
      "seq": 7,
+     "store": "day-1004-7",
      "start": "19:00",
      "end": "21:30",
      "title": "屋台（天神·焼きラーメン元祖）",
@@ -5179,7 +4980,40 @@ var TRIP = {
        "priceBucket": "mid"
       }
      ],
-     "nearby": []
+     "nearby": [
+      {
+       "name": "麺や兼虎 福岡PARCO店",
+       "dist": 0.21,
+       "rating": "4.3(687)",
+       "price": "¥1,000–2,000",
+       "cat": "拉面",
+       "how": "步行3分"
+      },
+      {
+       "name": "黒毛和牛 博多和牛まぶし 武蔵 天神店",
+       "dist": 0.32,
+       "rating": "4.4(221)",
+       "price": "¥2,000–3,000",
+       "cat": "和牛",
+       "how": "步行5分"
+      },
+      {
+       "name": "一兰 本社总本店（中洲）",
+       "dist": 0.45,
+       "rating": "4.2(13,214)",
+       "price": "¥1,000–2,000",
+       "cat": "拉面",
+       "how": "步行6分"
+      },
+      {
+       "name": "Shin-Shin 天神本店",
+       "dist": 0.46,
+       "rating": "4.3(7,907)",
+       "price": "¥1,000–2,000",
+       "cat": "拉面",
+       "how": "步行7分"
+      }
+     ]
     }
    ]
   },
